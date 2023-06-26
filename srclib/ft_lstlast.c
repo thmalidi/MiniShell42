@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/26 16:12:04 by tmalidi          ###   ########.fr       */
+/*   Created: 2022/11/20 13:17:11 by tmalidi           #+#    #+#             */
+/*   Updated: 2023/06/26 16:17:43 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//tmalidi
+#include "../minishell.h"
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-
-# include "libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <stddef.h>
-# include <string.h>
-# include <limits.h>
-# include <unistd.h>
-# include <stdarg.h>
-
-size_t	ft_strlen(const char *s);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	**ft_split(char const *s, char c);
-
-#endif
+t_list	*ft_lstlast(t_list *lst)
+{
+	if (!lst)
+		return (0);
+	while (lst -> next)
+	{
+		lst = lst -> next;
+	}
+	return (lst);
+}

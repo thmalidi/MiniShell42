@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/26 16:12:04 by tmalidi          ###   ########.fr       */
+/*   Created: 2022/11/20 12:04:43 by tmalidi           #+#    #+#             */
+/*   Updated: 2023/06/26 16:17:50 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//tmalidi
+#include "../minishell.h"
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*new;
 
-# include "libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <stddef.h>
-# include <string.h>
-# include <limits.h>
-# include <unistd.h>
-# include <stdarg.h>
-
-size_t	ft_strlen(const char *s);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	**ft_split(char const *s, char c);
-
-#endif
+	new = malloc(sizeof(t_list) * 1);
+	if (!new)
+		return (0);
+	new -> content = content;
+	new -> next = NULL;
+	return (new);
+}

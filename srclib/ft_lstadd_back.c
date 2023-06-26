@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/26 16:12:04 by tmalidi          ###   ########.fr       */
+/*   Created: 2022/11/20 13:34:54 by tmalidi           #+#    #+#             */
+/*   Updated: 2023/06/26 16:17:07 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//tmalidi
+#include "../minishell.h"
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*last;
 
-# include "libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <stddef.h>
-# include <string.h>
-# include <limits.h>
-# include <unistd.h>
-# include <stdarg.h>
-
-size_t	ft_strlen(const char *s);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	**ft_split(char const *s, char c);
-
-#endif
+	if (lst)
+	{
+		if (*lst == NULL)
+			*lst = new;
+		else
+		{
+			last = ft_lstlast(*lst);
+			last -> next = new;
+		}
+	}
+}
