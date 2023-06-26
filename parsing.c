@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/26 18:03:51 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/06/26 18:10:33 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	plst(t_list **a)
 	tmp = *a;
 	while(tmp)
 	{
-		printf("%s\n", tmp->content);
+		printf("[%s]\n", tmp->content);
 		tmp = tmp->next;
 	}
 	return;
@@ -94,16 +94,14 @@ t_list **parsing(char *str)
 int main()
 {
 	t_list **arg;
-	//t_list *tmp;
 	char *line;
 	int i = 0;
 	
-	while(i < 2)
+	while(i < 2)											//limite pour tester les leaks remplacer par "while(1)" pour boucle infini
 	{
 		line = readline("\033[32mMinishell>\033[0m");
 		arg = parsing(line);
-		//tmp = *arg;
-		plst(arg);										//decommenter pour afficher les element de la liste
+		//plst(arg);										//decommenter pour afficher les element de la liste
 		free_lst(arg);
 		free(line);
 		i++;
