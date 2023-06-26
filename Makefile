@@ -7,7 +7,7 @@ CC = cc
 HEADER = minishell.h
 
 #inclure fichier .c
-SRC = main.c \
+SRC = parsing.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -22,7 +22,7 @@ lib :
 	make -C $(LIB_PATH)
 
 $(NAME): $(OBJ) 
-	$(CC)  $(OBJ) $(FLAGS) -o $(NAME) $(LIB) -L/usr/include/readline/readline.h
+	$(CC)  $(OBJ) $(FLAGS) -o $(NAME) $(LIB) -L/usr/include/readline/readline.h -lreadline
 
 %.o: %.c Makefile $(HEADER)
 	$(CC) $(FLAGS) -o $@ -c $<
