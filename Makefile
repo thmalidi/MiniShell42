@@ -9,12 +9,14 @@ HEADER = minishell.h
 #inclure fichier .c
 
 SRC = parsing.c \
+exit.c \
 srclib/ft_lstadd_back.c \
 srclib/ft_lstlast.c \
 srclib/ft_lstnew.c \
 srclib/ft_split.c \
 srclib/ft_strlen.c \
 srclib/ft_substr.c \
+srclib/ft_strdup.c \
 
 OBJ = $(SRC:.c=.o)
 

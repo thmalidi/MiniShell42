@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/26 15:38:11 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/06/26 18:03:51 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_list **pars_arg(char *str)
 	*a = new;
 	while (tab[i])
 		ft_lstadd_back(a, ft_lstnew(tab[i++]));
+	free(tab);
 	return a;
 }
 
@@ -72,25 +73,39 @@ int scan_cmd(char *str)
 	while (str[i])
 	{
 		if (str[i] == 92 || str[i] == ';')
-			return 0;
+			return (printf("\033[31mError :\033[0m%c\033[31m forbidden character\033[0m", str[i]),0);
 		i++;
 	}
 	if (!double_quote(str))
-		return (0);
+		return (printf("\033[31mError : quotes still open\033[0m"),0);
 	return 1;
+}
+
+t_list **parsing(char *str)
+{
+	t_list **arg;
+	
+	if (!scan_cmd(str))
+		return (NULL);
+	arg = pars_arg(str);
+	return (arg);
 }
 
 int main()
 {
 	t_list **arg;
+	//t_list *tmp;
 	char *line;
-	while(1)
+	int i = 0;
+	
+	while(i < 2)
 	{
 		line = readline("\033[32mMinishell>\033[0m");
-		if (!scan_cmd(line))
-			printf("Erreur\n");
-		arg = pars_arg(line);
-		plst(arg);
+		arg = parsing(line);
+		//tmp = *arg;
+		plst(arg);										//decommenter pour afficher les element de la liste
+		free_lst(arg);
 		free(line);
+		i++;
 	}
 }
