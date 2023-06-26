@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tmalidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/26 12:13:14 by tmalidi          ###   ########.fr       */
+/*   Created: 2022/11/08 15:50:13 by tmalidi           #+#    #+#             */
+/*   Updated: 2022/11/08 15:50:17 by tmalidi          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-//tmalidi
+#include "libft.h"
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-
-#include "libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <readline/readline.h>
-
-#endif
+int	ft_toupper(int c)
+{
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	else
+		return (c);
+}

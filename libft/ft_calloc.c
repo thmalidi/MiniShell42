@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tmalidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/26 12:13:14 by tmalidi          ###   ########.fr       */
+/*   Created: 2022/11/10 14:01:22 by tmalidi           #+#    #+#             */
+/*   Updated: 2022/11/10 14:01:26 by tmalidi          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-//tmalidi
+#include "libft.h"
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+void	*ft_calloc(size_t count, size_t size)
+{
+	char	*tab;
 
-#include "libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <readline/readline.h>
-
-#endif
+	if (count == ULONG_MAX)
+		return (NULL);
+	tab = malloc(count * size);
+	if (tab == NULL)
+		return (NULL);
+	ft_bzero(tab, count * size);
+	return (tab);
+}

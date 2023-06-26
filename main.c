@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/26 12:13:14 by tmalidi          ###   ########.fr       */
+/*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
+/*   Updated: 2023/06/26 12:11:01 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//tmalidi
+#include "minishell.h"
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-
-#include "libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <readline/readline.h>
-
-#endif
+int main()
+{
+    printf("ouiiiifrereoro");
+}

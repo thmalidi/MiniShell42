@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_putnbr_l.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/26 12:13:14 by tmalidi          ###   ########.fr       */
+/*   Created: 2022/11/30 15:54:09 by tmalidi           #+#    #+#             */
+/*   Updated: 2023/02/07 13:24:37 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//tmalidi
+#include "libft.h"
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+void	ft_putnbr_l(long int n, int fd)
+{
+	char	temp[12];
+	int		i;
 
-#include "libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <readline/readline.h>
-
-#endif
+	i = 0;
+	if (n == 0)
+		write(1, "0", 1);
+	while (n != 0)
+	{
+		temp[i++] = (char)((n % 10) + 48);
+		n = n / 10;
+	}
+	i -= 1;
+	while (i >= 0)
+		write(fd, &temp[i--], 1);
+}

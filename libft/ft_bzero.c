@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tmalidi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/26 12:13:14 by tmalidi          ###   ########.fr       */
+/*   Created: 2022/11/07 17:08:04 by tmalidi           #+#    #+#             */
+/*   Updated: 2022/11/07 17:16:42 by tmalidi          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-//tmalidi
+#include "libft.h"
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+void	ft_bzero(void *s, size_t n)
+{
+	int		r;
+	char	*start;
 
-#include "libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <readline/readline.h>
-
-#endif
+	start = s;
+	r = 0;
+	while ((size_t)r < n)
+	{
+		start[r] = '\0';
+		r++;
+	}
+}

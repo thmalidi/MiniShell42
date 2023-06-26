@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   nbrlen16.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/26 12:13:14 by tmalidi          ###   ########.fr       */
+/*   Created: 2022/11/30 15:56:01 by tmalidi           #+#    #+#             */
+/*   Updated: 2023/02/07 13:22:47 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//tmalidi
+#include "libft.h"
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+int	nbrlen16(long int nb)
+{
+	long int	i;
 
-#include "libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <readline/readline.h>
-
-#endif
+	i = 0;
+	if (nb == 0)
+		return (1);
+	if (nb < 0)
+		i += 1;
+	while (nb)
+	{
+		nb = nb / 16;
+		i++;
+	}
+	return (i);
+}
