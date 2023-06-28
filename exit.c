@@ -6,11 +6,31 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:58:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/26 17:28:56 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/06/28 16:35:23 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void free_history_content(t_history *history)
+{
+    t_history *temp;
+    
+    while (history != NULL)
+    {
+        temp = history;
+        history = history->next;
+        free(temp->content); // Libération de la mémoire du contenu de l'élément
+        free(temp); // Libération de la mémoire de l'élément
+    }
+    free(history);
+}
+
+void free_history(t_history **history)
+{
+    free_history_content(*history);
+    free(history);
+}
 
 void free_lst_content(t_list *a)
 {

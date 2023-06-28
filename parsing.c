@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/26 18:10:33 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/06/28 16:40:24 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,21 +89,4 @@ t_list **parsing(char *str)
 		return (NULL);
 	arg = pars_arg(str);
 	return (arg);
-}
-
-int main()
-{
-	t_list **arg;
-	char *line;
-	int i = 0;
-	
-	while(i < 2)											//limite pour tester les leaks remplacer par "while(1)" pour boucle infini
-	{
-		line = readline("\033[32mMinishell>\033[0m");
-		arg = parsing(line);
-		//plst(arg);										//decommenter pour afficher les element de la liste
-		free_lst(arg);
-		free(line);
-		i++;
-	}
 }
