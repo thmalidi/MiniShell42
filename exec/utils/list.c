@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/26 11:52:13 by hgeffroy         ###   ########.fr       */
+/*   Created: 2023/06/26 13:40:22 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/06/26 13:48:22 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//hgeffroy
+#include "header/exec.h"
 
-//Probbalement a remplir vers la fin du projet, pour le moment on peut travailler avec nos .h chacun et on mettra en commun vers la fin ?
+int	ft_lstlen(t_list *list)
+{
+	int	len;
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-
-#endif
+	len = 0;
+	while (list)
+	{
+		len++;
+		list = list->next;
+	}
+	return (len);
+}

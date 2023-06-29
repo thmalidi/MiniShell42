@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/26 11:52:13 by hgeffroy         ###   ########.fr       */
+/*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/06/26 13:59:14 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//hgeffroy
+#include "header/exec.h"
 
-//Probbalement a remplir vers la fin du projet, pour le moment on peut travailler avec nos .h chacun et on mettra en commun vers la fin ?
-
-#ifndef MINISHELL_H
-# define MINISHELL_H
-
-#endif
+int	exec(t_list *list)
+{
+	
+}
