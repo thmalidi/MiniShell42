@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/14 14:01:50 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/14 15:21:05 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,6 @@ void	free_history(t_history **history);
 t_list	**parsing(char *str);
 void	plst(t_list **a);
 void    splited_arg(t_list **arg);
-void    free_elm(t_element **subparsing);
+void    free_elm(t_list **arg);
 
 #endif

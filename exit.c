@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:58:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/14 14:06:21 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/14 15:33:08 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void free_lst_content(t_list *a)
     {
         t_list *temp = a;
         a = a->next;
-        //free_elm(a->subparsing);
+        //free(a->subparsing);
         free(temp->content); // Libération de la mémoire du contenu de l'élément
         free(temp); // Libération de la mémoire de l'élément
     }

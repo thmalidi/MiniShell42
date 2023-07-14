@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 12:59:50 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/14 14:07:17 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/14 15:32:47 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void    splited_arg(t_list **arg)
         tab = ft_split(tmp->content, ' ');
         while (tab[i])
             ft_lstadd_back_e(tmp->subparsing, ft_lstnew_e(tab[i++]));
-        pte(tmp->subparsing);
-        free(tab);
+        //pte(tmp->subparsing);
+        free_tab(tab);
         tmp = tmp->next;
     }
 }

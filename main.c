@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/14 13:13:16 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/14 15:21:37 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int main()
 		add_to_history(history, line);
 		arg = parsing(line);
 		splited_arg(arg);
-		//plst(arg);										//decommenter pour afficher les element de la liste
+		//plst(arg);									//decommenter pour afficher les element de la liste
+		free_elm(arg);
 		free_lst(arg);
 		i++;
 	}
