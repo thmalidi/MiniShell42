@@ -1,6 +1,6 @@
 NAME = minishell
 
-FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 CC = cc
 
@@ -12,6 +12,8 @@ SRC = parsing.c \
 exit.c \
 history.c \
 main.c \
+subparsing.c \
+exit_utils.c \
 srclib/ft_strncmp.c \
 srclib/ft_lstadd_back.c \
 srclib/ft_lstlast.c \
