@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 11:11:20 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/16 16:23:57 by hgeffroy         ###   ########.fr       */
+/*   Created: 2023/07/16 18:03:53 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/07/16 18:04:33 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#include "exec.h"
 
-# include "exec.h"
+void	close_all(int *fd)
+{
+	int	i;
 
-typedef struct s_pipelist {
-	char 				*elt;
-	int  				type;
-	struct s_pipelist	*next;
-}  t_pipelist;
-
-typedef struct s_list {
-	int					nb; //qui serait le numero du pipe
-	t_pipelist 			*pipelist;
-	struct s_list		*next;
-}  t_list;
-
-typedef	int	(*t_redirect)(int *fd, t_pipelist *file);
-
-#endif
+	i = -1;
+	while (++i < 4)
+	{
+		if (fd[i] > 0)
+			close (fd[i]);
+	}
+	return ;
+}

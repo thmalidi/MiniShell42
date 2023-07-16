@@ -1,32 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   check_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 11:11:20 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/16 16:23:57 by hgeffroy         ###   ########.fr       */
+/*   Created: 2023/07/16 18:26:33 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/07/16 18:26:44 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#include "exec.h"
 
-# include "exec.h"
-
-typedef struct s_pipelist {
-	char 				*elt;
-	int  				type;
-	struct s_pipelist	*next;
-}  t_pipelist;
-
-typedef struct s_list {
-	int					nb; //qui serait le numero du pipe
-	t_pipelist 			*pipelist;
-	struct s_list		*next;
-}  t_list;
-
-typedef	int	(*t_redirect)(int *fd, t_pipelist *file);
-
-#endif

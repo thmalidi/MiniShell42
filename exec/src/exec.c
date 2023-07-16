@@ -6,37 +6,11 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/16 09:02:30 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/16 18:30:14 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-/*
-Sort un fd avec les redirections s'il y en a.
-Si plusieurs redirections du meme type dans un meme pipe => Derniere redirection prioritaire.
-*/
-int	check_redir(t_pipelist *pipelist, int *fd)
-{
-	int			err;
-	t_pipelist	*temp;
-	
-	temp = pipelist;
-	while(temp)
-	{
-		if (temp->elt == '<')
-			err = set_infile(fd, temp->next);
-		else if (temp->elt == '>')
-			err = set_outfile(fd, temp->next);
-		else if (temp->elt == '>>')
-			err = set_outfileappend(fd, temp->next);
-		else if (temp->elt == '<<')
-			err = set_heredoc(); //A voir comment le gerer, ptet meme pas ds cette fonction ?
-		if (err < 0)
-			return (-1);
-		temp = temp->next;
-	}
-}
+#include "exec.h"
 
 /* 
 Sort fd propre.
@@ -52,14 +26,29 @@ int	set_pipe(t_pipelist *pipelist, int *fd)
 
 /*
 Set le dup d'entree et de sortie.
-On ne doit dup que si le fd est != de .
+On ne doit dup que si le fd est != de 0.
 On doit prioriser les infile et outfile aux pipes.
 */
 int	set_dup(t_pipelist *pipelist, int *fd)
 {
-	
+	if (fd[0] > 0)
+	{
+		if (dup2(fd[0], STDIN_FILENO) < 0)
+			return (close_all(fd), -1);
+	}
+	if (fd[3] > 0)
+	{
+		if (dup2(fd[3], STDOUT_FILENO) < 0)
+			return (close_all(fd), -1);
+	}
+	close_all(fd);
+	return (0);
 }
 
+/*
+Execute une fork qui correspond donc a un pipe.
+Dans le cas ou l'exec ne fonctionne pas, exit avec un perror, il faudra check que le perror renvoie bien les bons trucs.
+*/
 int	exec_onepipe(t_pipelist *pipelist, int *fd, char **env)
 {
 	set_dup(pipelist, fd);
@@ -68,6 +57,9 @@ int	exec_onepipe(t_pipelist *pipelist, int *fd, char **env)
 	// Le check de la commande se fait exactement de la meme maniere que sur pipex.
 }
 
+/*
+Fonction a appeler dans le main.
+*/
 int	exec(t_list *list, char **env)
 {
 	int	i;
