@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 13:34:54 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/14 13:32:45 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/16 10:02:25 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,15 @@ void	ft_lstadd_back_e(t_element **lst, t_element *new)
 	if (lst)
 	{
 		if (*lst == NULL)
+		{
 			*lst = new;
+			new->previous = NULL;
+		}
 		else
 		{
 			last = ft_lstlast_e(*lst);
 			last -> next = new;
+			new->previous = last;
 		}
 	}
 }

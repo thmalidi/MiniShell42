@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 12:59:50 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/14 15:32:47 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/16 11:09:24 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@ void pte(t_element **list)
     while (tmp)
     {
         printf(">%s<\n", tmp->str);
+        tmp = tmp->next;
+    }
+}
+
+void print_type(t_element **subparsing)
+{
+    t_element *tmp;
+
+    tmp = *subparsing;
+    while (tmp)
+    {
+        printf("%s type = %d \n", tmp->str, tmp->type);
         tmp = tmp->next;
     }
 }
@@ -63,6 +75,13 @@ void    splited_arg(t_list **arg)
             ft_lstadd_back_e(tmp->subparsing, ft_lstnew_e(tab[i++]));
         //pte(tmp->subparsing);
         free_tab(tab);
+        tmp = tmp->next;
+    }
+    tmp = *arg;
+    while (tmp)
+    {
+        subparsing(tmp->subparsing);
+        print_type(tmp->subparsing);
         tmp = tmp->next;
     }
 }

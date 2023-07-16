@@ -6,11 +6,17 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/14 15:21:37 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/16 10:58:38 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void print_envp(char **envp)
+{
+	while (*envp)
+		printf("%s\n", *envp++);
+}
 
 int main()
 {
