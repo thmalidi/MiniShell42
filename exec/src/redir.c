@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 16:20:01 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/19 09:27:18 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/19 14:05:20 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,31 @@ int	set_append(int *fd, t_pipelist *pipelist)
 		perror(pipelist->elt);
 }
 
+/*
+Il faut pipe ?
+elt de pipelist est le limiteur
+*/
 int	set_heredoc(int *fd, t_pipelist *pipelist)
 {
-	
+	int		pid;
+	char	*line;
+
+	if (pipe(fd) == -1)
+		return (-1);
+	pid = fork();
+	if (pid == 0)
+	{
+		while (1)
+		{
+			line = get_next_line(STDIN_FILENO);
+			if (!line)
+				return (-1);
+			if (line == pipelist->elt)
+				break ;
+			write(fd[1], line, ft_strlen(line));
+			// On doit peut-etre free(line) ici
+		}
+		free(line);
+		exit(1);
+	}
 }

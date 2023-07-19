@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/19 11:16:43 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/19 11:38:00 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,14 @@ int	exec_cmd(t_pipelist *pipelist, int *fd, char **env)
 }
 
 /*
+Exec une commande qui est un builtin.
+*/
+int	exec_builtin(t_pipelist *pipelist, int *fd)
+{
+	// Faire un ptr sur fct
+}
+
+/*
 Execute une fork qui correspond donc a un pipe.
 Dans le cas ou l'exec ne fonctionne pas, exit avec un perror, il faudra check que le perror renvoie bien les bons trucs.
 */
@@ -88,10 +96,6 @@ int	exec_onepipe(t_pipelist *pipelist, int *fd, char **env)
 		exec_builtin(temp, fd); // Ajouter l'env ?
 	else
 		/* Il n'y a pas de cmd dans le pipe, faire en fonction */; //Cmd not found sur le premier argument.
-	
-	// Fonction de generation des arguments, on peut parcourir la liste et check le type et add si c'est une optn de commande.
-	// Check si c'est un builtin d'abord !! On envoie les args dans les builtins meme s'ils ne sont pas a gere, on renverra une erreur depuis les bultins si ca ne va pas.
-	// Le check de la commande se fait exactement de la meme maniere que sur pipex.
 }
 
 /*
