@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/18 20:02:57 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/19 08:37:50 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Si on est sur le dernier pipe, on ne doit pas ouvrir de nouveau pipe, la sortie 
 int	set_pipe(t_list *list, int *fd)
 {
 	if (check_redir(list->pipelist, fd) < 0)
-		return (-1); //Ne pas oublier de remettre les fd[4] et fd[5] a 0 si pas de redir !! /!\ Important
+		return (-1); //Ne pas oublier de remettre les fd[4] et fd[5] a 0 si pas de redir !! /!\ Important 
 	if (pipe(&fd[2]) == -1)
 		return (-1); // Msg d'erreur a mettre.
 }
