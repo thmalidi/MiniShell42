@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_cmd.c                                        :+:      :+:    :+:   */
+/*   gen_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:26:33 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/19 10:24:34 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/19 11:19:47 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	count_optn(t_pipelist *pipelist)
 	int			count;
 
 	temp = pipelist;
-	while (1 /*temp->type != type commande*/)
-		temp->next;
 	count = 0;
 	while (temp /*&& type est un fichier ou une optn*/)
 		count++;
@@ -46,12 +44,13 @@ char	**gen_args(t_pipelist *pipelist)
 	if (!args)
 		return (NULL);
 	temp = pipelist;
-	while (temp /*&& temp->type != type commande*/)
-		temp->next;
 	i = 0;
+	args[i] = ft_strdup(temp->elt);
 	while (1 /*temp->type est soit un fichier soit un flag soit un dossier*/)
 	{
 		args[i++] = ft_strdup(temp->elt);
+		if (!args[i])
+			return (/*Free des trucs*/ NULL);
 		temp->next;
 	}
 	return (args);

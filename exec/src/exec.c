@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/19 09:40:20 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/19 11:16:43 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,38 @@ int	set_dup(t_pipelist *pipelist, int *fd)
 }
 
 /*
+Exec une commande qui n'est pas un builtin.
+*/
+int	exec_cmd(t_pipelist *pipelist, int *fd, char **env)
+{
+	char **argstoexec;
+
+	argstoexec = gen_args(pipelist);
+	if (!argstoexec)
+		return (-1);
+	execve(argstoexec[0], argstoexec, env);
+	free_tab(argstoexec);
+	exit(1);
+}
+
+/*
 Execute une fork qui correspond donc a un pipe.
 Dans le cas ou l'exec ne fonctionne pas, exit avec un perror, il faudra check que le perror renvoie bien les bons trucs.
 */
 int	exec_onepipe(t_pipelist *pipelist, int *fd, char **env)
 {
 	t_pipelist	*temp;
-	char		**argstoexec;
 	
 	set_dup(pipelist, fd);
-	argstoexec = NULL;
-	while (!argstoexec && temp) // Ou alors temp->type != (type cmd) qui me parait mieux.
-	{
-		argstoexec = gen_args(temp);
+	while (temp /*&& temp->type != commande && temp-> type != builtin */)
 		temp = temp->next;
-	}
-	// Il faut trouver la cmd a executer. Si aucune commande, on prend la premier chaine de char du pipe pour le cmd not found !!
+	if (1 /*temp->type = cmd*/)
+		exec_cmd(temp, fd, env);
+	else if (1 /*temp->type = builtin*/)
+		exec_builtin(temp, fd); // Ajouter l'env ?
+	else
+		/* Il n'y a pas de cmd dans le pipe, faire en fonction */; //Cmd not found sur le premier argument.
+	
 	// Fonction de generation des arguments, on peut parcourir la liste et check le type et add si c'est une optn de commande.
 	// Check si c'est un builtin d'abord !! On envoie les args dans les builtins meme s'ils ne sont pas a gere, on renverra une erreur depuis les bultins si ca ne va pas.
 	// Le check de la commande se fait exactement de la meme maniere que sur pipex.
@@ -104,3 +120,5 @@ int	exec(t_list *list, char **env)
 		close_inpipe(fd); // Passer le outpipe en inpipe et close l'ancien inpipe + close les eventuels outfile et infile et les enlever de fd
 	}
 }
+
+// Faire un main pour tester !!!
