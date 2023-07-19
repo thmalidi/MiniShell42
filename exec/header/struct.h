@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:11:20 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/16 16:23:57 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/18 19:50:46 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_pipelist {
 }  t_pipelist;
 
 typedef struct s_list {
-	int					nb; //qui serait le numero du pipe
+	int					lastpipe; // 1 si c'est le dernier pipe 0 sinon.
 	t_pipelist 			*pipelist;
 	struct s_list		*next;
 }  t_list;

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:03:53 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/16 18:04:33 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/18 19:17:59 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	close_all(int *fd)
 	int	i;
 
 	i = -1;
-	while (++i < 4)
+	while (++i < 6)
 	{
 		if (fd[i] > 0)
 			close (fd[i]);
