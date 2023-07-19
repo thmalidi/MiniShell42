@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 16:20:01 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/19 08:20:21 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/19 09:27:18 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	check_redir(t_pipelist *pipelist, int *fd)
 	temp = pipelist;
 	while(temp)
 	{
-		if (temp->type == ?) //Definir le type avec Theo
+		if (1/*temp->type == type redir*/)
 		{
-			if (arr_fct[temp->type - ? /*type infile*/](fd, temp->next) == -1)
-				/*Retour d'erreur*/
+			if (1/*arr_fct[temp->type - type file](fd, temp->next) == -1*/)
+				/*Retour d'erreur*/;
 		}
 		if (err < 0)
 			return (-1);
