@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:11:20 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/18 19:50:46 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/19 08:16:46 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ typedef struct s_list {
 	struct s_list		*next;
 }  t_list;
 
-typedef	int	(*t_redirect)(int *fd, t_pipelist *file);
+typedef	int	(*t_redirect)(int *fd, t_pipelist *pipelist);
 
 #endif

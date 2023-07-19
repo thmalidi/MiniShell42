@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 16:20:01 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/16 17:18:23 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/19 08:20:21 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,29 @@ int	check_redir(t_pipelist *pipelist, int *fd)
 	}
 }
 
-int	set_infile(int *fd, t_pipelist *file)
+int	set_infile(int *fd, t_pipelist *pipelist)
 {
-	
+	fd[0] = open(pipelist->elt, O_RDONLY);
+	if (fd[4] < 0)
+		perror(pipelist->elt);
 }
 
-int	set_outfile(int *fd, t_pipelist *file)
+int	set_outfile(int *fd, t_pipelist *pipelist)
 {
-	
+
+	fd[5] = open(pipelist->elt, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	if (fd[5] < 0)
+		perror(pipelist->elt);
 }
 
-int	set_append(int *fd, t_pipelist *file)
+int	set_append(int *fd, t_pipelist *pipelist)
 {
-	
+	fd[5] = open(pipelist->elt, O_WRONLY | O_APPEND | O_CREAT, 0644);
+	if (fd[5] < 0)
+		perror(pipelist->elt);
 }
 
-int	set_heredoc(int *fd, t_pipelist *file)
+int	set_heredoc(int *fd, t_pipelist *pipelist)
 {
 	
 }
