@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/16 10:58:38 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/19 10:37:56 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,13 @@ int main()
             plst_h(history);
 		add_to_history(history, line);
 		arg = parsing(line);
-		splited_arg(arg);
-		//plst(arg);									//decommenter pour afficher les element de la liste
-		free_elm(arg);
-		free_lst(arg);
+		if (arg)
+		{
+			splited_arg(arg);
+			//plst(arg);									//decommenter pour afficher les element de la liste
+			free_elm(arg);
+			free_lst(arg);
+		}
 		i++;
 	}
     free_history(history);

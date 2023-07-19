@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/28 16:40:24 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/19 10:39:15 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ int scan_cmd(char *str)
 	while (str[i])
 	{
 		if (str[i] == 92 || str[i] == ';')
-			return (printf("\033[31mError :\033[0m%c\033[31m forbidden character\033[0m", str[i]),0);
+			return (printf("\033[31mError :\033[0m%c\033[31m forbidden character\033[0m\n", str[i]),0);
 		i++;
 	}
 	if (!double_quote(str))
-		return (printf("\033[31mError : quotes still open\033[0m"),0);
+		return (printf("\033[31mError : quotes still open\033[0m\n"),0);
 	return 1;
 }
 

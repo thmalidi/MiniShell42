@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:15:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/17 12:40:57 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/19 12:12:31 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,41 +33,56 @@ int is_cmd(char **path, char *cmd)
 	return (free(tmp), 0);
 }
 
+int is_builtins(char *str)
+{
+	if (!ft_strncmp("echo",str, ft_strlen(str)))
+		return (1);
+	if (!ft_strncmp("cd",str, ft_strlen(str)))
+		return (1);
+	if (!ft_strncmp("pwd",str, ft_strlen(str)))
+		return (1);
+	if (!ft_strncmp("unset",str, ft_strlen(str)))
+		return (1);
+	if (!ft_strncmp("env",str, ft_strlen(str)))
+		return (1);
+	if (!ft_strncmp("export",str, ft_strlen(str)))
+		return (1);
+	if (!ft_strncmp("exit",str, ft_strlen(str)))
+		return (1);
+	return (0);
+}
+
 int    subparsing(t_element **subparsing)
 {
     int i;
 	t_element *tmp;
-	t_element *first;
+	//t_element *first;
 	char **envp;
 
     i = 0;
-	first = *subparsing;
 	tmp = *subparsing;
 	envp = ft_split(getenv("PATH"), ':');
     while (tmp)
     {
 		printf("tmp[0] == %c\n",tmp->str[0]);
-        if (!ft_strncmp("<",tmp->str, ft_strlen(tmp->str)))																			//infile
-            tmp->type = 3;
-        else if (!strncmp(">",tmp->str, ft_strlen(tmp->str)) && i == 1)																//outfile
-            tmp->type = 4;
-		else if(tmp->str[0] == '-')																									//flag
-		{
-			if (tmp->previous->type == 2 || tmp->previous->type == 5)
-				tmp->type = 5;
-		}
-		else if ((i == 0 || (tmp->next == NULL && first->type == 3)) && is_cmd(envp, tmp->str))										//commande
+        if (!ft_strncmp("<",tmp->str, ft_strlen(tmp->str)))																	//infile
+            tmp->type = 1;
+		else if (!ft_strncmp("<<",tmp->str, ft_strlen(tmp->str)))
 			tmp->type = 2;
-		else if (tmp->previous)																										//fichier
-		{
-        	if ((tmp->previous->type == 3 || tmp->previous->type == 4 || tmp->previous->type == 2 || tmp->previous->type == 5) && !access(tmp->str, F_OK))
-				tmp->type = 1;
-		}
+        else if (!strncmp(">",tmp->str, ft_strlen(tmp->str)))																//outfile
+            tmp->type = 3;
+		else if (!strncmp(">>",tmp->str, ft_strlen(tmp->str)))
+            tmp->type = 4;
+		else if(tmp->str[0] == '-')																							//flag
+			tmp->type = 5;
+		else if (!access(tmp->str, F_OK))																					//fichier
+			tmp->type = 6;
+		else if (is_builtins(tmp->str))																						//builtins
+			tmp->type = 7;
+		else if (is_cmd(envp, tmp->str))																					//commande
+			tmp->type = 8;
 		else
-		{
 			tmp->type = -1;
-			return (free_tab(envp), 0);
-		}
 		tmp = tmp->next;
         i++;
     }
