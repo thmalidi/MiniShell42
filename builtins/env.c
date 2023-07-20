@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/19 14:09:31 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/20 08:21:18 by hgeffroy         ###   ########.fr       */
+/*   Created: 2023/07/20 08:13:23 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/07/20 09:57:37 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	print_tab(char **tab)
-{
-	int	i;
+#include "builtins.h"
 
-	while(tab[i])
-		printf("%s", tab[i]);
+/*
+Check les eventuels arguments, je pense qu'on met juste un message d'erreur si il y a des arguments.
+*/
+int	env(t_pipelist *pipelist, char **env)
+{
+	print_tab(env);
 	return (0);
-}
-
-int	set_value(char *var, char *value)
-{
-	
 }

@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/19 14:09:31 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/20 08:21:18 by hgeffroy         ###   ########.fr       */
+/*   Created: 2023/07/20 08:19:00 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/07/20 08:19:44 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	print_tab(char **tab)
-{
-	int	i;
+#ifndef PROTOTYPES_H
+# define PROTOTYPES_H
 
-	while(tab[i])
-		printf("%s", tab[i]);
-	return (0);
-}
+# include "builtins.h"
 
-int	set_value(char *var, char *value)
-{
-	
-}
+#endif

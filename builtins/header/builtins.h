@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/19 14:09:31 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/20 08:21:18 by hgeffroy         ###   ########.fr       */
+/*   Created: 2023/07/20 08:14:14 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/07/20 08:18:49 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	print_tab(char **tab)
-{
-	int	i;
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-	while(tab[i])
-		printf("%s", tab[i]);
-	return (0);
-}
+# include "prototypes.h"
 
-int	set_value(char *var, char *value)
-{
-	
-}
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <errno.h>
+# include <sys/wait.h>
+
+#endif
