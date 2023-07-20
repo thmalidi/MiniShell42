@@ -1,29 +1,29 @@
 NAME = minishell
 
-FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 CC = cc
 
-HEADER = minishell.h
+HEADER = source/minishell.h
 
 #inclure fichier .c
 
-SRC = parsing.c \
-exit.c \
-history.c \
-main.c \
-subparsing.c \
-subparsing_utils.c \
-exit_utils.c \
-srclib/ft_strjoin.c \
-srclib/ft_strncmp.c \
-srclib/ft_lstadd_back.c \
-srclib/ft_lstlast.c \
-srclib/ft_lstnew.c \
-srclib/ft_split.c \
-srclib/ft_strlen.c \
-srclib/ft_substr.c \
-srclib/ft_strdup.c \
+SRC = main.c \
+source/parsing.c \
+source/exit.c \
+source/history.c \
+source/subparsing.c \
+source/subparsing_utils.c \
+source/exit_utils.c \
+source/srclib/ft_strjoin.c \
+source/srclib/ft_strncmp.c \
+source/srclib/ft_lstadd_back.c \
+source/srclib/ft_lstlast.c \
+source/srclib/ft_lstnew.c \
+source/srclib/ft_split.c \
+source/srclib/ft_strlen.c \
+source/srclib/ft_substr.c \
+source/srclib/ft_strdup.c \
 
 OBJ = $(SRC:.c=.o)
 

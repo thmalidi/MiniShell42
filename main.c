@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/20 02:47:24 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/20 10:09:43 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int main()
 	//plst_h(history);
 }*/
 
-#include "minishell.h"
+#include "source/minishell.h"
 
 void	handle_signal(int sig)
 {
@@ -67,18 +67,18 @@ void	init_sa(struct sigaction *sa)
 	}
 }
 
-void	manage_line(char *line, t_history **history)
+void	manage_line(char *line, t_history **history)			//ajouter la fonctionde l'exec ici
 {
 	t_list	**arg;
 
-	if (!ft_strncmp(line, "history", ft_strlen(line)))
+	if (!ft_strncmp(line, "history", ft_strlen(line)) && ft_strlen(line) != 0)
 		plst_h(history);
-	else
+	else if (ft_strlen(line) != 0)
 	{
 		arg = parsing(line);
 		if (arg) 
 		{
-			splited_arg(arg);
+			splited_arg(arg);									//creation de la liste pour chaque pipe ici
 			free_elm(arg);
 			free_lst(arg);
 		}
