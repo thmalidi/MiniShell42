@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/20 02:48:03 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/20 14:48:01 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-//# include "libft/libft.h"
+# include "../source/libft/libft.h"
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <readline/readline.h>
@@ -24,7 +25,7 @@
 # include <limits.h>
 # include <unistd.h>
 # include <stdarg.h>
-#include <signal.h>
+# include <signal.h>
 
 typedef struct s_element
 {

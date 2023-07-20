@@ -1,45 +1,94 @@
-NAME = minishell
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/07/20 14:14:21 by hgeffroy          #+#    #+#              #
+#    Updated: 2023/07/20 14:45:08 by hgeffroy         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+include config/sources.mk
 
-CC = cc
+#--variables-------------------------------------------------------------------#
 
-HEADER = source/minishell.h
+NAME		=	minishell
+DEBUG		=	no
 
-#inclure fichier .c
+#--includes & libraries--------------------------------------------------------#
 
-SRC = main.c \
-source/parsing.c \
-source/exit.c \
-source/history.c \
-source/subparsing.c \
-source/subparsing_utils.c \
-source/exit_utils.c \
-source/srclib/ft_strjoin.c \
-source/srclib/ft_strncmp.c \
-source/srclib/ft_lstadd_back.c \
-source/srclib/ft_lstlast.c \
-source/srclib/ft_lstnew.c \
-source/srclib/ft_split.c \
-source/srclib/ft_strlen.c \
-source/srclib/ft_substr.c \
-source/srclib/ft_strdup.c \
+INC_DIR		=	include
+LIBFT_DIR	=	source/libft
 
-OBJ = $(SRC:.c=.o)
+#--sources & objects-----------------------------------------------------------#
 
-$(NAME): $(OBJ) 
-	$(CC)  $(OBJ) $(FLAGS) -o $(NAME) -L/usr/include/readline/readline.h -lreadline
+SRC_DIR		=	source
+OBJ_DIR		=	.objs
 
-%.o: %.c Makefile $(HEADER)
-	$(CC) $(FLAGS) -o $@ -c $<
+#--flags-----------------------------------------------------------------------#
+
+CFLAGS		=	-g3 -Wall -Wextra -Werror -I $(LIBFT_DIR) -I $(INC_DIR)
+
+#--debug flags--------------------------------------------------------#
+
+DFLAGS		=	-g3 -fsanitize=address
+
+ifeq ($(DEBUG), yes)
+CFLAGS 		+=	$(DFLAGS)
+endif
+
+#--libs------------------------------------------------------------------------#
+
+LIBFT	=	$(LIBFT_DIR)/libft.a
+
+#--objects---------------------------------------------------------------------#
+
+OBJECTS	=	$(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
+
+#--global rules----------------------------------------------------------------#
+
+.DEFAULT_GOAL = all
+
+#--compilation rules-----------------------------------------------------------#
+
+all:
+	$(MAKE) -C ./source/libft
+	$(MAKE) $(NAME) -j
+
+$(NAME): $(OBJECTS) $(LIBFT)
+	$(CC) $^ $(CFLAGS) $(LIBFT) -o $@ -lreadline
+
+$(OBJ_DIR)/%.o: %.c $(HEADERS) 
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+#--libs, debugs & bonus--------------------------------------------------------#
+
+lib:
+	$(MAKE) -C $(LIBFT_DIR)
+
+debug:
+	$(MAKE) re -j DEBUG=yes
+
+#--re, clean & fclean----------------------------------------------------------#
+
+re:
+	clear
+	$(MAKE) fclean
+	$(MAKE) -j all
 
 clean:
-	rm -f $(OBJ)
+	$(MAKE) -C $(LIBFT_DIR) clean
+	$(RM) -rf $(OBJECTS)
 
-fclean: clean
-	rm -f $(NAME)
+fclean:
+	clear
+	$(MAKE) clean
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(RM) $(NAME)
 
-re: fclean
-	$(MAKE) all
+#--PHONY-----------------------------------------------------------------------#
 
-.PHONY : all clean fclean re
+.PHONY: all lib debug re clean fclean

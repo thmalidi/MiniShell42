@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/20 10:09:43 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/20 14:10:08 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*#include "minishell.h"
+#include "minishell.h"
 
+/*
 void print_envp(char **envp)
 {
 	while (*envp)
@@ -46,8 +47,6 @@ int main()
 	free_history(history);
 	//plst_h(history);
 }*/
-
-#include "source/minishell.h"
 
 void	handle_signal(int sig)
 {
