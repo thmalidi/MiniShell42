@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/26 11:20:47 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/20 08:00:02 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,3 +16,5 @@
 # define MINISHELL_H
 
 #endif
+
+//Test
