@@ -6,15 +6,15 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 13:34:54 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/16 10:02:25 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/20 17:51:30 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../include/minishell.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back_big(t_big_list **lst, t_big_list *new)
 {
-	t_list	*last;
+	t_big_list	*last;
 
 	if (lst)
 	{
@@ -22,7 +22,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 			*lst = new;
 		else
 		{
-			last = ft_lstlast(*lst);
+			last = ft_lstlast_big(*lst);
 			last -> next = new;
 		}
 	}

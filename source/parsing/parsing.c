@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/19 10:39:15 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/20 17:49:41 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,20 @@ void	plst(t_list **a)
 	return;
 }
 
-t_list **pars_arg(char *str)
+t_big_list **pars_arg(char *str)
 {
 	char **tab;
 	int i;
-	t_list **a;
-	t_list *new;
+	t_big_list **a;
+	t_big_list *new;
 	
 	tab = ft_split(str, '|');
 	i = 0;
 	a = malloc(sizeof(t_list *));
-	new = ft_lstnew(tab[i++]);
+	new = ft_lstnew_big(tab[i++]);
 	*a = new;
 	while (tab[i])
-		ft_lstadd_back(a, ft_lstnew(tab[i++]));
+		ft_lstadd_back_big(a, ft_lstnew_big(tab[i++]));
 	free(tab);
 	return a;
 }
@@ -81,9 +81,9 @@ int scan_cmd(char *str)
 	return 1;
 }
 
-t_list **parsing(char *str)
+t_big_list **parsing(char *str)
 {
-	t_list **arg;
+	t_big_list **arg;
 	
 	if (!scan_cmd(str))
 		return (NULL);

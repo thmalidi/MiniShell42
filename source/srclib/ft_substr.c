@@ -6,11 +6,11 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 08:56:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/26 16:17:24 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/20 17:37:42 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../include/minishell.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {

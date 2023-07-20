@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 13:48:02 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/14 15:38:11 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/20 17:39:11 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void    free_te(t_element **subparsing)
     }
 }
 
-void    free_elm(t_list **arg)
+void    free_elm(t_big_list **arg)
 {
-    t_list *tmp;
+    t_big_list *tmp;
     
     tmp = *arg;
     while(tmp)

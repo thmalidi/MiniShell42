@@ -6,17 +6,17 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 12:04:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/26 16:17:50 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/20 17:48:46 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../include/minishell.h"
 
-t_list	*ft_lstnew(void *content)
+t_big_list	*ft_lstnew_big(void *content)
 {
-	t_list	*new;
+	t_big_list	*new;
 
-	new = malloc(sizeof(t_list) * 1);
+	new = malloc(sizeof(t_big_list) * 1);
 	if (!new)
 		return (0);
 	new -> content = content;

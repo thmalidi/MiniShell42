@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/20 14:10:08 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/20 17:53:48 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	init_sa(struct sigaction *sa)
 
 void	manage_line(char *line, t_history **history)			//ajouter la fonctionde l'exec ici
 {
-	t_list	**arg;
+	t_big_list	**arg;
 
 	if (!ft_strncmp(line, "history", ft_strlen(line)) && ft_strlen(line) != 0)
 		plst_h(history);

@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 12:59:50 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/20 10:06:20 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/20 17:43:57 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ t_element	*ft_lstnew_e(char *str)
 	return (new);
 }
 
-void    splited_arg(t_list **arg)
+void    splited_arg(t_big_list **arg)
 {
 	char **tab;
-	t_list *tmp;
+	t_big_list *tmp;
 	int     i;
 	
 	tmp = *arg;

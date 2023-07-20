@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/20 14:48:01 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/20 17:52:28 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ typedef struct s_element
 	struct s_element *next;
 }			t_element;
 
-typedef struct s_list
+typedef struct s_big_list
 {
 	char			*content;
 	t_element		**subparsing;
-	struct s_list	*next;
-}					t_list;
+	struct s_big_list	*next;
+}					t_big_list;
 
 typedef struct s_history
 {
@@ -49,27 +49,24 @@ typedef struct s_history
 	struct s_history	*previous;
 }						t_history;
 
-size_t	ft_strlen(const char *s);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	**ft_split(char const *s, char c);
-void    free_lst(t_list **a);
-char	*ft_strdup(const char *s1);
+void	free_lst(t_big_list **a);
 void	free_tab(char **tab);
 t_list	*ft_lstnew(void *content);
-void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstadd_back_e(t_element **lst, t_element *new);
 t_list	*ft_lstlast(t_list *lst);
 t_element	*ft_lstlast_e(t_element *lst);
 void 	add_to_history(t_history **history, char *line);
 void	plst_h(t_history **a);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	free_history(t_history **history);
-t_list	**parsing(char *str);
+t_big_list **parsing(char *str);
 void	plst(t_list **a);
-void    splited_arg(t_list **arg);
-void    free_elm(t_list **arg);
+void    splited_arg(t_big_list **arg);
+void    free_elm(t_big_list **arg);
 int		subparsing(t_element **subparsing);
-char	*ft_strjoin(char const *s1, char const *s2);
 void	printf_tab(char **tab);
+
+void	ft_lstadd_back_big(t_big_list **lst, t_big_list *new);
+t_big_list	*ft_lstnew_big(void *content);
+t_big_list	*ft_lstlast_big(t_big_list *lst);
 
 #endif

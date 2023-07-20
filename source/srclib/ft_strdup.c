@@ -6,11 +6,11 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:38:37 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/26 17:11:51 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/20 17:37:25 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../include/minishell.h"
 
 char	*ft_strdup(const char *s1)
 {

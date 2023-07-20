@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
+#    By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 14:14:21 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/07/20 14:45:08 by hgeffroy         ###   ########.fr        #
+#    Updated: 2023/07/20 17:43:10 by tmalidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ include config/sources.mk
 #--variables-------------------------------------------------------------------#
 
 NAME		=	minishell
-DEBUG		=	no
+DEBUG		=	yes
 
 #--includes & libraries--------------------------------------------------------#
 

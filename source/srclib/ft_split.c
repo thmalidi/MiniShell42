@@ -6,11 +6,11 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 08:27:54 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/26 16:17:15 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/20 17:37:19 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../include/minishell.h"
 
 static int	ft_len_word(char const *s, char c)
 {

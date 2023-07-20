@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:58:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/14 15:33:08 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/20 17:53:06 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void free_history(t_history **history)
     free(history);
 }
 
-void free_lst_content(t_list *a)
+void free_lst_content(t_big_list *a)
 {
     while (a != NULL)
     {
-        t_list *temp = a;
+        t_big_list *temp = a;
         a = a->next;
         //free(a->subparsing);
         free(temp->content); // Libération de la mémoire du contenu de l'élément
@@ -45,7 +45,7 @@ void free_lst_content(t_list *a)
     free(a);
 }
 
-void free_lst(t_list **a)
+void free_lst(t_big_list **a)
 {
     free_lst_content(*a);
     free(a);

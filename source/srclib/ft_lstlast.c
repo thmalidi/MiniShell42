@@ -6,13 +6,13 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 13:17:11 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/14 13:30:03 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/20 17:50:46 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../include/minishell.h"
 
-t_list	*ft_lstlast(t_list *lst)
+t_big_list	*ft_lstlast_big(t_big_list *lst)
 {
 	if (!lst)
 		return (0);

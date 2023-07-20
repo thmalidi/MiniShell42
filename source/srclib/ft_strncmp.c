@@ -6,11 +6,11 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:23:02 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/28 16:00:41 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/20 17:37:37 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../include/minishell.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

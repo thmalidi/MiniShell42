@@ -6,11 +6,11 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:40:28 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/06/28 16:00:25 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/20 17:37:33 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../include/minishell.h"
 
 size_t	ft_strlen(const char *s)
 {
