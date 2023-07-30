@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/20 17:52:28 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/07/30 14:49:20 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # define MINISHELL_H
 
 # include "../source/libft/libft.h"
+// # include "exec.h"
+# include "builtins.h"
+// # include "env.h"
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -29,16 +32,16 @@
 
 typedef struct s_element
 {
-	int			type;
-	char		*str;
-	struct s_element *previous;
-	struct s_element *next;
+	int					type;
+	char				*str;
+	struct s_element 	*previous;
+	struct s_element 	*next;
 }			t_element;
 
 typedef struct s_big_list
 {
-	char			*content;
-	t_element		**subparsing;
+	char				*content;
+	t_element			**subparsing;
 	struct s_big_list	*next;
 }					t_big_list;
 

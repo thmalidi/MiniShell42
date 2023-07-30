@@ -6,11 +6,11 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 16:20:01 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/19 14:05:20 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/30 08:40:59 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 /*
 Sort un fd avec les redirections s'il y en a.

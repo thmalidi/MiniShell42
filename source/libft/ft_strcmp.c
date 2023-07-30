@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/19 14:09:31 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/20 08:21:18 by hgeffroy         ###   ########.fr       */
+/*   Created: 2023/07/30 10:31:06 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/07/30 10:33:45 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	print_tab(char **tab)
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	int	i;
 
-	while(tab[i])
-		printf("%s", tab[i]);
-	return (0);
-}
-
-int	set_value(char *var, char *value)
-{
-	
+	i = -1;
+	while(s1[++i])
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+	}
+	return (s1[i] - s2[i]);
 }
