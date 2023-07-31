@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 09:55:47 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/30 14:50:03 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/31 07:49:50 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	add_to_env(t_env *env, char *var, char *value)
 		return (-1);
 	if (!env)
 	{
+		puts("YO from addtoenv");
 		env = new;
 		return (0);
 	}

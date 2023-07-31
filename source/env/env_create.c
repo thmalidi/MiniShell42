@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 08:40:00 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/30 15:50:41 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/31 08:01:31 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static char	*get_var(char *line)
 
 	i = -1;
 	while(line[++i] != '=')
-	var = (char *)malloc(sizeof(char) * (i + 2));
+	var = (char *)malloc(sizeof(char) * (i + 3));
 	if (!var)
 		return (NULL);
-	ft_strlcpy(var, line, i);
-	var[i] = '\0';
+	ft_strlcpy(var, line, i + 1);
+	var[i + 1] = '\0';
 	return (var);
 }
 
@@ -35,6 +35,8 @@ t_env	*create_env(char **env)
 	char	*var;
 	t_env	*lst_env;
 
+	int		test;
+
 	//if (!env) a gerer, on fait quoi ?
 	
 	lst_env = NULL;
@@ -42,12 +44,17 @@ t_env	*create_env(char **env)
 	while (env[++i])
 	{
 		var = get_var(env[i]);
+		printf("var[%d] = %s\n", i, var);
 		if (!var)
 			return (/*Nettoyer l_env et free var*/NULL);
-		if (add_to_env(lst_env, var, getenv(var)) < 0);
+			
+		test = add_to_env(lst_env, var, getenv(var));
+		printf("test = %d\n", test);
+		if (test != 0);
 			return (/*Nettoyer l_env et free var*/NULL);
 	}
-	return (free(var), lst_env);
+	puts("YO from create_env");
+	return (lst_env);
 }
 
 // A tester !
@@ -56,9 +63,9 @@ int	main(int ac, char *av, char **env)
 {
 	t_env *l_env;
 	
+	//printf("%s\n", l_env->value);
 	l_env = create_env(env);
-	printf("%s\n", l_env->var);
 	//env_print(l_env);
 }
 
-// gcc ../libft/*.c env_create.c env_free.c env_op.c env_to_tab.c env_utils.c -fsanitize=address
+// gcc ../libft/*.c env_create.c env_free.c env_op.c env_to_tab.c env_utils.c -fsanitize=address -g3
