@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 09:55:47 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/31 07:49:50 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/31 08:48:35 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 Retourne -2 si var est a NULL, regarder si on peut s'en servir pour la gestion du cas "export =a".
 */
-int	add_to_env(t_env *env, char *var, char *value)
+int	add_to_env(t_env **env, char *var, char *value)
 {
 	t_env *new;
 	t_env *temp;
@@ -23,15 +23,17 @@ int	add_to_env(t_env *env, char *var, char *value)
 	if (!var)
 		return (-2); // Erreur a print pour le cas "export =a"
 	new = env_newelt(var, value);
+	// printf("new->var = %s\n", var);
+	// printf("new->value = %s\n", value);
 	if (!new)
 		return (-1);
-	if (!env)
+	if (!(*env))
 	{
-		puts("YO from addtoenv");
-		env = new;
+		// puts("YO from addtoenv");
+		*env = new;
 		return (0);
 	}
-	temp = env;
+	temp = *env;
 	while (temp->next)
 		temp = temp->next;
 	temp->next = new;
@@ -42,19 +44,19 @@ int	add_to_env(t_env *env, char *var, char *value)
 /*
 Retourne 0 en cas de succes, -1 si on a rien enleve.
 */
-int	rm_from_env(t_env *env, char *var_to_rm)
+int	rm_from_env(t_env **env, char *var_to_rm)
 {
 	t_env	*tmp1;
 	t_env	*tmp2;
 	
 	if (!env)
 		return(-1);
-	if (ft_strcmp(env->var, var_to_rm) == 0)
+	if (ft_strcmp((*env)->var, var_to_rm) == 0)
 	{
-		env = env->next; // A check, sinon return l'env.
+		*env = (*env)->next; // A check, sinon return l'env.
 		return (0);
 	}
-	tmp2 = env_lfvar(env, var_to_rm);
+	tmp2 = env_lfvar(*env, var_to_rm);
 	if (!tmp2)
 		return (-1);
 	tmp1 = tmp2->next;

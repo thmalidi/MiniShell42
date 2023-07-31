@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 08:43:58 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/30 15:13:34 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/31 08:46:31 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ typedef struct s_env
 
 // Proto
 t_env	*create_env(char **env);
-int		add_to_env(t_env *env, char *var, char *value);
-int		rm_from_env(t_env *env, char *var_to_rm);
+int		add_to_env(t_env **env, char *var, char *value);
+int		rm_from_env(t_env **env, char *var_to_rm);
 int		set_value(t_env *env, char *var, char *value);
 t_env	*env_newelt(char *newvar, char *newvalue);
 t_env	*env_lfvar(t_env *env, char *var);

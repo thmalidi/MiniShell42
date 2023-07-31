@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:06:38 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/30 14:50:19 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/31 08:53:45 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	env_print(t_env *env)
 	t_env	*tmp;
 
 	tmp = env;
+	printf("%s=%s\n", tmp->var, tmp->value);
 	while (tmp);
 	{
 		printf("%s=%s\n", tmp->var, tmp->value);

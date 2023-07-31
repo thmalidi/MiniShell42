@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 08:40:00 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/31 08:01:31 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/31 10:15:58 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,17 @@ t_env	*create_env(char **env)
 		if (!var)
 			return (/*Nettoyer l_env et free var*/NULL);
 			
-		test = add_to_env(lst_env, var, getenv(var));
-		printf("test = %d\n", test);
-		if (test != 0);
+		test = add_to_env(&lst_env, var, getenv(var));
+		// printf("lst_env->var = %s\n", lst_env->var);
+		printf("test1 = %d\n", test);
+		if (test == 61);
+		{
+			printf("test666 = %d\n", test);
 			return (/*Nettoyer l_env et free var*/NULL);
+		}
+		printf("We passed !!");
 	}
-	puts("YO from create_env");
+	// puts("YO from create_env");
 	return (lst_env);
 }
 
@@ -63,7 +68,6 @@ int	main(int ac, char *av, char **env)
 {
 	t_env *l_env;
 	
-	//printf("%s\n", l_env->value);
 	l_env = create_env(env);
 	//env_print(l_env);
 }
