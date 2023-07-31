@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 14:14:47 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/31 11:40:47 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/31 16:18:21 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	**env_to_tab(t_env *env)
 	{
 		tab[i] = line_var(tmp);
 		if(!tab[i])
-			return (/*Free des trucs*/NULL);
+			return (free_tab(tab), NULL);
 		tmp = tmp->next;
 		i++;
 	}

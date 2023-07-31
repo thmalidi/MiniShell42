@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 08:43:58 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/31 10:33:35 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/31 16:17:31 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ t_env	*env_newelt(char *newvar, char *newvalue);
 t_env	*env_lfvar(t_env *env, char *var);
 void	env_print(t_env *env);
 void	env_free_elt(t_env *elt);
-void	clean_env(t_env *env);
+void	env_clean(t_env *env);
 char	**env_to_tab(t_env *env);
+void	free_tab(char **tab);
 
 #endif

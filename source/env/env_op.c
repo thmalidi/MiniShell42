@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 09:55:47 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/31 08:48:35 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/07/31 15:20:49 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,10 @@ int	add_to_env(t_env **env, char *var, char *value)
 	if (!var)
 		return (-2); // Erreur a print pour le cas "export =a"
 	new = env_newelt(var, value);
-	// printf("new->var = %s\n", var);
-	// printf("new->value = %s\n", value);
 	if (!new)
 		return (-1);
 	if (!(*env))
 	{
-		// puts("YO from addtoenv");
 		*env = new;
 		return (0);
 	}
