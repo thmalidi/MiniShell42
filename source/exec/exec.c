@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/31 11:10:39 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/01 16:09:08 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ Si on est sur le dernier pipe, on ne doit pas ouvrir de nouveau pipe, la sortie 
 int	set_pipe(t_list *list, int *fd)
 {
 	if (check_redir(list->pipelist, fd) < 0)
-		return (-1); //Ne pas oublier de remettre les fd[4] et fd[5] a 0 si pas de redir !! /!\ Important 
+		return (-1); //Ne pas oublier de remettre les fd[4] et fd[5] a 0 si pas de redir !! /!\ Important
+	if (list->next)
+		return (0);
 	if (pipe(&fd[2]) == -1)
 		return (-1); // Msg d'erreur a mettre.
+	return (0);
 }
 
 /*
@@ -100,29 +103,12 @@ int	exec_onepipe(t_pipelist *pipelist, int *fd, char **env)
 
 /*
 Fonction a appeler dans le main.
+Il faut d'abord faire un tour sur les heredoc et ENSUITE faire les autres.
+Il faudra donc stocker les heredoc du premier passage.
 */
-int	exec(t_list *list, char **env)
+int	exec(t_list *list, t_env *env)
 {
-	int	i;
-	int	fd[6]; //fd[4] = infile et fd[5] = outfile
-	int	*pid;
-	int	lstlen;
-
-	lstlen = ft_lstlen(list);
-	i = -1;
-	pid = (int *)malloc(sizeof(int) * lstlen);
-	if (!pid)
-		return (-1);
-	while (++i < lstlen)
-	{
-		set_pipe(fd, list); // On open le nouveau pipe, on ouvre les infile ou outfile si besoin
-		pid[i] = fork();
-		if (pid[i] < 0)
-			return (-1); // Probablement des trucs a free la
-		if(pid[i] == 0)
-			exec_onepipe(list->pipelist, fd, env);
-		close_inpipe(fd); // Passer le outpipe en inpipe et close l'ancien inpipe + close les eventuels outfile et infile et les enlever de fd
-	}
+	
 }
 
 // Faire un main pour tester !!!

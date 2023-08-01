@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 16:20:01 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/31 11:10:24 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/01 16:07:31 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,30 +59,13 @@ int	set_append(int *fd, t_pipelist *pipelist)
 }
 
 /*
-Il faut pipe ?
-elt de pipelist est le limiteur
+Si on met des trucs apres le here doc, on doit mettre l'erreur apres la fin du heredoc.
+On execute toujours le heredoc, et on met les erreurs sur le reste ensuite.
+Heredoc ecrit dans le INPIPE.
+elt de pipelist est le limiteur.
+Il faut fork pour les signaux.
+Attention c'est un process il faudra le wait !!
 */
-int	set_heredoc(int *fd, t_pipelist *pipelist)
+int	set_heredoc(int *fd_hd, t_pipelist *pipelist)
 {
-	int		pid;
-	char	*line;
-
-	if (pipe(fd) == -1)
-		return (-1);
-	pid = fork();
-	if (pid == 0)
-	{
-		while (1)
-		{
-			line = get_next_line(STDIN_FILENO);
-			if (!line)
-				return (-1);
-			if (line == pipelist->elt)
-				break ;
-			write(fd[1], line, ft_strlen(line));
-			// On doit peut-etre free(line) ici
-		}
-		free(line);
-		exit(1);
-	}
 }

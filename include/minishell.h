@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/30 14:49:20 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/01 16:09:46 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 # define MINISHELL_H
 
 # include "../source/libft/libft.h"
-// # include "exec.h"
 # include "builtins.h"
-// # include "env.h"
+# include "env.h"
+// # include "exec.h"
 
 # include <stdio.h>
 # include <stdlib.h>
