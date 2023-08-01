@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 09:55:47 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/31 15:20:49 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/01 11:52:33 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,18 @@ int	set_value_env(t_env *env, char *var_to_set, char *value)
 	new->next = tmp1->next;
 	return (0);
 	env_free_elt(tmp1);
+}
+
+/*
+Retourne la valeur de la variable d'environnement var. Retourne NULL s'il ne trouve pas var.
+Attention, elle n'est pas malloc (C'est completement faisable si besoin)!
+*/
+char	*get_value_env(t_env *env, char *var)
+{
+	t_env	*tmp;
+
+	tmp = env_lfvar(env, var);
+	if (!tmp)
+		return (NULL);
+	return (tmp->value);
 }
