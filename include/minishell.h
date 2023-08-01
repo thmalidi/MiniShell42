@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/01 16:09:46 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/01 16:41:08 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_element
 
 typedef struct s_big_list
 {
+	int					here_doc;
 	char				*content;
 	t_element			**subparsing;
 	struct s_big_list	*next;
@@ -65,7 +66,7 @@ t_big_list **parsing(char *str);
 void	plst(t_list **a);
 void    splited_arg(t_big_list **arg);
 void    free_elm(t_big_list **arg);
-int		subparsing(t_element **subparsing);
+int		subparsing(t_element **subparsing, t_big_list *arg);
 void	printf_tab(char **tab);
 
 void	ft_lstadd_back_big(t_big_list **lst, t_big_list *new);

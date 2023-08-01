@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 12:59:50 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/20 17:43:57 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/01 16:49:16 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,9 @@ void    splited_arg(t_big_list **arg)
 	tmp = *arg;
 	while (tmp)
 	{
-		subparsing(tmp->subparsing);
+		subparsing(tmp->subparsing, tmp);
 		//print_type(tmp->subparsing);
+		printf(">>>>>>>%d\n",tmp->here_doc);
 		tmp = tmp->next;
 	}
 }
