@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:15:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/02 14:12:45 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/02 14:29:18 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int is_builtins(char *str)
 	return (0);
 }
 
-int    subparsing(t_element **subparsing, t_big_list *arg)
+int    subparsing(t_element **subparsing, t_big_list *arg, int n)
 {
     int i;
 	t_element *tmp;
@@ -70,7 +70,7 @@ int    subparsing(t_element **subparsing, t_big_list *arg)
             tmp->type = 1;
 		else if (!ft_strncmp("<<",tmp->str, ft_strlen(tmp->str)))
 		{
-			arg->here_doc = i;
+			arg->here_doc = n;
 			tmp->type = 2;
 		}
         else if (!strncmp(">",tmp->str, ft_strlen(tmp->str)))																//outfile
@@ -82,9 +82,15 @@ int    subparsing(t_element **subparsing, t_big_list *arg)
 		else if (!access(tmp->str, F_OK))																					//fichier
 			tmp->type = 6;
 		else if (is_builtins(tmp->str))																						//builtins
+		{
+			arg->builtin = 1;
 			tmp->type = 7;
+		}
 		else if (is_cmd(envp, tmp->str))																					//commande
+		{
+			arg->cmd = 1;
 			tmp->type = 8;
+		}
 		else
 			tmp->type = -1;
 		tmp = tmp->next;

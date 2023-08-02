@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 12:59:50 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/02 14:13:41 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/02 14:30:12 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void    splited_arg(t_big_list **arg)
 	char **tab;
 	t_big_list *tmp;
 	int     i;
+	int n;
 	
 	tmp = *arg;
 	while(tmp)
@@ -76,11 +77,13 @@ void    splited_arg(t_big_list **arg)
 		tmp = tmp->next;
 	}
 	tmp = *arg;
+	n = 1;
 	while (tmp)
 	{
-		subparsing(tmp->pipelist, tmp);
+		subparsing(tmp->pipelist, tmp, n);
 		//print_type(tmp->pipelist);
 		printf(">>>>>>>%d\n",tmp->here_doc);
+		n++;
 		tmp = tmp->next;
 	}
 }
