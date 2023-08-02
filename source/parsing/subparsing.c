@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 12:59:50 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/01 16:49:16 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/02 14:13:41 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,20 @@ void    splited_arg(t_big_list **arg)
 	while(tmp)
 	{
 		i = 0;
-		tmp->subparsing = malloc(sizeof(t_element *));
-		*tmp->subparsing = NULL;
+		tmp->pipelist = malloc(sizeof(t_element *));
+		*tmp->pipelist = NULL;
 		tab = ft_split(tmp->content, ' ');
 		while (tab[i])
-			ft_lstadd_back_e(tmp->subparsing, ft_lstnew_e(tab[i++]));
-		//pte(tmp->subparsing);
+			ft_lstadd_back_e(tmp->pipelist, ft_lstnew_e(tab[i++]));
+		//pte(tmp->pipelist);
 		free_tab(tab);
 		tmp = tmp->next;
 	}
 	tmp = *arg;
 	while (tmp)
 	{
-		subparsing(tmp->subparsing, tmp);
-		//print_type(tmp->subparsing);
+		subparsing(tmp->pipelist, tmp);
+		//print_type(tmp->pipelist);
 		printf(">>>>>>>%d\n",tmp->here_doc);
 		tmp = tmp->next;
 	}

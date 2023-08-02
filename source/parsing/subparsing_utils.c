@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:15:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/01 16:42:28 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/02 14:12:45 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int    subparsing(t_element **subparsing, t_big_list *arg)
             tmp->type = 1;
 		else if (!ft_strncmp("<<",tmp->str, ft_strlen(tmp->str)))
 		{
-			arg->here_doc = 1;
+			arg->here_doc = i;
 			tmp->type = 2;
 		}
         else if (!strncmp(">",tmp->str, ft_strlen(tmp->str)))																//outfile
