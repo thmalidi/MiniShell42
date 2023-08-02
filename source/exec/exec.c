@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/01 16:09:08 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/02 14:15:08 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ Sort fd propre.
 Si on impose un outfile ou un infile, on ouvre quand meme le pipe et on les met dan fd[4] pour le infile et fd[5] pour le outfile.
 Si on est sur le dernier pipe, on ne doit pas ouvrir de nouveau pipe, la sortie se fera sur la sortie standard si aucun outfile n'est precise.
 */
-int	set_pipe(t_list *list, int *fd)
+int	set_pipe(t_big_list *list, t_pipe_data *data)
 {
-	if (check_redir(list->pipelist, fd) < 0)
+	if (check_redir(list->pipelist, data) < 0)
 		return (-1); //Ne pas oublier de remettre les fd[4] et fd[5] a 0 si pas de redir !! /!\ Important
 	if (list->next)
 		return (0);
-	if (pipe(&fd[2]) == -1)
+	else if (pipe(&(data->fd)[2]) == -1)
 		return (-1); // Msg d'erreur a mettre.
 	return (0);
 }
@@ -79,7 +79,7 @@ Exec une commande qui est un builtin.
 */
 int	exec_builtin(t_pipelist *pipelist, int *fd)
 {
-	// Faire un ptr sur fct
+	
 }
 
 /*
@@ -91,14 +91,31 @@ int	exec_onepipe(t_pipelist *pipelist, int *fd, char **env)
 	t_pipelist	*temp;
 	
 	set_dup(pipelist, fd);
-	while (temp /*&& temp->type != commande && temp-> type != builtin */)
-		temp = temp->next;
 	if (1 /*temp->type = cmd*/)
-		exec_cmd(temp, fd, env);
+		exec_cmd(pipelist, fd, env);
 	else if (1 /*temp->type = builtin*/)
-		exec_builtin(temp, fd); // Ajouter l'env ?
+		exec_builtin(pipelist, fd); // Ajouter l'env ?
 	else
 		/* Il n'y a pas de cmd dans le pipe, faire en fonction */; //Cmd not found sur le premier argument.
+}
+
+int	process_manager(t_big_list *list, t_pipe_data *data, char **env)
+{
+	t_big_list		*tmp;
+	int				i;
+	
+	tmp = list;
+	i = 0;
+	while (tmp)
+	{
+		set_pipe(list, data);
+		(data->pid)[i] = fork();
+		if ((data->pid)[i] == 0)
+			exec_onepipe(list, data->fd, env);
+		tmp = tmp->next;
+		i = i++;
+	}
+	return (0);
 }
 
 /*
@@ -106,9 +123,20 @@ Fonction a appeler dans le main.
 Il faut d'abord faire un tour sur les heredoc et ENSUITE faire les autres.
 Il faudra donc stocker les heredoc du premier passage.
 */
-int	exec(t_list *list, t_env *env)
+int	exec(t_big_list *list, char **env)
 {
+	t_pipe_data	*data;
 	
+	data = (t_pipe_data *)malloc(sizeof(t_pipe_data));
+	if (!data)
+		return (-1);
+	init_data(data); // Fonction qui va malloc et mettre a 0 tout ce beau bordel.
+	exec_heredocs(list, data);
+	if (process_manager(list, data->fd_hd, env) < 0)
+		return (-1);
+	// Wait
+	// Free(data)
 }
+
 
 // Faire un main pour tester !!!
