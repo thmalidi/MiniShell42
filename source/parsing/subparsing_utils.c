@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:15:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/02 14:29:18 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/03 14:08:26 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int is_builtins(char *str)
 	return (0);
 }
 
-int    subparsing(t_element **subparsing, t_big_list *arg, int n)
+int    subparsing(t_element **subparsing, t_big_list *arg)
 {
     int i;
 	t_element *tmp;
@@ -65,12 +65,12 @@ int    subparsing(t_element **subparsing, t_big_list *arg, int n)
 	envp = ft_split(getenv("PATH"), ':');
     while (tmp)
     {
-		printf("tmp[0] == %c\n",tmp->str[0]);
+		//printf("tmp[0] == %c\n",tmp->str[0]);
         if (!ft_strncmp("<",tmp->str, ft_strlen(tmp->str)))																	//infile
             tmp->type = 1;
 		else if (!ft_strncmp("<<",tmp->str, ft_strlen(tmp->str)))
 		{
-			arg->here_doc = n;
+			arg->here_doc++;
 			tmp->type = 2;
 		}
         else if (!strncmp(">",tmp->str, ft_strlen(tmp->str)))																//outfile

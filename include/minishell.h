@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/02 14:28:42 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/03 14:07:00 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_big_list **parsing(char *str);
 void	plst(t_list **a);
 void    splited_arg(t_big_list **arg);
 void    free_elm(t_big_list **arg);
-int		subparsing(t_element **subparsing, t_big_list *arg, int n);
+int		subparsing(t_element **subparsing, t_big_list *arg);
 void	printf_tab(char **tab);
 
 void	ft_lstadd_back_big(t_big_list **lst, t_big_list *new);
