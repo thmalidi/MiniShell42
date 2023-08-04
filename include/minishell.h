@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/01 16:41:08 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/03 14:07:00 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ typedef struct s_element
 typedef struct s_big_list
 {
 	int					here_doc;
+	int					builtin;
+	int					cmd;
 	char				*content;
-	t_element			**subparsing;
+	t_element			**pipelist;
 	struct s_big_list	*next;
 }					t_big_list;
 

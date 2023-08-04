@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:15:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/01 16:42:28 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/03 14:08:26 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ int    subparsing(t_element **subparsing, t_big_list *arg)
 	envp = ft_split(getenv("PATH"), ':');
     while (tmp)
     {
-		printf("tmp[0] == %c\n",tmp->str[0]);
+		//printf("tmp[0] == %c\n",tmp->str[0]);
         if (!ft_strncmp("<",tmp->str, ft_strlen(tmp->str)))																	//infile
             tmp->type = 1;
 		else if (!ft_strncmp("<<",tmp->str, ft_strlen(tmp->str)))
 		{
-			arg->here_doc = 1;
+			arg->here_doc++;
 			tmp->type = 2;
 		}
         else if (!strncmp(">",tmp->str, ft_strlen(tmp->str)))																//outfile
@@ -82,9 +82,15 @@ int    subparsing(t_element **subparsing, t_big_list *arg)
 		else if (!access(tmp->str, F_OK))																					//fichier
 			tmp->type = 6;
 		else if (is_builtins(tmp->str))																						//builtins
+		{
+			arg->builtin = 1;
 			tmp->type = 7;
+		}
 		else if (is_cmd(envp, tmp->str))																					//commande
+		{
+			arg->cmd = 1;
 			tmp->type = 8;
+		}
 		else
 			tmp->type = -1;
 		tmp = tmp->next;
