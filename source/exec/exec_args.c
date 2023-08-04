@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gen_args.c                                         :+:      :+:    :+:   */
+/*   exec_args.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:26:33 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/01 15:16:57 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/03 12:47:09 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,24 @@ Il semblerait qu'il faille ajouter tous les fichiers et option jusqu' a ce qu'on
 */
 int	count_optn(t_pipelist *pipelist)
 {
-	t_pipelist	*temp;
+	t_pipelist	*tmp;
 	int			count;
 
-	temp = pipelist;
+	tmp = pipelist;
 	count = 0;
-	while (temp /*&& type n'est pa une redir*/)
-		count++;
+	while (tmp)
+	{
+		if (tmp->type < 5 && tmp->type > 0)
+		{
+			tmp = tmp->next;
+			tmp = tmp->next;
+		}
+		else
+		{
+			tmp = tmp->next;
+			count++;
+		}
+	}
 	return (count);
 		
 }
@@ -33,25 +44,34 @@ int	count_optn(t_pipelist *pipelist)
 /*
 Retourne les tableau que execve prendra en argument.
 Retourne NULL si ce n'est pas une commande existante.
+Attention probleme si 2 signes de redir a la suite !! A gerer au parsing ?
 */
 char	**gen_args(t_pipelist *pipelist)
 {
-	t_pipelist	*temp;
+	t_pipelist	*tmp;
 	char		**args;
 	int			i;
 
 	args = (char **)malloc(sizeof(char *) * (count_optn(pipelist) + 1));
 	if (!args)
 		return (NULL);
-	temp = pipelist;
+	tmp = pipelist;
 	i = 0;
-	args[i] = ft_strdup(temp->elt);
-	while (1 /*temp->type est soit un fichier soit un flag soit un dossier soit un truc inconnu, il faut s'arreter au premier truc inconnu*/)
+	args[i] = ft_strdup(tmp->elt);
+	while (tmp && tmp->type != 8) // Ici, on peut potentiellement gerer le cas ou il n'y a aucune commande dans le pipe. OU avant ?
+		tmp = tmp->next;
+	// Il va falloir recuperer la commande ici et la mettre au debut de args. 
+	while (tmp)
 	{
-		args[i++] = ft_strdup(temp->elt);
-		if (!args[i])
-			return (/*Free des trucs*/ NULL);
-		temp->next;
+		if (tmp->type > 0 && tmp->type < 5)
+			tmp = tmp->next->next;
+		else
+		{
+			args[i++] = ft_strdup(tmp->elt);
+			if (!args[i])
+				return (/*Free des trucs*/ NULL);
+			tmp->next;
+		}
 	}
 	args[i] = NULL;
 	return (args);
