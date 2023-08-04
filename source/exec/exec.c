@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/02 14:15:08 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/03 08:03:33 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int	exec(t_big_list *list, char **env)
 	if (!data)
 		return (-1);
 	init_data(data); // Fonction qui va malloc et mettre a 0 tout ce beau bordel.
-	exec_heredocs(list, data);
+	exec_hd(list, data);
 	if (process_manager(list, data->fd_hd, env) < 0)
 		return (-1);
 	// Wait

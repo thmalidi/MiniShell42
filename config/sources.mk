@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    sources.mk                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+         #
+#    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 14:42:36 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/07/20 17:33:43 by tmalidi          ###   ########.fr        #
+#    Updated: 2023/08/03 08:01:20 by hgeffroy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,5 +25,10 @@ SOURCES =	source/main.c \
 			source/srclib/ft_split.c \
 			source/srclib/ft_strlen.c \
 			source/srclib/ft_substr.c \
-			source/srclib/ft_strdup.c 
+			source/srclib/ft_strdup.c \
+			source/env/env_create.c \
+			source/env/env_free.c \
+			source/env/env_op.c \
+			source/env/env_to_tab.c \
+			source/env/env_utils.c
 			

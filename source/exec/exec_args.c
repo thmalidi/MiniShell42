@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gen_args.c                                         :+:      :+:    :+:   */
+/*   exec_args.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:26:33 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/02 14:10:19 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/03 12:47:09 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	**gen_args(t_pipelist *pipelist)
 	tmp = pipelist;
 	i = 0;
 	args[i] = ft_strdup(tmp->elt);
-	while (tmp && tmp->type != 8) //Ici, on peut potentiellement gerer le cas ou il n'y a aucune commande dans le pipe. OU avant ?
+	while (tmp && tmp->type != 8) // Ici, on peut potentiellement gerer le cas ou il n'y a aucune commande dans le pipe. OU avant ?
 		tmp = tmp->next;
 	// Il va falloir recuperer la commande ici et la mettre au debut de args. 
 	while (tmp)
