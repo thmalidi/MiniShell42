@@ -1,40 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:03:53 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/30 08:41:03 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/05 15:12:08 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	close_all(int *fd)
+int	lstargs_len(t_lstargs *list)
 {
-	int	i;
+	int			len;
+	t_lstargs	*tmp;
 
-	i = -1;
-	while (++i < 6)
+	len = 0;
+	while (tmp)
 	{
-		if (fd[i] > 0)
-			close (fd[i]);
+		len++;
+		tmp = tmp->next;
 	}
-	return ;
+	return (len);
 }
 
-void	close_inpipe(int *fd)
-{
-	if (fd[0] > 0)
-		close (fd[0]);
-	if (fd[1] > 0)
-		close (fd[1]);
-	if (fd[4] > 0)
-		close (fd[4]);
-	if (fd[5] > 0)
-		close (fd[5]);
-	fd[4] = 0;
-	fd[5] = 0;
-}
+// void	close_all(int *fd)
+// {
+// 	int	i;
+
+// 	i = -1;
+// 	while (++i < 6)
+// 	{
+// 		if (fd[i] > 0)
+// 			close (fd[i]);
+// 	}
+// 	return ;
+// }
+
+// void	close_inpipe(int *fd)
+// {
+// 	if (fd[0] > 0)
+// 		close (fd[0]);
+// 	if (fd[1] > 0)
+// 		close (fd[1]);
+// 	if (fd[4] > 0)
+// 		close (fd[4]);
+// 	if (fd[5] > 0)
+// 		close (fd[5]);
+// 	fd[4] = 0;
+// 	fd[5] = 0;
+// }

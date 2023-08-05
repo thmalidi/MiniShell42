@@ -1,0 +1,206 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_init.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/08/05 18:05:46 by hgeffroy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+int	check_file(char *file, int type, t_datalist *datalist)
+{
+	int	fd;
+	
+	fd = open(file, __O_DIRECTORY, 0644);
+	if (fd != -1)
+	{
+		printf("%s: is a directory\n", file);
+		return (close(fd), -1);
+	}
+	if (type == 1)
+	{
+		if (datalist->infile)
+			close(datalist->infile);
+		datalist->infile = open(file, O_RDONLY, 0644);
+		if (fd < 0)
+			return (-1); //Print des trucs probablement
+	}
+	else if (type == 3)
+	{
+		if (datalist->outfile)
+			close(datalist->outfile);
+		datalist->outfile = open(file, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+		if (fd < 0)
+			return (-1); //Print des trucs probablement
+	}
+	else if (type == 4)
+	{
+		if (datalist->outfile)
+			close(datalist->outfile);
+		datalist->outfile = open(file, O_WRONLY | O_APPEND | O_CREAT, 0644);
+		if (fd < 0)
+			return (-1); //Print des trucs probablement
+	}
+	return (fd);
+}
+
+/*
+Set les valeurs de infile et outfile et supprimme de pipelist les elements correspondants.
+Attention si la commande commence par une redir il faut ptet changer des trucs ici, reinit le pointeur 
+*/
+int	set_files(t_datalist *datalist, t_element **pipelist)
+{
+	t_element	*tmp;
+
+	tmp = *pipelist;
+	while (tmp)
+	{
+		if (tmp->type < 3 && tmp->type > 0)
+		{
+			if(tmp->type == 1)
+				check_file(tmp->next->str, tmp->type, datalist); // Fct check_file a faire, cf stat
+			else
+				datalist->infile = (datalist->fd_hd)[0];
+			tmp = remove_file(tmp);
+		}
+		else if (tmp->type < 5 && tmp->type > 2)
+		{
+			check_file(tmp->next->str, tmp->type, datalist); // Fct checkfile a faire, cf stat
+			tmp = remove_file(tmp);
+		}
+		else
+			tmp = tmp->next;
+		if (!pipelist)
+			*pipelist = tmp;
+	}
+	return (0);
+}
+
+/*
+Remplit lstargs.
+*/
+int	set_args(t_lstargs **lstargs, t_element *tmp)
+{
+	t_lstargs	*new;
+	t_lstargs	*tmp;
+	
+	new = (t_lstargs *)malloc(sizeof(lstargs));
+	if (!new)
+		return (-1);
+	new->next = NULL;
+	new->arg = ft_strdup(tmp->str);
+	if (!new->arg)
+		return (free(new), -1);
+	tmp = *lstargs;
+	if (!tmp)
+	{
+		*lstargs = new;
+		return (0);
+	}
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
+	return (0);
+}
+
+/*
+Initialise les data d'un element de la liste.
+*/
+int	init_data(t_datalist *datalist, t_big_list *list)
+{
+	t_element	*tmp;
+
+	tmp = *(list->pipelist);
+	while (tmp)
+	{
+		datalist->fd_hd = exec_hd(tmp);
+		tmp = tmp->next;
+	}
+	if (set_files(datalist, &(*(list->pipelist))) != 0)
+		return (-1);
+	tmp = *(list->pipelist);
+	datalist->cmd = ft_strdup(tmp->str);
+	if (!datalist->cmd)
+		return (-1);
+	tmp = tmp->next;
+	if (set_args(&(datalist->lstargs), tmp) != 0)
+		return (-1);
+	return (0);
+}
+
+/*
+Ajoute un element a la structure datalist et le remplit.
+*/
+int	fill_data(t_datalist **datalist, t_big_list *list)
+{
+	t_datalist *new;
+	t_datalist *tmp;
+
+	new = (t_datalist *)malloc(sizeof(datalist)); // Calloc...
+	if (!new)
+		return (-1);
+	new->next = NULL;
+	if (init_data(*datalist, list) != 0)
+		return (free(new), -1);
+	tmp = *datalist;
+	if (!tmp)
+	{
+		*datalist = new;
+		return (0);
+	}
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
+	return (0);
+}
+
+/*
+Initialise la structure, on va exec les heredoc dedans, et set les fd.
+Free la big_list.
+*/
+t_datalist	*init_struct(t_big_list *list)
+{
+	t_datalist	*datalist;
+	t_big_list	*tmp;
+
+	datalist = NULL;
+	while (tmp)
+	{
+		if (fill_data(&datalist, tmp) < 0)
+			return (free_big_list(list), NULL);
+		tmp = tmp->next;
+	}
+	free_big_list(list);
+	return (datalist);
+}
+
+void	print_datalist(t_datalist *datalist)
+{
+	t_datalist	*tmp;
+	t_lstargs	*tmpargs;
+	int			i;
+
+	i = 0;
+	tmp = datalist;
+	while (tmp)
+	{
+		printf("\nDatalist du pipe %d :\n", i);
+		printf("Cmd : %s\n", tmp->cmd);
+		printf("Premiere ligne du infile : %s", get_next_line(tmp->infile));
+		printf("Premiere ligne du outfile : %s", get_next_line(tmp->outfile));
+		printf("Les arguments : ");
+		tmpargs = tmp->lstargs;
+		while (tmpargs)
+		{
+			printf("%s, ", tmpargs->arg);
+			tmpargs = tmpargs->next;
+		}
+		i++;
+		printf("\n");
+	}
+}

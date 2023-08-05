@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 09:55:47 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/01 11:52:33 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/05 07:47:25 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,5 @@ char	*get_value_env(t_env *env, char *var)
 	tmp = env_lfvar(env, var);
 	if (!tmp)
 		return (NULL);
-	return (tmp->value);
+	return (tmp->next->value);
 }
