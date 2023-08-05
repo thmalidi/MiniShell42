@@ -6,75 +6,38 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:26:33 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/03 12:47:09 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/05 15:19:32 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-
-/*
-Retourne le nombre d'option pour la premiere commande.
-Faire des tests sur bash pour voir comment ca se passe si on met des options apres une redir ou autre. Les options sont forcement juste apres la commande.
-Il semblerait qu'il faille ajouter tous les fichiers et option jusqu' a ce qu'on croise autre chose (genre redir)
-*/
-int	count_optn(t_pipelist *pipelist)
-{
-	t_pipelist	*tmp;
-	int			count;
-
-	tmp = pipelist;
-	count = 0;
-	while (tmp)
-	{
-		if (tmp->type < 5 && tmp->type > 0)
-		{
-			tmp = tmp->next;
-			tmp = tmp->next;
-		}
-		else
-		{
-			tmp = tmp->next;
-			count++;
-		}
-	}
-	return (count);
-		
-}
+#include "minishell.h"
 
 /*
 Retourne les tableau que execve prendra en argument.
 Retourne NULL si ce n'est pas une commande existante.
 Attention probleme si 2 signes de redir a la suite !! A gerer au parsing ?
 */
-char	**gen_args(t_pipelist *pipelist)
+char	**gen_args(t_datalist *data)
 {
-	t_pipelist	*tmp;
-	char		**args;
 	int			i;
+	t_lstargs	*tmp;
+	char		**args;
 
-	args = (char **)malloc(sizeof(char *) * (count_optn(pipelist) + 1));
+	tmp = data->lstargs;
+	args = (char **)malloc(sizeof(char *) * (lstargs_len(tmp) + 2));
 	if (!args)
 		return (NULL);
-	tmp = pipelist;
-	i = 0;
-	args[i] = ft_strdup(tmp->elt);
-	while (tmp && tmp->type != 8) // Ici, on peut potentiellement gerer le cas ou il n'y a aucune commande dans le pipe. OU avant ?
-		tmp = tmp->next;
-	// Il va falloir recuperer la commande ici et la mettre au debut de args. 
+	args[0] = ft_strdup(data->cmd);
+	if (!args[0])
+		return(free(args), NULL);
+	i = 1;
 	while (tmp)
 	{
-		if (tmp->type > 0 && tmp->type < 5)
-			tmp = tmp->next->next;
-		else
-		{
-			args[i++] = ft_strdup(tmp->elt);
-			if (!args[i])
-				return (/*Free des trucs*/ NULL);
-			tmp->next;
-		}
+		args[i] = tmp->arg;
+		i++;
+		tmp = tmp->next;
 	}
-	args[i] = NULL;
-	return (args);
+	return (args);	
 }
 
 

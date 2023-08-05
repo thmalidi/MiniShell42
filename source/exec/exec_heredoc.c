@@ -6,12 +6,11 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/03 14:00:48 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/05 09:34:46 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-#include "../libft/libft.h"
+#include "minishell.h"
 
 /*
 Si on met des trucs apres le here doc, on doit mettre l'erreur apres la fin du heredoc.
@@ -22,45 +21,9 @@ Il faut fork pour les signaux.
 Attention c'est un process il faudra le wait !!
 */
 
-int	exec_hd(t_big_list *list, t_pipe_data *data)
+int	*exec_hd(t_big_list *list)
 {
-	t_big_list	*tmp;
-
-	/*Il va falloir malloc fd_hd et pid_hd*/
-	tmp = list;
-	while (tmp)
-	{
-		if (tmp->heredoc > 0)
-		{
-			exec_hd_onepipe(tmp->pipelist, data);
-			tmp = tmp->next;
-		}
-	}
-	return (0);
-}
-
-int	exec_hd_onepipe(t_pipelist *list, t_pipe_data *data)
-{
-	t_pipelist	*tmp;
-	int			nb_hd;
-
-	tmp = list;
-	nb_hd = 0;
-	while (tmp)
-	{
-		if (tmp->type == 2)
-		{
-			nb_hd++;
-			if (pipe(&(data->fd_hd)[(list->pipe->heredoc - 1) * 2]) < 0)
-				return (-1); // Free des trucs ?
-			(data->pid_hd)[list->pipe->heredoc - 1] = fork();
-			if ((data->pid_hd)[list->pipe->heredoc - 1] == 0)
-				exec_ohd(tmp->next->elt, data->fd_hd);
-		}
-		tmp = tmp->next;
-	}
-	// Il faut wait ici.
-	return (0);
+	
 }
 
 /*
@@ -79,7 +42,7 @@ int	exec_ohd(char *limiter, int *fd)
 			free(line);
 			break ;
 		}
-		printf("Je write %ld char !!\n", strlen(line));
+		// printf("Je write %ld char !!\n", strlen(line));
 		write(fd[1], line, /*ft_*/strlen(line));
 		write(fd[1], "\n", 1);
 		free(line);
