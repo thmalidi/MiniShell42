@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/05 16:52:51 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/05 18:34:46 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	manage_line(char *line, t_history **history)			//ajouter la fonctionde l'ex
 	}
 }
 
-int	main(void)
+/*int	main(void)
 {
 	struct sigaction	sa;
 	t_history			**history;
@@ -106,4 +106,4 @@ int	main(void)
 	}
 	free_history(history);
 	return (0);
-}
+}*/
