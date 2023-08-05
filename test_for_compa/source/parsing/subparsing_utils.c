@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:15:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/02 14:29:18 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/05 17:00:11 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ int    subparsing(t_element **subparsing, t_big_list *arg, int n)
 	envp = ft_split(getenv("PATH"), ':');
     while (tmp)
     {
-		printf("tmp[0] == %c\n",tmp->str[0]);
+		clean_str(tmp->str);
+		printf("tmp[0] == %s\n",tmp->str);
         if (!ft_strncmp("<",tmp->str, ft_strlen(tmp->str)))																	//infile
             tmp->type = 1;
 		else if (!ft_strncmp("<<",tmp->str, ft_strlen(tmp->str)))

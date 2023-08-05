@@ -6,23 +6,18 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/20 17:49:41 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/05 16:57:33 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	plst(t_list **a)
+void	plst(t_big_list **a)
 {
-	t_list *tmp;
+	t_big_list *tmp;
 
 	tmp = *a;
-	while(tmp)
-	{
-		printf("[%s]\n", tmp->content);
-		tmp = tmp->next;
-	}
-	return;
+	printf("[%s]\n", tmp->content);
 }
 
 t_big_list **pars_arg(char *str)
@@ -35,6 +30,8 @@ t_big_list **pars_arg(char *str)
 	tab = ft_split(str, '|');
 	i = 0;
 	a = malloc(sizeof(t_list *));
+	quote_splite(tab[i]);
+	printf("(%s)\n",tab[i]);
 	new = ft_lstnew_big(tab[i++]);
 	*a = new;
 	while (tab[i])

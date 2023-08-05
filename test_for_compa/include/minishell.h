@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/02 14:28:42 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/05 16:48:38 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_big_list
 	int					here_doc;
 	int					builtin;
 	int					cmd;
+	char				**env;
 	char				*content;
 	t_element			**pipelist;
 	struct s_big_list	*next;
@@ -65,7 +66,7 @@ void 	add_to_history(t_history **history, char *line);
 void	plst_h(t_history **a);
 void	free_history(t_history **history);
 t_big_list **parsing(char *str);
-void	plst(t_list **a);
+void	plst(t_big_list **a);
 void    splited_arg(t_big_list **arg);
 void    free_elm(t_big_list **arg);
 int		subparsing(t_element **subparsing, t_big_list *arg, int n);
@@ -74,5 +75,9 @@ void	printf_tab(char **tab);
 void	ft_lstadd_back_big(t_big_list **lst, t_big_list *new);
 t_big_list	*ft_lstnew_big(void *content);
 t_big_list	*ft_lstlast_big(t_big_list *lst);
+
+void clean_str(char *str);
+void quote_splite(char *str);
+
 
 #endif
