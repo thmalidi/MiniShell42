@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/06 08:39:40 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/06 09:41:43 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,15 @@ t_big_list **pars_arg(char *str)
 	t_big_list **a;
 	t_big_list *new;
 	
+	if (str[0] == '|')
+		return(printf("parse error near `|'\n"), NULL);
 	tab = ft_split(str, '|');
 	i = 0;
 	a = malloc(sizeof(t_list *));
 	new = ft_lstnew_big(tab[i++]);
 	*a = new;
 	while (tab[i])
-		ft_lstadd_back_big(a, ft_lstnew_big(tab[i++]));
+		ft_lstadd_back_big(a, ft_lstnew_big(tab[i]));
 	free(tab);
 	return a;
 }
