@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/05 18:59:33 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/06 11:22:35 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,12 @@ char *mod_env(char **tab)
     return (make_str(tab));
 }
 
-int main()
+/*int main()
 {
     char **tab = ft_split("je suis$:USER", '$');
     char *final = mod_env(tab);
     ft_printf("%s",final);
     free_tab(tab);
     free(final);
-}
+}*/
+
