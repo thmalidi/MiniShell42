@@ -6,25 +6,14 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 08:43:58 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/31 16:17:31 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/06 09:38:17 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
 
-# include "../libft/libft.h"
-
-// A delete
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <stddef.h>
-# include <string.h>
-# include <limits.h>
-# include <unistd.h>
-# include <stdarg.h>
-# include <signal.h>
+# include "minishell.h"
 
 // Struct
 typedef struct s_env

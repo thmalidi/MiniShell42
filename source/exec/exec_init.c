@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/05 18:05:46 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/06 16:39:46 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_file(char *file, int type, t_datalist *datalist)
 {
 	int	fd;
 	
-	fd = open(file, __O_DIRECTORY, 0644);
+	fd = open(file, O_DIRECTORY, 0644);
 	if (fd != -1)
 	{
 		printf("%s: is a directory\n", file);
@@ -66,46 +66,45 @@ int	set_files(t_datalist *datalist, t_element **pipelist)
 				check_file(tmp->next->str, tmp->type, datalist); // Fct check_file a faire, cf stat
 			else
 				datalist->infile = (datalist->fd_hd)[0];
-			tmp = remove_file(tmp);
+			tmp = remove_files(tmp);
 		}
 		else if (tmp->type < 5 && tmp->type > 2)
 		{
 			check_file(tmp->next->str, tmp->type, datalist); // Fct checkfile a faire, cf stat
-			tmp = remove_file(tmp);
+			tmp = remove_files(tmp);
 		}
 		else
 			tmp = tmp->next;
-		if (!pipelist)
+		if (!*pipelist)
 			*pipelist = tmp;
 	}
 	return (0);
 }
 
 /*
-Remplit lstargs.
+Remplit lstargs, t_element ne contient plus que ce dont on a besoin ici.
 */
-int	set_args(t_lstargs **lstargs, t_element *tmp)
+char 	**set_args(t_element *pipelist)
 {
-	t_lstargs	*new;
-	t_lstargs	*tmp;
-	
-	new = (t_lstargs *)malloc(sizeof(lstargs));
-	if (!new)
-		return (-1);
-	new->next = NULL;
-	new->arg = ft_strdup(tmp->str);
-	if (!new->arg)
-		return (free(new), -1);
-	tmp = *lstargs;
-	if (!tmp)
+	t_element	*tmp;
+	char		**args;
+	int			i;
+
+	args = (char **)malloc(sizeof(char *) * (element_len(pipelist) + 1));
+	if (!args)
+		return (NULL);
+	tmp = pipelist;
+	i = 0;
+	while (tmp)
 	{
-		*lstargs = new;
-		return (0);
-	}
-	while (tmp->next)
+		args[i] = ft_strdup(tmp->str);
+		if (!args[i])
+			return(/*Free*/NULL);
 		tmp = tmp->next;
-	tmp->next = new;
-	return (0);
+		i++;
+	}
+	args[i] = NULL;
+	return(args);
 }
 
 /*
@@ -118,17 +117,17 @@ int	init_data(t_datalist *datalist, t_big_list *list)
 	tmp = *(list->pipelist);
 	while (tmp)
 	{
-		datalist->fd_hd = exec_hd(tmp);
+		// datalist->fd_hd = exec_hd(tmp);
 		tmp = tmp->next;
 	}
-	if (set_files(datalist, &(*(list->pipelist))) != 0)
+	if (set_files(datalist, list->pipelist) != 0)
 		return (-1);
 	tmp = *(list->pipelist);
 	datalist->cmd = ft_strdup(tmp->str);
 	if (!datalist->cmd)
 		return (-1);
-	tmp = tmp->next;
-	if (set_args(&(datalist->lstargs), tmp) != 0)
+	datalist->args = set_args(*(list->pipelist));
+	if (!(datalist->args))
 		return (-1);
 	return (0);
 }
@@ -141,11 +140,11 @@ int	fill_data(t_datalist **datalist, t_big_list *list)
 	t_datalist *new;
 	t_datalist *tmp;
 
-	new = (t_datalist *)malloc(sizeof(datalist)); // Calloc...
+	new = (t_datalist *)malloc(sizeof(t_datalist)); // Calloc...
 	if (!new)
 		return (-1);
 	new->next = NULL;
-	if (init_data(*datalist, list) != 0)
+	if (init_data(new, list) != 0)
 		return (free(new), -1);
 	tmp = *datalist;
 	if (!tmp)
@@ -169,6 +168,7 @@ t_datalist	*init_struct(t_big_list *list)
 	t_big_list	*tmp;
 
 	datalist = NULL;
+	tmp = list;
 	while (tmp)
 	{
 		if (fill_data(&datalist, tmp) < 0)
@@ -182,7 +182,6 @@ t_datalist	*init_struct(t_big_list *list)
 void	print_datalist(t_datalist *datalist)
 {
 	t_datalist	*tmp;
-	t_lstargs	*tmpargs;
 	int			i;
 
 	i = 0;
@@ -191,15 +190,11 @@ void	print_datalist(t_datalist *datalist)
 	{
 		printf("\nDatalist du pipe %d :\n", i);
 		printf("Cmd : %s\n", tmp->cmd);
-		printf("Premiere ligne du infile : %s", get_next_line(tmp->infile));
-		printf("Premiere ligne du outfile : %s", get_next_line(tmp->outfile));
-		printf("Les arguments : ");
-		tmpargs = tmp->lstargs;
-		while (tmpargs)
-		{
-			printf("%s, ", tmpargs->arg);
-			tmpargs = tmpargs->next;
-		}
+		printf("Premiere ligne du infile : %s\n", get_next_line(tmp->infile));
+		printf("Premiere ligne du outfile : %s\n", get_next_line(tmp->outfile));
+		printf("Les arguments : \n");
+		print_tab(tmp->args);
+		tmp = tmp->next;
 		i++;
 		printf("\n");
 	}

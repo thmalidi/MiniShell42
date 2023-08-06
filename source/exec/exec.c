@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/06 08:35:57 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/06 14:52:49 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	set_pipe(t_datalist *list, int *fd)
 		if (pipe(&fd[2]) < 0)
 			return (-1);
 	}
+	return (0);
 }
 
 /*
@@ -45,6 +46,7 @@ int	set_dup(t_datalist *list, int *fd)
 	else
 		dup2(fd[3], STDOUT_FILENO);
 	// Close les fd.
+	return (0);
 }
 
 /*
@@ -52,7 +54,7 @@ Exec une commande qui est un builtin.
 */
 int	exec_builtin()
 {
-	
+	return (0);
 }
 
 /*
@@ -71,6 +73,7 @@ int	exec_onepipe(t_datalist *datalist, int *fd, char **env)
 	execve(args[0], args, env);
 	// else if (is_builtin)
 	// exec_builtin();
+	return(0);
 }
 
 /*
@@ -79,23 +82,27 @@ Les heredocs sont executes dans init_struct.
 */
 int	exec(t_big_list *list, char **env)
 {
-	int			i;
-	int			fd[4];
+	//int			i;
+	//int			fd[4];
 	t_datalist	*datalist;
 
+	(void)env;
+
 	datalist = init_struct(list);
-	while (datalist)
-	{
-		if (set_pipe(datalist, fd) < 0)
-			return (/*Free datalist*/-1);
-		datalist->pid = fork();
-		if (datalist->pid == 0)
-			exec_onepipe(datalist, fd, env);
-		i++;
-		datalist = datalist->next;
-	}
-	while (i--)
-		waitpid(-1, 0, 0);
+	print_datalist(datalist);
+	// i = 0;
+	// while (datalist)
+	// {
+	// 	if (set_pipe(datalist, fd) < 0)
+	// 		return (/*Free datalist*/-1);
+	// 	datalist->pid = fork();
+	// 	if (datalist->pid == 0)
+	// 		exec_onepipe(datalist, fd, env);
+	// 	i++;
+	// 	datalist = datalist->next;
+	// }
+	// while (i--)
+	// 	waitpid(-1, 0, 0);
 	return (0);
 }
 

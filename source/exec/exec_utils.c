@@ -6,24 +6,34 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:03:53 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/05 15:12:08 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/06 16:35:38 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	lstargs_len(t_lstargs *list)
+int	element_len(t_element *list)
 {
 	int			len;
-	t_lstargs	*tmp;
+	t_element	*tmp;
 
 	len = 0;
+	tmp = list;
 	while (tmp)
 	{
 		len++;
 		tmp = tmp->next;
 	}
 	return (len);
+}
+
+void print_tab(char **tab)
+{
+	int i;
+
+	i = -1;
+	while (tab[++i])
+		printf("tab[%d] = %s\n", i, tab[i]);
 }
 
 // void	close_all(int *fd)

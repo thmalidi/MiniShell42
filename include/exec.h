@@ -6,29 +6,16 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/05 18:01:31 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/06 16:35:50 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
 
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdio.h>
-# include <readline/readline.h>
-# include <stdlib.h>
-# include <string.h>
-# include <errno.h>
-# include <sys/wait.h>
+# include "minishell.h"
 
 // Struct
-typedef struct s_lstargs
-{
-	char				*arg;
-	struct s_lstargs	*next;
-}	t_lstargs;
-
 typedef struct s_datalist 
 {
 	char				*cmd;
@@ -37,11 +24,20 @@ typedef struct s_datalist
 	int					infile;
 	int					outfile;
 	int					*fd_hd; //Ceci est le pipe du dernier heredoc, fd_hd[2]
-	struct s_lstargs	*lstargs;
+	char				**args;
 	struct s_datalist	*next;
 }	t_datalist;
 
 // Proto
-int	lstargs_len(t_lstargs *list);
+int			element_len(t_element *list);
+int			exec(t_big_list *list, char **env);
+char		**gen_args(t_datalist *data);
+t_datalist	*init_struct(t_big_list *list);
+t_element	*remove_files(t_element *elt);
+void		free_element(t_element *elt);
+void		free_big_list(t_big_list *list);
+
+void		print_datalist(t_datalist *datalist);
+void 		print_tab(char **tab);
 
 #endif
