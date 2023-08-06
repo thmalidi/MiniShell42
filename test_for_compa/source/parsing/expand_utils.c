@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/06 12:17:06 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/06 18:10:46 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,23 +57,75 @@ char *rp_env(char *str, char *var, char *value)
 	return (tmp);
 }
 
+int count_var(char *str)
+{
+	int i;
+	int c;
+	
+	i = 0;
+	c = 0;
+	while (str[i])
+	{
+		if (str[i++] == '$')
+			c += 1;
+	}
+	return (c);
+}
+
+char **extract_var(char *str)
+{
+	int i;
+	int	j;
+	int c;
+	char **tab;
+
+	printf("%d\n", count_var(str) + 1);
+	tab = malloc(sizeof(char *) * (count_var(str) + 1));
+	if (!tab)
+		return (NULL);
+	i = 0;
+	c = 0;
+	while (str[i])
+	{
+		if (str[i] == '$')
+		{
+			j = i + 1;
+			while (str[j] && ft_isalnum(str[j]))
+				j++;
+			if (j - i != 1)
+			{
+				tab[c] = ft_substr(str, i, j - i);
+				c++;
+			}
+		}
+		i++;
+	}
+	//printf("%d",c);
+	tab[c] = NULL;
+	return (tab);
+}
+
 int main()
 {
 	//printf("%s",ft_strnstr("je $USER suis beau", "$USER", ft_strlen("je $USER suis")));
 	char *str;
 	char *tmp;
 	int i;
-	
+	char **tab;
+
+	tab = extract_var("$USER, toto $JSP $ntm$ jsdvjhsvdjh $2a;7");
 	i = 0;
-	str = ft_strdup("je suis $USERf oui $USER");
-	while (i < 2)
+	str = ft_strdup("$USER, toto $JSP $ntm$ jsdvjhsvdjh $2a;7");
+	while (tab[i])
 	{
-		tmp = rp_env(str,"$USER", "tmalidi");
+		tmp = rp_env(str,tab[i], "tmalidi");
 		free(str);
 		str = ft_strdup(tmp);
 		free(tmp);
 		i++;
 	}
-	printf("%s", str);
+	printf("%s\n", str);
 	free(str);
+	printf_tab(tab);
+	free_tab(tab);
 }
