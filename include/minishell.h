@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/05 07:42:37 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/06 08:38:54 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void 	add_to_history(t_history **history, char *line);
 void	plst_h(t_history **a);
 void	free_history(t_history **history);
 t_big_list **parsing(char *str);
-void	plst(t_list **a);
+void	plst(t_big_list **a);
 void    splited_arg(t_big_list **arg);
 void    free_elm(t_big_list **arg);
 int		subparsing(t_element **subparsing, t_big_list *arg);

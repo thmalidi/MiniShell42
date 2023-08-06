@@ -6,11 +6,11 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:06:38 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/31 16:08:30 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/06 08:41:25 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "minishell.h"
 
 /*
 Fonction qui malloc l'elt, ne pas oublier de proteger.

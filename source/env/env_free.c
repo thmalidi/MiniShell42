@@ -6,11 +6,11 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:33:38 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/31 16:18:43 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/06 08:41:05 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "minishell.h"
 
 void	env_free_elt(t_env *elt)
 {
@@ -41,12 +41,12 @@ void	env_clean(t_env *env)
 	env_free_elt(tmp2);
 }
 
-void	free_tab(char **tab)
-{
-	int	i;
+// void	free_tab(char **tab)
+// {
+// 	int	i;
 
-	i = -1;
-	while (tab[++i])
-		free(tab[i]);
-	free(tab);
-}
+// 	i = -1;
+// 	while (tab[++i])
+// 		free(tab[i]);
+// 	free(tab);
+// }

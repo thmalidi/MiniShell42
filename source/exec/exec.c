@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/05 18:14:50 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/06 08:35:57 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,6 @@ int	set_dup(t_datalist *list, int *fd)
 }
 
 /*
-Exec une commande qui n'est pas un builtin.
-*/
-int	exec_cmd()
-{
-	
-}
-
-/*
 Exec une commande qui est un builtin.
 */
 int	exec_builtin()
@@ -69,7 +61,16 @@ Dans le cas ou l'exec ne fonctionne pas, exit avec un perror, il faudra check qu
 */
 int	exec_onepipe(t_datalist *datalist, int *fd, char **env)
 {
+	char **args;
+	
 	set_dup(datalist, fd);
+	args = gen_args(datalist);
+	if (!args)
+		return (-1);
+	// if (!is_builtin)
+	execve(args[0], args, env);
+	// else if (is_builtin)
+	// exec_builtin();
 }
 
 /*

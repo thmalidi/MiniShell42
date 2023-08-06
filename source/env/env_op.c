@@ -6,11 +6,11 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 09:55:47 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/05 07:47:25 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/06 08:41:18 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "minishell.h"
 
 /*
 Retourne -2 si var est a NULL, regarder si on peut s'en servir pour la gestion du cas "export =a".
