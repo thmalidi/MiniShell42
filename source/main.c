@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/06 09:11:46 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/06 15:06:49 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,11 @@ int main()
 // 	}
 // }
 
-void	manage_line(char *line, t_history **history)			//ajouter la fonctionde l'exec ici
+void	manage_line(char *line, t_history **history, char **env)			//ajouter la fonctionde l'exec ici
 {
  	t_big_list	**arg;
-
+	t_env		*envlst;
+	
  	if (!ft_strncmp(line, "history", ft_strlen(line)) && ft_strlen(line) != 0)
  		plst_h(history);
  	else if (ft_strlen(line) != 0)
@@ -78,19 +79,21 @@ void	manage_line(char *line, t_history **history)			//ajouter la fonctionde l'ex
  		if (arg) 
  		{
  			splited_arg(arg);									//creation de la liste pour chaque pipe ici
-			plst(arg);
- 			free_elm(arg);
- 			free_lst(arg);
+			// plst(arg);
+			envlst = create_env(env);
+			exec(*arg, env);
  		}
  	}
 }
 
-int	main(void)
+int	main(int ac, char **av, char **env)
 {
 	t_history			**history;
 	char				*line;
 	int					i;
 
+	(void)ac;
+	(void)av;
  	i = 0;
  	history = malloc(sizeof(t_history *));
  	if (!history)
@@ -100,7 +103,7 @@ int	main(void)
  	{
  		line = readline("\033[32mMinishell>\033[0m");
  		add_to_history(history, line);
- 		manage_line(line, history);
+ 		manage_line(line, history, env);
  		i++;
  	}
  	free_history(history);

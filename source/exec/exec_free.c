@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 11:17:07 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/05 11:48:53 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/06 09:43:58 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_element	*remove_files(t_element *elt)
 	t_element 	*tmp1;
 	t_element	*tmp2;
 
-	if (tmp1->previous)
+	if (elt->previous)
 	{
 		tmp1 = elt->previous;
 		tmp1->next = tmp1->next->next->next;
