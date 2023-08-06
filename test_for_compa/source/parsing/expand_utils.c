@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/06 11:56:13 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/06 12:17:06 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ char *rp_env(char *str, char *var, char *value)
 	int 	len;
 	
 	sec = ft_strnstr(str, var,ft_strlen(str));
+	if (sec == NULL)
+		return (NULL);
 	sec += ft_strlen(var);
 	len = range(str,var,ft_strlen(str));
 	tmp = ft_substr(str, 0, len - (int)ft_strlen(var));
@@ -58,7 +60,20 @@ char *rp_env(char *str, char *var, char *value)
 int main()
 {
 	//printf("%s",ft_strnstr("je $USER suis beau", "$USER", ft_strlen("je $USER suis")));
-	char *test = rp_env("je suis $USERf oui","$USER", "tmalidi");
-	printf("%s",test);
-	free(test);
+	char *str;
+	char *tmp;
+	int i;
+	
+	i = 0;
+	str = ft_strdup("je suis $USERf oui $USER");
+	while (i < 2)
+	{
+		tmp = rp_env(str,"$USER", "tmalidi");
+		free(str);
+		str = ft_strdup(tmp);
+		free(tmp);
+		i++;
+	}
+	printf("%s", str);
+	free(str);
 }
