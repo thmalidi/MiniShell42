@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/06 18:10:46 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/07 16:00:09 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ char **extract_var(char *str)
 	int c;
 	char **tab;
 
-	printf("%d\n", count_var(str) + 1);
 	tab = malloc(sizeof(char *) * (count_var(str) + 1));
 	if (!tab)
 		return (NULL);
@@ -93,19 +92,42 @@ char **extract_var(char *str)
 			while (str[j] && ft_isalnum(str[j]))
 				j++;
 			if (j - i != 1)
-			{
-				tab[c] = ft_substr(str, i, j - i);
-				c++;
-			}
+				tab[c++] = ft_substr(str, i, j - i);
 		}
 		i++;
 	}
-	//printf("%d",c);
 	tab[c] = NULL;
 	return (tab);
 }
 
-int main()
+char	*expand(char *str)
+{
+	char **tab;
+	int i;
+	char *tmp;
+	char *final;
+
+	i = 0;
+	final = ft_strdup(str);
+	free(str);
+	printf("<%c>\n",final[0]);
+	if (final[0] != 39)
+	{
+		tab = extract_var(final);
+		while (tab[i])
+		{
+			tmp = rp_env(final,tab[i], "TEST");
+			free(final);
+			final = ft_strdup(tmp);
+			free(tmp);
+			i++;
+		}
+		free_tab(tab);
+	}
+	return (final);
+}
+
+/*int main()
 {
 	//printf("%s",ft_strnstr("je $USER suis beau", "$USER", ft_strlen("je $USER suis")));
 	char *str;
@@ -113,9 +135,9 @@ int main()
 	int i;
 	char **tab;
 
-	tab = extract_var("$USER, toto $JSP $ntm$ jsdvjhsvdjh $2a;7");
+	tab = extract_var("USER, toto JSP ntm jsdvjhsvdjh 2a;7");
 	i = 0;
-	str = ft_strdup("$USER, toto $JSP $ntm$ jsdvjhsvdjh $2a;7");
+	str = ft_strdup("USER, toto JSP ntm jsdvjhsvdjh 2a;7");
 	while (tab[i])
 	{
 		tmp = rp_env(str,tab[i], "tmalidi");
@@ -128,4 +150,4 @@ int main()
 	free(str);
 	printf_tab(tab);
 	free_tab(tab);
-}
+}*/

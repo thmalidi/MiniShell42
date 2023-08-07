@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/05 16:57:33 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/07 16:10:16 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,21 @@ void	plst(t_big_list **a)
 	printf("[%s]\n", tmp->content);
 }
 
+void	trim_tab(char **tab)
+{
+	int i;
+	char *tmp;
+	
+	i = 0;
+	while (tab[i])
+	{
+		tmp = ft_strtrim(tab[i], " ");
+		free(tab[i]);
+		tab[i] = tmp;
+		i++;
+	}
+}
+
 t_big_list **pars_arg(char *str)
 {
 	char **tab;
@@ -27,11 +42,22 @@ t_big_list **pars_arg(char *str)
 	t_big_list **a;
 	t_big_list *new;
 	
+	if (str[0] == '|')
+		return(printf("parse error near `|'\n"), NULL);
 	tab = ft_split(str, '|');
 	i = 0;
+	trim_tab(tab);
 	a = malloc(sizeof(t_list *));
-	quote_splite(tab[i]);
-	printf("(%s)\n",tab[i]);
+	while (tab[i])
+		quote_splite(tab[i++]);
+	i = 0;
+	while(tab[i])
+	{
+		tab[i] = expand(tab[i]);
+		i++;
+	}
+	i = 0;
+	//printf("(%s)\n",tab[i]);
 	new = ft_lstnew_big(tab[i++]);
 	*a = new;
 	while (tab[i])

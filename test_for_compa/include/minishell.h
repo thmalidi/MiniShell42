@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/05 16:48:38 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/07 15:44:11 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ t_big_list	*ft_lstlast_big(t_big_list *lst);
 
 void clean_str(char *str);
 void quote_splite(char *str);
+char	*expand(char *str);
 
 
 #endif

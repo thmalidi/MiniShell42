@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/06 10:56:30 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/07 15:33:17 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	init_sa(struct sigaction *sa)
 
 
 
-/*void	manage_line(char *line, t_history **history)			//ajouter la fonctionde l'exec ici
+void	manage_line(char *line, t_history **history)			//ajouter la fonctionde l'exec ici
 {
 	t_big_list	**arg;
 
@@ -111,5 +111,5 @@ int	main(void)
 	}
 	free_history(history);
 	return (0);
-}*/
+}
 
