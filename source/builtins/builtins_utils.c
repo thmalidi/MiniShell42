@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   bultins_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/20 08:13:23 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/07 12:15:19 by hgeffroy         ###   ########.fr       */
+/*   Created: 2023/08/07 11:30:29 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/08/07 14:47:01 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-Check les eventuels arguments, je pense qu'on met juste un message d'erreur si il y a des arguments.
-*/
-int	env(char t_datalist *data, t_env *env)
+int	len_tab(char **tab)
 {
-	if (len_tab(data->args))
-		printf("Env Shouldn't be ran with args");
-	env_print(env);
+	int	len;
+
+	len = 0;
+	while (tab[len])
+		len++;
+	return (len);	
 }

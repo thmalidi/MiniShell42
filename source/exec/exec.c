@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/06 14:52:49 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/07 12:13:54 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	exec_builtin()
 Execute une fork qui correspond donc a un pipe.
 Dans le cas ou l'exec ne fonctionne pas, exit avec un perror, il faudra check que le perror renvoie bien les bons trucs.
 */
-int	exec_onepipe(t_datalist *datalist, int *fd, char **env)
+int	exec_onepipe(t_datalist *datalist, int *fd, t_env *env)
 {
 	char **args;
 	
@@ -70,7 +70,7 @@ int	exec_onepipe(t_datalist *datalist, int *fd, char **env)
 	if (!args)
 		return (-1);
 	// if (!is_builtin)
-	execve(args[0], args, env);
+	execve(args[0], args, env_to_tab(env));
 	// else if (is_builtin)
 	// exec_builtin();
 	return(0);
@@ -80,7 +80,7 @@ int	exec_onepipe(t_datalist *datalist, int *fd, char **env)
 Fonction a appeler dans le main.
 Les heredocs sont executes dans init_struct.
 */
-int	exec(t_big_list *list, char **env)
+int	exec(t_big_list *list, t_env *env)
 {
 	//int			i;
 	//int			fd[4];
