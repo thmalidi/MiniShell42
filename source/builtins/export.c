@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:24 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/07 16:14:29 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/08 07:58:38 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,13 @@ void	export(t_datalist *data, t_env *env)
 	return ;
 }
 
-int	main(int ac, char **av, char **env)
-{
-	t_env *tenv;
+// int	main(int ac, char **av, char **env)
+// {
+// 	t_env *tenv;
 
-	(void)ac;
-	(void)av;
-	tenv = create_env(env);
-	print_export(tenv);
-	return (0);
-}
+// 	(void)ac;
+// 	(void)av;
+// 	tenv = create_env(env);
+// 	print_export(tenv);
+// 	return (0);
+// }
