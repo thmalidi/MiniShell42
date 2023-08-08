@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/06 16:39:46 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/07 10:45:59 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,24 +60,38 @@ int	set_files(t_datalist *datalist, t_element **pipelist)
 	tmp = *pipelist;
 	while (tmp)
 	{
+		printf("Yolo %s\n", tmp->str);
 		if (tmp->type < 3 && tmp->type > 0)
 		{
 			if(tmp->type == 1)
-				check_file(tmp->next->str, tmp->type, datalist); // Fct check_file a faire, cf stat
+				check_file(tmp->next->str, tmp->type, datalist);
 			else
 				datalist->infile = (datalist->fd_hd)[0];
+			if (!tmp->previous && tmp->next->next)
+				tmp->next->next->previous = NULL;
 			tmp = remove_files(tmp);
+			if (tmp && !(tmp->previous))
+			{
+				puts("Coucou");
+				*pipelist = tmp;
+			}
 		}
 		else if (tmp->type < 5 && tmp->type > 2)
 		{
-			check_file(tmp->next->str, tmp->type, datalist); // Fct checkfile a faire, cf stat
+			check_file(tmp->next->str, tmp->type, datalist);
+			if (!tmp->previous && tmp->next->next)
+				tmp->next->next->previous = NULL;
 			tmp = remove_files(tmp);
+			if (tmp && !(tmp->previous))
+			{
+				puts("Coucou");
+				*pipelist = tmp;
+			}
 		}
 		else
 			tmp = tmp->next;
-		if (!*pipelist)
-			*pipelist = tmp;
 	}
+	printf("Pipelist fin de set_files : %s\n", (*(pipelist))->str);
 	return (0);
 }
 

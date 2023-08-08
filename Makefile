@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+         #
+#    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 14:14:21 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/08/01 16:48:05 by tmalidi          ###   ########.fr        #
+#    Updated: 2023/08/06 18:02:54 by hgeffroy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,38 +14,38 @@ include config/sources.mk
 
 #--variables-------------------------------------------------------------------#
 
-NAME		=	minishell
-DEBUG		=	yes
+NAME            =       minishell
+DEBUG           =       yes
 
 #--includes & libraries--------------------------------------------------------#
 
-INC_DIR		=	include
-LIBFT_DIR	=	source/libft
+INC_DIR         =       include
+LIBFT_DIR       =       source/libft
 
 #--sources & objects-----------------------------------------------------------#
 
-SRC_DIR		=	source
-OBJ_DIR		=	.objs
+SRC_DIR         =       source
+OBJ_DIR         =       .objs
 
 #--flags-----------------------------------------------------------------------#
 
-CFLAGS		=	-g3 -Wall -Wextra -Werror -I $(LIBFT_DIR) -I $(INC_DIR)
+CFLAGS          =       -g3 -Wall -Wextra -Werror -I $(LIBFT_DIR) -I $(INC_DIR)
 
 #--debug flags--------------------------------------------------------#
 
-DFLAGS		=	-g3 -fsanitize=address
+DFLAGS          =       -g3 -fsanitize=address
 
 ifeq ($(DEBUG), yes)
-CFLAGS 		+=	$(DFLAGS)
+CFLAGS          +=      $(DFLAGS)
 endif
 
 #--libs------------------------------------------------------------------------#
 
-LIBFT	=	$(LIBFT_DIR)/libft.a
+LIBFT   =       $(LIBFT_DIR)/libft.a
 
 #--objects---------------------------------------------------------------------#
 
-OBJECTS	=	$(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
+OBJECTS =       $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 
 #--global rules----------------------------------------------------------------#
 
@@ -54,40 +54,40 @@ OBJECTS	=	$(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 #--compilation rules-----------------------------------------------------------#
 
 all:
-	$(MAKE) -C ./source/libft
-	$(MAKE) $(NAME) -j
+		$(MAKE) -C ./source/libft
+		$(MAKE) $(NAME) -j
 
 $(NAME): $(OBJECTS) $(LIBFT)
-	$(CC) $^ $(CFLAGS) $(LIBFT) -o $@ -lreadline
+		$(CC) $^ $(CFLAGS) $(LIBFT) -o $@ -lreadline
 
 $(OBJ_DIR)/%.o: %.c $(HEADERS) 
-	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+		mkdir -p $(dir $@)
+		$(CC) $(CFLAGS) -c $< -o $@
 
 #--libs, debugs & bonus--------------------------------------------------------#
 
 lib:
-	$(MAKE) -C $(LIBFT_DIR)
+		$(MAKE) -C $(LIBFT_DIR)
 
 debug:
-	$(MAKE) re -j DEBUG=yes
+		$(MAKE) re -j DEBUG=yes
 
 #--re, clean & fclean----------------------------------------------------------#
 
 re:
-	clear
-	$(MAKE) fclean
-	$(MAKE) -j all
+		clear
+		$(MAKE) fclean
+		$(MAKE) -j all
 
 clean:
-	$(MAKE) -C $(LIBFT_DIR) clean
-	$(RM) -rf $(OBJECTS)
+		$(MAKE) -C $(LIBFT_DIR) clean
+		$(RM) -rf $(OBJECTS)
 
 fclean:
-	clear
-	$(MAKE) clean
-	$(MAKE) -C $(LIBFT_DIR) fclean
-	$(RM) $(NAME)
+		clear
+		$(MAKE) clean
+		$(MAKE) -C $(LIBFT_DIR) fclean
+		$(RM) $(NAME)
 
 #--PHONY-----------------------------------------------------------------------#
 

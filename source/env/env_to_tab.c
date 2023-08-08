@@ -6,16 +6,15 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 14:14:47 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/06 08:41:21 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/07 14:45:37 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	env_len(t_env *env);
 static char	*line_var(t_env *env);
 
-static int	env_len(t_env *env)
+int	env_len(t_env *env)
 {
 	t_env	*tmp;
 	int		count;

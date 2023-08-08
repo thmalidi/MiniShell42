@@ -6,7 +6,7 @@
 #    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 14:42:36 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/08/06 09:42:08 by hgeffroy         ###   ########.fr        #
+#    Updated: 2023/08/07 14:52:37 by hgeffroy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,5 +36,7 @@ SOURCES =	source/main.c \
 			source/exec/exec_heredoc.c \
 			source/exec/exec_init.c \
 			source/exec/exec_utils.c \
-			source/exec/exec.c 
+			source/exec/exec.c \
+			source/builtins/builtins_utils.c \
+			source/builtins/export.c
 			

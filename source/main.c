@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/06 15:06:49 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/07 14:37:51 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,36 +79,36 @@ void	manage_line(char *line, t_history **history, char **env)			//ajouter la fon
  		if (arg) 
  		{
  			splited_arg(arg);									//creation de la liste pour chaque pipe ici
-			// plst(arg);
+			plst(arg);
 			envlst = create_env(env);
-			exec(*arg, env);
+			exec(*arg, envlst);
  		}
  	}
 }
 
-int	main(int ac, char **av, char **env)
-{
-	t_history			**history;
-	char				*line;
-	int					i;
+// int	main(int ac, char **av, char **env)
+// {
+// 	t_history			**history;
+// 	char				*line;
+// 	int					i;
 
-	(void)ac;
-	(void)av;
- 	i = 0;
- 	history = malloc(sizeof(t_history *));
- 	if (!history)
- 		return (0);
- 	*history = NULL;
- 	while (i < 3)
- 	{
- 		line = readline("\033[32mMinishell>\033[0m");
- 		add_to_history(history, line);
- 		manage_line(line, history, env);
- 		i++;
- 	}
- 	free_history(history);
- 	return (0);
-}
+// 	(void)ac;
+// 	(void)av;
+//  	i = 0;
+//  	history = malloc(sizeof(t_history *));
+//  	if (!history)
+//  		return (0);
+//  	*history = NULL;
+//  	while (i < 3)
+//  	{
+//  		line = readline("\033[32mMinishell>\033[0m");
+//  		add_to_history(history, line);
+//  		manage_line(line, history, env);
+//  		i++;
+//  	}
+//  	free_history(history);
+//  	return (0);
+// }
 
 /*int main()
 {
