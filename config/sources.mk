@@ -6,7 +6,7 @@
 #    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 14:42:36 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/08/07 14:52:37 by hgeffroy         ###   ########.fr        #
+#    Updated: 2023/08/08 09:02:43 by hgeffroy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SOURCES =	source/main.c \
 			source/env/env_op.c \
 			source/env/env_to_tab.c \
 			source/env/env_utils.c \
-			source/exec/exec_args.c \
+			source/exec/exec_cmd.c \
+			source/exec/exec_cmd_utils.c \
 			source/exec/exec_free.c \
 			source/exec/exec_heredoc.c \
 			source/exec/exec_init.c \

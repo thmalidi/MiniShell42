@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/08 08:31:21 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/08 13:59:16 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,20 @@ int	set_files(t_datalist *datalist, t_element **pipelist)
 			if(tmp->type == 1)
 				check_file(tmp->next->str, tmp->type, datalist);
 			else
-				;
-				// datalist->infile = (datalist->fd_hd)[0];
+				datalist->infile = exec_hd(tmp);
 			if (!tmp->previous && tmp->next->next)
-				tmp->next->next->previous = NULL;
+				tmp->next->next->previous = NULL; // Si c'est au debut de la chaine
 			tmp = remove_files(tmp);
-			if (tmp && !(tmp->previous))
+			if (!tmp || !(tmp->previous))
 				*pipelist = tmp;
 		}
 		else if (tmp->type < 5 && tmp->type > 2)
 		{
 			check_file(tmp->next->str, tmp->type, datalist);
-			if (!tmp->previous && tmp->next->next)
+			if (!tmp->previous && tmp->next->next) // Si c'est au debut de la chaine
 				tmp->next->next->previous = NULL;
 			tmp = remove_files(tmp);
-			if (tmp && !(tmp->previous))
+			if (!tmp || !(tmp->previous))
 				*pipelist = tmp;
 		}
 		else
@@ -123,20 +122,25 @@ int	init_data(t_datalist *datalist, t_big_list *list)
 	t_element	*tmp;
 
 	tmp = *(list->pipelist);
-	while (tmp)
-	{
-		// datalist->fd_hd = exec_hd(tmp);
-		tmp = tmp->next;
-	}
+	// while (tmp)
+	// {
+	// 	close_fd_hd(datalist->fd_hd);
+	// 	if ()
+	// 		datalist->fd_hd = exec_hd(tmp);
+	// 	if (!datalist->fd_hd)
+	// 		return(-1);
+	// 	tmp = tmp->next;
+	// }
 	if (set_files(datalist, list->pipelist) != 0)
 		return (-1);
 	tmp = *(list->pipelist);
-	datalist->cmd = ft_strdup(tmp->str);
+	if (tmp)
+		datalist->cmd = ft_strdup(tmp->str);
 	if (!datalist->cmd)
 		return (-1);
 	datalist->args = set_args(*(list->pipelist));
 	if (!(datalist->args))
-		return (-1);
+		return (/*Free le strdup ?*/-1);
 	return (0);
 }
 
@@ -148,7 +152,7 @@ int	fill_data(t_datalist **datalist, t_big_list *list)
 	t_datalist *new;
 	t_datalist *tmp;
 
-	new = (t_datalist *)malloc(sizeof(t_datalist)); // Calloc...
+	new = (t_datalist *)ft_calloc(1, sizeof(t_datalist)); // Calloc...
 	if (!new)
 		return (-1);
 	new->next = NULL;
@@ -198,7 +202,9 @@ void	print_datalist(t_datalist *datalist)
 	{
 		printf("\nDatalist du pipe %d :\n", i);
 		printf("Cmd : %s\n", tmp->cmd);
+		printf("fd du infile : %d\n", datalist->infile);
 		printf("Premiere ligne du infile : %s\n", get_next_line(tmp->infile));
+		printf("fd du outfile : %d\n", datalist->outfile);
 		printf("Premiere ligne du outfile : %s\n", get_next_line(tmp->outfile));
 		printf("Les arguments : \n");
 		print_tab(tmp->args);

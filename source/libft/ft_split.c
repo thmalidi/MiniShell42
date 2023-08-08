@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 08:27:54 by tmalidi           #+#    #+#             */
-/*   Updated: 2022/11/13 08:28:02 by tmalidi          ###   ########lyon.fr   */
+/*   Updated: 2023/08/08 13:56:07 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ char	**ft_split(char const *s, char c)
 	int		len_word;
 	int		i;
 
+	if (!s)
+		return(NULL);
 	size = count_cells(s, c);
 	tab = malloc(sizeof(char *) * (size + 1));
 	if (!tab)

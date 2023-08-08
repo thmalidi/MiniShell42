@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/08 08:31:55 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/08 13:41:40 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,18 @@ int	exec_builtin()
 Execute une fork qui correspond donc a un pipe.
 Dans le cas ou l'exec ne fonctionne pas, exit avec un perror, il faudra check que le perror renvoie bien les bons trucs.
 */
-int	exec_onepipe(t_datalist *datalist, int *fd, t_env *env)
-{
-	// char **args;
+int	exec_onepipe(t_datalist *datalist, int *fd, t_env *envlst)
+{	
+	char	*cmdwpath;
+	char	**env;
 	
 	set_dup(datalist, fd);
-	// args = gen_args(datalist);
-	// if (!args)
-	// 	return (-1);
-	// if (!is_builtin)
-	execve((datalist->args)[0], datalist->args, env_to_tab(env));
-	// else if (is_builtin)
+	// if (is_builtin)
 	// exec_builtin();
+	env = env_to_tab(envlst); // A free, ca malloc
+	cmdwpath = check_cmd(env, datalist->cmd); // A free
+	// else
+	execve(cmdwpath, datalist->args, env);
 	return(0);
 }
 
@@ -80,16 +80,16 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env *env)
 Fonction a appeler dans le main.
 Les heredocs sont executes dans init_struct.
 */
-int	exec(t_big_list *list, t_env *env)
+int	exec(t_big_list *list, t_env *envlst)
 {
 	int			i;
 	int			fd[4];
 	t_datalist	*datalist;
 
-	// (void)env;
+	// (void)envlst;
 
 	datalist = init_struct(list);
-	print_datalist(datalist);
+	// print_datalist(datalist);
 	i = 0;
 	while (datalist)
 	{
@@ -97,10 +97,9 @@ int	exec(t_big_list *list, t_env *env)
 			return (/*Free datalist*/-1);
 		datalist->pid = fork();
 		if (datalist->pid == 0)
-			exec_onepipe(datalist, fd, env);
+			exec_onepipe(datalist, fd, envlst);
 		i++;
 		datalist = datalist->next;
-		// puts("hello");
 	}
 	while (i--)
 		waitpid(-1, 0, 0);

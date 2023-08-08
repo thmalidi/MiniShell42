@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:24 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/08 07:58:38 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/08 11:17:17 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,7 @@ int	print_export(t_env *env)
 void	export(t_datalist *data, t_env *env)
 {
 	if (len_tab(data->args) < 2)
-	{
 		print_export(env);
-	}
 	return ;
 }
 

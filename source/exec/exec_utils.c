@@ -6,11 +6,27 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:03:53 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/06 16:35:38 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/08 11:26:24 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+Close les n premiers fd.
+*/
+void	close_fd(int *fd, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		if (fd[i])
+			close (fd[i]);
+		i++;
+	}
+}
 
 int	element_len(t_element *list)
 {
