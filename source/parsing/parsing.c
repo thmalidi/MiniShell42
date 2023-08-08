@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/06 09:41:43 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/08 09:48:49 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_big_list **pars_arg(char *str)
 	new = ft_lstnew_big(tab[i++]);
 	*a = new;
 	while (tab[i])
-		ft_lstadd_back_big(a, ft_lstnew_big(tab[i]));
+		ft_lstadd_back_big(a, ft_lstnew_big(tab[i++]));
 	free(tab);
 	return a;
 }
