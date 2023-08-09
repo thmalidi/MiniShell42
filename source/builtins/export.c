@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:24 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/08 11:17:17 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/09 16:03:41 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ int	print_export_line(t_env *env_var)
 		return(-1);
 	printf("declare -x ");
 	printf("%s", env_var->var);
-	printf("=\"");
-	printf("%s", env_var->value);
-	printf("\"\n");
+	printf("\"");
+	if (env_var->value)
+		printf("%s", env_var->value);
+	printf("\"");
 	return (0);
 }
 
@@ -68,10 +69,38 @@ int	print_export(t_env *env)
 	
 }
 
+char	**parsing_export(char *arg)
+{
+	char	**res;
+
+	res = ft_split(arg, '=');
+	if (check_var(res[0]) < 0)
+		return(free(res), NULL);
+	return (res);
+}
+
 void	export(t_datalist *data, t_env *env)
 {
+	int		i;
+	char	**args_splitted;
+	
 	if (len_tab(data->args) < 2)
 		print_export(env);
+	else
+	{
+		i = - 1;
+		while ((data->args)[++i])
+		{
+			args_splitted = parsing_export(data->args[i]);
+			if (!args_splitted)
+				continue ;
+			else if (!strcmp(env->var, args_splitted[1]) && !env_lfvar(env, args_splitted[1]))
+				add_to_env(&env, args_splitted[0], args_splitted[1]);
+			else
+				set_value_env(env, args_splitted[0], args_splitted[1]);
+			free(args_splitted);
+		}
+	}
 	return ;
 }
 

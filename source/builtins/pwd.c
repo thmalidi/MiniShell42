@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:28 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/08 09:37:51 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/09 14:39:44 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	pwd(t_datalist *data, t_env *env)
 
 	if (len_tab(data->args))
 		printf("pwd shouldn't be ran with args");
-	pwd = get_value_env(env, "PWD");
+	pwd = getcwd(NULL, 0);
 	if (!pwd)
 		return (-1);
 	printf("%s\n", pwd);

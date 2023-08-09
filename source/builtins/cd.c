@@ -6,15 +6,30 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:03:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/08 11:16:45 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/09 12:21:20 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int cd(t_datalist datalist)
+/*
+Si plusieurs arguments, n'execute que le premier !!
+Changer de repertoire courant chdir
+Mettre a jour pwd
+Mettre a jour le old pwd
+*/
+int cd(t_datalist *datalist, t_env *env, char *path)
 {
-	// Changer de repertoire courant
-	// Mettre a jour pwd
-	// Mettre a jour le old pwd
+	char	*dir;
+
+	if (!path) //On peut retourner a la racine au pire
+		return (-1);
+	dir = getcwd(NULL, 0);
+	set_value_env(env, "OLDPWD", dir);
+	chdir(path);
+	dir = getcwd(NULL, 0);
+	set_value_env(env, "PWD", dir);
+	return (0);
 }
+
+// Il faut tester les acces aux dossiers ?

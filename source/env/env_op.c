@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 09:55:47 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/06 08:41:18 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/09 11:52:55 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	add_to_env(t_env **env, char *var, char *value)
 
 /*A test separement*/
 /*
-Retourne 0 en cas de succes, -1 si on a rien enleve.
+Retourne 0 en cas de succes, -1 sinon. Ne rien enlever est un succes !
 */
 int	rm_from_env(t_env **env, char *var_to_rm)
 {
@@ -55,11 +55,11 @@ int	rm_from_env(t_env **env, char *var_to_rm)
 	}
 	tmp2 = env_lfvar(*env, var_to_rm);
 	if (!tmp2)
-		return (-1);
+		return (0);
 	tmp1 = tmp2->next;
 	tmp2->next = tmp1->next;
 	env_free_elt(tmp1);
-	return (-1);
+	return (0);
 }
 
 /*
@@ -67,9 +67,9 @@ Retourne 0 en cas de succes, -1 si on a rien set.
 */
 int	set_value_env(t_env *env, char *var_to_set, char *value)
 {
-	t_env	*new;
-	t_env	*tmp1;
-	t_env	*tmp2;
+	t_env	*new; // Le nouvel elt
+	t_env	*tmp1; // L'elt qu'on change
+	t_env	*tmp2; // L'elt precedent celui qu'on change
 
 	
 	if (!env)
@@ -83,8 +83,8 @@ int	set_value_env(t_env *env, char *var_to_set, char *value)
 		return (-1);
 	tmp2->next = new;
 	new->next = tmp1->next;
-	return (0);
 	env_free_elt(tmp1);
+	return (0);
 }
 
 /*
