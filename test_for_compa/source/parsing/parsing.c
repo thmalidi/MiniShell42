@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/10 11:27:24 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/10 16:10:38 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,30 @@ t_big_list **pars_arg(char *str)
 
 int double_quote(char *str)
 {
+	int s = 0;
+    int d = 0;
+	int	i;
+
+	i = 0;
+    while (str[i] != '\0')
+	{
+        if (str[i] == 39) 
+		{
+            if (d % 2 == 0)
+                s++;
+        } 
+		if (str[i] == 34) 
+		{
+            if (s % 2 == 0)
+                d++;
+        }
+        i++;
+    }
+	if (s % 2 == 0 && d % 2 == 0)
+    	return 1;
+	return 0;
+}
+/*{
 	int i;
 	int s;
 	int d;
@@ -86,7 +110,7 @@ int double_quote(char *str)
 	if (d % 2 != 0 || s % 2 != 0)
 		return (0);
 	return (1);
-}
+}*/
 
 int scan_cmd(char *str)
 {
@@ -97,7 +121,7 @@ int scan_cmd(char *str)
 	dup = ft_strtrim(str, " ");
 	while (str[i])
 	{
-		if ((dup[i] == 92 || dup[i] == ';') && dup[0] != 34)
+		if ((dup[i] == 92 || dup[i] == ';') && dup[0] != 34 && dup[0] != 39)
 			return (printf("\033[31mError :\033[0m%c\033[31m forbidden character\033[0m\n", dup[i]),free(dup),0);
 		i++;
 	}
@@ -110,8 +134,8 @@ t_big_list **parsing(char *str)
 {
 	t_big_list **arg;
 	
-	/*if (!scan_cmd(str))
-		return (NULL);*/
+	if (!double_quote(str))
+		return (NULL);
 	arg = pars_arg(str);
 	return (arg);
 }

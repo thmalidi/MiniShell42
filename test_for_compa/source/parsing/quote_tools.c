@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:12:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/08 17:23:38 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/10 16:02:52 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int replace(char *str, char c, int i)
 {
     while(str[i] && str[i] != c)
     {
-        printf("str[i] = %c\n", str[i]);
+        //printf("str[i] = %c\n", str[i]);
         if (str[i] == ' ')
             str[i] = c;
         i++;
@@ -28,15 +28,18 @@ void quote_splite(char *str)
 {
     int i;
 
-    if (!double_quote(str))
-        return ;
+    /*if (!double_quote(str))
+        return ;*/
     i = 0;
     while (str[i])
     {
-        while(str[i] != 39 && str[i] != 34 && str[i])
+        while(str[i] && str[i] != 39 && str[i] != 34)
             i++;
-        if (str[i] != '\0')
+        if (str[i])
+        {
+            printf("(%c)\n",str[i]);
             i = replace(str,str[i],i + 1);
+        }
     }
 }
 
