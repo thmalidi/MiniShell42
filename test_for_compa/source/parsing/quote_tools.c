@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:12:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/10 16:02:52 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/10 16:27:30 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void quote_splite(char *str)
 
     /*if (!double_quote(str))
         return ;*/
+    //printf("??%s\n",str);
     i = 0;
     while (str[i])
     {
@@ -37,7 +38,7 @@ void quote_splite(char *str)
             i++;
         if (str[i])
         {
-            printf("(%c)\n",str[i]);
+            printf("(%c) i = %d\n",str[i], i);
             i = replace(str,str[i],i + 1);
         }
     }

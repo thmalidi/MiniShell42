@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/10 11:27:09 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/10 16:23:33 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char *expand(char *str)
 
     tmp = ft_strdup(str);
     free(str);
-    quote_splite(tmp);
+    //quote_splite(tmp);
     tab = ft_split(tmp, ' ');
     free(tmp);
     i = 0;
