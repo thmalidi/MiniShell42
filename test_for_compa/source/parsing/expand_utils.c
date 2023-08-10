@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/07 16:00:09 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/10 10:33:33 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char **extract_var(char *str)
 	return (tab);
 }
 
-char	*expand(char *str)
+char	*expand_process(char *str)
 {
 	char **tab;
 	int i;

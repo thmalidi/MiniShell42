@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/07 16:10:16 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/10 11:27:24 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ t_big_list **pars_arg(char *str)
 	while(tab[i])
 	{
 		tab[i] = expand(tab[i]);
+		printf("->(%s)\n", tab[i]);
 		i++;
 	}
 	i = 0;
-	//printf("(%s)\n",tab[i]);
 	new = ft_lstnew_big(tab[i++]);
 	*a = new;
 	while (tab[i])
@@ -77,39 +77,41 @@ int double_quote(char *str)
 	d = 0;
 	while (str[i])
 	{
-		if (str[i] == 39)
+		if (str[i] == 39 && str[0] != 34)
 			s++;
 		if (str[i] == 34)
 			d++;
 		i++;
 	}
 	if (d % 2 != 0 || s % 2 != 0)
-		return 0;
-	return 1;
+		return (0);
+	return (1);
 }
 
 int scan_cmd(char *str)
 {
 	int i;
+	char *dup;
 
 	i = 0;
+	dup = ft_strtrim(str, " ");
 	while (str[i])
 	{
-		if (str[i] == 92 || str[i] == ';')
-			return (printf("\033[31mError :\033[0m%c\033[31m forbidden character\033[0m\n", str[i]),0);
+		if ((dup[i] == 92 || dup[i] == ';') && dup[0] != 34)
+			return (printf("\033[31mError :\033[0m%c\033[31m forbidden character\033[0m\n", dup[i]),free(dup),0);
 		i++;
 	}
-	if (!double_quote(str))
-		return (printf("\033[31mError : quotes still open\033[0m\n"),0);
-	return 1;
+	if (!double_quote(dup))
+		return (printf("\033[31mError : quotes still open\033[0m\n"),free(dup),0);
+	return (free(dup),1);
 }
 
 t_big_list **parsing(char *str)
 {
 	t_big_list **arg;
 	
-	if (!scan_cmd(str))
-		return (NULL);
+	/*if (!scan_cmd(str))
+		return (NULL);*/
 	arg = pars_arg(str);
 	return (arg);
 }

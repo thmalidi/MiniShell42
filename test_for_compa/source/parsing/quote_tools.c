@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:12:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/05 17:09:48 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/08 17:23:38 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void quote_splite(char *str)
 {
     int i;
 
+    if (!double_quote(str))
+        return ;
     i = 0;
     while (str[i])
     {

@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:15:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/07 15:57:36 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/08 17:19:41 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,27 @@ int is_builtins(char *str)
 	if (!ft_strncmp("exit",str, ft_strlen(str)))
 		return (1);
 	return (0);
+}
+
+int is_ok(t_big_list **a)
+{
+	t_big_list *test;
+	t_element	*tmp;
+
+	test = *a;
+	while (test)
+	{
+		tmp = *test->pipelist;
+		while (tmp)
+		{
+			printf("(%s)\n",tmp->str);
+			if(!scan_cmd(tmp->str))
+				return(0);
+			tmp = tmp->next;
+		}
+		test = test->next;
+	}
+	return (1);
 }
 
 int    subparsing(t_element **subparsing, t_big_list *arg, int n)

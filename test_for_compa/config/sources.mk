@@ -6,12 +6,13 @@
 #    By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 14:42:36 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/08/06 11:23:17 by tmalidi          ###   ########.fr        #
+#    Updated: 2023/08/08 13:29:08 by tmalidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SOURCES =	source/main.c \
 			source/parsing/parsing.c \
+			source/parsing/parsing_utils.c \
 			source/parsing/exit.c \
 			source/parsing/history.c \
 			source/parsing/subparsing.c \

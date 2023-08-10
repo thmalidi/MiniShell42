@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/07 15:44:11 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/10 11:10:12 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,11 @@ t_big_list	*ft_lstlast_big(t_big_list *lst);
 
 void clean_str(char *str);
 void quote_splite(char *str);
-char	*expand(char *str);
-
+char	*expand_process(char *str);
+char *expand(char *str);
+void    manage_tab(char **tab);
+int		scan_cmd(char *str);
+int		is_ok(t_big_list **a);
+int		double_quote(char *str);
 
 #endif
