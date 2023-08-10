@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/08 11:44:30 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/10 10:17:22 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define EXEC_H
 
 # include "minishell.h"
+# include "env.h"
 
 // Struct
 typedef struct s_datalist 
@@ -27,6 +28,8 @@ typedef struct s_datalist
 	char				**args;
 	struct s_datalist	*next;
 }	t_datalist;
+
+typedef int	(*t_builtins)(t_datalist *datalist, t_env *env);
 
 // Proto
 int			element_len(t_element *list);
@@ -48,5 +51,6 @@ char		**is_path(char **env);
 int			is_whitespace(char *cmd);
 
 int			exec_hd(t_element *pipelist);
+int			isbuiltin(char *cmd);
 
 #endif

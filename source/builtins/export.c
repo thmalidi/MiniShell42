@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:24 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/09 16:03:41 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/10 09:15:14 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	**parsing_export(char *arg)
 	return (res);
 }
 
-void	export(t_datalist *data, t_env *env)
+int	export_b(t_datalist *data, t_env *env)
 {
 	int		i;
 	char	**args_splitted;
@@ -101,7 +101,7 @@ void	export(t_datalist *data, t_env *env)
 			free(args_splitted);
 		}
 	}
-	return ;
+	return (0);
 }
 
 // int	main(int ac, char **av, char **env)

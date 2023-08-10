@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/08 13:41:40 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/10 10:25:27 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,11 @@ int	set_dup(t_datalist *list, int *fd)
 /*
 Exec une commande qui est un builtin.
 */
-int	exec_builtin()
+void	exec_builtin(t_datalist *datalist, t_env *envlst, int builtin)
 {
-	return (0);
+	const t_builtins tab_builtins[] = {&cd_b, &echo_b, &env_b, &exit_b, &exit_b, &export_b, &pwd_b, &unset_b};
+	
+	(*tab_builtins[builtin])(datalist, envlst);
 }
 
 /*
@@ -65,14 +67,18 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env *envlst)
 {	
 	char	*cmdwpath;
 	char	**env;
+	int		builtin;
 	
 	set_dup(datalist, fd);
-	// if (is_builtin)
-	// exec_builtin();
-	env = env_to_tab(envlst); // A free, ca malloc
-	cmdwpath = check_cmd(env, datalist->cmd); // A free
-	// else
-	execve(cmdwpath, datalist->args, env);
+	builtin = isbuiltin(datalist->cmd);
+	if (builtin > -1)
+		exec_builtin(datalist, envlst, builtin);
+	else
+	{
+		env = env_to_tab(envlst); // A free, ca malloc
+		cmdwpath = check_cmd(env, datalist->cmd); // A free
+		execve(cmdwpath, datalist->args, env);	
+	}
 	return(0);
 }
 

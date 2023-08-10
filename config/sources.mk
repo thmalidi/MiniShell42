@@ -6,7 +6,7 @@
 #    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 14:42:36 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/08/08 09:02:43 by hgeffroy         ###   ########.fr        #
+#    Updated: 2023/08/10 09:18:46 by hgeffroy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,5 +39,11 @@ SOURCES =	source/main.c \
 			source/exec/exec_utils.c \
 			source/exec/exec.c \
 			source/builtins/builtins_utils.c \
-			source/builtins/export.c
+			source/builtins/cd.c \
+			source/builtins/echo.c \
+			source/builtins/env.c \
+			source/builtins/exit.c \
+			source/builtins/export.c \
+			source/builtins/pwd.c \
+			source/builtins/unset.c
 			
