@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/10 10:33:33 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/10 17:55:37 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	range(char *str, char *var, int size)
 {
-	int i;
-	int j;
-	
+	int	i;
+	int	j;
+
 	i = 0;
-	while(i < size)
+	while (i < size)
 	{
 		if (str[i] == var[0])
 		{
@@ -36,32 +36,31 @@ int	range(char *str, char *var, int size)
 	return (-1);
 }
 
-char *rp_env(char *str, char *var, char *value)
+char	*rp_env(char *str, char *var, char *value)
 {
-	char *sec;
-	char *tmp;
-	char *final;
-	int 	len;
-	
-	sec = ft_strnstr(str, var,ft_strlen(str));
+	char	*sec;
+	char	*tmp;
+	char	*final;
+	int		len;
+
+	sec = ft_strnstr(str, var, ft_strlen(str));
 	if (sec == NULL)
 		return (NULL);
 	sec += ft_strlen(var);
-	len = range(str,var,ft_strlen(str));
+	len = range(str, var, ft_strlen(str));
 	tmp = ft_substr(str, 0, len - (int)ft_strlen(var));
 	final = ft_strjoin(tmp, value);
 	free(tmp);
 	tmp = ft_strjoin(final, sec);
 	free(final);
-	//free(sec);
 	return (tmp);
 }
 
-int count_var(char *str)
+int	count_var(char *str)
 {
-	int i;
-	int c;
-	
+	int	i;
+	int	c;
+
 	i = 0;
 	c = 0;
 	while (str[i])
@@ -72,12 +71,12 @@ int count_var(char *str)
 	return (c);
 }
 
-char **extract_var(char *str)
+char	**extract_var(char *str)
 {
-	int i;
-	int	j;
-	int c;
-	char **tab;
+	int		i;
+	int		j;
+	int		c;
+	char	**tab;
 
 	tab = malloc(sizeof(char *) * (count_var(str) + 1));
 	if (!tab)
@@ -102,21 +101,20 @@ char **extract_var(char *str)
 
 char	*expand_process(char *str)
 {
-	char **tab;
-	int i;
-	char *tmp;
-	char *final;
+	char	**tab;
+	int		i;
+	char	*tmp;
+	char	*final;
 
 	i = 0;
 	final = ft_strdup(str);
 	free(str);
-	printf("<%c>\n",final[0]);
 	if (final[0] != 39)
 	{
 		tab = extract_var(final);
 		while (tab[i])
 		{
-			tmp = rp_env(final,tab[i], "TEST");
+			tmp = rp_env(final, tab[i], "TEST");
 			free(final);
 			final = ft_strdup(tmp);
 			free(tmp);
@@ -126,28 +124,3 @@ char	*expand_process(char *str)
 	}
 	return (final);
 }
-
-/*int main()
-{
-	//printf("%s",ft_strnstr("je $USER suis beau", "$USER", ft_strlen("je $USER suis")));
-	char *str;
-	char *tmp;
-	int i;
-	char **tab;
-
-	tab = extract_var("USER, toto JSP ntm jsdvjhsvdjh 2a;7");
-	i = 0;
-	str = ft_strdup("USER, toto JSP ntm jsdvjhsvdjh 2a;7");
-	while (tab[i])
-	{
-		tmp = rp_env(str,tab[i], "tmalidi");
-		free(str);
-		str = ft_strdup(tmp);
-		free(tmp);
-		i++;
-	}
-	printf("%s\n", str);
-	free(str);
-	printf_tab(tab);
-	free_tab(tab);
-}*/
