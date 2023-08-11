@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 08:13:23 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/07 12:15:19 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/10 12:04:07 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 /*
 Check les eventuels arguments, je pense qu'on met juste un message d'erreur si il y a des arguments.
+Il ne faut pas print si les var n'ont pas de value !!!
 */
-int	env(char t_datalist *data, t_env *env)
+int	env_b(t_datalist *data, t_env **env)
 {
-	if (len_tab(data->args))
-		printf("Env Shouldn't be ran with args");
-	env_print(env);
+	if (len_tab(data->args) > 1)
+		printf("Env Shouldn't be ran with args\n");
+	else
+		env_print(*env);
+	return (0);
 }

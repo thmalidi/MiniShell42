@@ -6,11 +6,27 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:03:53 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/06 16:35:38 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/10 10:20:23 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+Close les n premiers fd.
+*/
+void	close_fd(int *fd, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		if (fd[i])
+			close (fd[i]);
+		i++;
+	}
+}
 
 int	element_len(t_element *list)
 {
@@ -34,6 +50,19 @@ void print_tab(char **tab)
 	i = -1;
 	while (tab[++i])
 		printf("tab[%d] = %s\n", i, tab[i]);
+}
+
+int	isbuiltin(char *cmd)
+{	int			i;
+	const char	*builtins[] = {"cd", "echo", "env", "exit", "export", "pwd", "unset", NULL};
+	
+	i = -1;
+	while (builtins[++i])
+	{
+		if (!strcmp(cmd, builtins[i]))
+			return (i);
+	}
+	return (-1);
 }
 
 // void	close_all(int *fd)

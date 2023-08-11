@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/06 09:51:23 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/08 11:47:11 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,6 @@ elt de pipelist est le limiteur.
 Il faut fork pour les signaux.
 Attention c'est un process il faudra le wait !!
 */
-
-
-int	*exec_hd(t_big_list *list)
-{
-	(void)list;
-	return (0);
-}
-
 
 /*
 La question etant, est-ce qu'on supprime, la reponse etant oui
@@ -51,6 +43,16 @@ int	exec_ohd(char *limiter, int *fd)
 		free(line);
 	}
 	return (0);
+}
+int	exec_hd(t_element *pipelist)
+{
+	int	fd[2];
+
+	if (pipe(fd) == -1)
+		return(-1);
+	exec_ohd(pipelist->next->str, fd);
+	close (fd[1]);
+	return (fd[0]);
 }
 
 

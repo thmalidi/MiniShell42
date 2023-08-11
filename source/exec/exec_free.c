@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 11:17:07 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/06 09:43:58 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/08 13:49:07 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,30 @@ Enleve les elts correspondants aux redirections apres avoir check une redirectio
 */
 t_element	*remove_files(t_element *elt)
 {
+	t_element	*res;
 	t_element 	*tmp1;
 	t_element	*tmp2;
 
 	if (elt->previous)
 	{
-		tmp1 = elt->previous;
-		tmp1->next = tmp1->next->next->next;
+		res = elt->previous;
+		if (elt->next->next)
+			res->next = elt->next->next;
+		else
+			res->next = NULL;
 	}
-	tmp1 = elt->next;
-	tmp2 = tmp1->next;
-	free(tmp1->str);
-	free(tmp1);
+	else if (elt->next->next)
+		res = elt->next->next;
+	else // Truc du genre < out sans rien d'autre
+		res = NULL;
 	tmp1 = elt;
+	tmp2 = elt->next;
 	free(tmp1->str);
 	free(tmp1);
-	return (tmp2);
+	free(tmp2->str);
+	free(tmp2);
+	// printf("Retour de remove files : %s\n", res->str);
+	return (res);
 }
 
 void	free_element(t_element *elt)
