@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/11 18:19:45 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/11 18:53:37 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "../source/libft/libft.h"
-# include "builtins.h"
-# include "env.h"
-# include "exec.h"
-
+# include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <readline/readline.h>
@@ -55,6 +51,11 @@ typedef struct s_history
 	struct s_history	*next;
 	struct s_history	*previous;
 }						t_history;
+
+# include "../source/libft/libft.h"
+# include "builtins.h"
+# include "env.h"
+# include "exec.h"
 
 void		free_lst(t_big_list **a);
 void		free_tab(char **tab);
