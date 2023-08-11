@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:24 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/10 16:21:49 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/11 15:29:13 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	print_export_line(t_env *env_var)
 {
 	if (!env_var)
-		return(-1);
+		return (-1);
 	printf("declare -x ");
 	printf("%s", env_var->var);
 	if (env_var->value)
@@ -31,7 +31,7 @@ t_env	*find_next_min(t_env *env, char *prev_min)
 {
 	t_env	*min;
 	t_env	*tmp;
-	
+
 	tmp = env; // Check que l'env est pas vide
 	min = NULL;
 	while (tmp)
@@ -45,7 +45,8 @@ t_env	*find_next_min(t_env *env, char *prev_min)
 	tmp = env;
 	while (tmp)
 	{
-		if (ft_strcmp(min->var, tmp->var) > 0 && ft_strcmp(prev_min, tmp->var) < 0)
+		if (ft_strcmp(min->var, tmp->var) > 0 \
+		&& ft_strcmp(prev_min, tmp->var) < 0)
 			min = tmp;
 		tmp = tmp->next;
 	}
@@ -57,7 +58,7 @@ int	print_export(t_env *env)
 	int		i;
 	t_env	*min;
 	char	*prev_min;
-	
+
 	i = 0;
 	prev_min = "";
 	while (i < env_len(env))
@@ -68,7 +69,6 @@ int	print_export(t_env *env)
 		i++;
 	}
 	return (0);
-	
 }
 
 char	**parsing_export(char *arg)
@@ -77,7 +77,7 @@ char	**parsing_export(char *arg)
 
 	res = ft_split(arg, '=');
 	if (check_var(res[0]) < 0)
-		return(free_tab(res), NULL);
+		return (free_tab(res), NULL);
 	return (res);
 }
 
@@ -85,18 +85,19 @@ int	export_b(t_datalist *data, t_env **env)
 {
 	int		i;
 	char	**args_splitted;
-	
+
 	if (len_tab(data->args) < 2)
 		print_export(*env);
 	else
 	{
-		i = - 1;
+		i = -1;
 		while ((data->args)[++i])
 		{
 			args_splitted = parsing_export(data->args[i]);
 			if (!args_splitted)
 				continue ;
-			else if (!strcmp((*env)->var, args_splitted[1]) && !env_lfvar((*env), args_splitted[1]))
+			else if (!strcmp((*env)->var, args_splitted[1]) \
+			&& !env_lfvar((*env), args_splitted[1]))
 				add_to_env(env, args_splitted[0], args_splitted[1]);
 			else
 				set_value_env(env, args_splitted[0], args_splitted[1]);

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 14:14:47 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/07 14:45:37 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/11 15:34:43 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	env_len(t_env *env)
 {
 	t_env	*tmp;
 	int		count;
-	
+
 	if (!env)
 		return (0);
 	tmp = env;
@@ -37,7 +37,8 @@ static char	*line_var(t_env *env)
 	int		j;
 	char	*line;
 
-	line = (char *)malloc(sizeof(char) * (ft_strlen(env->value) + ft_strlen(env->var) + 2));
+	line = (char *)malloc(sizeof(char) * \
+	(ft_strlen(env->value) + ft_strlen(env->var) + 2));
 	if (!line)
 		return (NULL);
 	i = -1;
@@ -60,7 +61,7 @@ char	**env_to_tab(t_env *env)
 	t_env	*tmp;
 	char	**tab;
 	int		i;
-	
+
 	if (!env)
 		return (NULL);
 	tab = (char **)malloc(sizeof(char *) * (env_len(env) + 2));
@@ -71,7 +72,7 @@ char	**env_to_tab(t_env *env)
 	while (tmp)
 	{
 		tab[i] = line_var(tmp);
-		if(!tab[i])
+		if (!tab[i])
 			return (free_tab(tab), NULL);
 		tmp = tmp->next;
 		i++;
