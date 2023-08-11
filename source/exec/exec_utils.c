@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:03:53 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/10 10:20:23 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/11 08:49:11 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,15 @@ void print_tab(char **tab)
 	i = -1;
 	while (tab[++i])
 		printf("tab[%d] = %s\n", i, tab[i]);
+}
+
+void print_tab_int(int *tab, int n)
+{
+	int i;
+
+	i = -1;
+	while (++i < n)
+		printf("tab[%d] = %d\n", i, tab[i]);
 }
 
 int	isbuiltin(char *cmd)

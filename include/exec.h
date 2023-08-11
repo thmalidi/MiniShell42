@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/10 16:36:55 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/11 08:49:44 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,8 @@ int			is_whitespace(char *cmd);
 int			exec_hd(t_element *pipelist);
 int			isbuiltin(char *cmd);
 void		close_fd(int *fd, int n);
+
+// A del
+void 	print_tab_int(int *tab, int n);
 
 #endif

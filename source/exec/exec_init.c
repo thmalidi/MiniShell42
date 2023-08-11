@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/08 13:59:16 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/11 10:38:17 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	set_files(t_datalist *datalist, t_element **pipelist)
 		else
 			tmp = tmp->next;
 	}
+	// printf("fd du outfile : %d\n\n", datalist->outfile);
 	// printf("Pipelist fin de set_files : %s\n", (*(pipelist))->str);
 	return (0);
 }
@@ -122,15 +123,6 @@ int	init_data(t_datalist *datalist, t_big_list *list)
 	t_element	*tmp;
 
 	tmp = *(list->pipelist);
-	// while (tmp)
-	// {
-	// 	close_fd_hd(datalist->fd_hd);
-	// 	if ()
-	// 		datalist->fd_hd = exec_hd(tmp);
-	// 	if (!datalist->fd_hd)
-	// 		return(-1);
-	// 	tmp = tmp->next;
-	// }
 	if (set_files(datalist, list->pipelist) != 0)
 		return (-1);
 	tmp = *(list->pipelist);
@@ -202,10 +194,10 @@ void	print_datalist(t_datalist *datalist)
 	{
 		printf("\nDatalist du pipe %d :\n", i);
 		printf("Cmd : %s\n", tmp->cmd);
-		printf("fd du infile : %d\n", datalist->infile);
-		printf("Premiere ligne du infile : %s\n", get_next_line(tmp->infile));
-		printf("fd du outfile : %d\n", datalist->outfile);
-		printf("Premiere ligne du outfile : %s\n", get_next_line(tmp->outfile));
+		printf("fd du infile : %d\n", tmp->infile);
+		// printf("Premiere ligne du infile : %s\n", get_next_line(tmp->infile));
+		printf("fd du outfile : %d\n", tmp->outfile);
+		// printf("Premiere ligne du outfile : %s\n", get_next_line(tmp->outfile));
 		printf("Les arguments : \n");
 		print_tab(tmp->args);
 		tmp = tmp->next;
