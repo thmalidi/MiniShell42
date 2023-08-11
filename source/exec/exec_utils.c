@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:03:53 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/11 08:49:11 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/11 15:39:38 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,28 +43,30 @@ int	element_len(t_element *list)
 	return (len);
 }
 
-void print_tab(char **tab)
+void	print_tab(char **tab)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (tab[++i])
 		printf("tab[%d] = %s\n", i, tab[i]);
 }
 
-void print_tab_int(int *tab, int n)
+void	print_tab_int(int *tab, int n)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < n)
 		printf("tab[%d] = %d\n", i, tab[i]);
 }
 
-int	isbuiltin(char *cmd)
-{	int			i;
-	const char	*builtins[] = {"cd", "echo", "env", "exit", "export", "pwd", "unset", NULL};
-	
+int	is_builtin(char *cmd)
+{	
+	int			i;
+	const char	*builtins[] = {"cd", "echo", "env", "exit", \
+							"export", "pwd", "unset", NULL};
+
 	i = -1;
 	while (builtins[++i])
 	{

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/11 10:38:17 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/11 15:56:35 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	check_file(char *file, int type, t_datalist *datalist)
 {
 	int	fd;
-	
+
 	fd = open(file, O_DIRECTORY, 0644);
 	if (fd != -1)
 	{
@@ -50,8 +50,10 @@ int	check_file(char *file, int type, t_datalist *datalist)
 }
 
 /*
-Set les valeurs de infile et outfile et supprimme de pipelist les elements correspondants.
-Attention si la commande commence par une redir il faut ptet changer des trucs ici, reinit le pointeur 
+Set les valeurs de infile et outfile et 
+supprimme de pipelist les elements correspondants.
+Attention si la commande commence par une redir 
+il faut ptet changer des trucs ici, reinit le pointeur.
 */
 int	set_files(t_datalist *datalist, t_element **pipelist)
 {
@@ -62,12 +64,12 @@ int	set_files(t_datalist *datalist, t_element **pipelist)
 	{
 		if (tmp->type < 3 && tmp->type > 0)
 		{
-			if(tmp->type == 1)
+			if (tmp->type == 1)
 				check_file(tmp->next->str, tmp->type, datalist);
 			else
 				datalist->infile = exec_hd(tmp);
 			if (!tmp->previous && tmp->next->next)
-				tmp->next->next->previous = NULL; // Si c'est au debut de la chaine
+				tmp->next->next->previous = NULL;
 			tmp = remove_files(tmp);
 			if (!tmp || !(tmp->previous))
 				*pipelist = tmp;
@@ -75,7 +77,7 @@ int	set_files(t_datalist *datalist, t_element **pipelist)
 		else if (tmp->type < 5 && tmp->type > 2)
 		{
 			check_file(tmp->next->str, tmp->type, datalist);
-			if (!tmp->previous && tmp->next->next) // Si c'est au debut de la chaine
+			if (!tmp->previous && tmp->next->next)
 				tmp->next->next->previous = NULL;
 			tmp = remove_files(tmp);
 			if (!tmp || !(tmp->previous))
@@ -84,15 +86,13 @@ int	set_files(t_datalist *datalist, t_element **pipelist)
 		else
 			tmp = tmp->next;
 	}
-	// printf("fd du outfile : %d\n\n", datalist->outfile);
-	// printf("Pipelist fin de set_files : %s\n", (*(pipelist))->str);
 	return (0);
 }
 
 /*
 Remplit lstargs, t_element ne contient plus que ce dont on a besoin ici.
 */
-char 	**set_args(t_element *pipelist)
+char	**set_args(t_element *pipelist)
 {
 	t_element	*tmp;
 	char		**args;
@@ -107,12 +107,12 @@ char 	**set_args(t_element *pipelist)
 	{
 		args[i] = ft_strdup(tmp->str);
 		if (!args[i])
-			return(/*Free*/NULL);
+			return (/*Free*/NULL);
 		tmp = tmp->next;
 		i++;
 	}
 	args[i] = NULL;
-	return(args);
+	return (args);
 }
 
 /*
@@ -141,10 +141,10 @@ Ajoute un element a la structure datalist et le remplit.
 */
 int	fill_data(t_datalist **datalist, t_big_list *list)
 {
-	t_datalist *new;
-	t_datalist *tmp;
+	t_datalist	*new;
+	t_datalist	*tmp;
 
-	new = (t_datalist *)ft_calloc(1, sizeof(t_datalist)); // Calloc...
+	new = (t_datalist *)ft_calloc(1, sizeof(t_datalist));
 	if (!new)
 		return (-1);
 	new->next = NULL;
@@ -195,9 +195,7 @@ void	print_datalist(t_datalist *datalist)
 		printf("\nDatalist du pipe %d :\n", i);
 		printf("Cmd : %s\n", tmp->cmd);
 		printf("fd du infile : %d\n", tmp->infile);
-		// printf("Premiere ligne du infile : %s\n", get_next_line(tmp->infile));
 		printf("fd du outfile : %d\n", tmp->outfile);
-		// printf("Premiere ligne du outfile : %s\n", get_next_line(tmp->outfile));
 		printf("Les arguments : \n");
 		print_tab(tmp->args);
 		tmp = tmp->next;
