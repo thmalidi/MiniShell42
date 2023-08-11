@@ -6,24 +6,23 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:03:32 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/11 17:51:25 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/11 17:57:49 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char *rp_trim(char *str)
+char	*rp_trim(char *str)
 {
-	char *tmp;
+	char	*tmp;
 
-	if (str[0] == 39 )
+	if (str[0] == 39)
 		tmp = ft_strtrim(str, "\'");
 	else if (str[0] == 34)
 		tmp = ft_strtrim(str, "\"");
 	else
 		tmp = ft_strdup(str);
 	return (free(str), tmp);
-	
 }
 
 int	pars_arg_op(char **tab, int i, t_env **envlst)
@@ -40,7 +39,6 @@ int	pars_arg_op(char **tab, int i, t_env **envlst)
 	{
 		tab[i] = expand(tab[i], envlst);
 		tab[i] = rp_trim(tab[i]);
-		printf("<<<<<<%s\n", tab[i]);
 		i++;
 	}
 	return (1);

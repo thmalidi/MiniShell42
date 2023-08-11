@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/11 17:52:31 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/11 17:56:50 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,6 @@ int	scan_cmd(char *str)
 					dup[i]), free(dup), 0);
 		i++;
 	}
-	/*if (!double_quote(dup))
-		return (printf("\033[31mError : quotes still open\033[0m\n"),
-			free(dup), 0);*/
 	return (free(dup), 1);
 }
 
