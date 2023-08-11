@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/11 17:22:35 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/11 17:52:31 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,10 @@ t_big_list	**pars_arg(char *str, t_env **envlst)
 		return (printf("parse error near `|'\n"), NULL);
 	tab = ft_split(str, '|');
 	i = 0;
-	trim_tab(tab);
+	if (!pars_arg_op(tab, i, envlst))
+		return (free_tab(tab), NULL);
+	i = 0;
 	a = malloc(sizeof(t_list *));
-	while (tab[i])
-		quote_splite(tab[i++]);
-	i = 0;
-	while (tab[i])
-	{
-		tab[i] = expand(tab[i], envlst);
-		tab[i] = rp_trim(tab[i]);
-		printf("<<<<<<%s\n", tab[i]);
-		i++;
-	}
-	i = 0;
 	new = ft_lstnew_big(tab[i++]);
 	*a = new;
 	while (tab[i])
@@ -81,7 +72,6 @@ int	double_quote(char *str)
 		}
 		i++;
 	}
-	printf("simple = %d && double = %d\n",s,d);
 	if (s % 2 == 0 && d % 2 == 0)
 		return (1);
 	return (0);
@@ -102,9 +92,9 @@ int	scan_cmd(char *str)
 					dup[i]), free(dup), 0);
 		i++;
 	}
-	if (!double_quote(dup))
+	/*if (!double_quote(dup))
 		return (printf("\033[31mError : quotes still open\033[0m\n"),
-			free(dup), 0);
+			free(dup), 0);*/
 	return (free(dup), 1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/11 17:09:28 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/11 17:48:02 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,7 @@ int		is_ok(t_big_list **a);
 int		double_quote(char *str);
 
 char *rp_trim(char *str);
+int	pars_arg_op(char **tab, int i, t_env **envlst);
+void	trim_tab(char **tab);
 
 #endif
