@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:11 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/10 10:30:36 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/10 12:03:57 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	noneed_breakline(char **args)
 	return (0);
 }
 
-int	echo_b(t_datalist *data, t_env *env)
+int	echo_b(t_datalist *data, t_env **env)
 {
 	int	breakline;
 	int	i;

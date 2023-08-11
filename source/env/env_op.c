@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 09:55:47 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/09 11:52:55 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/10 15:44:19 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,25 +65,24 @@ int	rm_from_env(t_env **env, char *var_to_rm)
 /*
 Retourne 0 en cas de succes, -1 si on a rien set.
 */
-int	set_value_env(t_env *env, char *var_to_set, char *value)
+int	set_value_env(t_env **env, char *var_to_set, char *value)
 {
-	t_env	*new; // Le nouvel elt
 	t_env	*tmp1; // L'elt qu'on change
-	t_env	*tmp2; // L'elt precedent celui qu'on change
 
-	
-	if (!env)
+	tmp1 = env_lfvar(*env, var_to_set);
+	if (!tmp1 && strcmp((*env)->var, var_to_set))
 		return (-1);
-	tmp2 = env_lfvar(env, var_to_set);
-	if (!tmp2)
-		return (-1);
-	tmp1 = tmp2->next;
-	new = env_newelt(var_to_set, value);
-	if (!new)
-		return (-1);
-	tmp2->next = new;
-	new->next = tmp1->next;
-	env_free_elt(tmp1);
+	else if (!tmp1)
+	{
+		free((*env)->value);
+		(*env)->value = ft_strdup(value);
+	}
+	else
+	{
+		tmp1 = tmp1->next;
+		free(tmp1->value);
+		tmp1->value = ft_strdup(value);
+	}
 	return (0);
 }
 
