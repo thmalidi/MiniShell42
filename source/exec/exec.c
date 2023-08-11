@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/10 16:36:18 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/11 11:09:54 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ int	set_pipe(t_datalist *list, int *fd)
 {	
 	fd[0] = fd[2];
 	fd[1] = fd[3];
+	fd[3] = 0;
 	if (list->next)
 	{
 		if (pipe(&fd[2]) < 0)
 			return (-1);
+		// puts("Je pipe (je suis dans set_pipe)"); //A del
 	}
 	return (0);
 }
@@ -36,15 +38,27 @@ On doit prioriser les infile et outfile aux pipes.
 */
 int	set_dup(t_datalist *list, int *fd)
 {
+	// print_tab_int(fd, 4);
 	if(list->infile)
+	{
 		dup2(list->infile, STDIN_FILENO);
-	else
+		puts("Riri");
+	}
+	else if (fd[0])
+	{
 		dup2(fd[0], STDIN_FILENO);
-
+		printf("Fifi");
+	}
 	if (list->outfile)
+	{
 		dup2(list->outfile, STDOUT_FILENO);
-	else
+		puts("Loulou");
+	}
+	else if (fd[3])
+	{
 		dup2(fd[3], STDOUT_FILENO);
+		puts("Baba");
+	}
 	close_fd(fd, 4);
 	return (0);
 }
@@ -94,8 +108,9 @@ int	exec(t_big_list *list, t_env **envlst)
 
 	// (void)envlst;
 
+	ft_bzero(fd, 4 * sizeof(int));
 	datalist = init_struct(list);
-	// print_datalist(datalist);
+	print_datalist(datalist);
 	i = 0;
 	while (datalist)
 	{
@@ -104,6 +119,11 @@ int	exec(t_big_list *list, t_env **envlst)
 		datalist->pid = fork();
 		if (datalist->pid == 0)
 			exec_onepipe(datalist, fd, envlst);
+		if (datalist->infile)
+			close(datalist->infile);
+		if (datalist->outfile)
+			close(datalist->outfile);
+		close_fd(fd, 2);
 		i++;
 		datalist = datalist->next;
 	}
@@ -113,4 +133,4 @@ int	exec(t_big_list *list, t_env **envlst)
 }
 
 
-// Faire un main pour tester !!!
+// Faire un main pour tester sans le main minishell !
