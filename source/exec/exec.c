@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/11 11:09:54 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/11 11:17:56 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	exec_builtin(t_datalist *datalist, t_env **envlst, int builtin)
 	const t_builtins tab_builtins[] = {&cd_b, &echo_b, &env_b, &exit_b, &export_b, &pwd_b, &unset_b};
 	
 	(*tab_builtins[builtin])(datalist, envlst);
+	exit(0);
 }
 
 /*
