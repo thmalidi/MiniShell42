@@ -6,33 +6,20 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 11:17:07 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/08 13:49:07 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/11 15:37:24 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void	free_tab(char **tab)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (tab[i])
-// 	{
-// 		free(tab[i]);
-// 		i++;
-// 	}
-// 	free(tab);
-// 	return ;
-// }
-
 /*
-Enleve les elts correspondants aux redirections apres avoir check une redirection.
+Enleve les elts correspondants aux redirections 
+apres avoir check une redirection.
 */
 t_element	*remove_files(t_element *elt)
 {
 	t_element	*res;
-	t_element 	*tmp1;
+	t_element	*tmp1;
 	t_element	*tmp2;
 
 	if (elt->previous)
@@ -53,7 +40,6 @@ t_element	*remove_files(t_element *elt)
 	free(tmp1);
 	free(tmp2->str);
 	free(tmp2);
-	// printf("Retour de remove files : %s\n", res->str);
 	return (res);
 }
 
@@ -61,7 +47,7 @@ void	free_element(t_element *elt)
 {
 	t_element	*tmp1;
 	t_element	*tmp2;
-	
+
 	tmp2 = elt;
 	if (!tmp2)
 		return ;
