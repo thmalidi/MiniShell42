@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/10 11:10:12 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/11 16:21:23 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_element	*ft_lstlast_e(t_element *lst);
 void 	add_to_history(t_history **history, char *line);
 void	plst_h(t_history **a);
 void	free_history(t_history **history);
-t_big_list **parsing(char *str);
+t_big_list **parsing(char *str, t_env **envlst);
 void	plst(t_big_list **a);
 void    splited_arg(t_big_list **arg);
 void    free_elm(t_big_list **arg);
@@ -78,8 +78,8 @@ t_big_list	*ft_lstlast_big(t_big_list *lst);
 
 void clean_str(char *str);
 void quote_splite(char *str);
-char	*expand_process(char *str);
-char *expand(char *str);
+char	*expand_process(char *str, t_env *envlst);
+char	*expand(char *str, t_env **env);
 void    manage_tab(char **tab);
 int		scan_cmd(char *str);
 int		is_ok(t_big_list **a);

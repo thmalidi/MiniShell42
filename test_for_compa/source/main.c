@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/08 17:18:27 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/11 16:44:33 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,44 +71,62 @@ void	init_sa(struct sigaction *sa)
 
 
 
-void	manage_line(char *line, t_history **history)			//ajouter la fonctionde l'exec ici
+void	manage_line(char *line, t_history **history, t_env **env)			//ajouter la fonctionde l'exec ici
 {
-	t_big_list	**arg;
-
+	t_big_list			**arg;
+	
 	if (!ft_strncmp(line, "history", ft_strlen(line)) && ft_strlen(line) != 0)
 		plst_h(history);
 	else if (ft_strlen(line) != 0)
 	{
-		arg = parsing(line);
+		arg = parsing(line, env);
 		if (arg) 
 		{
 			splited_arg(arg);								//creation de la liste pour chaque pipe ici
 			if(!is_ok(arg))
-				printf("ouiiiiiiiiiiiiiiiiiiiiiii\n");
+				printf("faut pas que ca passe\n");
 			free_elm(arg);
 			free_lst(arg);
 		}
 	}
 }
 
-int	main(void)
+void shab_env(t_env *env)
 {
-	//struct sigaction	sa;
+	t_env *tmp;
+
+	tmp = env;
+	while (tmp)
+	{
+		if (!tmp)
+			return ;
+		printf("var = %s | value = %s\n", tmp->var,tmp->value);
+		tmp = tmp->next;
+	}
+}
+
+int	main(int ac, char **av, char **env)
+{
+	
 	t_history			**history;
 	char				*line;
 	int					i;
+	t_env				*envlst;
 
-	//init_sa(&sa);
+	(void)ac;
+	(void)av;
 	i = 0;
 	history = malloc(sizeof(t_history *));
 	if (!history)
 		return (0);
 	*history = NULL;
+	envlst = create_env(env);
+	shab_env(envlst);
 	while (i < 3)
 	{
 		line = readline("\033[32mMinishell>\033[0m");
 		add_to_history(history, line);
-		manage_line(line, history);
+		manage_line(line, history, &envlst);
 		i++;
 	}
 	free_history(history);

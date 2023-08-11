@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/10 18:40:06 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/11 16:15:56 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	trim_tab(char **tab)
 	}
 }
 
-t_big_list	**pars_arg(char *str)
+t_big_list	**pars_arg(char *str, t_env **envlst)
 {
 	char		**tab;
 	int			i;
@@ -45,7 +45,7 @@ t_big_list	**pars_arg(char *str)
 	i = 0;
 	while (tab[i])
 	{
-		tab[i] = expand(tab[i]);
+		tab[i] = expand(tab[i], envlst);
 		i++;
 	}
 	i = 0;
@@ -105,12 +105,12 @@ int	scan_cmd(char *str)
 	return (free(dup), 1);
 }
 
-t_big_list	**parsing(char *str)
+t_big_list	**parsing(char *str, t_env **envlst)
 {
 	t_big_list	**arg;
 
 	if (!double_quote(str))
 		return (printf("\033[31mError : quotes still open\033[0m\n"), NULL);
-	arg = pars_arg(str);
+	arg = pars_arg(str, envlst);
 	return (arg);
 }

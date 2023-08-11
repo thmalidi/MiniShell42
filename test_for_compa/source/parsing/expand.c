@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/10 17:59:59 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/11 16:18:41 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*join_tab(char **tab)
 	return (final);
 }
 
-char	*expand(char *str)
+char	*expand(char *str, t_env **env)
 {
 	char	*tmp;
 	char	*final;
@@ -101,7 +101,7 @@ char	*expand(char *str)
 	i = 0;
 	while (tab[i])
 	{
-		tab[i] = expand_process(tab[i]);
+		tab[i] = expand_process(tab[i], *env);
 		i++;
 	}
 	tmp = join_tab(tab);

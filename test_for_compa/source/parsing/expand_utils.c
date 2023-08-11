@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/10 17:55:37 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/11 16:35:50 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ char	*rp_env(char *str, char *var, char *value)
 	sec += ft_strlen(var);
 	len = range(str, var, ft_strlen(str));
 	tmp = ft_substr(str, 0, len - (int)ft_strlen(var));
-	final = ft_strjoin(tmp, value);
+	if (value)
+		final = ft_strjoin(tmp, value);
+	else 
+		final = ft_strdup(tmp);
 	free(tmp);
 	tmp = ft_strjoin(final, sec);
 	free(final);
@@ -99,7 +102,7 @@ char	**extract_var(char *str)
 	return (tab);
 }
 
-char	*expand_process(char *str)
+char	*expand_process(char *str, t_env *env)
 {
 	char	**tab;
 	int		i;
@@ -114,7 +117,8 @@ char	*expand_process(char *str)
 		tab = extract_var(final);
 		while (tab[i])
 		{
-			tmp = rp_env(final, tab[i], "TEST");
+			printf("(%s) -> %s\n", get_value_env(env, tab[i] + 1), tab[i] + 1);
+			tmp = rp_env(final, tab[i], get_value_env(env, tab[i] + 1));
 			free(final);
 			final = ft_strdup(tmp);
 			free(tmp);
@@ -122,5 +126,6 @@ char	*expand_process(char *str)
 		}
 		free_tab(tab);
 	}
+	printf("final == %s\n", final);
 	return (final);
 }

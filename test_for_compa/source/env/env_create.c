@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_create.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 08:40:00 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/07/31 16:25:52 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/11 16:24:41 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void print_tab(char **tab)
 		printf("tab[%d] = %s\n", i, tab[i]);
 }
 
-int	main(int ac, char **av, char **env)
+/*int	main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
@@ -74,6 +74,6 @@ int	main(int ac, char **av, char **env)
 	printf("\n\n\n\n");
 	print_tab(tabenv);
 	free_tab(tabenv);
-}
+}*/
 
 // gcc ../libft/*.c env_create.c env_free.c env_op.c env_to_tab.c env_utils.c -fsanitize=address -g3 -Werror -Wextra -Wall

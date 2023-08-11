@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:58:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/10 17:50:32 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/11 16:24:57 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	free_lst(t_big_list **a)
 	free(a);
 }
 
-void	free_tab(char **tab)
+/*void	free_tab(char **tab)
 {
 	int	i;
 
@@ -60,4 +60,4 @@ void	free_tab(char **tab)
 	while (tab[i])
 		free(tab[i++]);
 	free(tab);
-}
+}*/
