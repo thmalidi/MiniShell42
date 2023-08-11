@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 08:43:58 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/10 11:38:57 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/11 14:47:06 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ typedef struct s_env
 }					t_env;
 
 // Proto
-t_env	*create_env(char **env);
+char	**env_to_tab(t_env *env);
 int		add_to_env(t_env **env, char *var, char *value);
+int		env_len(t_env *env);
 int		rm_from_env(t_env **env, char *var_to_rm);
 int		set_value_env(t_env **env, char *var, char *value);
-t_env	*env_newelt(char *newvar, char *newvalue);
+t_env	*create_env(char **env);
 t_env	*env_lfvar(t_env *env, char *var);
+t_env	*env_newelt(char *newvar, char *newvalue);
 void	env_print(t_env *env);
 void	env_free_elt(t_env *elt);
 void	env_clean(t_env *env);
-char	**env_to_tab(t_env *env);
 void	free_tab(char **tab);
-int		env_len(t_env *env);
 
 #endif

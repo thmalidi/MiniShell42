@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:33:38 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/06 08:41:05 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/11 15:31:33 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	env_clean(t_env *env)
 {
 	t_env	*tmp1;
 	t_env	*tmp2;
-	
+
 	if (!env)
 		return ;
 	tmp2 = env;

@@ -6,20 +6,21 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 09:55:47 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/10 15:44:19 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/11 17:12:02 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-Retourne -2 si var est a NULL, regarder si on peut s'en servir pour la gestion du cas "export =a".
+Retourne -2 si var est a NULL, 
+regarder si on peut s'en servir pour la gestion du cas "export =a".
 */
 int	add_to_env(t_env **env, char *var, char *value)
 {
-	t_env *new;
-	t_env *temp;
-	
+	t_env	*new;
+	t_env	*temp;
+
 	if (!var)
 		return (-2); // Erreur a print pour le cas "export =a"
 	new = env_newelt(var, value);
@@ -45,9 +46,9 @@ int	rm_from_env(t_env **env, char *var_to_rm)
 {
 	t_env	*tmp1;
 	t_env	*tmp2;
-	
+
 	if (!env)
-		return(-1);
+		return (-1);
 	if (ft_strcmp((*env)->var, var_to_rm) == 0)
 	{
 		*env = (*env)->next; // A check, sinon return l'env.
@@ -67,7 +68,7 @@ Retourne 0 en cas de succes, -1 si on a rien set.
 */
 int	set_value_env(t_env **env, char *var_to_set, char *value)
 {
-	t_env	*tmp1; // L'elt qu'on change
+	t_env	*tmp1;
 
 	tmp1 = env_lfvar(*env, var_to_set);
 	if (!tmp1 && strcmp((*env)->var, var_to_set))
@@ -87,7 +88,8 @@ int	set_value_env(t_env **env, char *var_to_set, char *value)
 }
 
 /*
-Retourne la valeur de la variable d'environnement var. Retourne NULL s'il ne trouve pas var.
+Retourne la valeur de la variable d'environnement var.
+Retourne NULL s'il ne trouve pas var.
 Attention, elle n'est pas malloc (C'est completement faisable si besoin)!
 */
 char	*get_value_env(t_env *env, char *var)
@@ -96,6 +98,11 @@ char	*get_value_env(t_env *env, char *var)
 
 	tmp = env_lfvar(env, var);
 	if (!tmp)
-		return (NULL);
+	{
+		if (env->var == var)
+			return (env->value);
+		else
+			return (NULL);
+	}
 	return (tmp->next->value);
 }

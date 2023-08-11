@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:11 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/10 12:03:57 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/11 14:53:11 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	echo_b(t_datalist *data, t_env **env)
 {
 	int	breakline;
 	int	i;
-	
+
 	(void)env;
 	breakline = noneed_breakline(data->args);
 	i = breakline;

@@ -6,16 +6,16 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:31 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/10 12:04:48 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/11 15:27:39 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	unset_b(t_datalist *data ,t_env **env) // Si on a plusieurs var allo !!
+int	unset_b(t_datalist *data, t_env **env)
 {
 	int	i;
-	
+
 	i = -1;
 	while ((data->args)[++i])
 	{

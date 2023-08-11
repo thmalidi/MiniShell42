@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:03:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/10 15:43:48 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/11 15:27:08 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ Changer de repertoire courant chdir
 Mettre a jour pwd
 Mettre a jour le old pwd
 */
-int cd_b(t_datalist *data, t_env **env)
+int	cd_b(t_datalist *data, t_env **env)
 {
 	char	*dir;
 
-	if (!(data->args[1])) //On peut retourner a la racine au pire
+	if (!(data->args[1]))
 		return (-1);
 	dir = getcwd(NULL, 0);
-	set_value_env(env, "OLDPWD", dir); // Ne marche pas
+	set_value_env(env, "OLDPWD", dir);
 	chdir(data->args[1]);
 	dir = getcwd(NULL, 0);
-	set_value_env(env, "PWD", dir); // Ne marche pas
+	set_value_env(env, "PWD", dir);
 	return (0);
 }
 
