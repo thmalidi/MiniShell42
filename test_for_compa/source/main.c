@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/11 16:44:33 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/11 17:22:11 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ void	manage_line(char *line, t_history **history, t_env **env)			//ajouter la fo
 		if (arg) 
 		{
 			splited_arg(arg);								//creation de la liste pour chaque pipe ici
-			if(!is_ok(arg))
-				printf("faut pas que ca passe\n");
+			/*if(!is_ok(arg))
+				printf("faut pas que ca passe\n");*/
 			free_elm(arg);
 			free_lst(arg);
 		}

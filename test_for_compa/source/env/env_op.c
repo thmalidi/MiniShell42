@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 09:55:47 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/11 16:48:58 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/11 16:57:14 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,5 @@ char	*get_value_env(t_env *env, char *var)
 	tmp = env_lfvar(env, var);
 	if (!tmp)
 		return (NULL);
-	return (tmp->next->value);
+	return (tmp->value);
 }

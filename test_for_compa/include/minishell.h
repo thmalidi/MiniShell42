@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/11 16:21:23 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/11 17:09:28 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,7 @@ void    manage_tab(char **tab);
 int		scan_cmd(char *str);
 int		is_ok(t_big_list **a);
 int		double_quote(char *str);
+
+char *rp_trim(char *str);
 
 #endif

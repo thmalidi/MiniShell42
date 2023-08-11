@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/11 16:15:56 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/11 17:22:35 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ t_big_list	**pars_arg(char *str, t_env **envlst)
 	while (tab[i])
 	{
 		tab[i] = expand(tab[i], envlst);
+		tab[i] = rp_trim(tab[i]);
+		printf("<<<<<<%s\n", tab[i]);
 		i++;
 	}
 	i = 0;
@@ -79,6 +81,7 @@ int	double_quote(char *str)
 		}
 		i++;
 	}
+	printf("simple = %d && double = %d\n",s,d);
 	if (s % 2 == 0 && d % 2 == 0)
 		return (1);
 	return (0);
