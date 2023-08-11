@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/10 12:14:45 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:36:16 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	manage_line(char *line, t_history **history, t_env **env)			//ajouter la fo
  		plst_h(history);
  	else if (ft_strlen(line) != 0)
  	{
- 		arg = parsing(line);
+ 		arg = parsing(line, env);
  		if (arg) 
  		{
  			splited_arg(arg);									//creation de la liste pour chaque pipe ici

@@ -3,20 +3,24 @@
 #                                                         :::      ::::::::    #
 #    sources.mk                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
+#    By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 14:42:36 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/08/11 14:11:24 by hgeffroy         ###   ########.fr        #
+#    Updated: 2023/08/11 18:08:46 by tmalidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SOURCES =	source/main.c \
 			source/parsing/parsing.c \
+			source/parsing/parsing_utils.c \
 			source/parsing/exit.c \
 			source/parsing/history.c \
 			source/parsing/subparsing.c \
 			source/parsing/subparsing_utils.c \
 			source/parsing/exit_utils.c \
+			source/parsing/quote_tools.c \
+			source/parsing/expand.c \
+			source/parsing/expand_utils.c \
 			source/srclib/ft_strjoin.c \
 			source/srclib/ft_strncmp.c \
 			source/srclib/ft_lstadd_back.c \

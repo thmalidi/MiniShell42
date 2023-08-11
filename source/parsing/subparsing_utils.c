@@ -6,13 +6,13 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:15:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/03 14:08:26 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/10 18:27:03 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int is_cmd(char **path, char *cmd)
+int	is_cmd(char **path, char *cmd)
 {
 	char	*tmp;
 	char	*joined;
@@ -33,75 +33,85 @@ int is_cmd(char **path, char *cmd)
 	return (free(tmp), 0);
 }
 
-int is_builtins(char *str)
+int	is_builtins(char *str)
 {
-	if (!ft_strncmp("echo",str, ft_strlen(str)))
+	if (!ft_strncmp("echo", str, ft_strlen(str)))
 		return (1);
-	if (!ft_strncmp("cd",str, ft_strlen(str)))
+	if (!ft_strncmp("cd", str, ft_strlen(str)))
 		return (1);
-	if (!ft_strncmp("pwd",str, ft_strlen(str)))
+	if (!ft_strncmp("pwd", str, ft_strlen(str)))
 		return (1);
-	if (!ft_strncmp("unset",str, ft_strlen(str)))
+	if (!ft_strncmp("unset", str, ft_strlen(str)))
 		return (1);
-	if (!ft_strncmp("env",str, ft_strlen(str)))
+	if (!ft_strncmp("env", str, ft_strlen(str)))
 		return (1);
-	if (!ft_strncmp("export",str, ft_strlen(str)))
+	if (!ft_strncmp("export", str, ft_strlen(str)))
 		return (1);
-	if (!ft_strncmp("exit",str, ft_strlen(str)))
+	if (!ft_strncmp("exit", str, ft_strlen(str)))
 		return (1);
 	return (0);
 }
 
-int    subparsing(t_element **subparsing, t_big_list *arg)
+int	is_ok(t_big_list **a)
 {
-    int i;
-	t_element *tmp;
-	//t_element *first;
-	char **envp;
+	t_big_list	*test;
+	t_element	*tmp;
 
-    i = 0;
+	test = *a;
+	while (test)
+	{
+		tmp = *test->pipelist;
+		while (tmp)
+		{
+			if (!scan_cmd(tmp->str))
+				return (0);
+			tmp = tmp->next;
+		}
+		test = test->next;
+	}
+	return (1);
+}
+
+void	asign_type(t_element *tmp, t_big_list *arg, int n)
+{
+	if (!ft_strncmp("<", tmp->str, ft_strlen(tmp->str)))
+		tmp->type = 1;
+	else if (!ft_strncmp("<<", tmp->str, ft_strlen(tmp->str)))
+	{
+		arg->here_doc = n;
+		tmp->type = 2;
+	}
+	else if (!strncmp(">", tmp->str, ft_strlen(tmp->str)))
+		tmp->type = 3;
+	else if (!strncmp(">>", tmp->str, ft_strlen(tmp->str)))
+		tmp->type = 4;
+	else if (tmp->str[0] == '-')
+		tmp->type = 5;
+	else if (is_builtins(tmp->str))
+	{
+		arg->builtin = 1;
+		tmp->type = 7;
+	}
+	else
+		tmp->type = -1;
+}
+
+int	subparsing(t_element **subparsing, t_big_list *arg, int n)
+{
+	int			i;
+	t_element	*tmp;
+	char		**envp;
+
+	i = 0;
 	arg->here_doc = 0;
 	tmp = *subparsing;
 	envp = ft_split(getenv("PATH"), ':');
-    while (tmp)
-    {
-		//printf("tmp[0] == %c\n",tmp->str[0]);
-        if (!ft_strncmp("<",tmp->str, ft_strlen(tmp->str)))																	//infile
-            tmp->type = 1;
-		else if (!ft_strncmp("<<",tmp->str, ft_strlen(tmp->str)))
-		{
-			arg->here_doc++;
-			tmp->type = 2;
-		}
-        else if (!strncmp(">",tmp->str, ft_strlen(tmp->str)))																//outfile
-            tmp->type = 3;
-		else if (!strncmp(">>",tmp->str, ft_strlen(tmp->str)))
-            tmp->type = 4;
-		else if(tmp->str[0] == '-')																							//flag
-			tmp->type = 5;
-		else if (!access(tmp->str, F_OK))																					//fichier
-			tmp->type = 6;
-		else if (is_builtins(tmp->str))																						//builtins
-		{
-			arg->builtin = 1;
-			tmp->type = 7;
-		}
-		else if (is_cmd(envp, tmp->str))																					//commande
-		{
-			arg->cmd = 1;
-			tmp->type = 8;
-		}
-		else
-			tmp->type = -1;
+	while (tmp)
+	{
+		clean_str(tmp->str);
+		asign_type(tmp, arg, n);
 		tmp = tmp->next;
-        i++;
-    }
-    return (free_tab(envp), 1);
+		i++;
+	}
+	return (free_tab(envp), 1);
 }
-
-/*int main()
-{
-	char **envp = ft_split(getenv("PATH"), ':');
-	
-	printf("<<<<<<<<<<<<<<<<<<<<<<<<%d",is_cmd(envp, "ls"));
-}*/
