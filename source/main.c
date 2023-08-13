@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/11 18:57:24 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/13 13:34:18 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,12 @@ int	main(int ac, char **av, char **env)
  	while (1)
  	{
  		line = readline("\033[32mMinishell>\033[0m");
+		add_history(line);
  		add_to_history(history, line);
  		manage_line(line, history, &envlst);
  		i++;
  	}
+	rl_clear_history();
  	free_history(history);
  	return (0);
 }
