@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/13 13:14:31 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/14 11:01:51 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <signal.h>
+
+extern int return_value;
 
 typedef struct s_element
 {

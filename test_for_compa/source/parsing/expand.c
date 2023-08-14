@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/11 16:18:41 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/14 11:31:35 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,6 @@ char	*expand(char *str, t_env **env)
 	tmp = join_tab(tab);
 	final = ft_strtrim(tmp, " ");
 	free_tab(tab);
+	printf("%s\n", final);
 	return (free(tmp), final);
 }

@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/11 17:56:50 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/14 11:27:08 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ t_big_list	**pars_arg(char *str, t_env **envlst)
 	t_big_list	**a;
 	t_big_list	*new;
 
-	if (str[0] == '|')
-		return (printf("parse error near `|'\n"), NULL);
+	if (str[0] == '|' || str[ft_strlen(str) - 1] == '|')
+		return (printf("parse error near `|'\n"), return_value = 130, NULL);
 	tab = ft_split(str, '|');
 	i = 0;
 	if (!pars_arg_op(tab, i, envlst))
@@ -89,7 +89,7 @@ int	scan_cmd(char *str)
 		if ((dup[i] == 92 || dup[i] == ';') && dup[0] != 34 && dup[0] != 39)
 			return (printf(
 					"\033[31mError :\033[0m%c\033[31m forbidden character\033[0m\n",
-					dup[i]), free(dup), 0);
+					dup[i]), free(dup), return_value = 1, 0);
 		i++;
 	}
 	return (free(dup), 1);
@@ -100,7 +100,7 @@ t_big_list	**parsing(char *str, t_env **envlst)
 	t_big_list	**arg;
 
 	if (!double_quote(str))
-		return (printf("\033[31mError : quotes still open\033[0m\n"), NULL);
+		return (printf("\033[31mError : quotes still open\033[0m\n"),return_value = 1, NULL);
 	arg = pars_arg(str, envlst);
 	return (arg);
 }
