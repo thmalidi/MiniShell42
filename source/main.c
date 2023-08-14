@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/14 15:16:19 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/14 16:14:40 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,51 +66,58 @@ int main()
 // 	}
 // }
 
-void	manage_line(char *line, t_history **history, t_env **env)			//ajouter la fonctionde l'exec ici
+int only_space(char *str)
 {
- 	t_big_list	**arg;
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i++] != 32)
+			return (1);
+	}
+	return (0);
+}
+
+void	manage_line(char *line, t_env **env)			//ajouter la fonctionde l'exec ici
+{
+ 	t_big_list	*arg;
 	
- 	if (!ft_strncmp(line, "history", ft_strlen(line)) && ft_strlen(line) != 0)
- 		plst_h(history);
- 	else if (ft_strlen(line) != 0)
+ 	if (line)
  	{
- 		arg = parsing(line, env);
- 		if (arg) 
- 		{
- 			splited_arg(arg);									//creation de la liste pour chaque pipe ici
-			// plst(arg);
-			exec(*arg, env);
-			free(arg);
- 		}
+		if (only_space(line))
+		{
+			arg = parsing(line, env);
+			if (arg) 
+			{
+				splited_arg(arg);									//creation de la liste pour chaque pipe ici
+				// plst(arg);
+				exec(arg, env);
+				free(arg);
+			}
+		}
  	}
 }
 
 int	main(int ac, char **av, char **env)
 {
 	t_env				*envlst;
-	t_history			**history;
 	char				*line;
 	int					i;
 
 	(void)ac;
 	(void)av;
- 	i = 0;
- 	history = malloc(sizeof(t_history *));
- 	if (!history)
- 		return (0);
- 	*history = NULL;
+	i = 0;
 	envlst = create_env(env);
 	get_signal_parent();
  	while (1)
  	{
  		line = readline("\033[32mMinishell>\033[0m");
 		add_history(line);
- 		add_to_history(history, line);
- 		manage_line(line, history, &envlst);
+ 		manage_line(line, &envlst);
  		i++;
  	}
 	rl_clear_history();
- 	free_history(history);
  	return (0);
 }
 
