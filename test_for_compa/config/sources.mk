@@ -6,7 +6,7 @@
 #    By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 14:42:36 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/08/11 17:10:58 by tmalidi          ###   ########.fr        #
+#    Updated: 2023/08/14 17:40:50 by tmalidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SOURCES =	source/main.c \
 			source/parsing/quote_tools.c \
 			source/parsing/expand.c \
 			source/parsing/expand_utils.c \
+			source/parsing/mix_utils.c \
 			source/srclib/ft_strjoin.c \
 			source/srclib/ft_strncmp.c \
 			source/srclib/ft_lstadd_back.c \

@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:58:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/11 16:24:57 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/14 17:53:18 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void	free_lst_content(t_big_list *a)
 	free(a);
 }
 
-void	free_lst(t_big_list **a)
+void	free_lst(t_big_list *a)
 {
-	free_lst_content(*a);
-	free(a);
+	free_lst_content(a);
+	//free(a);
 }
 
 /*void	free_tab(char **tab)
