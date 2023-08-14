@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/14 15:02:16 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:16:19 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void	manage_line(char *line, t_history **history, t_env **env)			//ajouter la fo
  		{
  			splited_arg(arg);									//creation de la liste pour chaque pipe ici
 			// plst(arg);
-			// exec(*arg, env);
+			exec(*arg, env);
+			free(arg);
  		}
  	}
 }

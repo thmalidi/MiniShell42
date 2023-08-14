@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/14 14:50:46 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:38:05 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ int	exec(t_big_list *list, t_env **envlst)
 	{
 		waitpid(tmp->pid, 0, 0);
 		tmp = tmp->next;
+		// Regarder comment recuperer la valeur de retour ici...
 	}
 	free_datalist(datalist);
 	return (0);

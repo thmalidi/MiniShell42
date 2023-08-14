@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/14 14:56:02 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:09:48 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef struct s_datalist
 	int					pid;
 	int					infile;
 	int					outfile;
-	// int					*fd_hd; //Ceci est le pipe du dernier heredoc, fd_hd[2]
 	char				**args;
 	struct s_datalist	*next;
 }	t_datalist;
@@ -48,7 +47,7 @@ t_element	*remove_files(t_element *elt);
 void		close_fd(int *fd, int n);
 void		free_big_list(t_big_list *list);
 void		free_datalist(t_datalist *datalist);
-void		free_element(t_element *elt);
+void		free_element(t_element **elt);
 void		print_datalist(t_datalist *datalist);
 void 		print_tab(char **tab);
 
