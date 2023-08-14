@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/14 15:53:17 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/14 16:08:21 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,35 @@ int main()
 // 	}
 // }
 
+int only_space(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i++] != 32)
+			return (1);
+	}
+	return (0);
+}
+
 void	manage_line(char *line, t_env **env)			//ajouter la fonctionde l'exec ici
 {
  	t_big_list	*arg;
 	
  	if (line)
  	{
- 		arg = parsing(line, env);
- 		if (arg) 
- 		{
- 			splited_arg(arg);									//creation de la liste pour chaque pipe ici
-			// plst(arg);
-			exec(arg, env);
- 		}
+		if (only_space(line))
+		{
+			arg = parsing(line, env);
+			if (arg) 
+			{
+				splited_arg(arg);									//creation de la liste pour chaque pipe ici
+				// plst(arg);
+				exec(arg, env);
+			}
+		}
  	}
 }
 
@@ -90,7 +106,7 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
- 	i = 0;
+	i = 0;
 	envlst = create_env(env);
  	while (1)
  	{
