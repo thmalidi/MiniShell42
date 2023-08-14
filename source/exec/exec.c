@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/11 15:51:23 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:50:46 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,31 +93,35 @@ Les heredocs sont executes dans init_struct.
 */
 int	exec(t_big_list *list, t_env **envlst)
 {
-	int			i;
 	int			fd[4];
 	t_datalist	*datalist;
+	t_datalist	*tmp;
 
 	ft_bzero(fd, 4 * sizeof(int));
 	datalist = init_struct(list);
-	print_datalist(datalist);
-	i = 0;
-	while (datalist)
+	tmp = datalist;
+	// print_datalist(datalist);
+	while (tmp)
 	{
-		if (set_pipe(datalist, fd) < 0)
+		if (set_pipe(tmp, fd) < 0)
 			return (/*Free datalist*/-1);
-		datalist->pid = fork();
-		if (datalist->pid == 0)
-			exec_onepipe(datalist, fd, envlst);
-		if (datalist->infile)
-			close(datalist->infile);
-		if (datalist->outfile)
-			close(datalist->outfile);
+		tmp->pid = fork();
+		if (tmp->pid == 0)
+			exec_onepipe(tmp, fd, envlst);
+		if (tmp->infile)
+			close(tmp->infile);
+		if (tmp->outfile)
+			close(tmp->outfile);
 		close_fd(fd, 2);
-		i++;
-		datalist = datalist->next;
+		tmp = tmp->next;
 	}
-	while (i--)
-		waitpid(-1, 0, 0);
+	tmp = datalist;
+	while (tmp)
+	{
+		waitpid(tmp->pid, 0, 0);
+		tmp = tmp->next;
+	}
+	free_datalist(datalist);
 	return (0);
 }
 

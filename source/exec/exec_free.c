@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 11:17:07 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/11 15:37:24 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:58:59 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,25 @@ void	free_big_list(t_big_list *list)
 	free(tmp2->content);
 	free_element(*(tmp2->pipelist));
 	free(tmp2);
+}
+
+void	free_datalist(t_datalist *datalist)
+{
+	t_datalist	*tmp;
+	
+	if (!datalist)
+		return ;
+	tmp = datalist->next;
+	while (tmp)
+	{
+		free(datalist->cmd);
+		free_tab(datalist->args);
+		free(datalist);
+		datalist = tmp;
+		tmp = tmp->next;
+	}
+	free(datalist->cmd);
+	free_tab(datalist->args);
+	free(datalist);
+	return ;
 }

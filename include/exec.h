@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/11 18:52:41 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:56:02 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,14 @@ t_datalist	*init_struct(t_big_list *list);
 t_element	*remove_files(t_element *elt);
 void		close_fd(int *fd, int n);
 void		free_big_list(t_big_list *list);
+void		free_datalist(t_datalist *datalist);
 void		free_element(t_element *elt);
 void		print_datalist(t_datalist *datalist);
 void 		print_tab(char **tab);
 
+void		get_signal_parent(void);
+
 // A del
-void 	print_tab_int(int *tab, int n);
+void 		print_tab_int(int *tab, int n);
 
 #endif
