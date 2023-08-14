@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/14 15:45:26 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/14 16:16:27 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_big_list	*pars_arg(char *str, t_env **envlst)
 	if (!pars_arg_op(tab, i, envlst))
 		return (free_tab(tab), NULL);
 	i = 0;
-	a = malloc(sizeof(t_list ));
+	a = malloc(sizeof(t_big_list));
 	new = ft_lstnew_big(tab[i++]);
 	a = new;
 	while (tab[i])

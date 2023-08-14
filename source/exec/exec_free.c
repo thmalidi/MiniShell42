@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 11:17:07 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/11 15:37:24 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:10:07 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ t_element	*remove_files(t_element *elt)
 	return (res);
 }
 
-void	free_element(t_element *elt)
+void	free_element(t_element **elt)
 {
 	t_element	*tmp1;
 	t_element	*tmp2;
 
-	tmp2 = elt;
+	tmp2 = *elt;
 	if (!tmp2)
 		return ;
-	tmp1 = elt->next;
+	tmp1 = (*elt)->next;
 	while (tmp1)
 	{
 		free(tmp2->str);
@@ -61,6 +61,7 @@ void	free_element(t_element *elt)
 	}
 	free(tmp2->str);
 	free(tmp2);
+	free(elt);
 }
 
 void	free_big_list(t_big_list *list)
@@ -75,12 +76,33 @@ void	free_big_list(t_big_list *list)
 	while (tmp1)
 	{
 		free(tmp2->content);
-		free_element(*(tmp2->pipelist));
+		free_element(tmp2->pipelist);
 		free(tmp2);
 		tmp2 = tmp1;
 		tmp1 = tmp1->next;
 	}
 	free(tmp2->content);
-	free_element(*(tmp2->pipelist));
+	free_element(tmp2->pipelist);
 	free(tmp2);
+}
+
+void	free_datalist(t_datalist *datalist)
+{
+	t_datalist	*tmp;
+	
+	if (!datalist)
+		return ;
+	tmp = datalist->next;
+	while (tmp)
+	{
+		free(datalist->cmd);
+		free_tab(datalist->args);
+		free(datalist);
+		datalist = tmp;
+		tmp = tmp->next;
+	}
+	free(datalist->cmd);
+	free_tab(datalist->args);
+	free(datalist);
+	return ;
 }
