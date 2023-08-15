@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/14 15:38:05 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/15 09:33:17 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,25 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 		exec_builtin(datalist, envlst, builtin);
 	else
 	{
-		env = env_to_tab(*envlst); // A free, ca malloc
+		env = env_to_tab(*envlst); // A free, ca malloc + protection
 		cmdwpath = check_cmd(env, datalist->cmd); // A free
 		execve(cmdwpath, datalist->args, env);
+	}
+	return (0);
+}
+
+int	wait_processes(t_datalist *datalist)
+{
+	t_datalist	*tmp;
+	int			status;
+
+	tmp = datalist;
+	status = 0;
+	while (tmp)
+	{
+		waitpid(tmp->pid, &status, WUNTRACED);
+		tmp = tmp->next;
+		// Regarder comment recuperer la valeur de retour ici...
 	}
 	return (0);
 }
@@ -90,6 +106,7 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 /*
 Fonction a appeler dans le main.
 Les heredocs sont executes dans init_struct.
+Mettre les conditions sur le fork.
 */
 int	exec(t_big_list *list, t_env **envlst)
 {
@@ -115,13 +132,7 @@ int	exec(t_big_list *list, t_env **envlst)
 		close_fd(fd, 2);
 		tmp = tmp->next;
 	}
-	tmp = datalist;
-	while (tmp)
-	{
-		waitpid(tmp->pid, 0, 0);
-		tmp = tmp->next;
-		// Regarder comment recuperer la valeur de retour ici...
-	}
+	wait_processes(datalist);
 	free_datalist(datalist);
 	return (0);
 }
