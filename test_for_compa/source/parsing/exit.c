@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:58:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/14 17:53:18 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/15 09:13:21 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,21 @@ void	free_history(t_history **history)
 	free(history);
 }
 
-void	free_lst_content(t_big_list *a)
+void	free_lst_content(t_big_list **a)
 {
 	t_big_list	*temp;
 
-	while (a != NULL)
+	while (*a != NULL)
 	{
-		temp = a;
-		a = a->next;
+		temp = *a;
+		*a = temp->next;
 		free(temp->content);
 		free(temp);
 	}
 	free(a);
 }
 
-void	free_lst(t_big_list *a)
+void	free_lst(t_big_list **a)
 {
 	free_lst_content(a);
 	//free(a);

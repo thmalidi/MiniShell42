@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/14 18:12:10 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/15 09:11:46 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int return_value = 0;
 
 void	manage_line(char *line, t_env **env)			//ajouter la fonctionde l'exec ici
 {
-	t_big_list			*arg;
+	t_big_list			**arg;
 	
 	if (ft_strlen(line) != 0)
 	{
@@ -24,7 +24,7 @@ void	manage_line(char *line, t_env **env)			//ajouter la fonctionde l'exec ici
 		if (arg) 
 		{
 			splited_arg(arg);								//creation de la liste pour chaque pipe ici
-			check_in_outfile(arg);
+			check_in_outfile(*arg);
 			/*if(!is_ok(arg))
 				printf("faut pas que ca passe\n");*/
 			free_elm(arg);
