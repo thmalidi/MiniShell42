@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 12:59:50 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/15 18:03:49 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/15 18:06:31 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	splited_arg(t_big_list *arg)
 		}
 		i = 0;
 		while (tab[i])
-			ft_lstadd_back_e(tmp->pipelist, ft_lstnew_e(tab[i]));
+			ft_lstadd_back_e(tmp->pipelist, ft_lstnew_e(tab[i++]));
 		free_tab(tab);
 		tmp = tmp->next;
 	}

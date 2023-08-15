@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:22:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/15 11:36:21 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/15 18:23:15 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ char	*space(char *str, int range)
 	tmp = ft_strjoin(f, " ");
 	free(f);
 	f = ft_strjoin(tmp, s);
-	printf("f = %s\n", f);
 	return (free(s), free(tmp), f);
 }
 
@@ -60,7 +59,7 @@ int count_symb_in(char *str)
 
 	v = 0;
 	i = 0;
-	if (str[0] == 34 && str[0] == 39)
+	if (str[0] != 34 && str[0] != 39)
 	{
 		while (str[i])
 		{
@@ -87,7 +86,7 @@ int count_symb_out(char *str)
 
 	v = 0;
 	i = 0;
-	if (str[0] == 34 && str[0] == 39)
+	if (str[0] != 34 && str[0] != 39)
 	{
 		while (str[i])
 		{
@@ -96,7 +95,7 @@ int count_symb_out(char *str)
 		}
 		if (v > 2)
 		{
-			if (v == 4)
+			if (v == 3)
 				return (printf("parse error near `>'\n"), 0);
 			else
 				return (printf("parse error near `>>'\n"), 0);
@@ -123,7 +122,7 @@ int check_in_outfile(t_big_list *arg)
 			if ((etmp->type == 1 || etmp->type == 2 || etmp->type == 3 || etmp->type == 4) && etmp->next == NULL)
 			{
 				if (tmp->next == NULL)
-					return (printf("parse error near `|'\n"), return_value = 130, 0);
+					return (printf("parse error near `\\n'\n"), return_value = 130, 0);
 				else
 					return (printf("parse error near `|'\n"), return_value = 130, 0);
 			}
