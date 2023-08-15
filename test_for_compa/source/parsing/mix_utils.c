@@ -6,11 +6,52 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:22:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/15 09:50:28 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/15 11:36:21 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*space(char *str, int range)
+{
+	char	*f;
+	char	*s;
+	char	*tmp;
+
+	f = ft_substr(str, 0, range);
+	s = ft_substr(str + range, 0, ft_strlen(str + range));
+	free(str);
+	tmp = ft_strjoin(f, " ");
+	free(f);
+	f = ft_strjoin(tmp, s);
+	printf("f = %s\n", f);
+	return (free(s), free(tmp), f);
+}
+
+char	*put_space(char *str)
+{
+	int i;
+	char	*final;
+	
+	i = 0;
+	final = ft_strdup(str);
+	free(str);
+	if (final[0] != 34 && final[0] != 39)
+	{
+		while (final[i])
+		{
+			while (final[i] && (final[i] == '<' || final[i] == '>'))
+				i++;
+			if (final[i] != ' ' && final[i] && i != 0)
+				final = space(final, i);
+			while (final[i] && (final[i] != '<' && final[i] != '>'))
+				i++;
+			if (final[i] != ' ' && final[i])
+				final = space(final, i++);
+		}
+	}
+	return (final);
+}
 
 int count_symb_in(char *str)
 {
@@ -19,19 +60,22 @@ int count_symb_in(char *str)
 
 	v = 0;
 	i = 0;
-	while (str[i])
+	if (str[0] == 34 && str[0] == 39)
 	{
-		if (str[i++] == '<')
-			v++;
-	}
-	if (v > 3)
-	{
-		if (v == 4)
-			return (printf("parse error near `<'\n"), 0);
-		else if (v == 5)
-			return (printf("parse error near `<<'\n"), 0);
-		else
-			return (printf("parse error near `<<<'\n"), 0);
+		while (str[i])
+		{
+			if (str[i++] == '<')
+				v++;
+		}
+		if (v > 3)
+		{
+			if (v == 4)
+				return (printf("parse error near `<'\n"), 0);
+			else if (v == 5)
+				return (printf("parse error near `<<'\n"), 0);
+			else
+				return (printf("parse error near `<<<'\n"), 0);
+		}
 	}
 	return (1);
 }
@@ -43,17 +87,20 @@ int count_symb_out(char *str)
 
 	v = 0;
 	i = 0;
-	while (str[i])
+	if (str[0] == 34 && str[0] == 39)
 	{
-		if (str[i++] == '>')
-			v++;
-	}
-	if (v > 2)
-	{
-		if (v == 4)
-			return (printf("parse error near `>'\n"), 0);
-		else
-			return (printf("parse error near `>>'\n"), 0);
+		while (str[i])
+		{
+			if (str[i++] == '>')
+				v++;
+		}
+		if (v > 2)
+		{
+			if (v == 4)
+				return (printf("parse error near `>'\n"), 0);
+			else
+				return (printf("parse error near `>>'\n"), 0);
+		}
 	}
 	return (1);
 }

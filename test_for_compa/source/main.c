@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/15 09:23:07 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/15 11:34:10 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	main(int ac, char **av, char **env)
 		line = readline("\033[32mMinishell>\033[0m");
 		add_history(line);
 		manage_line(line, &envlst);
+		free(line);
 		i++;
 	}
 	printf("%d", return_value);
