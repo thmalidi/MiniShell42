@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:03:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/15 10:06:45 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:17:58 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ int	cd_b(t_datalist *data, t_env **env)
 	if (!dir)
 		return (-1);
 	set_value_env(env, "OLDPWD", dir);
+	free(dir);
 	chdir(data->args[1]);
 	if (!dir)
 		return (-1);
 	dir = getcwd(NULL, 0);
 	set_value_env(env, "PWD", dir);
+	free(dir);
 	return (0);
 }
 
