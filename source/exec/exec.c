@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/15 09:33:17 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/15 10:24:51 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	exec_builtin(t_datalist *datalist, t_env **envlst, int builtin)
 	const t_builtins	tab_builtins[] = {&cd_b, &echo_b, &env_b, \
 										&exit_b, &export_b, &pwd_b, &unset_b};
 
+	// fork ici si besoin (si pas exit)
 	(*tab_builtins[builtin])(datalist, envlst);
 	exit(0);
 }
@@ -74,19 +75,32 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 	char	**env;
 	int		builtin;
 
-	set_dup(datalist, fd);
-	builtin = is_builtin(datalist->cmd);
-	if (builtin > -1)
-		exec_builtin(datalist, envlst, builtin);
-	else
+	datalist->pid = fork();
+	if (datalist->pid == 0)
 	{
-		env = env_to_tab(*envlst); // A free, ca malloc + protection
-		cmdwpath = check_cmd(env, datalist->cmd); // A free
-		execve(cmdwpath, datalist->args, env);
+		signal(SIGQUIT, &child_handler);
+		set_dup(datalist, fd);
+		builtin = is_builtin(datalist->cmd);
+		if (builtin > -1)
+			exec_builtin(datalist, envlst, builtin);
+		else
+		{
+			// fork ici
+			env = env_to_tab(*envlst); // A free, ca malloc + protection
+			if (!env)
+				return (-1);
+			cmdwpath = check_cmd(env, datalist->cmd); // A free
+			if (!cmdwpath)
+				return (free_tab(env), -1);
+			execve(cmdwpath, datalist->args, env);
+		}
 	}
 	return (0);
 }
 
+/*
+Ctrl-D marche plus depuis que j'ai fait ca...
+*/
 int	wait_processes(t_datalist *datalist)
 {
 	t_datalist	*tmp;
@@ -96,7 +110,12 @@ int	wait_processes(t_datalist *datalist)
 	status = 0;
 	while (tmp)
 	{
-		waitpid(tmp->pid, &status, WUNTRACED);
+		if (tmp->pid)
+			waitpid(tmp->pid, &status, WUNTRACED);
+		if (WIFEXITED(status))
+			/*Valeur de retour = WEXITSTATUS(status)*/;
+		else if (WIFSIGNALED(status))
+			child_handler(WTERMSIG(status));
 		tmp = tmp->next;
 		// Regarder comment recuperer la valeur de retour ici...
 	}
@@ -121,10 +140,9 @@ int	exec(t_big_list *list, t_env **envlst)
 	while (tmp)
 	{
 		if (set_pipe(tmp, fd) < 0)
-			return (/*Free datalist*/-1);
-		tmp->pid = fork();
-		if (tmp->pid == 0)
-			exec_onepipe(tmp, fd, envlst);
+			return (free_datalist(datalist), -1);
+		if (exec_onepipe(tmp, fd, envlst) < 0)
+			return (/*Close des trucs et free ?*/free_datalist(datalist), -1);
 		if (tmp->infile)
 			close(tmp->infile);
 		if (tmp->outfile)
