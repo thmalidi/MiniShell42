@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:03:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/11 15:27:08 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/15 08:45:24 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ Si plusieurs arguments, n'execute que le premier !!
 Changer de repertoire courant chdir
 Mettre a jour pwd
 Mettre a jour le old pwd
+Gerer cd -
 */
 int	cd_b(t_datalist *data, t_env **env)
 {

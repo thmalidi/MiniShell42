@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/14 16:14:40 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/15 09:34:02 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	manage_line(char *line, t_env **env)			//ajouter la fonctionde l'exec ici
 				splited_arg(arg);									//creation de la liste pour chaque pipe ici
 				// plst(arg);
 				exec(arg, env);
-				free(arg);
 			}
 		}
  	}
@@ -109,7 +108,7 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	i = 0;
 	envlst = create_env(env);
-	get_signal_parent();
+	init_signals();
  	while (1)
  	{
  		line = readline("\033[32mMinishell>\033[0m");
