@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/16 14:33:54 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:14:59 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	need_to_fork(t_datalist *datalist, int builtin)
 		return (1);
 	if (len_datalist(datalist) == 1)
 	{
-		if ((builtin == 4 && !(datalist->args)) || builtin == 1 || builtin == 5 || builtin == 2)
+		if ((builtin == 4 && !(datalist->args)[1]) || builtin == 1 || builtin == 5 || builtin == 2)
 			return (1);
 		else
 			return (0);

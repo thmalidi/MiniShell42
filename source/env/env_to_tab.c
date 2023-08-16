@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 14:14:47 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/11 15:34:43 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:54:59 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static char	*line_var(t_env *env)
 	j = -1;
 	line[i] = '=';
 	i++;
+	if (!(env->value))
+		return(line);
 	while ((env->value)[++j])
 	{
 		line[i] = (env->value)[j];

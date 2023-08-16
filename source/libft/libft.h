@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 10:48:32 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/30 10:34:08 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:49:13 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlen(const char *s);
-size_t	ft_strlen(const char *s);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -87,7 +86,6 @@ int		ft_putchar_fdd(char c, int fd);
 int		ft_putnbr_base(long int nbr, char *base);
 int		ft_putnbr_fdd(int n, int fd);
 int		ft_putstr_fdd(char *s, int fd);
-size_t	ft_strlen(const char *s);
 int		treat_x(char c, va_list pmt);
 int		ft_printf(const char *str, ...);
 
@@ -98,7 +96,6 @@ char	*get_brut(char *tmp, int fd);
 char	*get_next_line(int fd);
 void	ft_strlcpy_new(char *dst, const char *src, size_t dstsize);
 char	*new_ft_strjoin(char *s1, char *s2);
-size_t	ft_strlen(const char *s);
 char	*ft_strrchr(const char *s, int c);
 
 #endif 
