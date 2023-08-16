@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 08:40:00 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/16 08:41:40 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/16 13:29:30 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,30 @@ static char	*get_var(char *line)
 	return (var);
 }
 
+int	create_env_from_scratch(t_env **lst_env)
+{
+	char	*pwd;
+
+	add_to_env(lst_env, "OLDPWD", NULL);
+	pwd = getcwd(NULL, 0);
+	add_to_env(lst_env, "PWD", pwd);
+	add_to_env(lst_env, "SHLVL", "1");
+	return (0);
+}
+
 t_env	*create_env(char **env)
 {
 	int		i;
 	char	*var;
 	t_env	*lst_env;
 
-	if(!env)
-		/*Remplir ce qu'il faut !!*/;
 	lst_env = NULL;
+	if (!env[0])
+	{
+		puts("lala");
+		create_env_from_scratch(&lst_env);
+		return (lst_env);	
+	}
 	i = -1;
 	while (env[++i])
 	{
