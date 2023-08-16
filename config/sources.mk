@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    sources.mk                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+         #
+#    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 14:42:36 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/08/11 18:08:46 by tmalidi          ###   ########.fr        #
+#    Updated: 2023/08/16 10:51:32 by hgeffroy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SOURCES =	source/main.c \
 			source/builtins/env.c \
 			source/builtins/exit.c \
 			source/builtins/export.c \
+			source/builtins/export_parsing.c \
 			source/builtins/pwd.c \
 			source/builtins/unset.c
 			

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 08:40:00 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/11 15:32:38 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/16 08:41:40 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ t_env	*create_env(char **env)
 	char	*var;
 	t_env	*lst_env;
 
+	if(!env)
+		/*Remplir ce qu'il faut !!*/;
 	lst_env = NULL;
 	i = -1;
 	while (env[++i])
