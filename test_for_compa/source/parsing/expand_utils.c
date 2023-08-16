@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/14 11:51:02 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/16 14:55:25 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,7 @@ char	**extract_var(char *str)
 		}
 		i++;
 	}
-	tab[c] = NULL;
-	return (tab);
+	return (tab[c] = NULL, tab);
 }
 
 char	*expand_process(char *str, t_env *env)
@@ -114,17 +113,13 @@ char	*expand_process(char *str, t_env *env)
 
 	i = 0;
 	final = ft_strdup(str);
-	free(str);
 	rv = ft_itoa(return_value);
 	if (final[0] != 39)
 	{
 		tab = extract_var(final);
 		while (tab[i])
 		{
-			if (!ft_strncmp("$?",tab[i],ft_strlen(tab[i])))
-				tmp = rp_env(final, tab[i], rv);
-			else
-				tmp = rp_env(final, tab[i], get_value_env(env, tab[i] + 1));
+			tmp = change(tab[i], final, env, rv);
 			free(final);
 			final = ft_strdup(tmp);
 			free(tmp);
@@ -132,5 +127,5 @@ char	*expand_process(char *str, t_env *env)
 		}
 		free_tab(tab);
 	}
-	return (free(rv), final);
+	return (free(rv), free(str), final);
 }

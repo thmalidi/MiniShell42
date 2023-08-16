@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/15 10:29:54 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/16 15:01:33 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_history
 	struct s_history	*previous;
 }						t_history;
 
+char		*change(char *str, char *final, t_env *env, char *rv);
 char		*put_space(char *str);
 int			check_in_outfile(t_big_list *arg);
 void		free_lst(t_big_list *a);
@@ -88,7 +89,9 @@ int			scan_cmd(char *str);
 int			is_ok(t_big_list **a);
 int			double_quote(char *str);
 char		*rp_trim(char *str);
+char		*rp_env(char *str, char *var, char *value);
 int			pars_arg_op(char **tab, int i, t_env **envlst);
 void		trim_tab(char **tab);
+int			potential_error(t_element    *etmp, t_big_list	*tmp);
 
 #endif

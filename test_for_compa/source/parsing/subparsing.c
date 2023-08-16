@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 12:59:50 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/15 18:06:31 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/16 14:39:18 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,18 @@ t_element	*ft_lstnew_e(char *str)
 	return (new);
 }
 
+void	space_process(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		tab[i] = put_space(tab[i]);
+		i++;
+	}
+}
+
 void	splited_arg(t_big_list *arg)
 {
 	char		**tab;
@@ -35,15 +47,10 @@ void	splited_arg(t_big_list *arg)
 	tmp = arg;
 	while (tmp)
 	{
-		i = 0;
 		tmp->pipelist = malloc(sizeof(t_element *));
 		*tmp->pipelist = NULL;
 		tab = ft_split(tmp->content, ' ');
-		while (tab[i])
-		{
-			tab[i] = put_space(tab[i]);
-			i++;
-		}
+		space_process(tab);
 		i = 0;
 		while (tab[i])
 			ft_lstadd_back_e(tmp->pipelist, ft_lstnew_e(tab[i++]));
@@ -54,8 +61,7 @@ void	splited_arg(t_big_list *arg)
 	n = 1;
 	while (tmp)
 	{
-		subparsing(tmp->pipelist, tmp, n);
-		n++;
+		subparsing(tmp->pipelist, tmp, n++);
 		tmp = tmp->next;
 	}
 }

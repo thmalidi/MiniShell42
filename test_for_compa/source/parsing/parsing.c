@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/15 09:25:48 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/16 14:44:40 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ t_big_list	*pars_arg(char *str, t_env **envlst)
 	if (!pars_arg_op(tab, i, envlst))
 		return (free_tab(tab), NULL);
 	i = 0;
-	//a = malloc(sizeof(t_big_list *));
 	new = ft_lstnew_big(tab[i++]);
 	a = new;
 	while (tab[i])
@@ -100,7 +99,8 @@ t_big_list	*parsing(char *str, t_env **envlst)
 	t_big_list	*arg;
 
 	if (!double_quote(str))
-		return (printf("\033[31mError : quotes still open\033[0m\n"),return_value = 1, NULL);
+		return (printf("\033[31mError : quotes still open\033[0m\n"),
+			return_value = 1, NULL);
 	arg = pars_arg(str, envlst);
 	return (arg);
 }

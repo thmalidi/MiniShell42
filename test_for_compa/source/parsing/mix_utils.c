@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:22:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/15 18:23:15 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/16 15:02:11 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ char	*space(char *str, int range)
 
 char	*put_space(char *str)
 {
-	int i;
+	int		i;
 	char	*final;
-	
+
 	i = 0;
 	final = ft_strdup(str);
 	free(str);
@@ -52,10 +52,10 @@ char	*put_space(char *str)
 	return (final);
 }
 
-int count_symb_in(char *str)
+int	count_symb_in(char *str)
 {
-	int i;
-	int v;
+	int	i;
+	int	v;
 
 	v = 0;
 	i = 0;
@@ -79,10 +79,10 @@ int count_symb_in(char *str)
 	return (1);
 }
 
-int count_symb_out(char *str)
+int	count_symb_out(char *str)
 {
-	int i;
-	int v;
+	int	i;
+	int	v;
 
 	v = 0;
 	i = 0;
@@ -104,11 +104,11 @@ int count_symb_out(char *str)
 	return (1);
 }
 
-int check_in_outfile(t_big_list *arg)
+int	check_in_outfile(t_big_list *arg)
 {
-	t_big_list *tmp;
-	t_element *etmp;
-	
+	t_big_list	*tmp;
+	t_element	*etmp;
+
 	tmp = arg;
 	while (tmp)
 	{
@@ -119,13 +119,8 @@ int check_in_outfile(t_big_list *arg)
 		{
 			if (!count_symb_in(etmp->str) || !count_symb_out(etmp->str))
 				return (return_value = 130, 0);
-			if ((etmp->type == 1 || etmp->type == 2 || etmp->type == 3 || etmp->type == 4) && etmp->next == NULL)
-			{
-				if (tmp->next == NULL)
-					return (printf("parse error near `\\n'\n"), return_value = 130, 0);
-				else
-					return (printf("parse error near `|'\n"), return_value = 130, 0);
-			}
+			if (!potential_error(etmp, tmp))
+				return (0);
 			etmp = etmp->next;
 		}
 		tmp = tmp->next;
