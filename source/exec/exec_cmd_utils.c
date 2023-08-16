@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 09:01:48 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/08 09:05:41 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/16 14:32:50 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**is_path(char **env)
 	char	**paths;
 
 	i = 0;
-	while (env[i] && ft_strncmp(env[i], "PATH=", 5) != 0)
+	while (env[i] && ft_strncmp(env[i], "PATH=", 5) != 0) // A changer en liste chainee.
 		i++;
 	if (!env[i])
 		return (NULL);
@@ -43,6 +43,20 @@ char	**is_path(char **env)
 		return (NULL);
 	return (paths);
 }
+
+// char	**is_path(t_env *env)
+// {
+// 	int		i;
+// 	char	*tmp;
+// 	char	**paths;
+
+// 	i = 0;
+// 	tmp = get_value_env(env, "PATH");
+// 	paths = ft_split(tmp, ':');
+// 	if (!paths)
+// 		return (NULL);
+// 	return (paths);
+// }
 
 int	check_end_path(char *path)
 {

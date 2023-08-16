@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/16 07:50:19 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/16 14:33:54 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,12 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 					return (-1);
 				cmdwpath = check_cmd(env, datalist->cmd); // A free
 				if (!cmdwpath)
-					return (free_tab(env), -1);
+				{
+					free_tab(env);
+					exit (-1);
+				}
 				execve(cmdwpath, datalist->args, env);
+				perror(NULL);
 			}
 		}
 	}
