@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/15 10:24:51 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/16 07:50:19 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,31 @@ void	exec_builtin(t_datalist *datalist, t_env **envlst, int builtin)
 	const t_builtins	tab_builtins[] = {&cd_b, &echo_b, &env_b, \
 										&exit_b, &export_b, &pwd_b, &unset_b};
 
-	// fork ici si besoin (si pas exit)
+
 	(*tab_builtins[builtin])(datalist, envlst);
-	exit(0);
+}
+
+/*
+Retourne 0 si pas besoin de fork, 1 sinon
+*/
+int	need_to_fork(t_datalist *datalist, int builtin)
+{
+	if (builtin < 0)
+		return (1);
+	if (len_datalist(datalist) == 1)
+	{
+		if ((builtin == 4 && !(datalist->args)) || builtin == 1 || builtin == 5 || builtin == 2)
+			return (1);
+		else
+			return (0);
+	}
+	else
+	{
+		if (builtin == 0 || builtin == 7)
+			return (0);
+		else
+			return (1);
+	}
 }
 
 /*
@@ -75,24 +97,32 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 	char	**env;
 	int		builtin;
 
-	datalist->pid = fork();
-	if (datalist->pid == 0)
+	
+	builtin = is_builtin(datalist->cmd);
+	if (need_to_fork(datalist, builtin) == 0)
+		exec_builtin(datalist, envlst, builtin);
+	else
 	{
-		signal(SIGQUIT, &child_handler);
-		set_dup(datalist, fd);
-		builtin = is_builtin(datalist->cmd);
-		if (builtin > -1)
-			exec_builtin(datalist, envlst, builtin);
-		else
+		datalist->pid = fork();
+		if (datalist->pid == 0)
 		{
-			// fork ici
-			env = env_to_tab(*envlst); // A free, ca malloc + protection
-			if (!env)
-				return (-1);
-			cmdwpath = check_cmd(env, datalist->cmd); // A free
-			if (!cmdwpath)
-				return (free_tab(env), -1);
-			execve(cmdwpath, datalist->args, env);
+			set_dup(datalist, fd);
+			if (builtin > -1)
+			{
+				exec_builtin(datalist, envlst, builtin);
+				exit (0);
+			}
+			else
+			{
+				signal(SIGQUIT, &child_handler);
+				env = env_to_tab(*envlst); // A free, ca malloc + protection
+				if (!env)
+					return (-1);
+				cmdwpath = check_cmd(env, datalist->cmd); // A free
+				if (!cmdwpath)
+					return (free_tab(env), -1);
+				execve(cmdwpath, datalist->args, env);
+			}
 		}
 	}
 	return (0);
@@ -141,7 +171,7 @@ int	exec(t_big_list *list, t_env **envlst)
 	{
 		if (set_pipe(tmp, fd) < 0)
 			return (free_datalist(datalist), -1);
-		if (exec_onepipe(tmp, fd, envlst) < 0)
+		if (exec_onepipe(tmp, fd, envlst))
 			return (/*Close des trucs et free ?*/free_datalist(datalist), -1);
 		if (tmp->infile)
 			close(tmp->infile);

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 08:14:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/11 14:47:51 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/16 10:49:39 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 // Utils
 void	print_tab(char **tab);
 int		len_tab(char **tab);
+int		check_var(char *var);
+char	**parsing_export(char *arg);
+char	**ft_split_export(char *arg);
 int		check_var(char *var);
 
 // Fct builtins

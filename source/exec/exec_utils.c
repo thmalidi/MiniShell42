@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:03:53 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/11 15:39:38 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/15 14:47:04 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,21 @@ int	is_builtin(char *cmd)
 			return (i);
 	}
 	return (-1);
+}
+
+int	len_datalist(t_datalist *datalist)
+{
+	int			len;
+	t_datalist	*tmp;
+
+	len = 0;
+	tmp = datalist;
+	while (tmp)
+	{
+		len++;
+		tmp = tmp->next;
+	}
+	return (len);
 }
 
 // void	close_all(int *fd)
