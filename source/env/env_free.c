@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:33:38 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/17 06:59:53 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/17 09:28:36 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	free_tab(char **tab)
 	int	i;
 
 	i = -1;
+	if (!tab)
+		return ;
 	while (tab[++i])
 		free(tab[i]);
 	free(tab);

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/16 16:14:59 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/17 09:25:07 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 			{
 				signal(SIGQUIT, &child_handler);
 				env = env_to_tab(*envlst); // A free, ca malloc + protection
-				if (!env)
-					return (-1);
+				// if (!env)
+				// 	return (-1);
 				cmdwpath = check_cmd(env, datalist->cmd); // A free
 				if (!cmdwpath)
 				{
