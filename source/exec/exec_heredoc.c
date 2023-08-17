@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/11 15:41:38 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/17 10:46:48 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,22 @@ int	exec_ohd(char *limiter, int *fd)
 		write(fd[1], "\n", 1);
 		free(line);
 	}
-	return (0);
+	// close_fd(fd, 2);
+	exit (0);
 }
 
 int	exec_hd(t_element *pipelist)
 {
 	int	fd[2];
+	int	pid;
 
 	if (pipe(fd) == -1)
 		return (-1);
-	exec_ohd(pipelist->next->str, fd);
+	pid = fork();
+	if (pid == 0)
+		exec_ohd(pipelist->next->str, fd);
 	close(fd[1]);
+	waitpid(pid, NULL, 0);
 	return (fd[0]);
 }
 
