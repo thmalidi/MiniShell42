@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    sources.mk                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
+#    By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 14:42:36 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/08/17 09:22:49 by hgeffroy         ###   ########.fr        #
+#    Updated: 2023/08/17 11:20:12 by tmalidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,9 @@ SOURCES =	source/main.c \
 			source/parsing/quote_tools.c \
 			source/parsing/expand.c \
 			source/parsing/expand_utils.c \
+			source/parsing/expand_utils_bis.c \
+			source/parsing/mix_utils.c \
+			source/parsing/mix_utils_bis.c \
 			source/srclib/ft_lstadd_back.c \
 			source/srclib/ft_lstlast.c \
 			source/srclib/ft_lstnew.c \

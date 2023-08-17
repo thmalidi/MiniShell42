@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:15:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/10 18:27:03 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/17 11:31:23 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int	subparsing(t_element **subparsing, t_big_list *arg, int n)
 	{
 		clean_str(tmp->str);
 		asign_type(tmp, arg, n);
+		tmp->str = free_trim(tmp->str);
 		tmp = tmp->next;
 		i++;
 	}

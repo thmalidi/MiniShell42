@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/14 15:49:17 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/17 11:30:10 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <signal.h>
+
+extern int return_value;
 
 typedef struct s_element
 {
@@ -59,7 +61,11 @@ typedef struct s_history
 # include "exec.h"
 #include <sys/wait.h>
 
-void		free_lst(t_big_list **a);
+char		*free_trim(char *str);
+char		*change(char *str, char *final, t_env *env, char *rv);
+char		*put_space(char *str);
+int			check_in_outfile(t_big_list *arg);
+void		free_lst(t_big_list *a);
 void		free_tab(char **tab);
 t_list		*ft_lstnew(void *content);
 void		ft_lstadd_back_e(t_element **lst, t_element *new);
@@ -71,7 +77,7 @@ void		free_history(t_history **history);
 t_big_list	*parsing(char *str, t_env **envlst);
 void		plst(t_big_list **a);
 void		splited_arg(t_big_list *arg);
-void		free_elm(t_big_list **arg);
+void		free_elm(t_big_list *arg);
 int			subparsing(t_element **subparsing, t_big_list *arg, int n);
 void		printf_tab(char **tab);
 void		ft_lstadd_back_big(t_big_list *lst, t_big_list *new);
@@ -86,7 +92,9 @@ int			scan_cmd(char *str);
 int			is_ok(t_big_list **a);
 int			double_quote(char *str);
 char		*rp_trim(char *str);
+char		*rp_env(char *str, char *var, char *value);
 int			pars_arg_op(char **tab, int i, t_env **envlst);
 void		trim_tab(char **tab);
+int			potential_error(t_element    *etmp, t_big_list	*tmp);
 
 #endif
