@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/15 14:47:12 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/17 11:18:50 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void 		print_tab(char **tab);
 void		init_signals(void);
 void		child_handler(int sig);
 int			len_datalist(t_datalist *datalist);
+void		hd_handler(int sig);
 
 // A del
 void 		print_tab_int(int *tab, int n);

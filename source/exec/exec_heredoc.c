@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/17 10:46:48 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/17 12:56:30 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	exec_hd(t_element *pipelist)
 {
 	int	fd[2];
 	int	pid;
+	int	status;
 
 	if (pipe(fd) == -1)
 		return (-1);
@@ -57,7 +58,9 @@ int	exec_hd(t_element *pipelist)
 	if (pid == 0)
 		exec_ohd(pipelist->next->str, fd);
 	close(fd[1]);
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &status, WUNTRACED);
+	if (WIFSIGNALED(status))
+		hd_handler(WTERMSIG(status)); //cf le wait de l'exec.
 	return (fd[0]);
 }
 

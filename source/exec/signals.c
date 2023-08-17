@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 14:05:15 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/17 09:39:13 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/17 12:58:02 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,6 @@ void	hd_handler(int sig)
 {
 	(void)sig;
 	exit(130);
-	printf("\n");
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
 }
 
 void	init_signals(void)
