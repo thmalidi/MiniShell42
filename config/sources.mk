@@ -6,7 +6,7 @@
 #    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 14:42:36 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/08/16 16:51:55 by hgeffroy         ###   ########.fr        #
+#    Updated: 2023/08/17 09:22:49 by hgeffroy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,14 +21,9 @@ SOURCES =	source/main.c \
 			source/parsing/quote_tools.c \
 			source/parsing/expand.c \
 			source/parsing/expand_utils.c \
-			source/srclib/ft_strjoin.c \
-			source/srclib/ft_strncmp.c \
 			source/srclib/ft_lstadd_back.c \
 			source/srclib/ft_lstlast.c \
 			source/srclib/ft_lstnew.c \
-			source/srclib/ft_split.c \
-			source/srclib/ft_strlen.c \
-			source/srclib/ft_substr.c \
 			source/env/env_create.c \
 			source/env/env_free.c \
 			source/env/env_op.c \
