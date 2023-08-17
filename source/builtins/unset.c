@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:31 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/11 15:27:39 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/17 07:24:31 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	unset_b(t_datalist *data, t_env **env)
 	while ((data->args)[++i])
 	{
 		if (check_var(data->args[1]) < 0)
-			printf("Une erreur");
+			printf("Une erreur"); // Meme gestion d'erreur que export !
 		else
 			rm_from_env(env, data->args[1]);
 	}

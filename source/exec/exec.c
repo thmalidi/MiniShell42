@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/16 07:50:19 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:14:59 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	need_to_fork(t_datalist *datalist, int builtin)
 		return (1);
 	if (len_datalist(datalist) == 1)
 	{
-		if ((builtin == 4 && !(datalist->args)) || builtin == 1 || builtin == 5 || builtin == 2)
+		if ((builtin == 4 && !(datalist->args)[1]) || builtin == 1 || builtin == 5 || builtin == 2)
 			return (1);
 		else
 			return (0);
@@ -120,8 +120,12 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 					return (-1);
 				cmdwpath = check_cmd(env, datalist->cmd); // A free
 				if (!cmdwpath)
-					return (free_tab(env), -1);
+				{
+					free_tab(env);
+					exit (-1);
+				}
 				execve(cmdwpath, datalist->args, env);
+				perror(NULL);
 			}
 		}
 	}

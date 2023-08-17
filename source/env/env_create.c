@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 08:40:00 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/16 13:29:30 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/17 07:13:44 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,9 @@ static char	*get_var(char *line)
 
 int	create_env_from_scratch(t_env **lst_env)
 {
-	char	*pwd;
-
-	add_to_env(lst_env, "OLDPWD", NULL);
-	pwd = getcwd(NULL, 0);
-	add_to_env(lst_env, "PWD", pwd);
-	add_to_env(lst_env, "SHLVL", "1");
+	add_to_env(lst_env, ft_strdup("OLDPWD"), NULL);
+	add_to_env(lst_env, ft_strdup("PWD"), getcwd(NULL, 0));
+	add_to_env(lst_env, ft_strdup("SHLVL"), ft_strdup("1"));
 	return (0);
 }
 
@@ -48,7 +45,6 @@ t_env	*create_env(char **env)
 	lst_env = NULL;
 	if (!env[0])
 	{
-		puts("lala");
 		create_env_from_scratch(&lst_env);
 		return (lst_env);	
 	}

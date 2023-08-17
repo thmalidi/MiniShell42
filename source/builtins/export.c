@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:24 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/16 09:02:54 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/17 06:16:04 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,23 +86,13 @@ int	export_b(t_datalist *data, t_env **env)
 		{
 			tmp = *env;
 			args_splitted = parsing_export(data->args[i]);
-			puts("Allo1");
 			if (!args_splitted)
-			{
-				puts("Allo2");
 				continue ;
-			}
 			else if (strcmp((*env)->var, args_splitted[0]) \
 			&& !env_lfvar(tmp, args_splitted[0]))
-			{
-				puts("Allo3");
 				add_to_env(env, args_splitted[0], args_splitted[1]);
-			}
 			else
-			{
-				puts("Allo4");
 				set_value_env(env, args_splitted[0], args_splitted[1]);
-			}
 			free(args_splitted);
 		}
 	}
