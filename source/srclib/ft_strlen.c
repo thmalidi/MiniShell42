@@ -6,11 +6,11 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:40:28 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/16 16:45:54 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/17 06:21:17 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 // size_t	ft_strlen(const char *s)
 // {

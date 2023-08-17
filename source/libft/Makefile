@@ -75,7 +75,7 @@ $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
 
 %.o: %.c Makefile $(HEADER)
-	$(CC) $(FLAGS) -o $@ -c $<
+	$(CC) $(FLAGS) -o $@ -c $< -I ./
 	
 clean:
 	rm -f $(OBJ) $(OBJ_BNS)	
@@ -86,4 +86,3 @@ re: fclean
 	$(MAKE) all
 
 .PHONY : all clean fclean re
-

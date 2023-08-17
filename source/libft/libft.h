@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 10:48:32 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/16 16:49:13 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/17 09:11:17 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
+
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 5
 # endif
@@ -76,7 +77,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		nbrlen16(long int nb);
 int		nbrlen(int nb);
 void	ft_putnbr_l(long int n, int fd);
-int	nbrlen_l(long int nb);
+int		nbrlen_l(long int nb);
 int		treat_s(va_list pmt);
 int		treat_c(va_list pmt);
 int		treat_d_i(va_list pmt);
@@ -87,7 +88,6 @@ int		ft_putnbr_base(long int nbr, char *base);
 int		ft_putnbr_fdd(int n, int fd);
 int		ft_putstr_fdd(char *s, int fd);
 int		treat_x(char c, va_list pmt);
-int		ft_printf(const char *str, ...);
 
 char	*get_next_line(int fd);
 char	*clean_tmp(char *tmp);
@@ -98,4 +98,4 @@ void	ft_strlcpy_new(char *dst, const char *src, size_t dstsize);
 char	*new_ft_strjoin(char *s1, char *s2);
 char	*ft_strrchr(const char *s, int c);
 
-#endif 
+#endif

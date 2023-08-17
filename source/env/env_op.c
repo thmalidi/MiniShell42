@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 09:55:47 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/11 17:12:02 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/17 07:21:37 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	rm_from_env(t_env **env, char *var_to_rm)
 	t_env	*tmp1;
 	t_env	*tmp2;
 
-	if (!env)
+	if (!env || !(*env))
 		return (-1);
 	if (ft_strcmp((*env)->var, var_to_rm) == 0)
 	{
@@ -58,6 +58,8 @@ int	rm_from_env(t_env **env, char *var_to_rm)
 	if (!tmp2)
 		return (0);
 	tmp1 = tmp2->next;
+	printf("tmp2 var = %s\n", tmp2->var);
+	printf("tmp1 var = %s\n", tmp1->var);
 	tmp2->next = tmp1->next;
 	env_free_elt(tmp1);
 	return (0);
