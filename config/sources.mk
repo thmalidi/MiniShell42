@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    sources.mk                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+         #
+#    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 14:42:36 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/08/17 11:20:12 by tmalidi          ###   ########.fr        #
+#    Updated: 2023/08/17 13:07:17 by hgeffroy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ SOURCES =	source/main.c \
 			source/parsing/parsing.c \
 			source/parsing/parsing_utils.c \
 			source/parsing/exit.c \
-			source/parsing/history.c \
 			source/parsing/subparsing.c \
 			source/parsing/subparsing_utils.c \
 			source/parsing/exit_utils.c \
