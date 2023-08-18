@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/17 12:56:30 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/18 07:43:25 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	exec_ohd(char *limiter, int *fd)
 		write(fd[1], "\n", 1);
 		free(line);
 	}
-	// close_fd(fd, 2);
 	exit (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/17 11:30:10 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/18 12:40:19 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <signal.h>
+# include <sys/wait.h>
 
 extern int return_value;
 
@@ -55,11 +56,10 @@ typedef struct s_history
 	struct s_history	*previous;
 }						t_history;
 
-# include "../source/libft/libft.h"
+# include "libft.h"
 # include "builtins.h"
 # include "env.h"
 # include "exec.h"
-#include <sys/wait.h>
 
 char		*free_trim(char *str);
 char		*change(char *str, char *final, t_env *env, char *rv);
