@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   nbrlen.c                                           :+:      :+:    :+:   */
+/*   ft_printf_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 15:55:14 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/07/30 15:16:13 by hgeffroy         ###   ########.fr       */
+/*   Created: 2022/11/18 13:27:03 by hgeffroy          #+#    #+#             */
+/*   Updated: 2022/11/19 10:30:45 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-// int	nbrlen(int nb)
-// {
-// 	int	i;
+int	printf_putchar(int c, int fd)
+{
+	ft_putchar_fd(c, fd);
+	return (1);
+}
 
-// 	i = 0;
-// 	if (nb == 0)
-// 		return (1);
-// 	if (nb < 0)
-// 	{
-// 		i += 1;
-// 		nb = nb * -1;
-// 	}
-// 	while (nb)
-// 	{
-// 		nb = nb / 10;
-// 		i++;
-// 	}
-// 	return (i);
-// }
+int	printf_putstr(const char *str, int fd)
+{
+	if (!str)
+	{
+		ft_putstr_fd("(null)", 1);
+		return (6);
+	}
+	ft_putstr_fd(str, fd);
+	return (ft_strlen(str));
+}

@@ -3,51 +3,73 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 11:03:25 by tmalidi           #+#    #+#             */
-/*   Updated: 2022/11/11 11:03:47 by tmalidi          ###   ########lyon.fr   */
+/*   Created: 2022/11/07 13:49:31 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/05/26 11:11:52 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
+#include "header/libft.h"
 
-static int	verif_l(char c, const char *set)
+static int	isinset(char c, const char *set)
 {
 	int	i;
 
 	i = 0;
 	while (set[i])
 	{
-		if (set[i] == c)
+		if (c == ((char *)set)[i])
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+static int	start_strtrim(const char *s, const char *set)
 {
+	int	start;
+
+	start = 0;
+	while (s[start] && (isinset(s[start], set)))
+		start++;
+	return (start);
+}
+
+static int	end_strtrim(const char *s, const char *set, int start)
+{
+	int	end;
+
+	if (start != (int)ft_strlen(s))
+		end = ft_strlen(s) - 1;
+	else
+		end = start;
+	while (s[end] && (isinset(s[end], set) && end > start))
+		end--;
+	return (end);
+}
+
+char	*ft_strtrim(const char *s, const char *set)
+{
+	char	*res;
+	int		i;
 	int		start;
 	int		end;
-	char	*cp_s1;
-	int		diff;
 
-	if (!s1 || !set)
+	if (!s || !set)
 		return (NULL);
-	cp_s1 = (char *)s1;
-	start = 0;
-	diff = 0;
-	end = ft_strlen(cp_s1) - 1;
-	while ((verif_l(cp_s1[start], set) == 1) && cp_s1[start])
-		start++;
-	if ((size_t)start == ft_strlen(s1))
-		return (ft_strdup(""));
-	while ((verif_l(cp_s1[end], set) == 1) && cp_s1[end])
+	start = start_strtrim(s, set);
+	end = end_strtrim(s, set, start);
+	res = malloc(sizeof(char) * ((end - start) + 2));
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (start + i < end + 1 && s[i])
 	{
-		end--;
-		diff++;
+		res[i] = s[start + i];
+		i++;
 	}
-	end = ft_strlen(cp_s1) - start - diff;
-	return (ft_substr(cp_s1, start, end));
+	res[i] = '\0';
+	return (res);
 }

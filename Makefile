@@ -6,7 +6,7 @@
 #    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 14:14:21 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/08/06 18:02:54 by hgeffroy         ###   ########.fr        #
+#    Updated: 2023/08/22 09:43:47 by hgeffroy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ DEBUG           =       yes
 
 INC_DIR         =       include
 LIBFT_DIR       =       source/libft
+LIBFT_HEAD		=		$(LIBFT_DIR)/header
 
 #--sources & objects-----------------------------------------------------------#
 
@@ -29,7 +30,7 @@ OBJ_DIR         =       .objs
 
 #--flags-----------------------------------------------------------------------#
 
-CFLAGS          =       -g3 -Wall -Wextra -Werror -I $(LIBFT_DIR) -I $(INC_DIR)
+CFLAGS          =       -g3 -Wall -Wextra -Werror -I $(LIBFT_HEAD) -I $(INC_DIR)
 
 #--debug flags--------------------------------------------------------#
 

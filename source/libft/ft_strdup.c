@@ -5,31 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 14:38:37 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/16 16:50:55 by hgeffroy         ###   ########.fr       */
+/*   Created: 2022/11/07 13:48:35 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/05/26 11:11:52 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "header/libft.h"
+#include <stdlib.h>
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(const char *s)
 {
-	int		len;
-	char	*tab;
-	int		r;
+	char		*sdup;
+	size_t		len;
+	int			i;
 
-	if (!s1)
+	len = ft_strlen(s);
+	sdup = (char *)malloc(sizeof(char) * (len + 1));
+	if (!sdup)
 		return (NULL);
-	len = ft_strlen(s1);
-	tab = malloc(sizeof(char) * (len + 1));
-	if (!tab)
-		return (0);
-	r = 0;
-	while (s1[r])
+	i = 0;
+	while (s[i])
 	{
-		tab[r] = s1[r];
-		r++;
+		sdup[i] = ((char *)s)[i];
+		i++;
 	}
-	tab[r] = '\0';
-	return (tab);
+	sdup[i] = ((char *)s)[i];
+	return (sdup);
 }

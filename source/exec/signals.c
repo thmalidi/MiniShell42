@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 14:05:15 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/17 12:58:02 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/22 09:58:14 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	rl_handler(int sig)
 {
 	(void)sig;
 	printf("\n");
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-}
+// 	rl_replace_line("", 0);
+// 	rl_on_new_line();
+// 	rl_redisplay();
+ }
 
 void	child_handler(int sig)
 {

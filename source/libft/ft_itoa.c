@@ -3,70 +3,76 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 13:11:57 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/02/07 13:21:05 by tmalidi          ###   ########.fr       */
+/*   Created: 2022/11/07 13:46:32 by hgeffroy          #+#    #+#             */
+/*   Updated: 2022/11/10 16:02:24 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
 
-int	nbrlen(int n)
+static char	*ft_revstr(char *s)
 {
-	int	i;
+	int		i;
+	int		len;
+	char	temp;
 
-	i = 1;
-	if (n < 0)
+	len = 0;
+	while (s[len])
+		len++;
+	i = 0;
+	while (i < len / 2)
 	{
-		i += 1;
-		n *= -1;
-	}
-	while (n != 0)
-	{
-		n = n / 10;
+		temp = s[i];
+		s[i] = s[len - i - 1];
+		s[len - i - 1] = temp;
 		i++;
 	}
-	return (i - 1);
+	return (s);
 }
 
-static void	mk_final(int i, char *str, long int t)
+static int	size_itoa(long int nb)
 {
-	str[i - 1] = '\0';
-	i -= 2;
-	while (i >= 0 && t > 0)
+	int				sizenb;
+
+	sizenb = 0;
+	if (nb <= 0)
 	{
-		str[i] = t % 10 + '0';
-		t /= 10;
-		i--;
+		sizenb += 1;
+		nb *= -1;
 	}
+	while (nb > 0)
+	{
+		sizenb += 1;
+		nb /= 10;
+	}
+	return (sizenb);
 }
 
 char	*ft_itoa(int n)
 {
-	char		*str;
-	int			i;
-	long int	t;
+	long int		nb;
+	int				i;
+	char			*res;
 
-	t = n;
-	i = nbrlen(t) + 1;
-	if (t == 0)
+	nb = n;
+	res = (char *) malloc(sizeof(char) * ((size_itoa(nb)) + 1));
+	if (!res)
+		return (NULL);
+	if (n < 0)
+		nb *= -1;
+	i = 0;
+	while (nb > 0)
 	{
-		str = malloc(sizeof(char) * 2);
-		if (!str)
-			return (NULL);
-		str[0] = '0';
-		str[1] = '\0';
-		return (str);
+		res[i] = nb % 10 + '0';
+		nb /= 10;
+		i++;
 	}
-	str = malloc(sizeof(char) * i);
-	if (str == NULL)
-		return (0);
-	if (t < 0)
-	{
-		str[0] = '-';
-		t = t * -1;
-	}
-	mk_final(i, str, t);
-	return (str);
+	if (n < 0)
+		res[i++] = '-';
+	if (n == 0)
+		res[i++] = '0';
+	res[i] = '\0';
+	return (ft_revstr(res));
 }

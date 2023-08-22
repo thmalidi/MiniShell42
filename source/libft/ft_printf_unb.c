@@ -1,31 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_printf_unb.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 13:47:46 by hgeffroy          #+#    #+#             */
-/*   Updated: 2022/11/10 14:42:40 by hgeffroy         ###   ########.fr       */
+/*   Created: 2022/11/19 10:13:14 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/06/19 09:29:03 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "ft_printf.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+int	lenunbr(unsigned long long nb, int basesize)
 {
-	size_t	i;
+	int			res;
 
-	i = 0;
-	if (!src && !dest)
+	res = 1;
+	while (nb / basesize > 0)
 	{
-		dest = NULL;
-		return (dest);
+		res++;
+		nb /= basesize;
 	}
-	while (i < n)
+	return (res);
+}
+
+void	ft_putunbr(unsigned int n, int fd)
+{
+	if (n > 9)
 	{
-		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
-		i++;
+		printf_putunbr(n / 10, fd);
+		printf_putunbr(n % 10, fd);
 	}
-	return (dest);
+	else
+		ft_putchar_fd(n + '0', fd);
+}
+
+int	printf_putunbr(unsigned long long n, int fd)
+{
+	ft_putunbr(n, fd);
+	return (lenunbr(n, 10));
 }

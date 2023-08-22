@@ -5,103 +5,123 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 15:38:18 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/03 12:45:39 by hgeffroy         ###   ########.fr       */
+/*   Created: 2022/11/16 10:05:33 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/08/18 12:47:52 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line.h"
 
-char	*anti_leaks(char *tmp, char *buffer)
-{
-	char	*no_leaks;
-
-	no_leaks = new_ft_strjoin(tmp, buffer);
-	free (tmp);
-	tmp = NULL;
-	return (no_leaks);
-}
-
-char	*clean_tmp(char *tmp)
-{
-	char	*cln;
-	int		i;
-
-	i = 0;
-	while (tmp[i] && tmp[i] != '\n')
-		i++;
-	if (!tmp[i])
-		return (free(tmp), tmp = NULL, NULL);
-	cln = malloc(sizeof(char) * ft_strlen(tmp) - i + 1);
-	if (!cln)
-		return (free(tmp), tmp = NULL, NULL);
-	i++;
-	ft_strlcpy(cln, &tmp[i], ft_strlen(tmp) - i + 1);
-	return (free(tmp), tmp = NULL, cln);
-}
-
-char	*get_res(char *tmp, char *res)
+int	isbreak(char *buffer)
 {
 	int	i;
 
 	i = 0;
-	if (!tmp)
-		return (NULL);
-	while (tmp[i] && tmp[i] != '\n')
+	while (i < BUFFER_SIZE && buffer[i] != 0)
+	{
+		if (buffer[i] == '\n')
+			return (i);
 		i++;
-	if (tmp[i] == '\n')
-		i++;
-	res = malloc(sizeof(char) * i + 1);
-	if (!(res))
+	}
+	return (-1);
+}
+
+void	ft_buffmove(char *buffer, int sz)
+{
+	int	i;
+	int	len;
+
+	if (!buffer)
+		return ;
+	len = 0;
+	if (sz == 0 || (sz < BUFFER_SIZE && isbreak(buffer) == -1)
+		|| isbreak(buffer) + 1 == sz)
+	{
+		buffer[0] = 0;
+		return ;
+	}
+	while (buffer[len] && buffer[len] != '\n' && len < sz + 1)
+		len++;
+	i = -1;
+	while (++i < sz - len - 1 && buffer[len + i + 1] != 0)
+		buffer[i] = buffer[len + i + 1];
+	while (i < BUFFER_SIZE && buffer[i] != 0)
+		buffer[i++] = 0;
+}
+
+char	*malloc_str(t_gnl_list *list, char *buffer, int sz)
+{
+	int		lstlen;
+	int		strlen;
+	int		i;
+	char	*res;
+
+	lstlen = 0;
+	while (list)
+	{
+		i = -1;
+		while ((list->content)[++i] && i < BUFFER_SIZE)
+			lstlen++;
+		list = list->next;
+	}
+	strlen = lstlen;
+	while (buffer[strlen - lstlen] != '\n'
+		&& strlen - lstlen < sz && buffer[strlen - lstlen])
+		strlen++;
+	if (buffer[strlen - lstlen] == '\n')
+		strlen++;
+	res = (char *)malloc(strlen + 1);
+	if (!res)
 		return (NULL);
-	ft_strlcpy(res, tmp, i + 1);
 	return (res);
 }
 
-char	*get_brut(char *tmp, int fd)
+char	*fill_str(t_gnl_list *list, char *buffer, int sz, char *res)
 {
-	char	buf[BUFFER_SIZE + 1];
-	int		rd;
+	int		i;
+	int		j;
 
-	if (!tmp)
+	i = 0;
+	while (list)
 	{
-		tmp = malloc(sizeof(char));
-		if (!tmp)
-			return (NULL);
-		tmp [0] = '\0';
+		j = 0;
+		while (j < BUFFER_SIZE && (list->content)[j] && (list->content)[j] != '\n')
+			res[i++] = (list->content)[j++];
+		list = list->next;
 	}
-	rd = 1;
-	while (rd)
-	{
-		rd = read(fd, buf, BUFFER_SIZE);
-		if (rd < 0)
-			return (NULL);
-		buf[rd] = '\0';
-		tmp = anti_leaks(tmp, buf);
-		if (!tmp)
-			return (free(tmp), tmp = NULL, NULL);
-		if (ft_strrchr(tmp, '\n'))
-			break ;
-	}
-	return (tmp);
+	j = 0;
+	while (buffer[j] != '\n' && buffer[j] && j < sz)
+		res[i++] = buffer[j++];
+	if (isbreak(buffer) != -1)
+		res[i++] = '\n';
+	res[i] = '\0';
+	return (res);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*tmp;
-	char		*res;
+	static int		sz;
+	t_gnl_list		*list;
+	static char		buffer[BUFFER_SIZE];
+	char			*res;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0 || fd > 1024)
-		return (free(tmp), tmp = NULL, NULL);
-	res = NULL;
-	tmp = get_brut(tmp, fd);
-	if (!tmp)
-		return (tmp = NULL, NULL);
-	res = get_res(tmp, res);
+	list = NULL;
+	if (BUFFER_SIZE <= 0 || fd < 0)
+		return (NULL);
+	if (buffer[0] == 0)
+		sz = read(fd, buffer, BUFFER_SIZE);
+	if (sz <= 0)
+		return (return_error(list, buffer, sz, 0));
+	while (isbreak(buffer) == -1 && !((sz < BUFFER_SIZE) || sz < 0))
+	{
+		ft_lstadd_back_gnl(&list, ft_lstnew_gnl(buffer));
+		sz = read(fd, buffer, BUFFER_SIZE);
+		if (sz < 0)
+			return (return_error(list, buffer, sz, 1));
+	}
+	res = malloc_str(list, buffer, sz);
 	if (!res)
-		return (free(tmp), tmp = NULL, NULL);
-	tmp = clean_tmp(tmp);
-	if (res[0] == '\0')
-		return (free(res), tmp = NULL, NULL);
-	return (res);
+		return (return_error(list, buffer, sz, 0));
+	res = fill_str(list, buffer, sz, res);
+	return (ft_buffmove(buffer, sz), ft_lstclear_gnl(&list), res);
 }

@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_l.c                                      :+:      :+:    :+:   */
+/*   ft_isstrdigit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 15:54:09 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/02/07 13:24:37 by tmalidi          ###   ########.fr       */
+/*   Created: 2023/05/27 16:33:26 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/06/10 12:28:48 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "header/libft.h"
 
-void	ft_putnbr_l(long int n, int fd)
+int	ft_isstrdigit(char *str)
 {
-	char	temp[12];
-	int		i;
+	int	i;
 
+	if (!str)
+		return (-1);
 	i = 0;
-	if (n == 0)
-		write(1, "0", 1);
-	while (n != 0)
+	if (str[i] == '-')
 	{
-		temp[i++] = (char)((n % 10) + 48);
-		n = n / 10;
+		if (str[i + 1])
+			i++;
+		else
+			return (-1);
 	}
-	i -= 1;
-	while (i >= 0)
-		write(fd, &temp[i--], 1);
+	while (str[i])
+	{
+		if (ft_isdigit(str[i]) != 1)
+			return (-1);
+	}
+	return (1);
 }
