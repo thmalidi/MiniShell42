@@ -5,23 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 15:40:28 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/16 16:50:01 by hgeffroy         ###   ########.fr       */
+/*   Created: 2022/11/07 13:49:07 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/06/10 12:29:08 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <string.h>
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(const char *str)
 {
-	int	len;
+	size_t	len;
 
 	len = 0;
-	if (s == NULL || !s)
+	if (!str)
 		return (0);
-	while (s[len] != '\0')
-	{
+	while (str[len])
 		len++;
-	}
 	return (len);
 }

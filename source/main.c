@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/17 11:33:33 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/22 09:57:47 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(int ac, char **av, char **env)
  		manage_line(line, &envlst);
  		i++;
  	}
-	rl_clear_history();
+	//rl_clear_history();
  	return (0);
 }
 

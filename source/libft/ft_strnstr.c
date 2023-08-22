@@ -3,49 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 18:03:14 by tmalidi           #+#    #+#             */
-/*   Updated: 2022/11/08 18:03:23 by tmalidi          ###   ########lyon.fr   */
+/*   Created: 2022/11/07 13:49:22 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/05/26 11:11:52 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
+#include "header/libft.h"
 
-static char	*process(const char *haystack, const char *needle, size_t n)
+static size_t	ft_min(size_t a, size_t b)
 {
-	int	i;
-	int	j;
-	int	r;
-
-	i = 0;
-	while (haystack[i] && (size_t)i < n)
-	{
-		j = 0;
-		if (haystack[i] == needle[0])
-		{
-			while ((haystack[i + j] == needle[j]) && (size_t)(i + j) < n)
-			{
-				j++;
-				r = i;
-				if (needle[j] == '\0')
-				{
-					return ((char *)&haystack[r]);
-				}
-			}
-		}
-		i++;
-	}
-	return (0);
+	if (a < b)
+		return (a);
+	else
+		return (b);
 }
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t n)
 {
-	if (needle[0] == '\0')
-		return ((char *)&haystack[0]);
-	if (n == 0)
-		return (0);
-	if (haystack[0] == '\0')
-		return (0);
-	return (process(haystack, needle, n));
+	int	i;
+
+	if (!haystack && n == 0)
+		return (NULL);
+	i = 0;
+	while (i + ft_strlen(needle) < ft_min(n, ft_strlen(haystack)) + 1)
+	{
+		if (ft_strncmp(haystack + i, needle, ft_strlen(needle)) == 0)
+			return ((char *)(haystack + i));
+		i++;
+	}
+	return (NULL);
 }

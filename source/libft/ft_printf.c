@@ -5,59 +5,97 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 15:27:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/17 13:32:17 by hgeffroy         ###   ########.fr       */
+/*   Created: 2022/11/11 13:27:27 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/07/17 23:55:56 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-static int	printgc(char ltr, va_list arg)
+static int	print_args(char c, va_list args, int fd)
 {
-	unsigned long	ad;
+	int	res;
 
-	if (ltr == 's')
-		return (treat_s(arg));
-	else if (ltr == 'c')
-		return (ft_putchar_fdd(va_arg(arg, int), 1));
-	else if (ltr == 'd' || ltr == 'i')
-		return (ft_putnbr_fdd(va_arg(arg, int), 1));
-	else if (ltr == 'x' || ltr == 'X')
-		return (treat_x(ltr, arg));
-	else if (ltr == 'u')
-		return (treat_u(arg));
-	else if (ltr == 'p')
+	res = 0;
+	if (c == 'c')
+		res = printf_putchar(va_arg(args, int), fd);
+	else if (c == 'd' || c == 'i')
+		res = printf_putnbr(va_arg(args, int), fd);
+	else if (c == 's')
+		res = printf_putstr((const char *)va_arg(args, char *), fd);
+	else if (c == 'u')
+		res = printf_putunbr(va_arg(args, unsigned int), fd);
+	else if (c == 'p')
+		res = printf_address(va_arg(args, unsigned long long), fd);
+	else if (c == 'x')
+		res = printf_puthexanbr(va_arg(args, unsigned int), 0, fd);
+	else if (c == 'X')
+		res = printf_puthexanbr(va_arg(args, unsigned int), 1, fd);
+	else if (c == '%')
 	{
-		ad = (unsigned long)va_arg(arg, unsigned long);
-		return (ft_putnbr(ad));
+		ft_putchar_fd('%', fd);
+		res = 1;
 	}
-	else
-		return (write(1, &ltr, 1));
+	return (res);
+}
+
+int	ft_printf_main(const char *str, va_list args, const char *modes, int fd)
+{
+	int	res;
+	int	mode;
+	int	i;
+
+	i = 0;
+	res = 0;
+	mode = 0;
+	while (str[i])
+	{
+		if (str[i] == '%' && (mode % 2) == 0)
+			mode++;
+		else if ((mode % 2) == 1 && ft_strchr(modes, str[i]))
+		{
+			res += print_args(str[i], args, fd);
+			mode++;
+		}
+		else if (mode % 2 == 0)
+			res += printf_putchar(str[i], fd);
+		else
+			return (va_end(args), -1);
+		i++;
+	}
+	return (res);
 }
 
 int	ft_printf(const char *str, ...)
 {
-	int			i;
-	int			len;
-	va_list		arg;
-	int			init_mem;
+	int			res;
+	va_list		args;
+	const char	*modes;
 
-	va_start(arg, str);
-	i = 0;
-	len = 0;
-	while (str[i])
-	{
-		if (write(1, 0, 0) != 0)
-			return (-1);
-		init_mem = len;
-		if (str[i] == '%' && str[i + 1] != '\0')
-			len += printgc(str[++i], arg);
-		else if (str[i] != '%' && str[i])
-			len += write(1, &str[i], 1);
-		i++;
-		if (init_mem > len)
-			return (-1);
-	}
-	va_end(arg);
-	return (len);
+	if (write(1, 0, 0) != 0)
+		return (-1);
+	modes = "cdisupxX%";
+	if (!str)
+		return (-1);
+	va_start(args, str);
+	res = ft_printf_main(str, args, modes, 1);
+	va_end(args);
+	return (res);
+}
+
+int	ft_dprintf(int fd, const char *str, ...)
+{
+	int			res;
+	va_list		args;
+	const char	*modes;
+
+	if (write(fd, 0, 0) != 0)
+		return (-1);
+	modes = "cdisupxX%";
+	if (!str)
+		return (-1);
+	va_start(args, str);
+	res = ft_printf_main(str, args, modes, fd);
+	va_end(args);
+	return (res);
 }

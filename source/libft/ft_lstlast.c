@@ -3,22 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/20 13:17:11 by tmalidi           #+#    #+#             */
-/*   Updated: 2022/11/20 13:17:13 by tmalidi          ###   ########lyon.fr   */
+/*   Created: 2022/11/07 13:47:02 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/05/26 11:11:52 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "header/libft.h"
 
 t_list	*ft_lstlast(t_list *lst)
 {
 	if (!lst)
-		return (0);
-	while (lst -> next)
-	{
-		lst = lst -> next;
-	}
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
 	return (lst);
 }

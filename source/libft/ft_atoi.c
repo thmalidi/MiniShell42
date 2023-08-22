@@ -3,63 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 11:35:42 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/02/07 14:20:54 by tmalidi          ###   ########.fr       */
+/*   Created: 2022/11/07 13:16:11 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/05/26 11:11:52 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "header/libft.h"
 
-static int	ret_ind(const char *str)
+static int	is_blank(char c)
 {
-	int	i;
-
-	i = 0;
-	while (((str[i] >= 9 && str[i] <= 13)
-			|| (str[i] == 32)))
-		i++;
-	return (i);
-}
-
-static int	char_to_int(const char *str, int i, int sign)
-{
-	long long int	r;
-
-	r = 0;
-	while (str [i] <= '9' && str[i] >= '0')
-	{
-		if (r != ((r * 10 + (((str[i] - 48)) * sign)) / 10))
-			return (((sign + 1) / 2) / -1);
-		r = r * 10;
-		r += str[i] - 48;
-		i++;
-	}
-	return (r);
+	if ((c > 8 && c < 14) || c == 32)
+		return (1);
+	return (0);
 }
 
 int	ft_atoi(const char *str)
 {
-	int	i;
-	int	r;
-	int	ind;
-	int	sign;
+	int			i;
+	int			sign;
+	long int	res;
 
 	i = 0;
-	r = 0;
-	(void)r;
-	(void)i;
+	while (is_blank(str[i]) == 1)
+		i++;
 	sign = 1;
-	ind = ret_ind(str);
-	if (str[ind] == '+')
-		return (char_to_int(str, ind + 1, sign));
-	else if (str[ind] == '-')
+	if (str[i] == '+' || str[i] == '-')
 	{
-		sign -= 1;
-		return (char_to_int(str, ind + 1, sign) * -1);
+		if (str[i] == '-')
+			sign = -1;
+		i++;
 	}
-	else if (str[ind] >= '0' && str[ind] <= '9')
-		return (char_to_int(str, ind, sign));
-	return (0);
+	res = 0;
+	while (ft_isdigit(str[i]) == 1)
+	{
+		res = res * 10 + str[i] - '0';
+		if (res != ((res * 10) + (str[i] - '0')) / 10)
+			return ((sign + 1) / -2);
+		i++;
+	}
+	return ((int)(sign * res));
 }
