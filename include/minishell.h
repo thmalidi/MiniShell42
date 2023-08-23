@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/22 17:36:59 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:32:06 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <sys/wait.h>
 
 # include "libft.h"
+# include "errors.h"
 # include "env.h"
 # include "parsing.h"
 # include "builtins.h"

@@ -6,7 +6,7 @@
 #    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 14:42:36 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/08/17 13:07:17 by hgeffroy         ###   ########.fr        #
+#    Updated: 2023/08/23 16:26:17 by hgeffroy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,5 +47,6 @@ SOURCES =	source/main.c \
 			source/builtins/export.c \
 			source/builtins/export_parsing.c \
 			source/builtins/pwd.c \
-			source/builtins/unset.c
+			source/builtins/unset.c \
+			source/errors/errors.c
 			

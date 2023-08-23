@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:26:33 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/16 14:32:39 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/23 15:35:24 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*check_cmd_nopath(char **paths, char *cmd, int i)
 	char	*cmd_to_check;
 	char	**cmd_splitted;
 
-	if (is_whitespace(cmd) > 0)
+	if (is_whitespace(cmd) == 0)
 		return (NULL);
 	cmd_to_check = ft_strjoin(paths[i], cmd);
 	if (!cmd_to_check)
@@ -91,7 +91,10 @@ char	*check_cmd(char **env, char *cmd)
 	int		i;
 
 	if (is_directory(cmd) == 0)
+	{
+		return_value = 126;
 		return (printf("%s: Is a directory\n", cmd), NULL);
+	}
 	cmd_to_check = check_cmd_path(cmd);
 	if (cmd_to_check)
 		return (cmd_to_check);
@@ -105,10 +108,9 @@ char	*check_cmd(char **env, char *cmd)
 		if (cmd_to_check)
 			return (cmd_to_check);
 	}
-	free_tab(paths);
-	free(cmd_to_check);
+	return_value = 127;
 	printf("Command not found: %s\n", cmd);
-	return (NULL);
+	return (free_tab(paths), free(cmd_to_check), NULL);
 }
 
 

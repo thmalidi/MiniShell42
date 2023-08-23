@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/17 09:25:07 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/23 14:56:20 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ int	exec(t_big_list *list, t_env **envlst)
 	}
 	wait_processes(datalist);
 	free_datalist(datalist);
-	return (0);
+	return (return_value);
 }
 
 // Faire un main pour tester sans le main minishell !

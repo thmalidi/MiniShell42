@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:16 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/17 09:17:39 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/23 15:51:43 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,19 @@ int	should_exit(char *arg)
 	while (arg[++i])
 	{
 		if (arg[i] == '(' || arg[i] == ')')
-			return (printf("syntax error near expected token \'%c\'\n", arg[i]), -1);
+			return (ft_dprintf(2, "syntax error near expected token \'%c\'\n", arg[i]), -1);
 	}
 	i = -1;
 	while (arg[++i])
 	{
 		if (ft_isalpha(arg[i]))
-			return (printf("exit: %s: numeric argument required\n", arg), 2);
+			return (ft_dprintf(2, "exit: %s: numeric argument required\n", arg), 2);
 	}
 	return (ft_atoi(arg));
 }
 
 int	exit_b(t_datalist *data, t_env **env)
 {
-	int	ret_value;
 	int	shouldexit;
 	
 	(void)env;
@@ -51,14 +50,14 @@ int	exit_b(t_datalist *data, t_env **env)
 	if (len_tab(data->args) < 2)
 		exit (0);
 	shouldexit = should_exit((data->args)[1]);
-	if (shouldexit < 0)
+	if (shouldexit == -1)
 	{
-		ret_value = 2;
-		return (ret_value);
+		return_value = 2;
+		return (shouldexit);
 	}
 	else
 	{
-		ret_value = shouldexit;
-		exit (ret_value);
+		return_value = shouldexit;
+		exit (return_value % 256);
 	}
 }

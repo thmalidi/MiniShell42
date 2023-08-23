@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:03:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/15 15:17:58 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/23 15:39:00 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 /*
 Si plusieurs arguments, n'execute que le premier !!
-Changer de repertoire courant chdir
-Mettre a jour pwd
-Mettre a jour le old pwd
 Gerer cd - ? (Envoit a la racine)
+Il faut parser ce bordel un peu !
 */
+
+
+
 int	cd_b(t_datalist *data, t_env **env)
 {
 	char	*dir;
