@@ -6,11 +6,11 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:48:30 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/05/26 11:11:52 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:07:13 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header/libft.h"
+#include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {

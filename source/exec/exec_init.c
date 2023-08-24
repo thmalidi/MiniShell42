@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/17 10:46:30 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:52:11 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ t_datalist	*init_struct(t_big_list *list)
 	return (datalist);
 }
 
+// A del
 void	print_datalist(t_datalist *datalist)
 {
 	t_datalist	*tmp;

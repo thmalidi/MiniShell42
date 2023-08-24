@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:56:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/23 16:34:42 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:58:53 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	error_perm(char *str)
 
 int	error_syntax(char *str)
 {
-	ft_dprintf(2, "syntax error near expected token \'%c\'\n", str);
+	ft_dprintf(2, "syntax error near expected token \'%s\'\n", str);
 	return_value = 2;
 	return (0);
 }

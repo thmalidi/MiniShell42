@@ -6,11 +6,11 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 16:33:26 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/06/10 12:28:48 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:05:11 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header/libft.h"
+#include "libft.h"
 
 int	ft_isstrdigit(char *str)
 {

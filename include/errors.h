@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:57:32 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/23 16:33:34 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:43:54 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 
 enum	e_errors
 {
-	nofile		=	0,
-	isdir		=	1,
-	notdir		=	2,
-	cmd			=	3,
-	perm		=	4,
-	syntax		=	5,
-	identifier	=	6,
-	nbargs		=	7
+	NOFILE		=	0,
+	ISDIR		=	1,
+	NOTDIR		=	2,
+	CMD			=	3,
+	PERM		=	4,
+	SYNTAX		=	5,
+	IDENTIFIER	=	6,
+	NBARGS		=	7
 };
 
 typedef int	(*t_errors)(char *arg);

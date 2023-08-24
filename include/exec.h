@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/17 11:18:50 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:37:14 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,17 @@ typedef struct s_datalist
 	char				**args;
 	struct s_datalist	*next;
 }	t_datalist;
+
+enum	e_builtin
+{
+	CD		=	0,
+	ECHO	=	1,
+	ENV		=	2,
+	EXIT	=	3,
+	EXPORT	=	4,
+	PWD		=	5,
+	UNSET	=	6
+};
 
 typedef int	(*t_builtins)(t_datalist *datalist, t_env **env);
 

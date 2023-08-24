@@ -6,12 +6,11 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:49:11 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/05/26 11:11:52 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:07:49 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header/libft.h"
-#include <stdlib.h>
+#include "libft.h"
 
 char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
 {

@@ -6,12 +6,11 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:48:13 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/05/26 11:11:52 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:07:02 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header/libft.h"
-#include <unistd.h>
+#include "libft.h"
 
 void	ft_putnbr_fd(int n, int fd)
 {
