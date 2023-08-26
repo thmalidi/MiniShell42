@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:26:33 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/23 15:35:24 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/26 09:27:53 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**get_path(char **env)
 		{
 			new_paths[i] = ft_strjoin(paths[i], "/");
 			if (!new_paths[i])
-				return (printf("Malloc failed in parsing\n"), \
+				return (ft_dprintf(2, "Malloc failed in parsing\n"), \
 					free_tab(paths), free_tab(new_paths), NULL);
 		}
 		else
@@ -53,13 +53,13 @@ char	*check_cmd_nopath(char **paths, char *cmd, int i)
 	cmd_to_check = ft_strjoin(paths[i], cmd);
 	if (!cmd_to_check)
 	{
-		printf("Malloc failed in parsing\n");
+		ft_dprintf(2, "Malloc failed in parsing\n");
 		return (free_tab(paths), NULL);
 	}
 	cmd_splitted = ft_split(cmd_to_check, ' ');
 	if (!cmd_splitted)
 	{
-		printf("Malloc failed in parsing\n");
+		ft_dprintf(2, "Malloc failed in parsing\n");
 		return (free(cmd_to_check), free_tab(paths), NULL);
 	}
 	else if (access(cmd_splitted[0], X_OK) == 0)
@@ -92,15 +92,17 @@ char	*check_cmd(char **env, char *cmd)
 
 	if (is_directory(cmd) == 0)
 	{
-		return_value = 126;
-		return (printf("%s: Is a directory\n", cmd), NULL);
+		error_manager(cmd, ISDIR);
+		// return_value = 126;
+		// return (printf("%s: Is a directory\n", cmd), NULL);
 	}
 	cmd_to_check = check_cmd_path(cmd);
 	if (cmd_to_check)
 		return (cmd_to_check);
 	paths = get_path(env);
 	if (!paths)
-		return (printf("%s: No such file or directory\n", cmd), NULL);
+		error_manager(cmd, NOFILE);
+		//return (printf("%s: No such file or directory\n", cmd), NULL);
 	i = -1;
 	while (paths[++i])
 	{
@@ -108,8 +110,9 @@ char	*check_cmd(char **env, char *cmd)
 		if (cmd_to_check)
 			return (cmd_to_check);
 	}
-	return_value = 127;
-	printf("Command not found: %s\n", cmd);
+	error_manager(cmd, CMD);
+	// return_value = 127;
+	// printf("%s: Command not found\n", cmd);
 	return (free_tab(paths), free(cmd_to_check), NULL);
 }
 

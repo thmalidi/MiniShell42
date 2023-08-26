@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/24 14:36:21 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/24 16:08:12 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	manage_line(char *line, t_env **env)			//ajouter la fonctionde l'exec ici
 	
  	if (line)
  	{
-		return_value = 0;
 		if (only_space(line))
 		{
 			arg = parsing(line, env);

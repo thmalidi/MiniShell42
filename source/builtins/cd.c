@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:03:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/24 15:47:25 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/24 15:52:03 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	go_root(t_env **env)
 		return (-1);
 	set_value_env(env, "OLDPWD", dir);
 	free(dir);
-	chdir("/Users/henri"); // A changer en fonction de la session de correction
+	chdir(get_value_env(*env, "HOME"));
 	dir = getcwd(NULL, 0);
 	if (!dir)
 		return (-1);

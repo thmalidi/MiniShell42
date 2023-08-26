@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 09:02:34 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/16 16:48:26 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/24 16:20:53 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ int		fill_tab(char **tab, char *arg, int index_split, int n)
 	tab[0][i] = '\0';
 	while (++i < (int)ft_strlen(arg) && n > 1)
 		tab[1][i - index_split - 1] = arg[i];
-	printf("lala %zu\n", ft_strlen(tab[0]));
-	printf("lali %zu\n", ft_strlen(tab[1]));
 	return (0);
 }
 
