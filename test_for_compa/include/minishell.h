@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/26 11:21:40 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/26 11:47:26 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ typedef struct s_history
 	struct s_history	*next;
 	struct s_history	*previous;
 }						t_history;
+
+
+void		print_tab(char **tab);
 
 char		*end_clean(char *str);
 char		*join_tab(char **tab, int s);
