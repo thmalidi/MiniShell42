@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/16 15:01:33 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/26 11:21:40 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ typedef struct s_history
 	struct s_history	*previous;
 }						t_history;
 
+char		*end_clean(char *str);
+char		*join_tab(char **tab, int s);
+char		*free_trim(char *str);
 char		*change(char *str, char *final, t_env *env, char *rv);
 char		*put_space(char *str);
 int			check_in_outfile(t_big_list *arg);

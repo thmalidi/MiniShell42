@@ -6,11 +6,18 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:56:31 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/16 15:02:43 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/17 11:27:29 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*free_trim(char *str)
+{
+	char *trim;
+	trim = ft_strtrim(str, "\"");
+	return (free(str), trim);
+}
 
 int	potential_error(t_element	*etmp, t_big_list	*tmp)
 {
