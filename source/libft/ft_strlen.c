@@ -6,11 +6,11 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:49:07 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/06/10 12:29:08 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:07:42 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
 size_t	ft_strlen(const char *str)
 {

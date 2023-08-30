@@ -6,11 +6,11 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:16:11 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/05/26 11:11:52 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:04:24 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header/libft.h"
+#include "libft.h"
 
 static int	is_blank(char c)
 {

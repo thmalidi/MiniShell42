@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 08:13:23 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/22 17:29:27 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:12:07 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Il ne faut pas print si les var n'ont pas de value, gere dans env_print.
 int	env_b(t_datalist *data, t_env **env)
 {
 	if (len_tab(data->args) > 1)
-		printf("Env Shouldn't be ran with args\n");
+		error_manager("env", NBARGS);
 	else
 		env_print(*env);
 	return (0);

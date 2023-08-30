@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_utils.c                                   :+:      :+:    :+:   */
+/*   free_tab.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/07 11:30:29 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/16 09:08:11 by hgeffroy         ###   ########.fr       */
+/*   Created: 2023/08/24 13:26:31 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/08/24 13:26:59 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	len_tab(char **tab)
+void	free_tab(char **tab)
 {
-	int	len;
+	int	i;
 
-	len = 0;
-	while (tab[len])
-		len++;
-	return (len);
+	if (!tab)
+		return ;
+	i = -1;
+	while (tab[++i])
+		free(tab[i]);
+	free(tab);
 }

@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   tab_len.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 13:47:46 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/24 14:06:02 by hgeffroy         ###   ########.fr       */
+/*   Created: 2023/08/24 10:39:32 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/08/24 10:39:49 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+int	len_tab(char **tab)
 {
-	size_t	i;
+	int	len;
 
-	i = 0;
-	if (!src && !dest)
-	{
-		dest = NULL;
-		return (dest);
-	}
-	while (i < n)
-	{
-		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
-		i++;
-	}
-	return (dest);
+	if (!tab)
+		return (0);
+	len = 0;
+	while (tab[len])
+		len++;
+	return (len);
 }

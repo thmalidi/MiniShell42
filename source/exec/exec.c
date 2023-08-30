@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/17 09:25:07 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:53:54 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,14 @@ int	need_to_fork(t_datalist *datalist, int builtin)
 		return (1);
 	if (len_datalist(datalist) == 1)
 	{
-		if ((builtin == 4 && !(datalist->args)[1]) || builtin == 1 || builtin == 5 || builtin == 2)
+		if ((builtin == EXPORT && !(datalist->args)[1]) || builtin == ECHO || builtin == PWD || builtin == ENV)
 			return (1);
 		else
 			return (0);
 	}
 	else
 	{
-		if (builtin == 0 || builtin == 7)
+		if (builtin == CD || builtin == UNSET)
 			return (0);
 		else
 			return (1);
@@ -116,8 +116,6 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 			{
 				signal(SIGQUIT, &child_handler);
 				env = env_to_tab(*envlst); // A free, ca malloc + protection
-				// if (!env)
-				// 	return (-1);
 				cmdwpath = check_cmd(env, datalist->cmd); // A free
 				if (!cmdwpath)
 				{
@@ -147,7 +145,7 @@ int	wait_processes(t_datalist *datalist)
 		if (tmp->pid)
 			waitpid(tmp->pid, &status, WUNTRACED);
 		if (WIFEXITED(status))
-			/*Valeur de retour = WEXITSTATUS(status)*/;
+			g_return_value = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
 			child_handler(WTERMSIG(status));
 		tmp = tmp->next;
@@ -186,7 +184,7 @@ int	exec(t_big_list *list, t_env **envlst)
 	}
 	wait_processes(datalist);
 	free_datalist(datalist);
-	return (0);
+	return (g_return_value);
 }
 
 // Faire un main pour tester sans le main minishell !

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:33:38 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/17 09:28:36 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:28:46 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,4 @@ void	env_clean(t_env *env)
 		tmp1 = tmp1->next;
 	}
 	env_free_elt(tmp2);
-}
-
-void	free_tab(char **tab)
-{
-	int	i;
-
-	i = -1;
-	if (!tab)
-		return ;
-	while (tab[++i])
-		free(tab[i]);
-	free(tab);
 }

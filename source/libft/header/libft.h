@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:55:24 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/22 09:02:16 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:09:20 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 # define LIBFT_H
 
 # include <string.h>
+# include <stdlib.h>
 # include <stdint.h>
+# include <stdio.h>
+# include <unistd.h>
 
 # include "ft_printf.h"
 # include "get_next_line.h"
@@ -45,6 +48,7 @@ size_t	ft_strlen(const char *str);
 
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s);
+char	*ft_strndup(const char *s, int n);
 char	*ft_strnstr(const char *meule_de_foin, const char *aiguille, size_t n);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_itoa(int n);
@@ -74,5 +78,10 @@ void	*ft_calloc(size_t nmemb, size_t size);
 t_list	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+int		len_tab(char **tab);
+void	print_tab(char **tab);
+void	print_tab_int(int *tab, int n);
+void	free_tab(char **tab);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 08:14:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/16 10:49:39 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:39:56 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,17 @@
 # include "minishell.h"
 # include "exec.h"
 # include "env.h"
+
+enum	e_builtin
+{
+	CD		=	0,
+	ECHO	=	1,
+	ENV		=	2,
+	EXIT	=	3,
+	EXPORT	=	4,
+	PWD		=	5,
+	UNSET	=	6
+};
 
 // Utils
 void	print_tab(char **tab);

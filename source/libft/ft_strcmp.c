@@ -6,9 +6,11 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 10:31:06 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/07 15:56:31 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:07:16 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

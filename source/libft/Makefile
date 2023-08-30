@@ -6,7 +6,7 @@
 #    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/13 12:02:18 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/08/22 09:02:41 by hgeffroy         ###   ########.fr        #
+#    Updated: 2023/08/24 14:09:47 by hgeffroy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ OBJ_DIR = ./obj/
 
 #Files
 
-SRC_F = ft_atoi.c \
+SRC_F = free_tab.c \
+		ft_atoi.c \
 		ft_bzero.c \
 		ft_calloc.c \
 		ft_isalnum.c \
@@ -51,6 +52,7 @@ SRC_F = ft_atoi.c \
 		ft_strlen.c \
 		ft_strmapi.c \
 		ft_strncmp.c \
+		ft_strndup.c \
 		ft_strnstr.c \
 		ft_strrchr.c \
 		ft_strtrim.c \
@@ -71,7 +73,10 @@ SRC_F = ft_atoi.c \
 		ft_lstnew.c \
 		ft_lstsize.c \
 		get_next_line.c \
-		get_next_line_utils.c
+		get_next_line_utils.c \
+		print_tab_int.c \
+		print_tab.c \
+		tab_len.c
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC_F:.c=.o))
 

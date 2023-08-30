@@ -6,13 +6,13 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/22 09:57:47 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:01:39 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int return_value = 0;
+int g_return_value;
 
 int only_space(char *str)
 {
@@ -40,7 +40,7 @@ void	manage_line(char *line, t_env **env)			//ajouter la fonctionde l'exec ici
 			{
 				splited_arg(arg);									//creation de la liste pour chaque pipe ici
 				// plst(arg);
-				return_value = exec(arg, env);
+				g_return_value = exec(arg, env);
 			}
 		}
  	}
@@ -57,15 +57,21 @@ int	main(int ac, char **av, char **env)
 	i = 0;
 	envlst = create_env(env);
 	init_signals();
+	g_return_value = 0;
  	while (1)
  	{
  		line = readline("\033[32mMinishell>\033[0m");
+		if (!line)
+		{
+			free(line);
+			return (g_return_value);
+		}
 		add_history(line);
  		manage_line(line, &envlst);
  		i++;
  	}
-	//rl_clear_history();
- 	return (0);
+	// rl_clear_history();
+ 	return (g_return_value);
 }
 
 /*int main()

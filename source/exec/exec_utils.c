@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:03:53 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/15 14:47:04 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:28:33 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,6 @@ int	element_len(t_element *list)
 		tmp = tmp->next;
 	}
 	return (len);
-}
-
-void	print_tab(char **tab)
-{
-	int	i;
-
-	i = -1;
-	while (tab[++i])
-		printf("tab[%d] = %s\n", i, tab[i]);
-}
-
-void	print_tab_int(int *tab, int n)
-{
-	int	i;
-
-	i = -1;
-	while (++i < n)
-		printf("tab[%d] = %d\n", i, tab[i]);
 }
 
 int	is_builtin(char *cmd)

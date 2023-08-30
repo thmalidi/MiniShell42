@@ -6,12 +6,15 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:31 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/17 07:24:31 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:45:45 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+Parsing similaire a export ?
+*/
 int	unset_b(t_datalist *data, t_env **env)
 {
 	int	i;

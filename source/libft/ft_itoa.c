@@ -6,11 +6,11 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:46:32 by hgeffroy          #+#    #+#             */
-/*   Updated: 2022/11/10 16:02:24 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:05:14 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 static char	*ft_revstr(char *s)
 {

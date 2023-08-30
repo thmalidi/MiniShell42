@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   print_tab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 13:47:46 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/24 14:06:02 by hgeffroy         ###   ########.fr       */
+/*   Created: 2023/08/24 10:42:18 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/08/24 10:43:33 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	print_tab(char **tab)
 {
-	size_t	i;
+	int	i;
 
-	i = 0;
-	if (!src && !dest)
-	{
-		dest = NULL;
-		return (dest);
-	}
-	while (i < n)
-	{
-		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
-		i++;
-	}
-	return (dest);
+	if (!tab)
+		return ;
+	i = -1;
+	while (tab[++i])
+		printf("tab[%d] = %s\n", i, tab[i]);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/23 17:26:13 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/30 12:53:54 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_big_list	*pars_arg(char *str, t_env **envlst)
 
 	if (str[0] == '|' || str[ft_strlen(str) - 1] == '|')
 		return (ft_dprintf(2,"parse error near `|'\n"), return_value = 130, NULL);
-	tab = ft_split(str, '|');
+  tab = ft_split(str, '|');
 	i = 0;
 	if (!pars_arg_op(tab, i, envlst))
 		return (free_tab(tab), NULL);
