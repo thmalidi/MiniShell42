@@ -6,13 +6,13 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/24 16:08:12 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:43:24 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int return_value = 0;
+int return_value;
 
 int only_space(char *str)
 {
@@ -57,15 +57,21 @@ int	main(int ac, char **av, char **env)
 	i = 0;
 	envlst = create_env(env);
 	init_signals();
+	return_value = 0;
  	while (1)
  	{
  		line = readline("\033[32mMinishell>\033[0m");
+		if (!line)
+		{
+			free(line);
+			break ;
+		}
 		add_history(line);
  		manage_line(line, &envlst);
  		i++;
  	}
-	//rl_clear_history();
- 	return (0);
+	// rl_clear_history();
+ 	return (return_value);
 }
 
 /*int main()
