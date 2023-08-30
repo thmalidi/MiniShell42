@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:56:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/30 14:34:02 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:08:39 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,12 @@ int	error_args(char *str)
 {
 	ft_dprintf(2, "%s: too many arguments\n", str);
 	g_return_value = 1;
+	return (0);
+}
+
+int	error_malloc(char *str)
+{
+	ft_dprintf(2, "Malloc failed in %s\n", str);
+	g_return_value = -1;
 	return (0);
 }

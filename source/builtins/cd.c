@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:03:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/30 14:43:42 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:54:47 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	cd_b(t_datalist *data, t_env **env)
 {
 	char	*dir;
 
-	if (len_tab(data->args) > 1)
+	if (len_tab(data->args) > 2)
 		return(error_manager("cd", NBARGS), -1);
 	if (!(data->args[1]) || ft_strcmp(data->args[1], "~") == 0)
 	{
