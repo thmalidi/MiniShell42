@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 09:02:34 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/30 13:35:24 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:55:28 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,11 @@ int		fill_tab(char **tab, char *arg, int index_split, int n)
 	if (!tab[0])
 		return (-1);
 	if (n > 1)
+	{
 		tab[1] = (char *)malloc(sizeof(char) * (ft_strlen(arg) - index_split)); // Proteger !!
+		if (!tab[1])
+			return (-1);
+	}
 	tab[n] = NULL;
 	i = -1;
 	while (++i < index_split)
@@ -67,6 +71,8 @@ char	**ft_split_export(char *arg)
 	else
 		n = 1;
 	res = (char **)malloc(sizeof(char *) * (n + 1));
+	if (!res)
+		return (NULL);
 	if (fill_tab(res, arg, i, n) < 0)
 		return (free_tab(res), NULL);
 	return (res);
@@ -77,6 +83,8 @@ char	**parsing_export(char *arg)
 	char	**res;
 
 	res = ft_split_export(arg);
+	if (!res)
+		return (NULL);
 	if (check_var(res[0]) < 0)
 		return (free_tab(res), error_manager("export", IDENTIFIER), NULL);
 	return (res);

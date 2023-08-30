@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subparsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 12:59:50 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/16 14:39:18 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/30 15:52:06 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	splited_arg(t_big_list *arg)
 	tmp = arg;
 	while (tmp)
 	{
-		tmp->pipelist = malloc(sizeof(t_element *));
+		tmp->pipelist = malloc(sizeof(t_element *)); //proteger...
 		*tmp->pipelist = NULL;
 		tab = ft_split(tmp->content, ' ');
 		space_process(tab);

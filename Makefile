@@ -6,7 +6,7 @@
 #    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 14:14:21 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/08/30 13:10:28 by hgeffroy         ###   ########.fr        #
+#    Updated: 2023/08/30 15:29:41 by hgeffroy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ LIBFT_HEAD		=		$(LIBFT_DIR)/header
 #--sources & objects-----------------------------------------------------------#
 
 SRC_DIR         =       source
-OBJ_DIR         =       .objs
+OBJ_DIR         =       .objs/
 
 #--flags-----------------------------------------------------------------------#
 
@@ -82,7 +82,7 @@ re:
 
 clean:
 		$(MAKE) -C $(LIBFT_DIR) clean
-		$(RM) -rf $(OBJECTS)
+		$(RM) -rf $(OBJ_DIR)
 
 fclean:
 		clear
