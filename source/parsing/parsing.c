@@ -35,8 +35,8 @@ t_big_list	*pars_arg(char *str, t_env **envlst)
 	t_big_list	*new;
 
 	if (str[0] == '|' || str[ft_strlen(str) - 1] == '|')
-		return (printf("parse error near `|'\n"), g_return_value = 130, NULL);
-	tab = ft_split(str, '|');
+		return (ft_dprintf(2,"parse error near `|'\n"), return_value = 130, NULL);
+  tab = ft_split(str, '|');
 	i = 0;
 	if (!pars_arg_op(tab, i, envlst))
 		return (free_tab(tab), NULL);
@@ -86,9 +86,9 @@ int	scan_cmd(char *str)
 	while (str[i])
 	{
 		if ((dup[i] == 92 || dup[i] == ';') && dup[0] != 34 && dup[0] != 39)
-			return (printf(
-					"\033[31mError :\033[0m%c\033[31m forbidden character\033[0m\n",
-					dup[i]), free(dup), g_return_value = 1, 0);
+			return (ft_dprintf(2,
+					"\033[31mError : '\033[0m%c\033[31m' forbidden character\033[0m\n",
+					dup[i]), free(dup), return_value = 1, 0);
 		i++;
 	}
 	return (free(dup), 1);
@@ -99,8 +99,8 @@ t_big_list	*parsing(char *str, t_env **envlst)
 	t_big_list	*arg;
 
 	if (!double_quote(str))
-		return (printf("\033[31mError : quotes still open\033[0m\n"),
-			g_return_value = 1, NULL);
+		return (ft_dprintf(2,"\033[31mError : quotes still open\033[0m\n"),
+			return_value = 1, NULL);
 	arg = pars_arg(str, envlst);
 	return (arg);
 }

@@ -25,11 +25,11 @@ int	potential_error(t_element	*etmp, t_big_list	*tmp)
 			|| etmp->type == 4) && etmp->next == NULL)
 	{
 		if (tmp->next == NULL)
-			return (printf("parse error near `\\n'\n"),
-				g_return_value = 130, 0);
+			return (dprintf(2,"parse error near `\\n'\n"),
+				return_value = 130, 0);
 		else
-			return (printf("parse error near `|'\n"),
-				g_return_value = 130, 0);
+			return (dprintf(2,"parse error near `|'\n"),
+				return_value = 130, 0);
 	}
 	return (1);
 }
