@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:03:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/24 15:52:03 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:53:54 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ int	cd_b(t_datalist *data, t_env **env)
 	if (!(data->args[1]) || ft_strcmp(data->args[1], "~") == 0)
 	{
 		go_root(env);
-		return (return_value);
+		return (g_return_value);
 	}
 	if (ft_strcmp(data->args[1], "-") == 0)
 	{
 		go_back(env);
-		return (return_value);
+		return (g_return_value);
 	}
 	dir = getcwd(NULL, 0);
 	if (!dir)
@@ -93,14 +93,14 @@ int	cd_b(t_datalist *data, t_env **env)
 	set_value_env(env, "OLDPWD", dir);
 	free(dir);
 	if (is_valid_dir(data->args[1]) == NO)
-		return (return_value);
+		return (g_return_value);
 	chdir(data->args[1]);
 	dir = getcwd(NULL, 0);
 	if (!dir)
 		return (-1);
 	set_value_env(env, "PWD", dir);
 	free(dir);
-	return (return_value);
+	return (g_return_value);
 }
 
 // Il faut tester les acces aux dossiers ?

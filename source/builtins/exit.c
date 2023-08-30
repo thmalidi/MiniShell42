@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:16 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/24 14:11:25 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:53:54 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,18 @@ int	exit_b(t_datalist *data, t_env **env)
 	
 	(void)env;
 	if (len_tab(data->args) > 2)
-		return (error_manager("exit", NBARGS), return_value);
+		return (error_manager("exit", NBARGS), g_return_value);
 	if (len_tab(data->args) < 2)
 		exit (0);
 	shouldexit = should_exit((data->args)[1]);
 	if (shouldexit == -1)
 	{
-		return_value = 2;
+		g_return_value = 2;
 		return (shouldexit);
 	}
 	else
 	{
-		return_value = shouldexit;
-		exit (return_value % 256);
+		g_return_value = shouldexit;
+		exit (g_return_value % 256);
 	}
 }

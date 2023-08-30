@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:28 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/24 13:44:50 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:53:54 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ int	pwd_b(t_datalist *data, t_env **env)
 	if (!pwd)
 		return (ft_dprintf(2, "getcwd failed\n"), -1);
 	printf("%s\n", pwd);
-	return (free(pwd), return_value);
+	return (free(pwd), g_return_value);
 }

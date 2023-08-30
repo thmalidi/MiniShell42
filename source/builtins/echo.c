@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:11 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/11 14:53:11 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:59:30 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ int	echo_b(t_datalist *data, t_env **env)
 		printf("%s ", data->args[i]);
 	if (breakline == 0)
 		printf("\n");
+	g_return_value = 0;
 	return (0);
 }

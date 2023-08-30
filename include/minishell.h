@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/24 14:57:30 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:53:54 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ enum	e_yesno
 	NO	=	1
 };
 
-extern int return_value;
+extern int g_return_value;
 
 #endif

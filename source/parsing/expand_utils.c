@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/16 14:55:25 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/30 12:53:54 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ char	*expand_process(char *str, t_env *env)
 
 	i = 0;
 	final = ft_strdup(str);
-	rv = ft_itoa(return_value);
+	rv = ft_itoa(g_return_value);
 	if (final[0] != 39)
 	{
 		tab = extract_var(final);

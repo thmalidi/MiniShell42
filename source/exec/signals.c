@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 14:05:15 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/30 12:31:17 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:53:54 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ void	child_handler(int sig)
 	
 	// if (sig == SIGINT)
 	// {
-	// 	return_value = 130;
+	// 	g_return_value = 130;
 	// 	printf("\n");
 	// }
 	// else if (sig == SIGQUIT)
 	// {
-	// 	return_value = 131;
+	// 	g_return_value = 131;
 	// 	printf("Quit (core dumped)\n");
 	// }
 }

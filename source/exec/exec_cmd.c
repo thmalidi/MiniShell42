@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:26:33 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/26 09:27:53 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:53:54 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	*check_cmd(char **env, char *cmd)
 	if (is_directory(cmd) == 0)
 	{
 		error_manager(cmd, ISDIR);
-		// return_value = 126;
+		// g_return_value = 126;
 		// return (printf("%s: Is a directory\n", cmd), NULL);
 	}
 	cmd_to_check = check_cmd_path(cmd);
@@ -111,7 +111,7 @@ char	*check_cmd(char **env, char *cmd)
 			return (cmd_to_check);
 	}
 	error_manager(cmd, CMD);
-	// return_value = 127;
+	// g_return_value = 127;
 	// printf("%s: Command not found\n", cmd);
 	return (free_tab(paths), free(cmd_to_check), NULL);
 }
