@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:16 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/30 12:53:54 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:43:02 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ int	exit_b(t_datalist *data, t_env **env)
 	else
 	{
 		g_return_value = shouldexit;
-		exit (g_return_value % 256);
+		exit (g_return_value % 128);
 	}
 }

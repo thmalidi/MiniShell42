@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:03:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/30 12:53:54 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:52:59 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	cd_b(t_datalist *data, t_env **env)
 		return (-1);
 	set_value_env(env, "PWD", dir);
 	free(dir);
-	return (g_return_value);
+	return (0);
 }
 
 // Il faut tester les acces aux dossiers ?

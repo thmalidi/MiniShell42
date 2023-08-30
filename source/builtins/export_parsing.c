@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 09:02:34 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/30 11:15:03 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:35:24 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ int	check_var(char *var)
 
 	if (!var)
 		return (-1);
-	if (!ft_isalpha(var[0]) && var[0] != '_')
+	if (ft_isalpha((int)var[0]) == 0 && var[0] != '_')
 		return (-1);
 	i = 0;
 	while (var[++i])
 	{
-		if (!ft_isalnum(var[i]) && var[i] != '_')
+		if (ft_isalnum((int)var[i]) == 0 && var[i] != '_')
 			return (-1);
 	}
 	return (0);
@@ -78,6 +78,6 @@ char	**parsing_export(char *arg)
 
 	res = ft_split_export(arg);
 	if (check_var(res[0]) < 0)
-		return (free_tab(res), NULL);
+		return (free_tab(res), error_manager("export", IDENTIFIER), NULL);
 	return (res);
 }
