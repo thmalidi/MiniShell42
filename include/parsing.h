@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:33:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/22 17:36:21 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:29:48 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ typedef struct s_history
 	struct s_history	*previous;
 }						t_history;
 
+void		print_tab(char **tab);
+
+char		*end_clean(char *str);
+char		*join_tab(char **tab, int s);
 char		*free_trim(char *str);
 char		*change(char *str, char *final, t_env *env, char *rv);
 char		*put_space(char *str);

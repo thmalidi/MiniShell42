@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mix_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:22:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/30 12:53:54 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:53:26 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ int	count_symb_in(char *str)
 		if (v > 3)
 		{
 			if (v == 4)
-				return (ft_dprintf(2,"parse error near `<'\n"), 0);
+				return (printf("parse error near `<'\n"), 0);
 			else if (v == 5)
-				return (ft_dprintf(2,"parse error near `<<'\n"), 0);
+				return (printf("parse error near `<<'\n"), 0);
 			else
-				return (ft_dprintf(2,"parse error near `<<<'\n"), 0);
+				return (printf("parse error near `<<<'\n"), 0);
 		}
 	}
 	return (1);
@@ -96,9 +96,9 @@ int	count_symb_out(char *str)
 		if (v > 2)
 		{
 			if (v == 3)
-				return (ft_dprintf(2,"parse error near `>'\n"), 0);
+				return (printf("parse error near `>'\n"), 0);
 			else
-				return (ft_dprintf(2,"parse error near `>>'\n"), 0);
+				return (printf("parse error near `>>'\n"), 0);
 		}
 	}
 	return (1);
