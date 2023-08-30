@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:33:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/30 15:29:48 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:49:51 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_history
 
 void		print_tab(char **tab);
 
+int			between(char *str, int range);
 char		*end_clean(char *str);
 char		*join_tab(char **tab, int s);
 char		*free_trim(char *str);

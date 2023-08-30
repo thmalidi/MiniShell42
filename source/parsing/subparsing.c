@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 12:59:50 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/30 15:55:35 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:55:55 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	splited_arg(t_big_list *arg)
 	{
 		tmp->pipelist = malloc(sizeof(t_element *));
 		*tmp->pipelist = NULL;
+		tmp->content = put_space(tmp->content);
 		tab = ft_split(tmp->content, ' ');
-		space_process(tab);
 		i = 0;
 		while (tab[i])
 			ft_lstadd_back_e(tmp->pipelist, ft_lstnew_e(tab[i++]));

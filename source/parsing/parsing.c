@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/30 15:52:31 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:18:21 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,21 @@ int	double_quote(char *str)
 int	scan_cmd(char *str)
 {
 	int		i;
+	int		d;
+	int		s;
 	char	*dup;
 
 	i = 0;
+	d = 0;
+	s = 0;
 	dup = ft_strtrim(str, " ");
 	while (str[i])
 	{
-		if ((dup[i] == 92 || dup[i] == ';') && dup[0] != 34 && dup[0] != 39)
+		if (dup[i] == 34)
+			d++;
+		if (dup[i] == 39)
+			s++;
+		if ((dup[i] == 92 || dup[i] == ';') && s % 2 == 0 && d % 2 == 0)
 			return (printf(
 					"\033[31mError :\033[0m%c\033[31m forbidden character\033[0m\n",
 					dup[i]), free(dup), g_return_value = 1, 0);
