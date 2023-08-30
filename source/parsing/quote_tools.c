@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:12:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/30 17:07:27 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/30 17:11:05 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	between(char *str, int range)
 			s++;
 		i++;
 	}
-	printf("%d && %d\n",s,d);
 	if (s % 2 == 0 && d % 2 == 0)
 		return (1);
 	return (0);
