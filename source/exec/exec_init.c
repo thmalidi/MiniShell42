@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/24 13:52:11 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/31 08:36:34 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ int	check_file(char *file, int type, t_datalist *datalist)
 
 	fd = open(file, O_DIRECTORY, 0644);
 	if (fd != -1)
-	{
-		printf("%s: is a directory\n", file);
-		return (close(fd), -1);
-	}
+		return (error_manager(file, ISDIR), close(fd), -1);
 	if (type == 1)
 	{
 		if (datalist->infile)
