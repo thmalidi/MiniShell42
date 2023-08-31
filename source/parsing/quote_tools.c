@@ -6,11 +6,35 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:12:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/30 16:06:39 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/30 17:11:05 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	between(char *str, int range)
+{
+	int i;
+	int s;
+	int d;
+
+	i = 0;
+	d = 0;
+	s = 0;
+	while (str[i] && i < range)
+	{
+		if (str[i] == 34)
+			d++;
+		if (str[i] == 39)
+			s++;
+		i++;
+	}
+	if (s % 2 == 0 && d % 2 == 0)
+		return (1);
+	return (0);
+	
+}
+
 
 int	replace(char *str, char c, int i)
 {
