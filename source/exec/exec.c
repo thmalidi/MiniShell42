@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/31 13:26:13 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:34:44 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 			if (builtin > -1)
 			{
 				exec_builtin(datalist, envlst, builtin);
-				exit (0);
+				exit (g_return_value);
 			}
 			else
 			{
