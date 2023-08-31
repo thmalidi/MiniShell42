@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/31 14:46:45 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:14:30 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,45 +21,16 @@ il faut ptet changer des trucs ici, reinit le pointeur.
 int	set_files(t_datalist *datalist, t_element **pipelist)
 {
 	t_element	*tmp;
-
+	
 	tmp = *pipelist;
 	while (tmp)
 	{
-		if (tmp->type < 3 && tmp->type > 0)
-		{
-			if (tmp->type == 1)
-			{
-				if (check_file(tmp->next->str, tmp->type, datalist) < 0)
-				{
-					if (!tmp->previous && tmp->next->next)
-						tmp->next->next->previous = NULL;
-					tmp = remove_files(tmp);
-					if (!tmp || !(tmp->previous))
-						*pipelist = tmp;
-					return (-1);
-				}
-			}
-			else
-				datalist->infile = exec_hd(tmp);
-			if (!tmp->previous && tmp->next->next)
-				tmp->next->next->previous = NULL;
-			tmp = remove_files(tmp);
-			if (!tmp || !(tmp->previous))
-				*pipelist = tmp;
-		}
-		else if (tmp->type < 5 && tmp->type > 2)
+		if (tmp->type == 2)
+			datalist->infile = exec_hd(tmp);
+		if (tmp->type < 5 && tmp->type > 0)
 		{
 			if (check_file(tmp->next->str, tmp->type, datalist) < 0)
-			{
-				if (!tmp->previous && tmp->next->next)
-					tmp->next->next->previous = NULL;
-				tmp = remove_files(tmp);
-				if (!tmp || !(tmp->previous))
-					*pipelist = tmp;
 				return (-1);
-			}
-			if (!tmp->previous && tmp->next->next)
-				tmp->next->next->previous = NULL;
 			tmp = remove_files(tmp);
 			if (!tmp || !(tmp->previous))
 				*pipelist = tmp;
@@ -156,9 +127,12 @@ t_datalist	*init_struct(t_big_list *list)
 	tmp = list;
 	while (tmp)
 	{
-		if (fill_data(&datalist, tmp) < 0)
-			return (free_big_list(list), NULL);
+		fill_data(&datalist, tmp); //Il faudra surement identifier les erreurs, notamment le null check.
 		tmp = tmp->next;
+		// if (fill_data(&datalist, tmp) < 0)
+		// 	tmp = tmp->next;
+		// else
+		// 	tmp = tmp->next;
 	}
 	free_big_list(list);
 	return (datalist);

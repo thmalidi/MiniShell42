@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:56:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/31 12:45:58 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:45:41 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	error_cmd(char *str)
 
 int	error_perm(char *str)
 {
-	ft_dprintf(2, "%s: permission denied\n", str);
-	g_return_value = 126;
+	ft_dprintf(2, "%s: Permission denied\n", str);
+	g_return_value = 1;
 	return (0);
 }
 
