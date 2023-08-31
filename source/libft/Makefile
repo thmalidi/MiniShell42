@@ -6,7 +6,7 @@
 #    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/13 12:02:18 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/08/24 14:09:47 by hgeffroy         ###   ########.fr        #
+#    Updated: 2023/08/31 15:35:38 by hgeffroy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC_F = free_tab.c \
 		ft_isalpha.c \
 		ft_isascii.c \
 		ft_isdigit.c \
+		ft_isstrdigit.c \
 		ft_isprint.c \
 		ft_itoa.c \
 		ft_memchr.c \

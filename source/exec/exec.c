@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/30 15:09:38 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:34:44 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 			if (builtin > -1)
 			{
 				exec_builtin(datalist, envlst, builtin);
-				exit (0);
+				exit (g_return_value);
 			}
 			else
 			{
@@ -123,7 +123,7 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 					exit (-1);
 				}
 				execve(cmdwpath, datalist->args, env);
-				perror(NULL);
+				// perror(NULL);
 			}
 		}
 	}
@@ -142,18 +142,15 @@ int	wait_processes(t_datalist *datalist)
 	status = 0;
 	while (tmp)
 	{
-		if (tmp->pid)
-			waitpid(tmp->pid, &status, WUNTRACED);
-		// if (WIFEXITED(status))
-		// {
-		// 	g_return_value = WEXITSTATUS(status);
-		// 	puts("lala");
-		// }
-		else if (WIFSIGNALED(status))
+		if (tmp->pid && waitpid(tmp->pid, &status, WUNTRACED) == -1)
 		{
-			child_handler(WTERMSIG(status));
-			puts("lali");	
+			g_return_value = 1;
+			return (-1);
 		}
+		else if (tmp->pid && WIFEXITED(status))
+			g_return_value = WEXITSTATUS(status); // Je ne veux pas rentrer ici si on etait pas fork
+		else if (WIFSIGNALED(status))
+			child_handler(WTERMSIG(status));
 		tmp = tmp->next;
 		// Regarder comment recuperer la valeur de retour ici...
 	}

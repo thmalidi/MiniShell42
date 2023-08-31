@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:26:33 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/30 16:06:25 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/31 11:06:56 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,18 +91,13 @@ char	*check_cmd(char **env, char *cmd)
 	int		i;
 
 	if (is_directory(cmd) == 0)
-	{
 		error_manager(cmd, ISDIR);
-		// g_return_value = 126;
-		// return (printf("%s: Is a directory\n", cmd), NULL);
-	}
 	cmd_to_check = check_cmd_path(cmd);
 	if (cmd_to_check)
 		return (cmd_to_check);
 	paths = get_path(env);
 	if (!paths)
 		error_manager(cmd, NOFILE);
-		//return (printf("%s: No such file or directory\n", cmd), NULL);
 	i = -1;
 	while (paths[++i])
 	{
@@ -111,8 +106,6 @@ char	*check_cmd(char **env, char *cmd)
 			return (cmd_to_check);
 	}
 	error_manager(cmd, CMD);
-	// g_return_value = 127;
-	// printf("%s: Command not found\n", cmd);
 	return (free_tab(paths), free(cmd_to_check), NULL);
 }
 
