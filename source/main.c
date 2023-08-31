@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/30 13:01:39 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:08:12 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	manage_line(char *line, t_env **env)			//ajouter la fonctionde l'exec ici
 			{
 				splited_arg(arg);									//creation de la liste pour chaque pipe ici
 				// plst(arg);
-				g_return_value = exec(arg, env);
+				exec(arg, env);
 			}
 		}
  	}
@@ -69,6 +69,7 @@ int	main(int ac, char **av, char **env)
 		add_history(line);
  		manage_line(line, &envlst);
  		i++;
+		// printf("return value : %d\n", g_return_value);
  	}
 	// rl_clear_history();
  	return (g_return_value);

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/30 12:53:54 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:09:38 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,10 +144,16 @@ int	wait_processes(t_datalist *datalist)
 	{
 		if (tmp->pid)
 			waitpid(tmp->pid, &status, WUNTRACED);
-		if (WIFEXITED(status))
-			g_return_value = WEXITSTATUS(status);
+		// if (WIFEXITED(status))
+		// {
+		// 	g_return_value = WEXITSTATUS(status);
+		// 	puts("lala");
+		// }
 		else if (WIFSIGNALED(status))
+		{
 			child_handler(WTERMSIG(status));
+			puts("lali");	
+		}
 		tmp = tmp->next;
 		// Regarder comment recuperer la valeur de retour ici...
 	}
@@ -184,7 +190,7 @@ int	exec(t_big_list *list, t_env **envlst)
 	}
 	wait_processes(datalist);
 	free_datalist(datalist);
-	return (g_return_value);
+	return (0);
 }
 
 // Faire un main pour tester sans le main minishell !

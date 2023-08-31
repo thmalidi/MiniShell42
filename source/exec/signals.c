@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 14:05:15 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/30 12:53:54 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:10:03 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,39 +22,35 @@ On a 3 handlers a faire : pour les hd, pour les childs et pour le parent.
 void	rl_handler(int sig)
 {
 	(void)sig;
-	
-	// (void)sig;
-	// printf("\n");
-	// rl_replace_line("", 0);
-	// rl_on_new_line();
-	// rl_redisplay();
+	printf("\n");
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
  }
 
 void	child_handler(int sig)
 {
-	(void)sig;
-	
-	// if (sig == SIGINT)
-	// {
-	// 	g_return_value = 130;
-	// 	printf("\n");
-	// }
-	// else if (sig == SIGQUIT)
-	// {
-	// 	g_return_value = 131;
-	// 	printf("Quit (core dumped)\n");
-	// }
+	if (sig == SIGINT)
+	{
+		g_return_value = 130;
+		printf("\n");
+	}
+	else if (sig == SIGQUIT)
+	{
+		g_return_value = 131;
+		printf("Quit (core dumped)\n");
+	}
 }
 
 void	hd_handler(int sig)
 {
-	(void)sig; //A garder !
-	//exit(130);
+	(void)sig;
+	exit(130);
 }
 
 void	init_signals(void)
 {
-	// signal(SIGINT, SIG_IGN);
-	// signal(SIGQUIT, SIG_IGN);
-	// signal(SIGINT, &rl_handler);
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, &rl_handler);
 }

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:03:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/30 13:52:59 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:54:47 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,17 @@ int	cd_b(t_datalist *data, t_env **env)
 {
 	char	*dir;
 
+	if (len_tab(data->args) > 2)
+		return(error_manager("cd", NBARGS), -1);
 	if (!(data->args[1]) || ft_strcmp(data->args[1], "~") == 0)
 	{
 		go_root(env);
-		return (g_return_value);
+		return (0);
 	}
 	if (ft_strcmp(data->args[1], "-") == 0)
 	{
 		go_back(env);
-		return (g_return_value);
+		return (0);
 	}
 	dir = getcwd(NULL, 0);
 	if (!dir)
@@ -93,7 +95,7 @@ int	cd_b(t_datalist *data, t_env **env)
 	set_value_env(env, "OLDPWD", dir);
 	free(dir);
 	if (is_valid_dir(data->args[1]) == NO)
-		return (g_return_value);
+		return (-1);
 	chdir(data->args[1]);
 	dir = getcwd(NULL, 0);
 	if (!dir)

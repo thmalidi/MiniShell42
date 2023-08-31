@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:26:33 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/30 12:53:54 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:06:25 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**get_path(char **env)
 		{
 			new_paths[i] = ft_strjoin(paths[i], "/");
 			if (!new_paths[i])
-				return (ft_dprintf(2, "Malloc failed in parsing\n"), \
+				return (error_manager("get_path", MALLOC), \
 					free_tab(paths), free_tab(new_paths), NULL);
 		}
 		else
@@ -53,13 +53,13 @@ char	*check_cmd_nopath(char **paths, char *cmd, int i)
 	cmd_to_check = ft_strjoin(paths[i], cmd);
 	if (!cmd_to_check)
 	{
-		ft_dprintf(2, "Malloc failed in parsing\n");
+		error_manager("check_cmd_nopath", MALLOC);
 		return (free_tab(paths), NULL);
 	}
 	cmd_splitted = ft_split(cmd_to_check, ' ');
 	if (!cmd_splitted)
 	{
-		ft_dprintf(2, "Malloc failed in parsing\n");
+		error_manager("check_cmd_nopath", MALLOC);
 		return (free(cmd_to_check), free_tab(paths), NULL);
 	}
 	else if (access(cmd_splitted[0], X_OK) == 0)

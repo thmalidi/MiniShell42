@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/24 13:52:11 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/31 10:21:14 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,14 @@ int	check_file(char *file, int type, t_datalist *datalist)
 
 	fd = open(file, O_DIRECTORY, 0644);
 	if (fd != -1)
-	{
-		printf("%s: is a directory\n", file);
-		return (close(fd), -1);
-	}
+		return (error_manager(file, ISDIR), close(fd), -1);
 	if (type == 1)
 	{
 		if (datalist->infile)
 			close(datalist->infile);
 		datalist->infile = open(file, O_RDONLY, 0644);
 		if (fd < 0)
-			return (-1); //Print des trucs probablement
+			return (error_manager(file, NOFILE), -1); // No file ou perm denied ?
 	}
 	else if (type == 3)
 	{
@@ -85,6 +82,10 @@ int	set_files(t_datalist *datalist, t_element **pipelist)
 		}
 		else
 			tmp = tmp->next;
+		// if (tmp)
+		// 	printf("%s\n", tmp->str);
+		// if (tmp && tmp->next)
+		// 	printf("%s\n\n", tmp->next->str);
 	}
 	return (0);
 }
