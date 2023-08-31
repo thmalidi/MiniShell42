@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:56:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/30 16:02:02 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:45:58 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	error_manager(char *str, int error_id)
 {
 	const t_errors	tab_errors[] = {&error_nofile, &error_isdir, &error_notdir, \
 									&error_cmd, &error_perm, &error_syntax, \
-									&error_identifier, &error_args, &error_malloc};
+									&error_identifier, &error_args, &error_malloc, \
+									&error_option};
 
 	return((*tab_errors[error_id])(str));
 }
@@ -37,7 +38,7 @@ int	error_isdir(char *str)
 
 int	error_notdir(char *str)
 {
-	ft_dprintf(2, "%s: not a directory\n", str);
+	ft_dprintf(2, "%s: Not a directory\n", str);
 	g_return_value = 1;
 	return (0);
 }
@@ -81,5 +82,12 @@ int	error_malloc(char *str)
 {
 	ft_dprintf(2, "malloc failed in %s\n", str);
 	g_return_value = -1;
+	return (0);
+}
+
+int	error_option(char *str)
+{
+	ft_dprintf(2, "%s: invalid option\n", str);
+	g_return_value = 2;
 	return (0);
 }

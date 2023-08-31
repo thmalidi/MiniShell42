@@ -6,45 +6,11 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/31 10:21:14 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:46:45 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	check_file(char *file, int type, t_datalist *datalist)
-{
-	int	fd;
-
-	fd = open(file, O_DIRECTORY, 0644);
-	if (fd != -1)
-		return (error_manager(file, ISDIR), close(fd), -1);
-	if (type == 1)
-	{
-		if (datalist->infile)
-			close(datalist->infile);
-		datalist->infile = open(file, O_RDONLY, 0644);
-		if (fd < 0)
-			return (error_manager(file, NOFILE), -1); // No file ou perm denied ?
-	}
-	else if (type == 3)
-	{
-		if (datalist->outfile)
-			close(datalist->outfile);
-		datalist->outfile = open(file, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-		if (fd < 0)
-			return (-1); //Print des trucs probablement
-	}
-	else if (type == 4)
-	{
-		if (datalist->outfile)
-			close(datalist->outfile);
-		datalist->outfile = open(file, O_WRONLY | O_APPEND | O_CREAT, 0644);
-		if (fd < 0)
-			return (-1); //Print des trucs probablement
-	}
-	return (fd);
-}
 
 /*
 Set les valeurs de infile et outfile et 
@@ -62,7 +28,17 @@ int	set_files(t_datalist *datalist, t_element **pipelist)
 		if (tmp->type < 3 && tmp->type > 0)
 		{
 			if (tmp->type == 1)
-				check_file(tmp->next->str, tmp->type, datalist);
+			{
+				if (check_file(tmp->next->str, tmp->type, datalist) < 0)
+				{
+					if (!tmp->previous && tmp->next->next)
+						tmp->next->next->previous = NULL;
+					tmp = remove_files(tmp);
+					if (!tmp || !(tmp->previous))
+						*pipelist = tmp;
+					return (-1);
+				}
+			}
 			else
 				datalist->infile = exec_hd(tmp);
 			if (!tmp->previous && tmp->next->next)
@@ -73,7 +49,15 @@ int	set_files(t_datalist *datalist, t_element **pipelist)
 		}
 		else if (tmp->type < 5 && tmp->type > 2)
 		{
-			check_file(tmp->next->str, tmp->type, datalist);
+			if (check_file(tmp->next->str, tmp->type, datalist) < 0)
+			{
+				if (!tmp->previous && tmp->next->next)
+					tmp->next->next->previous = NULL;
+				tmp = remove_files(tmp);
+				if (!tmp || !(tmp->previous))
+					*pipelist = tmp;
+				return (-1);
+			}
 			if (!tmp->previous && tmp->next->next)
 				tmp->next->next->previous = NULL;
 			tmp = remove_files(tmp);
@@ -82,10 +66,6 @@ int	set_files(t_datalist *datalist, t_element **pipelist)
 		}
 		else
 			tmp = tmp->next;
-		// if (tmp)
-		// 	printf("%s\n", tmp->str);
-		// if (tmp && tmp->next)
-		// 	printf("%s\n\n", tmp->next->str);
 	}
 	return (0);
 }
@@ -124,7 +104,7 @@ int	init_data(t_datalist *datalist, t_big_list *list)
 	t_element	*tmp;
 
 	tmp = *(list->pipelist);
-	if (set_files(datalist, list->pipelist) != 0)
+	if (set_files(datalist, list->pipelist) < 0)
 		return (-1);
 	tmp = *(list->pipelist);
 	if (tmp)
@@ -149,7 +129,7 @@ int	fill_data(t_datalist **datalist, t_big_list *list)
 	if (!new)
 		return (-1);
 	new->next = NULL;
-	if (init_data(new, list) != 0)
+	if (init_data(new, list) < 0)
 		return (free(new), -1);
 	tmp = *datalist;
 	if (!tmp)
