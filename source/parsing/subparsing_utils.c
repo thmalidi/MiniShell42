@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:15:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/30 17:13:31 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/31 11:20:14 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,9 @@ void	asign_type(t_element *tmp, t_big_list *arg, int n)
 		tmp->type = 3;
 	else if (!strncmp(">>", tmp->str, ft_strlen(tmp->str)))
 		tmp->type = 4;
-	else if (tmp->str[0] == '-')
+	else
+		tmp->type = 5;
+	/*else if (tmp->str[0] == '-')
 		tmp->type = 5;
 	else if (is_builtins(tmp->str))
 	{
@@ -93,7 +95,7 @@ void	asign_type(t_element *tmp, t_big_list *arg, int n)
 		tmp->type = 7;
 	}
 	else
-		tmp->type = -1;
+		tmp->type = -1;*/
 }
 
 int	subparsing(t_element **subparsing, t_big_list *arg, int n)
