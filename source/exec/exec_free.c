@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 11:17:07 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/14 15:10:07 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/08/31 11:00:49 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,15 @@ apres avoir check une redirection.
 t_element	*remove_files(t_element *elt)
 {
 	t_element	*res;
-	t_element	*tmp1;
-	t_element	*tmp2;
 
 	if (elt->previous)
 	{
 		res = elt->previous;
 		if (elt->next->next)
+		{
 			res->next = elt->next->next;
+			res->next->previous = res;
+		}
 		else
 			res->next = NULL;
 	}
@@ -34,12 +35,10 @@ t_element	*remove_files(t_element *elt)
 		res = elt->next->next;
 	else // Truc du genre < out sans rien d'autre
 		res = NULL;
-	tmp1 = elt;
-	tmp2 = elt->next;
-	free(tmp1->str);
-	free(tmp1);
-	free(tmp2->str);
-	free(tmp2);
+	free(elt->next->str);
+	free(elt->next);
+	free(elt->str);
+	free(elt);
 	return (res);
 }
 
