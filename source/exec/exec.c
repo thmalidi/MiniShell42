@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/31 16:34:44 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/01 09:09:47 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,23 @@ int	need_to_fork(t_datalist *datalist, int builtin)
 	}
 }
 
+int	exec_notbuiltin(t_datalist *datalist, t_env **envlst)
+{
+	char	*cmdwpath;
+	char	**env;
+	
+	signal(SIGQUIT, &child_handler);
+	env = env_to_tab(*envlst); // A free, ca malloc + protection
+	cmdwpath = check_cmd(env, datalist->cmd); // A free
+	if (!cmdwpath)
+	{
+		free_tab(env);
+		exit (-1);
+	}
+	execve(cmdwpath, datalist->args, env);
+	return (0);
+}
+
 /*
 Execute une fork qui correspond donc a un pipe.
 Dans le cas ou l'exec ne fonctionne pas, exit avec un perror,
@@ -93,8 +110,8 @@ il faudra check que le perror renvoie bien les bons trucs.
 */
 int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 {	
-	char	*cmdwpath;
-	char	**env;
+	//char	*cmdwpath;
+	//char	**env;
 	int		builtin;
 
 	
@@ -114,16 +131,16 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 			}
 			else
 			{
-				signal(SIGQUIT, &child_handler);
-				env = env_to_tab(*envlst); // A free, ca malloc + protection
-				cmdwpath = check_cmd(env, datalist->cmd); // A free
-				if (!cmdwpath)
-				{
-					free_tab(env);
-					exit (-1);
-				}
-				execve(cmdwpath, datalist->args, env);
-				// perror(NULL);
+				// signal(SIGQUIT, &child_handler);
+				// env = env_to_tab(*envlst); // A free, ca malloc + protection
+				// cmdwpath = check_cmd(env, datalist->cmd); // A free
+				// if (!cmdwpath)
+				// {
+				// 	free_tab(env);
+				// 	exit (-1);
+				// }
+				// execve(cmdwpath, datalist->args, env);
+				exec_notbuiltin(datalist, envlst);
 			}
 		}
 	}

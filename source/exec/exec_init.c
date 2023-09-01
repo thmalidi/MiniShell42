@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/31 15:14:30 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/01 08:58:39 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,6 @@ t_datalist	*init_struct(t_big_list *list)
 	{
 		fill_data(&datalist, tmp); //Il faudra surement identifier les erreurs, notamment le null check.
 		tmp = tmp->next;
-		// if (fill_data(&datalist, tmp) < 0)
-		// 	tmp = tmp->next;
-		// else
-		// 	tmp = tmp->next;
 	}
 	free_big_list(list);
 	return (datalist);
