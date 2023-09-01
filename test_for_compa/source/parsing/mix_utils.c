@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:22:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/16 15:02:11 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/30 17:08:26 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ char	*put_space(char *str)
 		{
 			while (final[i] && (final[i] == '<' || final[i] == '>'))
 				i++;
-			if (final[i] != ' ' && final[i] && i != 0)
+			if (final[i] != ' ' && final[i] && i != 0 && between(final, i))
 				final = space(final, i);
 			while (final[i] && (final[i] != '<' && final[i] != '>'))
 				i++;
-			if (final[i] != ' ' && final[i])
+			if (final[i] != ' ' && final[i] && between(final, i))
 				final = space(final, i++);
 		}
 	}
@@ -118,7 +118,7 @@ int	check_in_outfile(t_big_list *arg)
 		while (etmp)
 		{
 			if (!count_symb_in(etmp->str) || !count_symb_out(etmp->str))
-				return (return_value = 130, 0);
+				return (g_return_value = 130, 0);
 			if (!potential_error(etmp, tmp))
 				return (0);
 			etmp = etmp->next;

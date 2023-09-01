@@ -6,13 +6,13 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/15 11:34:10 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/08/31 16:01:46 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int return_value = 0;
+int g_return_value = 0;
 
 void	manage_line(char *line, t_env **env)			//ajouter la fonctionde l'exec ici
 {
@@ -67,7 +67,7 @@ int	main(int ac, char **av, char **env)
 		free(line);
 		i++;
 	}
-	printf("%d", return_value);
+	printf("%d", g_return_value);
 	rl_clear_history();
 	return (0);
 }

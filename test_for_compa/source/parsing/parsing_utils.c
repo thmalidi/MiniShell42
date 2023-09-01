@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:03:32 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/28 16:32:32 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/01 10:59:41 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,9 @@ int	pars_arg_op(char **tab, int i, t_env **envlst)
 	while (tab[i])
 	{
 		tab[i] = expand(tab[i], envlst);
-		if (tab[i][1] != 34 && tab[i][1] != 39)
-			tab[i] = rp_trim(tab[i]);
+		/*if (tab[i][1] != 34 && tab[i][1] != 39)
+			tab[i] = rp_trim(tab[i]);*/
 		i++;
 	}
-	printf("tab0 = %s\n", tab[0]);
 	return (1);
 }
