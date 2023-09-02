@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/01 17:24:58 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/02 08:39:13 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -76,7 +76,7 @@ int exec_nobuiltin(t_datalist *datalist, t_env **envlst)
 	if (!cmdwpath)
 	{
 		free_tab(env);
-		exit (-1);
+		exit (g_return_value);
 	}
 	execve(cmdwpath, datalist->args, env);
 	return (0);
@@ -103,6 +103,23 @@ int	need_to_fork(t_datalist *datalist, int builtin)
 		else
 			return (1);
 	}
+}
+
+int	exec_notbuiltin(t_datalist *datalist, t_env **envlst)
+{
+	char	*cmdwpath;
+	char	**env;
+	
+	signal(SIGQUIT, &child_handler);
+	env = env_to_tab(*envlst); // A free, ca malloc + protection
+	cmdwpath = check_cmd(env, datalist->cmd); // A free
+	if (!cmdwpath)
+	{
+		free_tab(env);
+		exit (-1);
+	}
+	execve(cmdwpath, datalist->args, env);
+	return (0);
 }
 
 /*
@@ -145,7 +162,7 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 				// 	exit (-1);
 				// }
 				// execve(cmdwpath, datalist->args, env);
-				// perror(NULL);
+				exec_notbuiltin(datalist, envlst);
 			}
 		}
 	}
@@ -189,8 +206,10 @@ int	exec(t_big_list *list, t_env **envlst)
 
 	ft_bzero(fd, 4 * sizeof(int));
 	datalist = init_struct(list);
+	// print_datalist(datalist);
+	if (!datalist)
+		return (0);
 	tmp = datalist;
-	//print_datalist(datalist);
 	while (tmp)
 	{
 		if (set_pipe(tmp, fd) < 0)

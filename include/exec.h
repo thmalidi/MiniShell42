@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/31 14:21:07 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/02 08:54:48 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,11 @@ void		free_big_list(t_big_list *list);
 void		free_datalist(t_datalist *datalist);
 void		free_element(t_element **elt);
 void		print_datalist(t_datalist *datalist);
-void 		print_tab(char **tab);
 
 void		init_signals(void);
 void		child_handler(int sig);
 int			len_datalist(t_datalist *datalist);
 void		hd_handler(int sig);
 int			check_file(char *file, int type, t_datalist *datalist);
-
-// A del
-void 		print_tab_int(int *tab, int n);
 
 #endif

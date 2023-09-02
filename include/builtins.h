@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 08:14:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/31 15:26:46 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/02 08:55:20 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,10 @@ enum	e_builtin
 };
 
 // Utils
-void	print_tab(char **tab);
-int		len_tab(char **tab);
 char	**parsing_export(char *arg);
 char	**ft_split_export(char *arg);
 int		check_var(char *var, char *func);
+int		is_an_option(char **tab);
 
 // Fct builtins
 int 	cd_b(t_datalist *data, t_env **env);

@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:11 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/01 17:25:24 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/02 08:47:05 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -38,8 +38,8 @@ int	echo_b(t_datalist *data, t_env **env)
 
 	(void)env;
 	breakline = noneed_breakline(data->args);
-	if (!(data->args) || !(data->args[0]))
-		return(0);
+	if (!(data->args) || !(data->args[1]))
+		return (printf("\n"), 0);
 	printf("%s", data->args[breakline + 1]);
 	i = breakline + 1;
 	while (data->args[++i])

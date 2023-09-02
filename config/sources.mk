@@ -6,7 +6,7 @@
 #    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 14:42:36 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/08/31 14:11:11 by hgeffroy         ###   ########.fr        #
+#    Updated: 2023/09/02 08:59:51 by hgeffroy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SOURCES =	source/main.c \
 			source/exec/exec_utils.c \
 			source/exec/exec.c \
 			source/exec/signals.c \
+			source/builtins/builtins_utils.c \
 			source/builtins/cd.c \
 			source/builtins/echo.c \
 			source/builtins/env.c \
