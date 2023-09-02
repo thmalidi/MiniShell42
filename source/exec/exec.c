@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/02 08:39:13 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/02 11:11:31 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int exec_nobuiltin(t_datalist *datalist, t_env **envlst)
 		exit (g_return_value);
 	}
 	execve(cmdwpath, datalist->args, env);
-	return (0);
+	exit (g_return_value);
 }
 
 /*
@@ -105,23 +105,6 @@ int	need_to_fork(t_datalist *datalist, int builtin)
 	}
 }
 
-int	exec_notbuiltin(t_datalist *datalist, t_env **envlst)
-{
-	char	*cmdwpath;
-	char	**env;
-	
-	signal(SIGQUIT, &child_handler);
-	env = env_to_tab(*envlst); // A free, ca malloc + protection
-	cmdwpath = check_cmd(env, datalist->cmd); // A free
-	if (!cmdwpath)
-	{
-		free_tab(env);
-		exit (-1);
-	}
-	execve(cmdwpath, datalist->args, env);
-	return (0);
-}
-
 /*
 Execute une fork qui correspond donc a un pipe.
 Dans le cas ou l'exec ne fonctionne pas, exit avec un perror,
@@ -133,7 +116,8 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 	// char	**env;
 	int		builtin;
 
-	
+	if (!(datalist->cmd))
+		return (0);
 	builtin = is_builtin(datalist->cmd);
 	if (need_to_fork(datalist, builtin) == 0)
 		exec_builtin(datalist, envlst, builtin);
@@ -151,19 +135,7 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 				exit (g_return_value);
 			}
 			else
-			{
 				exec_nobuiltin(datalist, envlst);
-				// signal(SIGQUIT, &child_handler);
-				// env = env_to_tab(*envlst); // A free, ca malloc + protection
-				// cmdwpath = check_cmd(env, datalist->cmd); // A free
-				// if (!cmdwpath)
-				// {
-				// 	free_tab(env);
-				// 	exit (-1);
-				// }
-				// execve(cmdwpath, datalist->args, env);
-				exec_notbuiltin(datalist, envlst);
-			}
 		}
 	}
 	return (0);

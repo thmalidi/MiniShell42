@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:26:33 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/31 11:06:56 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/02 10:37:03 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,16 @@ char	*check_cmd_nopath(char **paths, char *cmd, int i)
 	if (!cmd_to_check)
 	{
 		error_manager("check_cmd_nopath", MALLOC);
-		return (free_tab(paths), NULL);
+		return (NULL);
 	}
 	cmd_splitted = ft_split(cmd_to_check, ' ');
 	if (!cmd_splitted)
 	{
 		error_manager("check_cmd_nopath", MALLOC);
-		return (free(cmd_to_check), free_tab(paths), NULL);
+		return (free(cmd_to_check), NULL);
 	}
 	else if (access(cmd_splitted[0], X_OK) == 0)
-		return (free_tab(paths), free_tab(cmd_splitted), cmd_to_check);
+		return (free_tab(cmd_splitted), cmd_to_check);
 	free(cmd_to_check);
 	free_tab(cmd_splitted);
 	return (NULL);
@@ -76,12 +76,12 @@ char	*check_cmd_path(char *cmd)
 	cmd_splitted = ft_split(cmd, ' ');
 	if (!cmd_splitted)
 		return (NULL);
-	if (is_cmdwpath(cmd_splitted[0]) < 0)
+	if (is_cmdwpath(cmd_splitted[0]) == NO)
 		return (free_tab(cmd_splitted), NULL);
-	if (access(cmd_splitted[0], X_OK) == 0)
-		return (free_tab(cmd_splitted), ft_strdup(cmd));
-	free_tab(cmd_splitted);
-	return (NULL);
+	// if (access(cmd_splitted[0], X_OK) == 0)
+	return (free_tab(cmd_splitted), ft_strdup(cmd));
+	// free_tab(cmd_splitted);
+	// return (NULL);
 }
 
 char	*check_cmd(char **env, char *cmd)
@@ -93,20 +93,31 @@ char	*check_cmd(char **env, char *cmd)
 	if (is_directory(cmd) == 0)
 		error_manager(cmd, ISDIR);
 	cmd_to_check = check_cmd_path(cmd);
-	if (cmd_to_check)
-		return (cmd_to_check);
-	paths = get_path(env);
-	if (!paths)
-		error_manager(cmd, NOFILE);
-	i = -1;
-	while (paths[++i])
+	// if (cmd_to_check)
+	// 	return (cmd_to_check);
+	if (!cmd_to_check)
 	{
-		cmd_to_check = check_cmd_nopath(paths, cmd, i);
-		if (cmd_to_check)
-			return (cmd_to_check);
+		paths = get_path(env);
+		if (!paths)
+			error_manager(cmd, NOFILE);
+		i = -1;
+		while (paths[++i])
+		{
+			cmd_to_check = check_cmd_nopath(paths, cmd, i);
+			if (cmd_to_check)
+				//return (cmd_to_check);
+				break;
+		}
+		free_tab(paths);
 	}
-	error_manager(cmd, CMD);
-	return (free_tab(paths), free(cmd_to_check), NULL);
+	// printf("%s\n", cmd_to_check);
+	if (access(cmd_to_check, F_OK) != 0)
+		return (error_manager(cmd, NOFILE), NULL);
+	else if (access(cmd_to_check, F_OK) == 0 && access(cmd_to_check, X_OK) != 0)
+		return (error_manager(cmd, PERM), NULL);
+	else if (!cmd_to_check)
+		return (error_manager(cmd, CMD), NULL);
+	return (cmd_to_check);
 }
 
 

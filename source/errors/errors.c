@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:56:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/01 14:27:28 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/02 10:38:23 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -25,7 +25,7 @@ int	error_manager(char *str, int error_id)
 int	error_nofile(char *str)
 {
 	ft_dprintf(2, "%s: No such file or directory\n", str);
-	g_return_value = 1;
+	g_return_value = 127;
 	return (0);
 }
 
@@ -53,7 +53,7 @@ int	error_cmd(char *str)
 int	error_perm(char *str)
 {
 	ft_dprintf(2, "%s: Permission denied\n", str);
-	g_return_value = 1;
+	g_return_value = 126;
 	return (0);
 }
 
