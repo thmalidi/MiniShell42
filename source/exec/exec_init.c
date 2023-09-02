@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/01 08:58:39 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/02 07:42:59 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,12 @@ int	set_files(t_datalist *datalist, t_element **pipelist)
 		if (tmp->type < 5 && tmp->type > 0)
 		{
 			if (check_file(tmp->next->str, tmp->type, datalist) < 0)
+			{
+				tmp = remove_files(tmp);
+				if (!tmp || !(tmp->previous))
+					*pipelist = tmp;
 				return (-1);
+			}
 			tmp = remove_files(tmp);
 			if (!tmp || !(tmp->previous))
 				*pipelist = tmp;
@@ -75,8 +80,9 @@ int	init_data(t_datalist *datalist, t_big_list *list)
 	t_element	*tmp;
 
 	tmp = *(list->pipelist);
-	if (set_files(datalist, list->pipelist) < 0)
-		return (-1);
+	set_files(datalist, list->pipelist);
+	// if (set_files(datalist, list->pipelist) < 0)
+	// 	return (-1);
 	tmp = *(list->pipelist);
 	if (tmp)
 		datalist->cmd = ft_strdup(tmp->str);
@@ -100,8 +106,9 @@ int	fill_data(t_datalist **datalist, t_big_list *list)
 	if (!new)
 		return (-1);
 	new->next = NULL;
-	if (init_data(new, list) < 0)
-		return (free(new), -1);
+	init_data(new, list);
+	// if (init_data(new, list) < 0)
+	// 	return (free(new), -1);
 	tmp = *datalist;
 	if (!tmp)
 	{

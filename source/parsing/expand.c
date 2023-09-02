@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/31 16:52:14 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/01 09:07:11 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,10 @@ char	*join_tab(char **tab, int s)
 		{
 			tmp = ft_strjoin(final, tab[i]);
 			free(final);
-			final = ft_strdup(tmp);
+			if (tab[i + 1] && s)
+				final = ft_strjoin(tmp, " ");
+			else
+				final = ft_strdup(tmp);
 			free(tmp);
 			i++;
 		}

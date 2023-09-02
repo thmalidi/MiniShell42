@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec_files.c                                       :+:      :+:    :+:   */
@@ -6,18 +6,24 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:10:35 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/31 14:42:19 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:51:56 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minishell.h"
 
 int	check_infile(char *file, t_datalist *datalist)
 {
 	if (datalist->infile)
+	{
 		close(datalist->infile);
+		datalist->infile = 0;
+	}
 	if (access(file, F_OK) < 0)
+	{
+		datalist->infile = -1;
 		return (error_manager(file, NOFILE), -1);
+	}
 	else if (access(file, R_OK) < 0)
 		return (error_manager(file, PERM), -1);
 	datalist->infile = open(file, O_RDONLY, 0644);
@@ -26,20 +32,32 @@ int	check_infile(char *file, t_datalist *datalist)
 
 int	check_outfile(char *file, t_datalist *datalist)
 {
-	if (datalist->infile)
-		close(datalist->infile);
+	if (datalist->outfile)
+	{
+		close(datalist->outfile);
+		datalist->outfile = 0;
+	}
 	if (access(file, F_OK) == 0 && access(file, W_OK) < 0)
+	{
+		datalist->outfile = -1;
 		return (error_manager(file, PERM), -1);
+	}
 	datalist->outfile = open(file, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	return (0);
 }
 
 int	check_appfile(char *file, t_datalist *datalist)
 {
-	if (datalist->infile)
-		close(datalist->infile);
+	if (datalist->outfile)
+	{
+		close(datalist->outfile);
+		datalist->outfile = 0;
+	}
 	if (access(file, F_OK) == 0 && access(file, W_OK) < 0)
+	{
+		datalist->outfile = -1;
 		return (error_manager(file, PERM), -1);
+	}
 	datalist->outfile = open(file, O_WRONLY | O_APPEND | O_CREAT, 0644);
 	return (0);
 }
