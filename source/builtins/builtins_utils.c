@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 08:51:38 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/02 08:52:23 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/02 11:00:23 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,10 @@ int	check_var(char *var, char *func)
 
 int	is_option(char *str)
 {
-	int	i;
-	
 	if (str[0] == '-')
 	{
-		i = 0;
-		while (str[++i])
-		{
-			if (str[i] != '-')
-				return (YES);
-		}
+		if (str[1])
+			return (YES);
 	}
 	return (NO);
 }

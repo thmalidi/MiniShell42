@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 09:01:48 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/23 15:37:41 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/02 10:03:22 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ int	is_cmdwpath(char *cmd)
 
 	i = 0;
 	if (!cmd)
-		return (-1);
+		return (NO);
 	while (cmd[i])
 	{
 		if (cmd[i] == '/')
-			return (0);
+			return (YES);
 		i++;
 	}
-	return (-1);
+	return (NO);
 }
 
 char	**is_path(char **env)

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:31 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/02 09:05:30 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/02 09:08:02 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /*
 Parsing similaire a export ?
 */
-
 
 int	unset_b(t_datalist *data, t_env **env)
 {

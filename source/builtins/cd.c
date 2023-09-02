@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:03:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/31 13:19:42 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/02 10:57:24 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,11 @@ int	is_valid_dir(char *path)
 		if (errno == EACCES)
 			return (error_manager(path, PERM), NO);
 		else
-			return (error_manager(path, NOFILE), NO);
+		{
+			g_return_value = 1;
+			ft_dprintf(2, "%s: No such file or directory\n", path);
+			return (NO);
+		}
 	}
 	if (S_ISREG(sb.st_mode))
 		return (error_manager(path, NOTDIR), NO);
@@ -79,7 +83,7 @@ int	cd_b(t_datalist *data, t_env **env)
 
 	if (len_tab(data->args) > 2)
 		return(error_manager("cd", NBARGS), -1);
-	if (!(data->args[1]) || ft_strcmp(data->args[1], "~") == 0)
+	if (!(data->args[1]) || ft_strcmp(data->args[1], "~") == 0 || ft_strcmp(data->args[1], "~/") == 0)
 	{
 		go_root(env);
 		return (0);
@@ -89,6 +93,8 @@ int	cd_b(t_datalist *data, t_env **env)
 		go_back(env);
 		return (0);
 	}
+	if (is_an_option(data->args) == YES)
+		return (error_manager("cd", OPTION), g_return_value);
 	dir = getcwd(NULL, 0);
 	if (!dir)
 		return (-1);
