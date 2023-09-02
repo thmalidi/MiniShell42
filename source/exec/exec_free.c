@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 11:17:07 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/31 11:00:49 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/02 08:19:57 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ t_element	*remove_files(t_element *elt)
 			res->next = NULL;
 	}
 	else if (elt->next->next)
+	{
 		res = elt->next->next;
+		res->previous = NULL;
+	}
 	else // Truc du genre < out sans rien d'autre
 		res = NULL;
 	free(elt->next->str);

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/02 07:43:30 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/02 08:39:13 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int exec_nobuiltin(t_datalist *datalist, t_env **envlst)
 	if (!cmdwpath)
 	{
 		free_tab(env);
-		exit (-1);
+		exit (g_return_value);
 	}
 	execve(cmdwpath, datalist->args, env);
 	return (0);
@@ -206,8 +206,10 @@ int	exec(t_big_list *list, t_env **envlst)
 
 	ft_bzero(fd, 4 * sizeof(int));
 	datalist = init_struct(list);
+	// print_datalist(datalist);
+	if (!datalist)
+		return (0);
 	tmp = datalist;
-	//print_datalist(datalist);
 	while (tmp)
 	{
 		if (set_pipe(tmp, fd) < 0)
