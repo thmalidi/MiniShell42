@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:12:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/01 11:10:04 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/04 14:35:28 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	clean_str(char *str, int v)
 			str[i] = ' ';
 		else if (v == 0 && str[i] == 1)
 			str[i] = '\'';
+		else if (v == 0 && str[i] == 2)
+			str[i] = '\"';
 		i++;
 	}
 }
@@ -81,17 +83,9 @@ char *end_clean(char *str)
 	char	*dup;
 	char	*tmp;
 	char	**tab;
-	int		i;
-
-	tmp = ft_strdup(str);
+	
+	tmp = ft_strdup(prepare_string(str));
 	free(str);
-	i = 0;
-	while (tmp[i])
-	{
-		if (tmp[i] == '\'' && !between(tmp, i))
-			tmp[i] = 1;
-		i++;
-	}
 	tab = ft_split(tmp, 34);
 	free(tmp);
 	dup = join_tab(tab, 0);
