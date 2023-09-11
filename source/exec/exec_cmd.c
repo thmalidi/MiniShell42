@@ -1,12 +1,12 @@
 /******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cmd_bis.c                                     :+:      :+:    :+:   */
+/*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:05:34 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/11 14:10:46 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:05:11 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -99,6 +99,8 @@ char	*check_cmd(char **env, char *cmd)
 		return (check_cmd_nopath(get_path(env), cmd));
 	else
 	{
+		if (open(cmd, O_DIRECTORY) > -1)
+			return (error_manager(cmd, ISDIR), NULL);
 		if (access(cmd, F_OK) != 0)
 			return (error_manager(cmd, NOFILE), NULL);
 		else if (access(cmd, F_OK) == 0 && access(cmd, X_OK) != 0)
@@ -106,4 +108,3 @@ char	*check_cmd(char **env, char *cmd)
 		return (cmd);
 	}
 }
-
