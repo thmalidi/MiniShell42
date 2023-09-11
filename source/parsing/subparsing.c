@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subparsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 12:59:50 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/31 08:47:01 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/04 15:11:12 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,30 @@ void	space_process(char **tab)
 	}
 }
 
+void fill_pipelist(t_big_list *tmp)
+{
+	int	n;
+	
+	n = 1;
+	while (tmp && tmp->content)
+	{
+		subparsing(tmp->pipelist, tmp, n++);
+		tmp = tmp->next;
+	}
+}
+
 void	splited_arg(t_big_list *arg)
 {
 	char		**tab;
 	t_big_list	*tmp;
 	int			i;
-	int			n;
 
 	tmp = arg;
-	while (tmp)
+	while (tmp && tmp->content)
 	{
 		tmp->pipelist = malloc(sizeof(t_element *)); //proteger...
+		if (!tmp->pipelist)
+			return ;
 		*tmp->pipelist = NULL;
 		tmp->content = put_space(tmp->content);
 		tab = ft_split(tmp->content, ' ');
@@ -58,10 +71,5 @@ void	splited_arg(t_big_list *arg)
 		tmp = tmp->next;
 	}
 	tmp = arg;
-	n = 1;
-	while (tmp)
-	{
-		subparsing(tmp->pipelist, tmp, n++);
-		tmp = tmp->next;
-	}
+	fill_pipelist(tmp);
 }

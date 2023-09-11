@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/01 09:07:11 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/04 15:13:04 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ char	*make_str(char **tab)
 
 	i = 0;
 	final = malloc(sizeof(char));
+	if (!final)
+		return (NULL);
 	final[0] = '\0';
 	while (tab[i])
 	{
@@ -105,6 +107,8 @@ char	*expand(char *str, t_env **env)
 	tab = ft_split(tmp, ' ');
 	free(tmp);
 	i = 0;
+	if (!tab[i])
+		return (free(tab), NULL);
 	while (tab[i])
 	{
 		tab[i] = expand_process(tab[i], *env);

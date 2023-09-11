@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:22:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/30 17:08:26 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/04 14:51:32 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ int	check_in_outfile(t_big_list *arg)
 	t_element	*etmp;
 
 	tmp = arg;
+	if (!tmp->content)
+		return (0);
 	while (tmp)
 	{
 		if (tmp == NULL)
