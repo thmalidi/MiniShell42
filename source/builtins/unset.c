@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:31 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/11 14:23:21 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:40:42 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -26,7 +26,7 @@ int	unset_b(t_datalist *data, t_env **env)
 	while ((data->args)[++i])
 	{
 		if (check_var(data->args[i], "unset") < 0)
-			break;
+			break ;
 		else
 			rm_from_env(env, data->args[1]);
 	}

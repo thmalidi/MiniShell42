@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:16 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/31 15:42:57 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:03:36 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minishell.h"
 
@@ -37,7 +37,8 @@ int	should_exit(char *arg)
 		if (ft_isalpha(arg[i]))
 		{
 			g_return_value = 2;
-			return (ft_dprintf(2, "exit: %s: numeric argument required\n", arg), 2);
+			ft_dprintf(2, "exit: %s: numeric argument required\n", arg);
+			return (2);
 		}
 	}
 	return (ft_atoi(arg));
@@ -46,12 +47,13 @@ int	should_exit(char *arg)
 int	exit_b(t_datalist *data, t_env **env)
 {
 	int	shouldexit;
-	
+
 	(void)env;
 	if (data->args[1] && ft_isstrdigit(data->args[1]) < 0)
 	{
 		g_return_value = 2;
-		return (ft_dprintf(2, "exit: %s: numeric argument required\n", data->args[1]), 2);
+		ft_dprintf(2, "exit: %s: numeric argument required\n", data->args[1]);
+		return (2);
 	}
 	if (len_tab(data->args) > 2)
 		return (error_manager("exit", NBARGS), g_return_value);

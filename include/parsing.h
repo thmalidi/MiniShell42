@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:33:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/11 10:25:38 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/11 15:39:08 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef PARSING_H
 # define PARSING_H
@@ -81,6 +81,6 @@ char		*rp_trim(char *str);
 char		*rp_env(char *str, char *var, char *value);
 int			pars_arg_op(char **tab, int i, t_env **envlst);
 void		trim_tab(char **tab);
-int			potential_error(t_element    *etmp, t_big_list	*tmp);
+int			potential_error(t_element *etmp, t_big_list	*tmp);
 
 #endif

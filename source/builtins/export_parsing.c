@@ -1,27 +1,27 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   export_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 09:02:34 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/02 08:52:02 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:00:35 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minishell.h"
 
-int		fill_tab(char **tab, char *arg, int index_split, int n)
+int	fill_tab(char **tab, char *arg, int index_split, int n)
 {
 	int	i;
-	
-	tab[0] = (char *)malloc(sizeof(char) * (index_split + 2)); // Proteger !!
+
+	tab[0] = (char *)malloc(sizeof(char) * (index_split + 2));
 	if (!tab[0])
 		return (-1);
 	if (n > 1)
 	{
-		tab[1] = (char *)malloc(sizeof(char) * (ft_strlen(arg) - index_split)); // Proteger !!
+		tab[1] = (char *)malloc(sizeof(char) * (ft_strlen(arg) - index_split));
 		if (!tab[1])
 			return (-1);
 	}
@@ -46,7 +46,8 @@ char	**ft_split_export(char *arg)
 	i = -1;
 	while (arg[++i] && arg[i] != '=')
 		;
-	if (i < (int)ft_strlen(arg) || (arg[i] == '=' && arg[i] == (int)ft_strlen(arg)))
+	if (i < (int)ft_strlen(arg) \
+		|| (arg[i] == '=' && arg[i] == (int)ft_strlen(arg)))
 		n = 2;
 	else
 		n = 1;

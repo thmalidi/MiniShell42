@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:03:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/11 14:24:00 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:53:26 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -67,7 +67,7 @@ int	go_back(t_env **env)
 	dir = getcwd(NULL, 0);
 	if (!dir)
 		return (-1);
-	chdir(get_value_env(*env, "OLDPWD")); // A changer en fonction de la session de correction
+	chdir(get_value_env(*env, "OLDPWD"));
 	set_value_env(env, "OLDPWD", dir);
 	free(dir);
 	dir = getcwd(NULL, 0);
@@ -77,22 +77,30 @@ int	go_back(t_env **env)
 	return (0);
 }
 
+int	spec_manager(t_datalist *data, t_env **env)
+{
+	if (!(data->args[1]) || ft_strcmp(data->args[1], "~") == 0 \
+		|| ft_strcmp(data->args[1], "~/") == 0)
+	{
+		go_root(env);
+		return (1);
+	}
+	else if (ft_strcmp(data->args[1], "-") == 0)
+	{
+		go_back(env);
+		return (1);
+	}
+	return (0);
+}
+
 int	cd_b(t_datalist *data, t_env **env)
 {
 	char	*dir;
 
 	if (len_tab(data->args) > 2)
-		return(error_manager("cd", NBARGS), -1);
-	if (!(data->args[1]) || ft_strcmp(data->args[1], "~") == 0 || ft_strcmp(data->args[1], "~/") == 0)
-	{
-		go_root(env);
+		return (error_manager("cd", NBARGS), -1);
+	if (spec_manager(data, env) == 1)
 		return (0);
-	}
-	if (ft_strcmp(data->args[1], "-") == 0)
-	{
-		go_back(env);
-		return (0);
-	}
 	if (is_an_option(data->args, 0) == YES)
 		return (error_manager("cd", OPTION), g_return_value);
 	dir = getcwd(NULL, 0);
@@ -110,5 +118,3 @@ int	cd_b(t_datalist *data, t_env **env)
 	free(dir);
 	return (0);
 }
-
-// Il faut tester les acces aux dossiers ?

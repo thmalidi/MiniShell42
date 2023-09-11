@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:05:34 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/11 15:05:11 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:18:29 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -20,15 +20,15 @@ Sinon, check si le file existe, puis les perms.
 
 int	is_acmd(char *str)
 {
-    int	i;
-    
-    i = -1;
-    while (str[++i])
-    {
-        if (str[i] == '/')
-            return (NO);
-    }
-    return (YES);
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == '/')
+			return (NO);
+	}
+	return (YES);
 }
 
 char	**get_path(char **env)
@@ -77,7 +77,7 @@ char	*check_cmd_nopath(char **paths, char *cmd)
 			return (free(cmd_to_check), NULL);
 		}
 		if (access(cmd_to_check, F_OK) == 0)
-			break;
+			break ;
 		free(cmd_to_check);
 		cmd_to_check = NULL;
 	}

@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   env_op.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 09:55:47 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/30 14:29:14 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:05:54 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minishell.h"
 
@@ -51,15 +51,13 @@ int	rm_from_env(t_env **env, char *var_to_rm)
 		return (-1);
 	if (ft_strcmp((*env)->var, var_to_rm) == 0)
 	{
-		*env = (*env)->next; // A check, sinon return l'env.
+		*env = (*env)->next;
 		return (0);
 	}
 	tmp2 = env_lfvar(*env, var_to_rm);
 	if (!tmp2)
 		return (0);
 	tmp1 = tmp2->next;
-	// printf("tmp2 var = %s\n", tmp2->var);
-	// printf("tmp1 var = %s\n", tmp1->var);
 	tmp2->next = tmp1->next;
 	env_free_elt(tmp1);
 	return (0);

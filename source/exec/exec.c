@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/02 11:11:31 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:16:04 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minishell.h"
 
@@ -20,7 +20,7 @@ Si on est sur le dernier pipe, on ne doit pas ouvrir de nouveau pipe,
 la sortie se fera sur la sortie standard si aucun outfile n'est precise.
 */
 int	set_pipe(t_datalist *list, int *fd)
-{	
+{
 	fd[0] = fd[2];
 	fd[1] = fd[3];
 	fd[2] = 0;
@@ -30,7 +30,6 @@ int	set_pipe(t_datalist *list, int *fd)
 		if (pipe(&fd[2]) < 0)
 			return (-1);
 	}
-	//dprintf(2, "set pipe:\n%d\n%d\n%d\n%d\n", fd[0], fd[1], fd[2], fd[3]);
 	return (0);
 }
 
@@ -61,24 +60,26 @@ void	exec_builtin(t_datalist *datalist, t_env **envlst, int builtin)
 	const t_builtins	tab_builtins[] = {&cd_b, &echo_b, &env_b, \
 										&exit_b, &export_b, &pwd_b, &unset_b};
 
-
 	(*tab_builtins[builtin])(datalist, envlst);
 }
 
-int exec_nobuiltin(t_datalist *datalist, t_env **envlst)
+int	exec_nobuiltin(t_datalist *datalist, t_env **envlst)
 {
 	char	*cmdwpath;
 	char	**env;
 
 	signal(SIGQUIT, &child_handler);
-	env = env_to_tab(*envlst); // A free, ca malloc + protection
-	cmdwpath = check_cmd(env, datalist->cmd); // A free
+	env = env_to_tab(*envlst);
+	if (!env)
+		exit (g_return_value);
+	cmdwpath = check_cmd(env, datalist->cmd);
 	if (!cmdwpath)
 	{
 		free_tab(env);
 		exit (g_return_value);
 	}
 	execve(cmdwpath, datalist->args, env);
+	free_tab(env);
 	exit (g_return_value);
 }
 
@@ -91,7 +92,8 @@ int	need_to_fork(t_datalist *datalist, int builtin)
 		return (1);
 	if (len_datalist(datalist) == 1)
 	{
-		if ((builtin == EXPORT && !(datalist->args)[1]) || builtin == ECHO || builtin == PWD || builtin == ENV)
+		if ((builtin == EXPORT && !(datalist->args)[1]) || builtin == ECHO \
+			|| builtin == PWD || builtin == ENV)
 			return (1);
 		else
 			return (0);
@@ -112,8 +114,6 @@ il faudra check que le perror renvoie bien les bons trucs.
 */
 int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 {	
-	// char	*cmdwpath;
-	// char	**env;
 	int		builtin;
 
 	if (!(datalist->cmd))

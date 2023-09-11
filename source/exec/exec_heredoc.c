@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/02 12:21:30 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:24:19 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minishell.h"
 
@@ -36,9 +36,9 @@ int	exec_ohd(char *limiter, int *fd)
 		if (!line)
 		{
 			free(line);
-			return (g_return_value); //il doit falloir exit
+			return (g_return_value);
 		}
-		//line = readline("> ");
+		line = readline("> ");
 		if (ft_strcmp(line, limiter) == 0)
 		{
 			free(line);
@@ -65,7 +65,7 @@ int	exec_hd(t_element *pipelist)
 	close(fd[1]);
 	waitpid(pid, &status, WUNTRACED);
 	if (WIFSIGNALED(status))
-		hd_handler(WTERMSIG(status)); //cf le wait de l'exec.
+		hd_handler(WTERMSIG(status));
 	return (fd[0]);
 }
 
