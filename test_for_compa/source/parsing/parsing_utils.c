@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:03:32 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/04 14:33:08 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/11 11:25:08 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ char *prepare_string(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'' && !between(str, i))
+		if (str[i] == '\'' && !between(str, i) && str[i - 1] != str[i])
 			str[i] = 1;
 		i++;
 	}
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\"' && !between(str, i))
+		if (str[i] == '\"' && !between(str, i) && str[i - 1] != str[i])
 			str[i] = 2;
 		i++;
 	}

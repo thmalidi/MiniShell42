@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:12:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/04 14:35:28 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/11 11:27:14 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ int	between(char *str, int range)
 			s++;
 		i++;
 	}
-	if (s % 2 == 0 && d % 2 == 0)
+	if (s % 2 == 0 && str[range] != 39)
+		return (1);
+	if (d % 2 == 0 && str[range] != 34)
 		return (1);
 	return (0);
 	
