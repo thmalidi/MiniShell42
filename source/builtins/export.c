@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:24 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/11 14:23:37 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:04:29 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -32,7 +32,7 @@ t_env	*find_next_min(t_env *env, char *prev_min)
 	t_env	*min;
 	t_env	*tmp;
 
-	tmp = env; // Check que l'env est pas vide
+	tmp = env;
 	min = NULL;
 	while (tmp)
 	{
@@ -95,7 +95,6 @@ int	export_b(t_datalist *data, t_env **env)
 				add_to_env(env, args_splitted[0], args_splitted[1]);
 			else
 				set_value_env(env, args_splitted[0], args_splitted[1]);
-			//free_tab(args_splitted);
 		}
 	}
 	return (0);

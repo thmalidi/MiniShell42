@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 08:51:38 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/11 10:01:46 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:01:51 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -60,6 +60,7 @@ int	is_pwdoption(char *str)
 /*
 Func vaut 1 pour PWD, 0 sinon.
 */
+
 int	is_an_option(char **tab, int func)
 {
 	int	i;
@@ -83,4 +84,3 @@ int	is_an_option(char **tab, int func)
 	}
 	return (NO);
 }
-

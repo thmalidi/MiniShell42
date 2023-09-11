@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/02 08:34:58 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:25:43 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minishell.h"
 
@@ -21,7 +21,7 @@ il faut ptet changer des trucs ici, reinit le pointeur.
 int	set_files(t_datalist *datalist, t_element **pipelist)
 {
 	t_element	*tmp;
-	
+
 	tmp = *pipelist;
 	while (tmp)
 	{

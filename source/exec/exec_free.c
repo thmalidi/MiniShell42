@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 11:17:07 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/02 08:19:57 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:19:22 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minishell.h"
 
@@ -36,7 +36,7 @@ t_element	*remove_files(t_element *elt)
 		res = elt->next->next;
 		res->previous = NULL;
 	}
-	else // Truc du genre < out sans rien d'autre
+	else
 		res = NULL;
 	free(elt->next->str);
 	free(elt->next);
@@ -91,7 +91,7 @@ void	free_big_list(t_big_list *list)
 void	free_datalist(t_datalist *datalist)
 {
 	t_datalist	*tmp;
-	
+
 	if (!datalist)
 		return ;
 	tmp = datalist->next;
