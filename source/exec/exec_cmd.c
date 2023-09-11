@@ -1,18 +1,35 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cmd.c                                         :+:      :+:    :+:   */
+/*   exec_cmd_bis.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/16 18:26:33 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/02 10:37:03 by hgeffroy         ###   ########.fr       */
+/*   Created: 2023/09/11 11:05:34 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/09/11 14:10:46 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minishell.h"
 
-/*A refaire avec access et stat ?*/
+/*
+On check d'abord si c'est une commande (pas de /) ou un file (avec /).
+Si c'est une commande, recuperer le path et faire les trucs.
+Sinon, check si le file existe, puis les perms.
+*/
+
+int	is_acmd(char *str)
+{
+    int	i;
+    
+    i = -1;
+    while (str[++i])
+    {
+        if (str[i] == '/')
+            return (NO);
+    }
+    return (YES);
+}
 
 char	**get_path(char **env)
 {
@@ -43,100 +60,50 @@ char	**get_path(char **env)
 	return (free_tab(paths), new_paths);
 }
 
-char	*check_cmd_nopath(char **paths, char *cmd, int i)
+char	*check_cmd_nopath(char **paths, char *cmd)
 {
 	char	*cmd_to_check;
-	char	**cmd_splitted;
+	int		i;
 
 	if (is_whitespace(cmd) == 0)
 		return (NULL);
-	cmd_to_check = ft_strjoin(paths[i], cmd);
-	if (!cmd_to_check)
+	i = -1;
+	while (paths[++i])
 	{
-		error_manager("check_cmd_nopath", MALLOC);
-		return (NULL);
+		cmd_to_check = ft_strjoin(paths[i], cmd);
+		if (!cmd_to_check)
+		{
+			error_manager("check_cmd_nopath", MALLOC);
+			return (free(cmd_to_check), NULL);
+		}
+		if (access(cmd_to_check, F_OK) == 0)
+			break;
+		free(cmd_to_check);
+		cmd_to_check = NULL;
 	}
-	cmd_splitted = ft_split(cmd_to_check, ' ');
-	if (!cmd_splitted)
+	if (!cmd_to_check)
+		error_manager(cmd, CMD);
+	else if (access(cmd_to_check, X_OK) == 1)
 	{
-		error_manager("check_cmd_nopath", MALLOC);
+		error_manager(cmd, PERM);
 		return (free(cmd_to_check), NULL);
 	}
-	else if (access(cmd_splitted[0], X_OK) == 0)
-		return (free_tab(cmd_splitted), cmd_to_check);
-	free(cmd_to_check);
-	free_tab(cmd_splitted);
-	return (NULL);
-}
-
-char	*check_cmd_path(char *cmd)
-{
-	char	**cmd_splitted;
-
-	cmd_splitted = ft_split(cmd, ' ');
-	if (!cmd_splitted)
-		return (NULL);
-	if (is_cmdwpath(cmd_splitted[0]) == NO)
-		return (free_tab(cmd_splitted), NULL);
-	// if (access(cmd_splitted[0], X_OK) == 0)
-	return (free_tab(cmd_splitted), ft_strdup(cmd));
-	// free_tab(cmd_splitted);
-	// return (NULL);
+	return (cmd_to_check);
 }
 
 char	*check_cmd(char **env, char *cmd)
 {
-	char	**paths;
-	char	*cmd_to_check;
-	int		i;
-
-	if (is_directory(cmd) == 0)
-		error_manager(cmd, ISDIR);
-	cmd_to_check = check_cmd_path(cmd);
-	// if (cmd_to_check)
-	// 	return (cmd_to_check);
-	if (!cmd_to_check)
+	if (!cmd)
+		return (NULL);
+	if (is_acmd(cmd) == YES)
+		return (check_cmd_nopath(get_path(env), cmd));
+	else
 	{
-		paths = get_path(env);
-		if (!paths)
-			error_manager(cmd, NOFILE);
-		i = -1;
-		while (paths[++i])
-		{
-			cmd_to_check = check_cmd_nopath(paths, cmd, i);
-			if (cmd_to_check)
-				//return (cmd_to_check);
-				break;
-		}
-		free_tab(paths);
+		if (access(cmd, F_OK) != 0)
+			return (error_manager(cmd, NOFILE), NULL);
+		else if (access(cmd, F_OK) == 0 && access(cmd, X_OK) != 0)
+			return (error_manager(cmd, PERM), NULL);
+		return (cmd);
 	}
-	// printf("%s\n", cmd_to_check);
-	if (access(cmd_to_check, F_OK) != 0)
-		return (error_manager(cmd, NOFILE), NULL);
-	else if (access(cmd_to_check, F_OK) == 0 && access(cmd_to_check, X_OK) != 0)
-		return (error_manager(cmd, PERM), NULL);
-	else if (!cmd_to_check)
-		return (error_manager(cmd, CMD), NULL);
-	return (cmd_to_check);
 }
 
-
-// #include <stddef.h>
-// #include <stdlib.h>
-// int main(int ac, char **av, char **env)
-// {
-// 	char **test;
-
-// 	test = (char **)malloc(sizeof(char *) * 5);
-
-// 	test[0] = strdup("/bin/ls");
-// 	test[1] = strdup("exec.h");
-// 	test[2] = strdup("a");
-// 	test[3] = strdup("e");
-// 	test[4] = NULL;
-	
-// 	execve(test[0], test, env);
-// 	puts("\n");
-// 	//perror("\n");
-// 	return (0);
-// }

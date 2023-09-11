@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:24 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/02 08:58:51 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:23:37 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minishell.h"
 
@@ -79,7 +79,7 @@ int	export_b(t_datalist *data, t_env **env)
 
 	if (len_tab(data->args) < 2)
 		print_export(*env);
-	else if (is_an_option(data->args) == YES)
+	else if (is_an_option(data->args, 0) == YES)
 		return (error_manager("export", OPTION), g_return_value);
 	else
 	{

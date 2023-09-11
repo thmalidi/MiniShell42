@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   builtins_utils.c                                   :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 08:51:38 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/02 11:00:23 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/11 10:01:46 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minishell.h"
 
@@ -42,15 +42,44 @@ int	is_option(char *str)
 	return (NO);
 }
 
-int	is_an_option(char **tab)
+int	is_pwdoption(char *str)
 {
 	int	i;
 
 	i = -1;
-	while (tab[++i])
+	if (str[0] == '-')
 	{
-		if (is_option(tab[i]) == YES)
-			return (YES);
+		while (str[++i])
+		{
+			if (str[i] != '-')
+				return (YES);
+		}
+	}
+	return (NO);
+}
+/*
+Func vaut 1 pour PWD, 0 sinon.
+*/
+int	is_an_option(char **tab, int func)
+{
+	int	i;
+
+	i = -1;
+	if (func == 0)
+	{
+		while (tab[++i])
+		{
+			if (is_option(tab[i]) == YES)
+				return (YES);
+		}
+	}
+	else
+	{
+		while (tab[++i])
+		{
+			if (is_pwdoption(tab[i]) == YES)
+				return (YES);
+		}
 	}
 	return (NO);
 }

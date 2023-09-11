@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/02 08:54:48 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:22:20 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef EXEC_H
 # define EXEC_H
@@ -39,8 +39,6 @@ int			element_len(t_element *list);
 int			exec(t_big_list *list, t_env **env);
 int			exec_hd(t_element *pipelist);
 int			is_builtin(char *cmd);
-int			is_cmdwpath(char *cmd);
-int			is_directory(char *cmd);
 int			is_whitespace(char *cmd);
 t_datalist	*init_struct(t_big_list *list);
 t_element	*remove_files(t_element *elt);

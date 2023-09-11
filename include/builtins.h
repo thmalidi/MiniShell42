@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 08:14:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/02 08:55:20 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/11 10:02:27 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
@@ -32,7 +32,7 @@ enum	e_builtin
 char	**parsing_export(char *arg);
 char	**ft_split_export(char *arg);
 int		check_var(char *var, char *func);
-int		is_an_option(char **tab);
+int		is_an_option(char **tab, int func);
 
 // Fct builtins
 int 	cd_b(t_datalist *data, t_env **env);

@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec_cmd_utils.c                                   :+:      :+:    :+:   */
@@ -6,27 +6,11 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 09:01:48 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/02 10:03:22 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:24:22 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minishell.h"
-
-int	is_cmdwpath(char *cmd)
-{
-	int	i;
-
-	i = 0;
-	if (!cmd)
-		return (NO);
-	while (cmd[i])
-	{
-		if (cmd[i] == '/')
-			return (YES);
-		i++;
-	}
-	return (NO);
-}
 
 char	**is_path(char **env)
 {
@@ -44,36 +28,11 @@ char	**is_path(char **env)
 	return (paths);
 }
 
-// char	**is_path(t_env *env)
-// {
-// 	int		i;
-// 	char	*tmp;
-// 	char	**paths;
-
-// 	i = 0;
-// 	tmp = get_value_env(env, "PATH");
-// 	paths = ft_split(tmp, ':');
-// 	if (!paths)
-// 		return (NULL);
-// 	return (paths);
-// }
-
 int	check_end_path(char *path)
 {
 	if (path[ft_strlen(path) - 1] == '/')
 		return (0);
 	return (-1);
-}
-
-int	is_directory(char *cmd)
-{
-	int	fd;
-
-	fd = open(cmd, O_DIRECTORY);
-	if (fd == -1)
-		return (-1);
-	close(fd);
-	return (0);
 }
 
 int	is_whitespace(char *cmd)
