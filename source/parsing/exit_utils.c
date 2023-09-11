@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 13:48:02 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/15 09:22:55 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/04 14:58:02 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ void	free_elm(t_big_list *arg)
 	tmp = arg;
 	while (tmp)
 	{
-		free_te(tmp->pipelist);
-		free(tmp->pipelist);
+		if (tmp->content)
+		{
+			free_te(tmp->pipelist);
+			free(tmp->pipelist);
+		}
 		tmp = tmp->next;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:33:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/02 08:54:35 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/11 10:25:38 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ typedef struct s_history
 	struct s_history	*next;
 	struct s_history	*previous;
 }						t_history;
+void		print_tab(char **tab);
 
+char		*prepare_string(char *str);
 int			between(char *str, int range);
 char		*end_clean(char *str);
 char		*join_tab(char **tab, int s);
@@ -67,7 +69,7 @@ void		printf_tab(char **tab);
 void		ft_lstadd_back_big(t_big_list *lst, t_big_list *new);
 t_big_list	*ft_lstnew_big(void *content);
 t_big_list	*ft_lstlast_big(t_big_list *lst);
-void		clean_str(char *str);
+void		clean_str(char *str, int v);
 void		quote_splite(char *str);
 char		*expand_process(char *str, t_env *envlst);
 char		*expand(char *str, t_env **env);

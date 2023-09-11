@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:12:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/30 17:11:05 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/04 14:35:28 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	replace(char *str, char c, int i)
 	while (str[i] && str[i] != c)
 	{
 		if (str[i] == ' ')
-			str[i] = '~';
+			str[i] = 1;
 		i++;
 	}
 	return (i + 1);
@@ -61,33 +61,30 @@ void	quote_splite(char *str)
 	}
 }
 
-void	clean_str(char *str)
+void	clean_str(char *str, int v)
 {
 	int	i;
 
-	i = 1;
+	i = v;
 	while (str[i] && str[i + 1])
 	{
-		if (str[i] == '~')
+		if (v == 1 && str[i] == 1)
 			str[i] = ' ';
-		/*else if (str[i] == '@')
-			str[i] = '~';*/
-		/*if (str[i] == 39 || str[i] == 34)
-		{
-			if (str[i] == str[0])
-				str[i] = ' ';
-		}*/
+		else if (v == 0 && str[i] == 1)
+			str[i] = '\'';
+		else if (v == 0 && str[i] == 2)
+			str[i] = '\"';
 		i++;
 	}
 }
 
 char *end_clean(char *str)
 {
-	char *dup;
-	char *tmp;
-	char **tab;
-
-	tmp = ft_strdup(str);
+	char	*dup;
+	char	*tmp;
+	char	**tab;
+	
+	tmp = ft_strdup(prepare_string(str));
 	free(str);
 	tab = ft_split(tmp, 34);
 	free(tmp);
@@ -96,6 +93,7 @@ char *end_clean(char *str)
 	tab = ft_split(dup, 39);
 	free(dup);
 	tmp = join_tab(tab, 0);
+	clean_str(tmp, 0);
 	return (free_tab(tab), tmp);
 }
 
