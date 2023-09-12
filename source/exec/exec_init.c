@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/11 16:25:43 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/12 10:04:49 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -64,7 +64,7 @@ char	**set_args(t_element *pipelist)
 	{
 		args[i] = ft_strdup(tmp->str);
 		if (!args[i])
-			return (/*Free*/NULL);
+			return (free_tab(args), NULL);
 		tmp = tmp->next;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/12 08:17:33 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/12 11:08:52 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -50,11 +50,9 @@ int	main(int ac, char **av, char **env)
 {
 	t_env				*envlst;
 	char				*line;
-	int					i;
 
 	(void)ac;
 	(void)av;
-	i = 0;
 	envlst = create_env(env);
 	init_signals();
 	g_return_value = 0;
@@ -69,8 +67,8 @@ int	main(int ac, char **av, char **env)
 		}
 		add_history(line);
  		manage_line(line, &envlst);
- 		i++;
  	}
+ 	free_env(envlst);
 	// rl_clear_history();
  	return (g_return_value);
 }
