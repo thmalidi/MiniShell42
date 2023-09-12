@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/11 16:24:19 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/12 08:43:24 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -30,15 +30,16 @@ int	exec_ohd(char *limiter, int *fd)
 {
 	char	*line;
 
+	signal(SIGINT, &hd_handler);
 	while (1)
 	{
-		line = readline("");
+		line = readline("> ");
 		if (!line)
 		{
 			free(line);
 			return (g_return_value);
 		}
-		line = readline("> ");
+		//line = readline("> ");
 		if (ft_strcmp(line, limiter) == 0)
 		{
 			free(line);
@@ -60,6 +61,8 @@ int	exec_hd(t_element *pipelist)
 	if (pipe(fd) == -1)
 		return (-1);
 	pid = fork();
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	if (pid == 0)
 		exec_ohd(pipelist->next->str, fd);
 	close(fd[1]);

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/11 16:16:04 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/12 08:31:08 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -124,10 +124,14 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 	else
 	{
 		datalist->pid = fork();
-		if ((datalist->infile < 0 || datalist->outfile < 0) && datalist->pid == 0)
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+		if ((datalist->infile < 0 || datalist->outfile < 0) \
+			&& datalist->pid == 0)
 			exit (1);
 		if (datalist->pid == 0)
 		{
+			signal(SIGINT, &child_handler);
 			set_dup(datalist, fd);
 			if (builtin > -1)
 			{

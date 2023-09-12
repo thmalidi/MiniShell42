@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/31 13:08:07 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/12 08:17:33 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minishell.h"
 
@@ -64,12 +64,12 @@ int	main(int ac, char **av, char **env)
 		if (!line)
 		{
 			free(line);
+			printf("\n");
 			return (g_return_value);
 		}
 		add_history(line);
  		manage_line(line, &envlst);
  		i++;
-		// printf("return value : %d\n", g_return_value);
  	}
 	// rl_clear_history();
  	return (g_return_value);
