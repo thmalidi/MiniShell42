@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:12:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/11 11:27:14 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/12 14:27:14 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,16 @@ int	between(char *str, int range)
 			s++;
 		i++;
 	}
-	if (s % 2 == 0 && str[range] != 39)
+	if (str[range] == '>' || str[range] == '<')
+	{
+		if (s % 2 == 0 && d % 2 == 0 && s != 0 && d != 0)
+			return 1;
+	}
+	else if (s % 2 == 0 && str[range] != 39)
 		return (1);
-	if (d % 2 == 0 && str[range] != 34)
+	else if (d % 2 == 0 && str[range] != 34)
 		return (1);
-	return (0);
-	
+	return (0);	
 }
 
 
@@ -56,6 +60,7 @@ void	quote_splite(char *str)
 	i = 0;
 	while (str[i])
 	{
+		printf("%c\n", str[i]);
 		while (str[i] && str[i] != 39 && str[i] != 34)
 			i++;
 		if (str[i])
@@ -89,10 +94,14 @@ char *end_clean(char *str)
 	tmp = ft_strdup(prepare_string(str));
 	free(str);
 	tab = ft_split(tmp, 34);
+	if (!tab[0])
+		return (NULL);
 	free(tmp);
 	dup = join_tab(tab, 0);
 	free_tab(tab);
 	tab = ft_split(dup, 39);
+	if (!tab[0])
+		return (NULL);
 	free(dup);
 	tmp = join_tab(tab, 0);
 	clean_str(tmp, 0);

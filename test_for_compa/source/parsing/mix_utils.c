@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:22:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/04 14:51:32 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/12 14:17:49 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	count_symb_in(char *str)
 
 	v = 0;
 	i = 0;
+	if (!str)
+		return (1);
 	if (str[0] != 34 && str[0] != 39)
 	{
 		while (str[i])
@@ -69,11 +71,11 @@ int	count_symb_in(char *str)
 		if (v > 3)
 		{
 			if (v == 4)
-				return (printf("parse error near `<'\n"), 0);
+				return (ft_printf("parse error near `<'\n"), 0);
 			else if (v == 5)
-				return (printf("parse error near `<<'\n"), 0);
+				return (ft_printf("parse error near `<<'\n"), 0);
 			else
-				return (printf("parse error near `<<<'\n"), 0);
+				return (ft_printf("parse error near `<<<'\n"), 0);
 		}
 	}
 	return (1);
@@ -86,6 +88,8 @@ int	count_symb_out(char *str)
 
 	v = 0;
 	i = 0;
+	if (!str)
+		return (1);
 	if (str[0] != 34 && str[0] != 39)
 	{
 		while (str[i])

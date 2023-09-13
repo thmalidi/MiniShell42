@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/30 16:18:21 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/12 13:37:27 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,15 @@ int	scan_cmd(char *str)
 t_big_list	*parsing(char *str, t_env **envlst)
 {
 	t_big_list	*arg;
+	int i;
 
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '|' && !between(str, i))
+			str[i] = 3;
+		i++;
+	}
 	if (!double_quote(str))
 		return (printf("\033[31mError : quotes still open\033[0m\n"),
 			g_return_value = 1, NULL);
