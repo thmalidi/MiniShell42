@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 14:05:15 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/12 08:34:37 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/12 11:26:19 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -49,9 +49,14 @@ void	hd_handler(int sig)
 	exit(130);
 }
 
-void	init_signals(void)
+void	ignore_signals(void)
 {
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
+}
+
+void	init_signals(void)
+{
+	ignore_signals();
 	signal(SIGINT, &rl_handler);
 }

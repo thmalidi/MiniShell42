@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/11 15:38:17 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/12 11:24:23 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -49,6 +49,7 @@ void		free_element(t_element **elt);
 void		print_datalist(t_datalist *datalist);
 
 void		init_signals(void);
+void		ignore_signals(void);
 void		child_handler(int sig);
 int			len_datalist(t_datalist *datalist);
 void		hd_handler(int sig);

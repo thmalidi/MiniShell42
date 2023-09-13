@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:05:34 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/11 16:18:29 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/13 10:04:56 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -65,6 +65,8 @@ char	*check_cmd_nopath(char **paths, char *cmd)
 	char	*cmd_to_check;
 	int		i;
 
+	if (!paths || !paths[0])
+		return (error_manager(cmd, CMD), NULL);
 	if (is_whitespace(cmd) == 0)
 		return (NULL);
 	i = -1;

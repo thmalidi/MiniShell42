@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 08:43:58 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/11 18:54:51 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/12 10:59:03 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef ENV_H
 # define ENV_H
@@ -35,7 +35,7 @@ t_env	*env_lfvar(t_env *env, char *var);
 t_env	*env_newelt(char *newvar, char *newvalue);
 void	env_print(t_env *env);
 void	env_free_elt(t_env *elt);
-void	env_clean(t_env *env);
+void	free_env(t_env *env);
 void	free_tab(char **tab);
 
 #endif

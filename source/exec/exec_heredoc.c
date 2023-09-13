@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/12 08:43:24 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/12 08:49:47 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -22,10 +22,6 @@ Il faut fork pour les signaux.
 Attention c'est un process il faudra le wait !!
 */
 
-/*
-La question etant, est-ce qu'on supprime, la reponse etant oui
-*/
-
 int	exec_ohd(char *limiter, int *fd)
 {
 	char	*line;
@@ -39,7 +35,6 @@ int	exec_ohd(char *limiter, int *fd)
 			free(line);
 			return (g_return_value);
 		}
-		//line = readline("> ");
 		if (ft_strcmp(line, limiter) == 0)
 		{
 			free(line);
@@ -71,30 +66,3 @@ int	exec_hd(t_element *pipelist)
 		hd_handler(WTERMSIG(status));
 	return (fd[0]);
 }
-
-// int main(int ac, char **av)
-// {
-// 	char	*limiter;
-// 	char 	*line;
-// 	int		fd[2];
-// 	int		i;
-
-// 	pipe(fd);
-// 	i = 0;
-// 	while (av[++i])
-// 	{
-// 		limiter = strdup(av[i]);
-// 		exec_ohd(limiter, fd);
-// 	}
-
-// 	line = get_next_line(fd[0]);
-// 	printf("%s", line);
-// 	while (line)
-// 	{
-// 		line = get_next_line(fd[0]);
-// 		printf("%s", line);
-// 	}
-// }
-/*
-gcc exec_heredoc.c -lreadline
-*/

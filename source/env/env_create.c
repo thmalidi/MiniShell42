@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 08:40:00 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/11 16:07:27 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/12 10:59:40 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -53,9 +53,9 @@ t_env	*create_env(char **env)
 	{
 		var = get_var(env[i]);
 		if (!var)
-			return (env_clean(lst_env), free(var), NULL);
+			return (free_env(lst_env), free(var), NULL);
 		if (add_to_env(&lst_env, ft_strdup(var), ft_strdup(getenv(var))))
-			return (env_clean(lst_env), free(var), NULL);
+			return (free_env(lst_env), free(var), NULL);
 		free(var);
 	}
 	return (lst_env);
