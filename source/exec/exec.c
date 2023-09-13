@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/12 11:36:21 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/13 10:08:59 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -71,7 +71,10 @@ int	exec_nobuiltin(t_datalist *datalist, t_env **envlst)
 	signal(SIGQUIT, &child_handler);
 	env = env_to_tab(*envlst);
 	if (!env)
+	{
+		error_manager(datalist->cmd, CMD);
 		exit (g_return_value);
+	}
 	cmdwpath = check_cmd(env, datalist->cmd);
 	if (!cmdwpath)
 	{
@@ -117,7 +120,7 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 	int		builtin;
 
 	if (!(datalist->cmd))
-		return (0);
+		return (0); // A changer pour le cas "" ?
 	builtin = is_builtin(datalist->cmd);
 	if (need_to_fork(datalist, builtin) == 0)
 		exec_builtin(datalist, envlst, builtin);

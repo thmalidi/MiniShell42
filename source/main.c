@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/12 11:08:52 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/13 09:39:02 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -58,7 +58,7 @@ int	main(int ac, char **av, char **env)
 	g_return_value = 0;
  	while (1)
  	{
- 		line = readline("\033[32mMinishell>\033[0m");
+ 		line = readline("\001\033[32m\002Minishell>\001\033[0m\002");
 		if (!line)
 		{
 			free(line);
