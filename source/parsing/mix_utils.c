@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:22:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/12 14:04:33 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/13 13:38:56 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ int	count_symb_in(char *str)
 		if (v > 3)
 		{
 			if (v == 4)
-				return (ft_dprintf(2, "parse error near `<'\n"), 0);
+				return (dprintf(2, "parse error near `<'\n"), 0);
 			else if (v == 5)
-				return (ft_dprintf(2, "parse error near `<<'\n"), 0);
+				return (dprintf(2, "parse error near `<<'\n"), 0);
 			else
-				return (ft_dprintf(2, "parse error near `<<<'\n"), 0);
+				return (dprintf(2, "parse error near `<<<'\n"), 0);
 		}
 	}
 	return (1);
