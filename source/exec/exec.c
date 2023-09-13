@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/13 10:08:59 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/13 12:54:59 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -102,12 +102,7 @@ int	need_to_fork(t_datalist *datalist, int builtin)
 			return (0);
 	}
 	else
-	{
-		if (builtin == CD || builtin == UNSET)
-			return (0);
-		else
-			return (1);
-	}
+		return (1);
 }
 
 /*

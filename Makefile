@@ -6,11 +6,9 @@
 #    By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/09/13 11:51:14 by hgeffroy         ###   ########.fr        #
+#    Updated: 2023/09/13 11:56:59 by hgeffroy         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
-
-
 
 include config/sources.mk
 include config/headers.mk
