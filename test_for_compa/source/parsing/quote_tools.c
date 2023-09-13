@@ -6,13 +6,35 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:12:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/12 14:27:14 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/13 13:53:49 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	between(char *str, int range)
+{
+	int i;
+	int s;
+	int d;
+
+	i = 0;
+	d = 0;
+	s = 0;
+	while (str[i] && i < range)
+	{
+		if (str[i] == 34 && str[range] == 39)
+			d++;
+		if (str[i] == 39 && str[range] == 34)
+			s++;
+		i++;
+	}
+	if (s % 2 == 0 && d % 2 == 0)
+		return (1);
+	return (0);
+}
+
+/*int	between(char *str, int range)
 {
 	int i;
 	int s;
@@ -39,8 +61,7 @@ int	between(char *str, int range)
 	else if (d % 2 == 0 && str[range] != 34)
 		return (1);
 	return (0);	
-}
-
+}*/
 
 int	replace(char *str, char c, int i)
 {
@@ -60,7 +81,6 @@ void	quote_splite(char *str)
 	i = 0;
 	while (str[i])
 	{
-		printf("%c\n", str[i]);
 		while (str[i] && str[i] != 39 && str[i] != 34)
 			i++;
 		if (str[i])
@@ -81,30 +101,40 @@ void	clean_str(char *str, int v)
 			str[i] = '\'';
 		else if (v == 0 && str[i] == 2)
 			str[i] = '\"';
+		else if (v == 0 && str[i] == 3)
+			str[i] = '|';
 		i++;
 	}
 }
 
-char *end_clean(char *str)
+char *end_clean(char *str, t_element *e)
 {
 	char	*dup;
 	char	*tmp;
 	char	**tab;
+	int 	i;
 	
 	tmp = ft_strdup(prepare_string(str));
 	free(str);
 	tab = ft_split(tmp, 34);
 	if (!tab[0])
-		return (NULL);
+		return (free(tab), free(tmp), e->type = 0, "");
 	free(tmp);
 	dup = join_tab(tab, 0);
 	free_tab(tab);
 	tab = ft_split(dup, 39);
 	if (!tab[0])
-		return (NULL);
+		return (free(tab), free(dup), e->type = 0, "");
 	free(dup);
 	tmp = join_tab(tab, 0);
 	clean_str(tmp, 0);
+	i = 0;
+	while (tmp[i])
+	{
+		if (tmp[i] == 1 || tmp[i] == 2)
+			tmp[i] = '\0';
+		i++;
+	}
 	return (free_tab(tab), tmp);
 }
 

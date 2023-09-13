@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 13:48:02 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/04 14:58:02 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/13 13:48:29 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	free_te(t_element **subparsing)
 	while (tmp)
 	{
 		cu = tmp->next;
-		free(tmp->str);
+		if (tmp->type != 0)
+			free(tmp->str);
 		free(tmp);
 		tmp = cu;
 	}
