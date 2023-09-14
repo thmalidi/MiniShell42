@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/12 13:37:27 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:35:12 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,9 @@ t_big_list	*parsing(char *str, t_env **envlst)
 	if (!double_quote(str))
 		return (printf("\033[31mError : quotes still open\033[0m\n"),
 			g_return_value = 1, NULL);
+	if (check_full_space(str))
+		return (printf("parse error near `|'\n"),
+				g_return_value = 130, NULL);
 	arg = pars_arg(str, envlst);
 	return (arg);
 }
