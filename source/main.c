@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/13 09:39:02 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/14 11:11:48 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -27,7 +27,7 @@ int only_space(char *str)
 	return (0);
 }
 
-void	manage_line(char *line, t_env **env)			//ajouter la fonctionde l'exec ici
+void	manage_line(char *line, t_env **env)
 {
  	t_big_list	*arg;
 	
@@ -54,15 +54,16 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	envlst = create_env(env);
-	init_signals();
 	g_return_value = 0;
  	while (1)
  	{
+		init_signals();
  		line = readline("\001\033[32m\002Minishell>\001\033[0m\002");
 		if (!line)
 		{
 			free(line);
 			printf("\n");
+			free_env(envlst);
 			return (g_return_value);
 		}
 		add_history(line);

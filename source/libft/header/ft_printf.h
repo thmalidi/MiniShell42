@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:24:20 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/18 09:11:35 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/14 10:30:09 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
@@ -20,7 +20,7 @@
 # include <stdlib.h>
 
 int		ft_printf(const char *str, ...);
-int		ft_dprintf(int fd, const char *str, ...);
+// int		ft_dprintf(int fd, const char *str, ...);
 int		printf_putchar(int c, int fd);
 int		printf_putstr(const char *str, int fd);
 int		printf_putnbr(int nb, int fd);

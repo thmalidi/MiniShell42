@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 11:17:07 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/11 16:19:22 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/14 10:44:38 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -56,12 +56,14 @@ void	free_element(t_element **elt)
 	tmp1 = (*elt)->next;
 	while (tmp1)
 	{
-		free(tmp2->str);
+		if (tmp2->str && tmp2->type)
+			free(tmp2->str);
 		free(tmp2);
 		tmp2 = tmp1;
 		tmp1 = tmp1->next;
 	}
-	free(tmp2->str);
+	if (tmp2->str && tmp2->type)
+		free(tmp2->str);
 	free(tmp2);
 	free(elt);
 }
@@ -78,13 +80,15 @@ void	free_big_list(t_big_list *list)
 	while (tmp1)
 	{
 		free(tmp2->content);
-		free_element(tmp2->pipelist);
+		if (tmp2->pipelist)
+			free_element(tmp2->pipelist);
 		free(tmp2);
 		tmp2 = tmp1;
 		tmp1 = tmp1->next;
 	}
 	free(tmp2->content);
-	free_element(tmp2->pipelist);
+	if (tmp2->pipelist)
+		free_element(tmp2->pipelist);
 	free(tmp2);
 }
 

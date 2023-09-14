@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/13 12:54:59 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/14 10:55:40 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -114,8 +114,8 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 {	
 	int		builtin;
 
-	if (!(datalist->cmd))
-		return (0); // A changer pour le cas "" ?
+	if (ft_strcmp(datalist->cmd, "") == 0)
+		return (error_manager("", CMD), 0);
 	builtin = is_builtin(datalist->cmd);
 	if (need_to_fork(datalist, builtin) == 0)
 		exec_builtin(datalist, envlst, builtin);
@@ -187,7 +187,6 @@ int	exec(t_big_list *list, t_env **envlst)
 
 	ft_bzero(fd, 4 * sizeof(int));
 	datalist = init_struct(list);
-	// print_datalist(datalist);
 	if (!datalist)
 		return (0);
 	tmp = datalist;
