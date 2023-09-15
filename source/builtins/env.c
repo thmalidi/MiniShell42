@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 08:13:23 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/31 13:19:28 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/15 11:28:10 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minishell.h"
 
@@ -19,9 +19,10 @@ Il ne faut pas print si les var n'ont pas de value, gere dans env_print.
 */
 int	env_b(t_datalist *data, t_env **env)
 {
+	g_return_value = 0;
 	if (len_tab(data->args) > 1)
 		error_manager("env", NBARGS);
 	else
 		env_print(*env);
-	return (0);
+	return (g_return_value);
 }
