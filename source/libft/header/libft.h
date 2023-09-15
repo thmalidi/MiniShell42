@@ -1,18 +1,19 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:55:24 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/31 15:36:16 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/14 10:30:52 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include <stdarg.h>
 # include <string.h>
 # include <stdlib.h>
 # include <stdint.h>
@@ -84,5 +85,6 @@ int		len_tab(char **tab);
 void	print_tab(char **tab);
 void	print_tab_int(int *tab, int n);
 void	free_tab(char **tab);
+int		ft_dprintf(int fd, char *str, ...);
 
 #endif
