@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:12:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/13 14:17:30 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:41:01 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	between(char *str, int range)
 	s = 0;
 	while (str[i] && i < range)
 	{
-		if (str[i] == 34 && str[range] == 39)
+		if (str[i] == 34)
 			d++;
-		if (str[i] == 39 && str[range] == 34)
+		if (str[i] == 39)
 			s++;
 		i++;
 	}
