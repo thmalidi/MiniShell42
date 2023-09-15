@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 14:05:15 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/12 11:26:19 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/15 11:24:58 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -22,6 +22,7 @@ On a 3 handlers a faire : pour les hd, pour les childs et pour le parent.
 void	rl_handler(int sig)
 {
 	(void)sig;
+	g_return_value = 130;
 	printf("\n");
 	rl_replace_line("", 0);
 	rl_on_new_line();

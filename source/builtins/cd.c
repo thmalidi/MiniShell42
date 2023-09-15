@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:03:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/11 15:53:26 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/15 11:19:33 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -97,24 +97,29 @@ int	cd_b(t_datalist *data, t_env **env)
 {
 	char	*dir;
 
+	g_return_value = 0;
 	if (len_tab(data->args) > 2)
-		return (error_manager("cd", NBARGS), -1);
+		return (error_manager("cd", NBARGS), g_return_value);
 	if (spec_manager(data, env) == 1)
-		return (0);
+		return (g_return_value);
 	if (is_an_option(data->args, 0) == YES)
 		return (error_manager("cd", OPTION), g_return_value);
 	dir = getcwd(NULL, 0);
 	if (!dir)
-		return (-1);
+		return (ft_dprintf(2, "cd: error retrieving current directory: \
+		getcwd: cannot access parent directories: No such file or directory"), \
+		g_return_value);
 	set_value_env(env, "OLDPWD", dir);
 	free(dir);
 	if (is_valid_dir(data->args[1]) == NO)
-		return (-1);
+		return (g_return_value);
 	chdir(data->args[1]);
 	dir = getcwd(NULL, 0);
 	if (!dir)
-		return (-1);
+		return (ft_dprintf(2, "cd: error retrieving current directory: \
+		getcwd: cannot access parent directories: No such file or directory"), \
+		g_return_value);
 	set_value_env(env, "PWD", dir);
 	free(dir);
-	return (0);
+	return (g_return_value);
 }

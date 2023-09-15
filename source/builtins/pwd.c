@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:28 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/11 14:23:03 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/15 11:23:29 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -17,11 +17,16 @@ int	pwd_b(t_datalist *data, t_env **env)
 	char	*pwd;
 
 	(void)env;
+	g_return_value = 0;
 	if (is_an_option(data->args, 1) == YES)
 		return (error_manager("pwd", OPTION));
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
-		return (ft_dprintf(2, "getcwd failed\n"), -1);
+	{
+		return (ft_dprintf(2, "cd: error retrieving current directory: \
+		getcwd: cannot access parent directories: No such file or directory"), \
+		g_return_value);
+	}
 	printf("%s\n", pwd);
-	return (free(pwd), 0);
+	return (free(pwd), g_return_value);
 }
