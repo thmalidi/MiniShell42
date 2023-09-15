@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/12 08:49:47 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/15 15:22:07 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -44,7 +44,7 @@ int	exec_ohd(char *limiter, int *fd)
 		write(fd[1], "\n", 1);
 		free(line);
 	}
-	exit (0);
+	exit (g_return_value);
 }
 
 int	exec_hd(t_element *pipelist)
@@ -56,13 +56,12 @@ int	exec_hd(t_element *pipelist)
 	if (pipe(fd) == -1)
 		return (-1);
 	pid = fork();
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
+	ignore_signals();
 	if (pid == 0)
 		exec_ohd(pipelist->next->str, fd);
 	close(fd[1]);
 	waitpid(pid, &status, WUNTRACED);
-	if (WIFSIGNALED(status))
-		hd_handler(WTERMSIG(status));
+	if (WIFEXITED(status))
+		g_return_value = WEXITSTATUS(status); 
 	return (fd[0]);
 }

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/14 10:55:40 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/15 15:32:07 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -185,9 +185,12 @@ int	exec(t_big_list *list, t_env **envlst)
 	t_datalist	*datalist;
 	t_datalist	*tmp;
 
+	g_return_value = 0;
 	ft_bzero(fd, 4 * sizeof(int));
 	datalist = init_struct(list);
-	if (!datalist)
+	if (!datalist || !(datalist->cmd))
+		return (0);
+	if (g_return_value > 128)
 		return (0);
 	tmp = datalist;
 	while (tmp)

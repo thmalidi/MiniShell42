@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:40:49 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/14 11:11:48 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/15 12:12:53 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -68,6 +68,7 @@ int	main(int ac, char **av, char **env)
 		}
 		add_history(line);
  		manage_line(line, &envlst);
+		free(line);
  	}
  	free_env(envlst);
 	// rl_clear_history();

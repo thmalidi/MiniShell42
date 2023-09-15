@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/12 10:04:49 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/15 15:22:37 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -26,7 +26,11 @@ int	set_files(t_datalist *datalist, t_element **pipelist)
 	while (tmp)
 	{
 		if (tmp->type == 2)
+		{
 			datalist->infile = exec_hd(tmp);
+			if (datalist->infile < 0 || g_return_value > 128)
+				return (-1);
+		}
 		if (tmp->type < 5 && tmp->type > 0)
 		{
 			if (check_file(tmp->next->str, tmp->type, datalist) < 0)
@@ -34,7 +38,7 @@ int	set_files(t_datalist *datalist, t_element **pipelist)
 				tmp = remove_files(tmp);
 				if (!tmp || !(tmp->previous))
 					*pipelist = tmp;
-				return (-1);
+				return (0);
 			}
 			tmp = remove_files(tmp);
 			if (!tmp || !(tmp->previous))
@@ -80,14 +84,14 @@ int	init_data(t_datalist *datalist, t_big_list *list)
 	t_element	*tmp;
 
 	tmp = *(list->pipelist);
-	set_files(datalist, list->pipelist);
-	// if (set_files(datalist, list->pipelist) < 0)
-	// 	return (-1);
+	// set_files(datalist, list->pipelist);
+	if (set_files(datalist, list->pipelist) < 0)
+		return (-1);
 	tmp = *(list->pipelist);
 	if (tmp)
 		datalist->cmd = ft_strdup(tmp->str);
 	if (!datalist->cmd)
-		return (-1);
+		return (0);
 	datalist->args = set_args(*(list->pipelist));
 	if (!(datalist->args))
 		return (/*Free le strdup ?*/-1);
@@ -106,9 +110,9 @@ int	fill_data(t_datalist **datalist, t_big_list *list)
 	if (!new)
 		return (-1);
 	new->next = NULL;
-	init_data(new, list);
-	// if (init_data(new, list) < 0)
-	// 	return (free(new), -1);
+	// init_data(new, list);
+	if (init_data(new, list) < 0)
+		return (free(new), -1);
 	tmp = *datalist;
 	if (!tmp)
 	{
@@ -134,7 +138,12 @@ t_datalist	*init_struct(t_big_list *list)
 	tmp = list;
 	while (tmp && tmp->content[0] != '\0')
 	{
-		fill_data(&datalist, tmp); //Il faudra surement identifier les erreurs, notamment le null check.
+		if (fill_data(&datalist, tmp) < 0)
+		{
+			free_datalist(datalist);
+			free_big_list(list);
+			return (NULL); //Il faudra surement identifier les erreurs, notamment le null check.
+		}
 		tmp = tmp->next;
 	}
 	free_big_list(list);
