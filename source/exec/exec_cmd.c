@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:05:34 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/15 15:30:55 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/18 09:25:33 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -95,10 +95,20 @@ char	*check_cmd_nopath(char **paths, char *cmd)
 
 char	*check_cmd(char **env, char *cmd)
 {
+	char	**paths;
+	char	*cmd_to_ret;
+
 	if (!cmd)
 		return (NULL);
 	if (is_acmd(cmd) == YES)
-		return (check_cmd_nopath(get_path(env), cmd));
+	{
+		paths = get_path(env);
+		if (!paths)
+			return(NULL);
+		cmd_to_ret = check_cmd_nopath(paths, cmd);
+		free_tab(paths);
+		return (cmd_to_ret);
+	}
 	else
 	{
 		if (open(cmd, O_DIRECTORY) > -1)
