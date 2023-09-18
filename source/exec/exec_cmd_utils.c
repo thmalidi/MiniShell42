@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 09:01:48 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/11 14:24:22 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/15 15:30:45 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -43,7 +43,7 @@ int	is_whitespace(char *cmd)
 	while (cmd[i] == ' ' || (cmd[i] > 8 && cmd[i] < 14))
 		i++;
 	if (i == (int)ft_strlen(cmd))
-		return (0);
+		return (YES);
 	else
-		return (-1);
+		return (NO);
 }

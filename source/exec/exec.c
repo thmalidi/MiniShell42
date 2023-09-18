@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/14 10:55:40 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/18 11:25:33 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -61,15 +61,20 @@ void	exec_builtin(t_datalist *datalist, t_env **envlst, int builtin)
 										&exit_b, &export_b, &pwd_b, &unset_b};
 
 	(*tab_builtins[builtin])(datalist, envlst);
+	if (datalist->infile)
+		close(datalist->infile);
+	if (datalist->outfile)
+		close(datalist->outfile);
 }
 
-int	exec_nobuiltin(t_datalist *datalist, t_env **envlst)
+int	exec_nobuiltin(t_datalist *datalist, t_env **envlst, t_datalist *full_datalist)
 {
 	char	*cmdwpath;
 	char	**env;
 
 	signal(SIGQUIT, &child_handler);
 	env = env_to_tab(*envlst);
+	free_env(*envlst);
 	if (!env)
 	{
 		error_manager(datalist->cmd, CMD);
@@ -79,10 +84,13 @@ int	exec_nobuiltin(t_datalist *datalist, t_env **envlst)
 	if (!cmdwpath)
 	{
 		free_tab(env);
+		free_datalist(full_datalist);
 		exit (g_return_value);
 	}
 	execve(cmdwpath, datalist->args, env);
+	free(cmdwpath);
 	free_tab(env);
+	free_datalist(full_datalist);
 	exit (g_return_value);
 }
 
@@ -110,7 +118,7 @@ Execute une fork qui correspond donc a un pipe.
 Dans le cas ou l'exec ne fonctionne pas, exit avec un perror,
 il faudra check que le perror renvoie bien les bons trucs.
 */
-int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
+int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst, t_datalist *full_datalist)
 {	
 	int		builtin;
 
@@ -126,7 +134,7 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 		if ((datalist->infile < 0 || datalist->outfile < 0) \
 			&& datalist->pid == 0)
 		{
-			free_datalist(datalist);
+			free_datalist(full_datalist);
 			free_env(*envlst);
 			exit (1);
 		}
@@ -137,13 +145,16 @@ int	exec_onepipe(t_datalist *datalist, int *fd, t_env **envlst)
 			if (builtin > -1)
 			{
 				exec_builtin(datalist, envlst, builtin);
+				close(STDIN_FILENO);
+				close(STDOUT_FILENO);
+				close(STDERR_FILENO);
 				free_env(*envlst);
-				free_datalist(datalist);
+				free_datalist(full_datalist);
 				exit (g_return_value);
 			}
 			else
-				exec_nobuiltin(datalist, envlst);
-			free_datalist(datalist);
+				exec_nobuiltin(datalist, envlst, full_datalist);
+			free_datalist(full_datalist);
 			free_env(*envlst);
 		}
 	}
@@ -185,16 +196,21 @@ int	exec(t_big_list *list, t_env **envlst)
 	t_datalist	*datalist;
 	t_datalist	*tmp;
 
+	g_return_value = 0;
 	ft_bzero(fd, 4 * sizeof(int));
-	datalist = init_struct(list);
+	datalist = init_struct(list, envlst);
 	if (!datalist)
+		return (0);
+	if (g_return_value > 128)
 		return (0);
 	tmp = datalist;
 	while (tmp)
 	{
+		if (!(tmp->cmd))
+			continue ;
 		if (set_pipe(tmp, fd) < 0)
 			return (free_datalist(datalist), -1);
-		if (exec_onepipe(tmp, fd, envlst))
+		if (exec_onepipe(tmp, fd, envlst, datalist))
 			return (/*Close des trucs et free ?*/free_datalist(datalist), -1);
 		if (tmp->infile)
 			close(tmp->infile);
@@ -204,6 +220,7 @@ int	exec(t_big_list *list, t_env **envlst)
 		tmp = tmp->next;
 	}
 	wait_processes(datalist);
+	close_fd(fd, 4);
 	free_datalist(datalist);
 	return (0);
 }

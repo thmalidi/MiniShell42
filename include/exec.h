@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/12 11:24:23 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/18 07:54:15 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
@@ -37,10 +37,10 @@ char		**is_path(char **env);
 int			check_end_path(char *path);
 int			element_len(t_element *list);
 int			exec(t_big_list *list, t_env **env);
-int			exec_hd(t_element *pipelist);
+int			exec_hd(t_element *pipelist, t_env **env);
 int			is_builtin(char *cmd);
 int			is_whitespace(char *cmd);
-t_datalist	*init_struct(t_big_list *list);
+t_datalist	*init_struct(t_big_list *list, t_env **env);
 t_element	*remove_files(t_element *elt);
 void		close_fd(int *fd, int n);
 void		free_big_list(t_big_list *list);

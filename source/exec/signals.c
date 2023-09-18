@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 14:05:15 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/15 11:24:58 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/15 15:10:11 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -47,7 +47,8 @@ void	hd_handler(int sig)
 {
 	(void)sig;
 	printf("\n");
-	exit(130);
+	g_return_value = 130;
+	exit(g_return_value);
 }
 
 void	ignore_signals(void)

@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/12 08:49:47 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/18 08:24:47 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -22,11 +22,13 @@ Il faut fork pour les signaux.
 Attention c'est un process il faudra le wait !!
 */
 
-int	exec_ohd(char *limiter, int *fd)
+int	exec_ohd(char *limiter, int *fd, t_env **env)
 {
 	char	*line;
+	char	*line_expanded;
 
 	signal(SIGINT, &hd_handler);
+	close(fd[0]);
 	while (1)
 	{
 		line = readline("> ");
@@ -35,19 +37,26 @@ int	exec_ohd(char *limiter, int *fd)
 			free(line);
 			return (g_return_value);
 		}
-		if (ft_strcmp(line, limiter) == 0)
+		line_expanded = expand(line, env);
+		if (!line_expanded)
 		{
-			free(line);
+			free(line_expanded);
+			return (g_return_value);
+		}
+		if (ft_strcmp(line_expanded, limiter) == 0)
+		{
+			free(line_expanded);
 			break ;
 		}
-		write(fd[1], line, ft_strlen(line));
+		write(fd[1], line_expanded, ft_strlen(line_expanded));
 		write(fd[1], "\n", 1);
-		free(line);
+		free_env(*env);
+		free(line_expanded);
 	}
-	exit (0);
+	exit (g_return_value);
 }
 
-int	exec_hd(t_element *pipelist)
+int	exec_hd(t_element *pipelist, t_env **env)
 {
 	int	fd[2];
 	int	pid;
@@ -56,13 +65,12 @@ int	exec_hd(t_element *pipelist)
 	if (pipe(fd) == -1)
 		return (-1);
 	pid = fork();
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
+	ignore_signals();
 	if (pid == 0)
-		exec_ohd(pipelist->next->str, fd);
+		exec_ohd(pipelist->next->str, fd, env);
 	close(fd[1]);
 	waitpid(pid, &status, WUNTRACED);
-	if (WIFSIGNALED(status))
-		hd_handler(WTERMSIG(status));
+	if (WIFEXITED(status))
+		g_return_value = WEXITSTATUS(status);
 	return (fd[0]);
 }
