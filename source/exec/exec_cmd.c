@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:05:34 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 09:25:33 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/18 13:40:23 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,11 @@ char	**get_path(char **env)
 	return (free_tab(paths), new_paths);
 }
 
-char	*check_cmd_nopath(char **paths, char *cmd)
+char	*lfcmd(char **paths, char *cmd)
 {
 	char	*cmd_to_check;
 	int		i;
 
-	if (!paths || !paths[0])
-		return (error_manager(cmd, CMD), NULL);
-	if (is_whitespace(cmd) == YES)
-		return (NULL);
 	i = -1;
 	while (paths[++i])
 	{
@@ -83,6 +79,18 @@ char	*check_cmd_nopath(char **paths, char *cmd)
 		free(cmd_to_check);
 		cmd_to_check = NULL;
 	}
+	return (cmd_to_check);
+}
+
+char	*check_cmd_nopath(char **paths, char *cmd)
+{
+	char	*cmd_to_check;
+
+	if (!paths || !paths[0])
+		return (error_manager(cmd, CMD), NULL);
+	if (is_whitespace(cmd) == YES)
+		return (NULL);
+	cmd_to_check = lfcmd(paths, cmd);
 	if (!cmd_to_check)
 		error_manager(cmd, CMD);
 	else if (access(cmd_to_check, X_OK) == 1)
@@ -104,7 +112,7 @@ char	*check_cmd(char **env, char *cmd)
 	{
 		paths = get_path(env);
 		if (!paths)
-			return(NULL);
+			return (NULL);
 		cmd_to_ret = check_cmd_nopath(paths, cmd);
 		free_tab(paths);
 		return (cmd_to_ret);

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 07:53:48 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/18 14:01:25 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,10 @@ int	set_files(t_datalist *datalist, t_element **pipelist, t_env **env)
 			if (datalist->infile < 0 || g_return_value > 128)
 				return (-1);
 		}
-		if (tmp->type < 5 && tmp->type > 0)
+		else if (tmp->type < 5 && tmp->type > 0)
 		{
-			if (check_file(tmp->next->str, tmp->type, datalist) < 0)
-			{
-				tmp = remove_files(tmp);
-				if (!tmp || !(tmp->previous))
-					*pipelist = tmp;
+			if (manage_files(tmp, pipelist, datalist) < 0)
 				return (0);
-			}
-			tmp = remove_files(tmp);
-			if (!tmp || !(tmp->previous))
-				*pipelist = tmp;
 		}
 		else
 			tmp = tmp->next;
@@ -84,7 +76,6 @@ int	init_data(t_datalist *datalist, t_big_list *list, t_env **env)
 	t_element	*tmp;
 
 	tmp = *(list->pipelist);
-	// set_files(datalist, list->pipelist);
 	if (set_files(datalist, list->pipelist, env) < 0)
 		return (-1);
 	tmp = *(list->pipelist);
@@ -94,7 +85,7 @@ int	init_data(t_datalist *datalist, t_big_list *list, t_env **env)
 		return (0);
 	datalist->args = set_args(*(list->pipelist));
 	if (!(datalist->args))
-		return (/*Free le strdup ?*/-1);
+		return (-1);
 	return (0);
 }
 
@@ -110,7 +101,6 @@ int	fill_data(t_datalist **datalist, t_big_list *list, t_env **env)
 	if (!new)
 		return (-1);
 	new->next = NULL;
-	// init_data(new, list);
 	if (init_data(new, list, env) < 0)
 		return (free(new), -1);
 	tmp = *datalist;
@@ -142,7 +132,7 @@ t_datalist	*init_struct(t_big_list *list, t_env **env)
 		{
 			free_datalist(datalist);
 			free_big_list(list);
-			return (NULL); //Il faudra surement identifier les erreurs, notamment le null check.
+			return (NULL);
 		}
 		tmp = tmp->next;
 	}
@@ -151,23 +141,23 @@ t_datalist	*init_struct(t_big_list *list, t_env **env)
 }
 
 // A del
-void	print_datalist(t_datalist *datalist)
-{
-	t_datalist	*tmp;
-	int			i;
+// void	print_datalist(t_datalist *datalist)
+// {
+// 	t_datalist	*tmp;
+// 	int			i;
 
-	i = 0;
-	tmp = datalist;
-	while (tmp)
-	{
-		printf("\nDatalist du pipe %d :\n", i);
-		printf("Cmd : %s\n", tmp->cmd);
-		printf("fd du infile : %d\n", tmp->infile);
-		printf("fd du outfile : %d\n", tmp->outfile);
-		printf("Les arguments : \n");
-		print_tab(tmp->args);
-		tmp = tmp->next;
-		i++;
-		printf("\n");
-	}
-}
+// 	i = 0;
+// 	tmp = datalist;
+// 	while (tmp)
+// 	{
+// 		printf("\nDatalist du pipe %d :\n", i);
+// 		printf("Cmd : %s\n", tmp->cmd);
+// 		printf("fd du infile : %d\n", tmp->infile);
+// 		printf("fd du outfile : %d\n", tmp->outfile);
+// 		printf("Les arguments : \n");
+// 		print_tab(tmp->args);
+// 		tmp = tmp->next;
+// 		i++;
+// 		printf("\n");
+// 	}
+// }

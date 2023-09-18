@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:48:55 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 11:25:33 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/18 14:06:38 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	exec_builtin(t_datalist *datalist, t_env **envlst, int builtin)
 		close(datalist->outfile);
 }
 
-int	exec_nobuiltin(t_datalist *datalist, t_env **envlst, t_datalist *full_datalist)
+int	exec_nobuiltin(t_datalist *data, t_env **envlst, t_datalist *full_data)
 {
 	char	*cmdwpath;
 	char	**env;
@@ -77,20 +77,20 @@ int	exec_nobuiltin(t_datalist *datalist, t_env **envlst, t_datalist *full_datali
 	free_env(*envlst);
 	if (!env)
 	{
-		error_manager(datalist->cmd, CMD);
+		error_manager(data->cmd, CMD);
 		exit (g_return_value);
 	}
-	cmdwpath = check_cmd(env, datalist->cmd);
+	cmdwpath = check_cmd(env, data->cmd);
 	if (!cmdwpath)
 	{
 		free_tab(env);
-		free_datalist(full_datalist);
+		free_datalist(full_data);
 		exit (g_return_value);
 	}
-	execve(cmdwpath, datalist->args, env);
+	execve(cmdwpath, data->args, env);
 	free(cmdwpath);
 	free_tab(env);
-	free_datalist(full_datalist);
+	free_datalist(full_data);
 	exit (g_return_value);
 }
 

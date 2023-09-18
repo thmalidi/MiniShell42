@@ -1,20 +1,16 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/06 09:04:31 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/15 11:29:31 by hgeffroy         ###   ########.fr       */
+/*   Created: 2023/09/18 13:28:05 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/09/18 13:28:33 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-Parsing similaire a export ?
-*/
 
 int	unset_b(t_datalist *data, t_env **env)
 {
@@ -27,7 +23,7 @@ int	unset_b(t_datalist *data, t_env **env)
 	while ((data->args)[++i])
 	{
 		if (check_var(data->args[i], "unset") < 0)
-			break ; // changer la g_ret_val ?
+			break ;
 		else
 			rm_from_env(env, data->args[1]);
 	}
