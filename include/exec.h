@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 14:01:47 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/18 14:44:18 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef EXEC_H
 # define EXEC_H
@@ -55,5 +55,11 @@ int			len_datalist(t_datalist *datalist);
 void		hd_handler(int sig);
 int			check_file(char *file, int type, t_datalist *datalist);
 int			manage_files(t_element *tmp, t_element **pipelist, t_datalist *datalist);
+
+int			set_pipe(t_datalist *list, int *fd);
+int			set_dup(t_datalist *list, int *fd);
+void		exec_builtin(t_datalist *datalist, t_env **envlst, int builtin);
+int			exec_nobuiltin(t_datalist *data, t_env **envlst, t_datalist *full_data);
+int			need_to_fork(t_datalist *datalist, int builtin);
 
 #endif
