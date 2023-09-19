@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:22:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/13 13:38:56 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/19 10:34:10 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int	check_in_outfile(t_big_list *arg)
 		while (etmp)
 		{
 			if (!count_symb_in(etmp->str) || !count_symb_out(etmp->str))
-				return (g_return_value = 130, 0);
+				return (g_return_value = 2, 0);
 			if (!potential_error(etmp, tmp))
 				return (0);
 			etmp = etmp->next;
