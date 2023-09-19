@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:22:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/19 10:55:16 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/19 10:59:09 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	count_symb_in(char *str)
 			if (str[i++] == '<')
 				v++;
 		}
-		if (v > 3)
+		if (v >= 3)
 		{
 			if (v == 4)
 				return (error_manager("<", SYNTAX), 0);
