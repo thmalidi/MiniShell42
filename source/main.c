@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:35:39 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 15:38:29 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/19 16:58:23 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ int	main(int ac, char **av, char **env)
 			free_env(envlst);
 			return (g_return_value);
 		}
-		add_history(line);
+		if (line)
+			add_history(line);
 		manage_line(line, &envlst);
 		free(line);
 	}

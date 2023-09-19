@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:41:56 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 13:41:57 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:46:44 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	hd_handler(int sig)
 	(void)sig;
 	printf("\n");
 	g_return_value = 130;
-	exit(g_return_value);
+	close(STDIN_FILENO);
 }
 
 void	ignore_signals(void)
