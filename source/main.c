@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:35:39 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 15:29:03 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/19 15:38:29 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	manage_line(char *line, t_env **env)
 			if (arg)
 			{
 				splited_arg(arg);
-				if (check_in_outfile(arg) && g_return_value != 0)
+				if (check_in_outfile(arg) && g_return_value == 0)
 					exec(arg, env);
 			}
 		}
