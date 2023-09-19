@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 08:45:51 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/19 10:14:18 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	exec_ohd(char *limiter, int *fd, t_env **env)
 			exit (g_return_value);
 		}
 		line_expanded = expand(line, env); // Changer expand pour retourner \0 si seulement \n ?
-		// if (!line_expanded) 
+		// if (!line_expanded)
 		// 	return (free(line_expanded), g_return_value);
 		if (ft_strcmp(line_expanded, limiter) == 0)
 		{
