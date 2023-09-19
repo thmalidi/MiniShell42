@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:48:35 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/24 14:04:02 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/19 10:04:27 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,5 @@ char	*ft_strdup(const char *s)
 	}
 	sdup[i] = ((char *)s)[i];
 	return (sdup);
+	//return (NULL);
 }

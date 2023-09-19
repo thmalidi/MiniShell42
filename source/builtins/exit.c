@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:11:45 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 08:39:08 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/19 09:41:42 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ int	exit_b(t_datalist *data, t_env **env)
 	int	shouldexit;
 
 	(void)env;
-	if (len_tab(data->args) > 2)
-		return (error_manager("exit", NBARGS), g_return_value);
 	if (len_tab(data->args) < 2)
 	{
 		free_env(*env);
@@ -66,6 +64,8 @@ int	exit_b(t_datalist *data, t_env **env)
 		g_return_value = 2;
 		return (shouldexit);
 	}
+	else if (len_tab(data->args) > 2 && shouldexit != 2)
+		return (error_manager("exit", NBARGS), g_return_value);
 	else
 	{
 		g_return_value = shouldexit % 256;
