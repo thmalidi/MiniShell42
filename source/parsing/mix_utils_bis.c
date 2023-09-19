@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:56:31 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/14 15:42:20 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/19 13:08:40 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,19 @@ int	potential_error(t_element	*etmp, t_big_list	*tmp)
 			|| etmp->type == 4) && etmp->next == NULL)
 	{
 		if (tmp->next == NULL)
-			return (printf("parse error near `\\n'\n"),
-				g_return_value = 130, 0);
+		{
+			if (etmp->previous && (etmp->previous->type == 1 || etmp->previous->type == 2 || etmp->previous->type == 3
+					|| etmp->previous->type == 4) && etmp->next == NULL)
+				return (error_manager(etmp->str, SYNTAX),
+					g_return_value = 130, 0);	
+			else
+			{
+				return (error_manager("\\n", SYNTAX),
+					g_return_value = 130, 0);
+			}
+		}
 		else
-			return (printf("parse error near `|'\n"),
+			return (error_manager("|", SYNTAX),
 				g_return_value = 130, 0);
 	}
 	return (1);
