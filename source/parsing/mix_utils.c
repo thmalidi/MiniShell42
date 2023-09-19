@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:22:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/19 10:34:10 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/19 10:55:16 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ int	count_symb_in(char *str)
 		if (v > 3)
 		{
 			if (v == 4)
-				return (dprintf(2, "parse error near `<'\n"), 0);
+				return (error_manager("<", SYNTAX), 0);
 			else if (v == 5)
-				return (dprintf(2, "parse error near `<<'\n"), 0);
+				return (error_manager("<<", SYNTAX), 0);
 			else
-				return (dprintf(2, "parse error near `<<<'\n"), 0);
+				return (error_manager("<<<", SYNTAX), 0);
 		}
 	}
 	return (1);
@@ -100,9 +100,9 @@ int	count_symb_out(char *str)
 		if (v > 2)
 		{
 			if (v == 3)
-				return (printf("parse error near `>'\n"), 0);
+				return (error_manager(">", SYNTAX), 0);
 			else
-				return (printf("parse error near `>>'\n"), 0);
+				return (error_manager(">>", SYNTAX), 0);
 		}
 	}
 	return (1);
