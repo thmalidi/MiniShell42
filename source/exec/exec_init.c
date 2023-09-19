@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 15:49:37 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/19 08:20:13 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -31,7 +31,7 @@ int	set_files(t_datalist *datalist, t_element **pipelist, t_env **env)
 			if (datalist->infile < 0 || g_return_value > 128)
 				return (-1);
 		}
-		else if (tmp->type < 5 && tmp->type > 0)
+		if (tmp->type < 5 && tmp->type > 0)
 		{
 			if (manage_files(&tmp, pipelist, datalist) < 0)
 				return (0);

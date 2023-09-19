@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:27:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 14:43:45 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/19 08:14:03 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -22,9 +22,9 @@ int	exec_child(t_datalist *data, int *fd, t_env **envlst, t_datalist *full_data)
 	if (builtin > -1)
 	{
 		exec_builtin(data, envlst, builtin);
-		close(STDIN_FILENO);
-		close(STDOUT_FILENO);
-		close(STDERR_FILENO);
+		// close(STDIN_FILENO);
+		// close(STDOUT_FILENO);
+		// close(STDERR_FILENO);
 		free_env(*envlst);
 		free_datalist(full_data);
 		exit (g_return_value);
@@ -129,6 +129,7 @@ int	exec(t_big_list *list, t_env **envlst)
 	{
 		if (pipe_manager(tmp, datalist, fd, envlst) < 0)
 			return (0);
+		tmp = tmp->next;
 	}
 	wait_processes(datalist);
 	close_fd(fd, 4);

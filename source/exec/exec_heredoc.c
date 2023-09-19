@@ -1,16 +1,23 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 15:46:53 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/19 08:45:51 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "minishell.h"
+
+void	write_hd(char *line, int *fd)
+{
+	write(fd[1], line, ft_strlen(line));
+	write(fd[1], "\n", 1);
+	free(line);
+}
 
 /*
 Si on met des trucs apres le here doc, 
@@ -21,7 +28,6 @@ elt de pipelist est le limiteur.
 Il faut fork pour les signaux.
 Attention c'est un process il faudra le wait !!
 */
-
 int	exec_ohd(char *limiter, int *fd, t_env **env)
 {
 	char	*line;
@@ -31,7 +37,6 @@ int	exec_ohd(char *limiter, int *fd, t_env **env)
 	close(fd[0]);
 	while (1)
 	{
-		puts("On est au debut de la boucle hd");
 		line = readline("> ");
 		if (!line)
 		{
@@ -41,16 +46,13 @@ int	exec_ohd(char *limiter, int *fd, t_env **env)
 		line_expanded = expand(line, env); // Changer expand pour retourner \0 si seulement \n ?
 		// if (!line_expanded) 
 		// 	return (free(line_expanded), g_return_value);
-		if (ft_strncmp(line_expanded, limiter, ft_strlen(limiter)) == 0)
+		if (ft_strcmp(line_expanded, limiter) == 0)
 		{
-			puts("On arrive au exit");
 			free(line_expanded);
 			free_env(*env);
 			exit (g_return_value);
 		}
-		write(fd[1], line_expanded, ft_strlen(line_expanded));
-		write(fd[1], "\n", 1);
-		free(line_expanded);
+		write_hd(line_expanded, fd);
 	}
 }
 
@@ -60,7 +62,6 @@ int	exec_hd(t_element *pipelist, t_env **env)
 	int	pid;
 	int	status;
 
-	puts("On arrive au debut de l'exec de hd");
 	if (pipe(fd) == -1)
 		return (-1);
 	pid = fork();
