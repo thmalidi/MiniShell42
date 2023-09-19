@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:46:08 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 08:46:09 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/19 11:28:27 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_infile(char *file, t_datalist *datalist)
 {
-	if (datalist->infile)
+	if (datalist->infile > 0)
 	{
 		close(datalist->infile);
 		datalist->infile = 0;
@@ -32,7 +32,7 @@ int	check_infile(char *file, t_datalist *datalist)
 
 int	check_outfile(char *file, t_datalist *datalist)
 {
-	if (datalist->outfile)
+	if (datalist->outfile > 0)
 	{
 		close(datalist->outfile);
 		datalist->outfile = 0;
@@ -48,7 +48,7 @@ int	check_outfile(char *file, t_datalist *datalist)
 
 int	check_appfile(char *file, t_datalist *datalist)
 {
-	if (datalist->outfile)
+	if (datalist->outfile > 0)
 	{
 		close(datalist->outfile);
 		datalist->outfile = 0;

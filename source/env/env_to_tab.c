@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:31:34 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 13:31:35 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/19 14:08:35 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ static char	*line_var(t_env *env)
 	int		j;
 	char	*line;
 
-	line = (char *)malloc(sizeof(char) * \
-	(ft_strlen(env->value) + ft_strlen(env->var) + 2));
+	line = (char *)malloc(ft_strlen(env->value) + ft_strlen(env->var) + 2);
 	if (!line)
 		return (NULL);
 	i = -1;
@@ -48,7 +47,10 @@ static char	*line_var(t_env *env)
 	line[i] = '=';
 	i++;
 	if (!(env->value))
+	{
+		line[i] = '\0';
 		return (line);
+	}
 	while ((env->value)[++j])
 	{
 		line[i] = (env->value)[j];

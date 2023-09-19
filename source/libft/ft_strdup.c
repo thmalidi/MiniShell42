@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:48:35 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 10:04:27 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/19 13:25:14 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strdup(const char *s)
 	size_t		len;
 	int			i;
 
+	if (!s)
+		return (NULL);
 	len = ft_strlen(s);
 	sdup = (char *)malloc(sizeof(char) * (len + 1));
 	if (!sdup)

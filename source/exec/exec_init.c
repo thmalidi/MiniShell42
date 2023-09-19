@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 08:20:13 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/19 11:08:50 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@ supprimme de pipelist les elements correspondants.
 Attention si la commande commence par une redir 
 il faut ptet changer des trucs ici, reinit le pointeur.
 */
-int	set_files(t_datalist *datalist, t_element **pipelist, t_env **env)
+int	set_files(t_datalist *data, t_element **pipe, t_env **env, t_big_list *list)
 {
 	t_element	*tmp;
 
-	tmp = *pipelist;
+	tmp = *pipe;
 	while (tmp)
 	{
 		if (tmp->type == 2)
 		{
-			datalist->infile = exec_hd(tmp, env);
-			if (datalist->infile < 0 || g_return_value > 128)
+			data->infile = exec_hd(tmp, env, list);
+			if (data->infile < 0 || g_return_value > 128)
 				return (-1);
 		}
 		if (tmp->type < 5 && tmp->type > 0)
 		{
-			if (manage_files(&tmp, pipelist, datalist) < 0)
+			if (manage_files(&tmp, pipe, data) < 0)
 				return (0);
 		}
 		else
@@ -76,7 +76,7 @@ int	init_data(t_datalist *datalist, t_big_list *list, t_env **env)
 	t_element	*tmp;
 
 	tmp = *(list->pipelist);
-	if (set_files(datalist, list->pipelist, env) < 0)
+	if (set_files(datalist, list->pipelist, env, list) < 0)
 		return (-1);
 	tmp = *(list->pipelist);
 	if (tmp)

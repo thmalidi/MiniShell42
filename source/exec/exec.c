@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:27:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 08:14:03 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/19 11:29:39 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ int	pipe_manager(t_datalist *tmp, t_datalist *data, int *fd, t_env **envlst)
 		return (free_datalist(data), -1);
 	if (exec_opipe(tmp, fd, envlst, data))
 		return (free_datalist(data), -1);
-	if (tmp->infile)
+	if (tmp->infile > 0)
 		close(tmp->infile);
-	if (tmp->outfile)
+	if (tmp->outfile > 0)
 		close(tmp->outfile);
 	close_fd(fd, 2);
 	tmp = tmp->next;

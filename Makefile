@@ -6,7 +6,7 @@
 #    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/09/19 09:02:17 by hgeffroy         ###   ########.fr        #
+#    Updated: 2023/09/19 14:15:09 by hgeffroy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,6 +93,7 @@ fclean:
 		clear
 		$(MAKE) clean
 		$(MAKE) -C $(LIBFT_DIR) fclean
+		$(RM) $(NAME)
 
 #--PHONY-----------------------------------------------------------------------#
 

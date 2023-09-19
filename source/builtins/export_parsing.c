@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:11:09 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 13:11:12 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/19 12:49:05 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char	**ft_split_export(char *arg)
 		return (NULL);
 	if (fill_tab(res, arg, i, n) < 0)
 		return (free_tab(res), NULL);
+	res[n] = NULL;
 	return (res);
 }
 

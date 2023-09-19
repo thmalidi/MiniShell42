@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:40:31 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 13:40:32 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/19 11:26:36 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	close_fd(int *fd, int n)
 	i = 0;
 	while (i < n)
 	{
-		if (fd[i])
+		if (fd[i] > 0)
 			close (fd[i]);
 		i++;
 	}

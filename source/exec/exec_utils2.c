@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:39:46 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 08:39:47 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/19 13:36:12 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void	exec_builtin(t_datalist *datalist, t_env **envlst, int builtin)
 										&exit_b, &export_b, &pwd_b, &unset_b};
 
 	(*tab_builtins[builtin])(datalist, envlst);
-	if (datalist->infile)
+	if (datalist->infile > 0)
 		close(datalist->infile);
-	if (datalist->outfile)
+	if (datalist->outfile > 0)
 		close(datalist->outfile);
 }
 
@@ -87,7 +87,8 @@ int	exec_nobuiltin(t_datalist *data, t_env **envlst, t_datalist *full_data)
 		free_datalist(full_data);
 		exit (g_return_value);
 	}
-	execve(cmdwpath, data->args, env);
+	if (cmdwpath)
+		execve(cmdwpath, data->args, env);
 	free(cmdwpath);
 	free_tab(env);
 	free_datalist(full_data);
