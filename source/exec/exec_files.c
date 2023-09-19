@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:42:38 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 14:01:33 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:49:13 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minishell.h"
 
@@ -87,17 +87,17 @@ int	check_file(char *file, int type, t_datalist *datalist)
 	return (0);
 }
 
-int	manage_files(t_element *tmp, t_element **pipelist, t_datalist *datalist)
+int	manage_files(t_element **tmp, t_element **pipelist, t_datalist *datalist)
 {
-	if (check_file(tmp->next->str, tmp->type, datalist) < 0)
+	if (check_file((*tmp)->next->str, (*tmp)->type, datalist) < 0)
 	{
-		tmp = remove_files(tmp);
-		if (!tmp || !(tmp->previous))
-			*pipelist = tmp;
+		*tmp = remove_files(*tmp);
+		if (!(*tmp) || !((*tmp)->previous))
+			*pipelist = *tmp;
 		return (-1);
 	}
-	tmp = remove_files(tmp);
-	if (!tmp || !(tmp->previous))
-		*pipelist = tmp;
+	*tmp = remove_files(*tmp);
+	if (!(*tmp) || !((*tmp)->previous))
+		*pipelist = *tmp;
 	return (0);
 }

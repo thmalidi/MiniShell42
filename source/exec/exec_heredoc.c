@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 13:41:33 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:46:53 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minishell.h"
 
@@ -31,23 +31,27 @@ int	exec_ohd(char *limiter, int *fd, t_env **env)
 	close(fd[0]);
 	while (1)
 	{
+		puts("On est au debut de la boucle hd");
 		line = readline("> ");
 		if (!line)
-			return (free(line), g_return_value);
-		line_expanded = expand(line, env);
-		if (!line_expanded)
-			return (free(line_expanded), g_return_value);
-		if (ft_strcmp(line_expanded, limiter) == 0)
 		{
+			free(line);
+			exit (g_return_value);
+		}
+		line_expanded = expand(line, env); // Changer expand pour retourner \0 si seulement \n ?
+		// if (!line_expanded) 
+		// 	return (free(line_expanded), g_return_value);
+		if (ft_strncmp(line_expanded, limiter, ft_strlen(limiter)) == 0)
+		{
+			puts("On arrive au exit");
 			free(line_expanded);
-			break ;
+			free_env(*env);
+			exit (g_return_value);
 		}
 		write(fd[1], line_expanded, ft_strlen(line_expanded));
 		write(fd[1], "\n", 1);
-		free_env(*env);
 		free(line_expanded);
 	}
-	exit (g_return_value);
 }
 
 int	exec_hd(t_element *pipelist, t_env **env)
@@ -56,6 +60,7 @@ int	exec_hd(t_element *pipelist, t_env **env)
 	int	pid;
 	int	status;
 
+	puts("On arrive au debut de l'exec de hd");
 	if (pipe(fd) == -1)
 		return (-1);
 	pid = fork();

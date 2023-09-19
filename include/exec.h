@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:04:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 14:44:18 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:50:12 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -54,7 +54,7 @@ void		child_handler(int sig);
 int			len_datalist(t_datalist *datalist);
 void		hd_handler(int sig);
 int			check_file(char *file, int type, t_datalist *datalist);
-int			manage_files(t_element *tmp, t_element **pipelist, t_datalist *datalist);
+int			manage_files(t_element **tmp, t_element **pipelist, t_datalist *datalist);
 
 int			set_pipe(t_datalist *list, int *fd);
 int			set_dup(t_datalist *list, int *fd);
