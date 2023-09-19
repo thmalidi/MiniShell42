@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 10:05:33 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/18 12:47:52 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/19 08:58:28 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ char	*fill_str(t_gnl_list *list, char *buffer, int sz, char *res)
 	while (list)
 	{
 		j = 0;
-		while (j < BUFFER_SIZE && (list->content)[j] && (list->content)[j] != '\n')
+		while (j < BUFFER_SIZE && (list->content)[j] \
+				&& (list->content)[j] != '\n')
 			res[i++] = (list->content)[j++];
 		list = list->next;
 	}

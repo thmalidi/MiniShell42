@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 11:04:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 07:54:15 by hgeffroy         ###   ########.fr       */
+/*   Created: 2023/09/19 08:36:48 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/09/19 08:38:07 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,14 @@ void		child_handler(int sig);
 int			len_datalist(t_datalist *datalist);
 void		hd_handler(int sig);
 int			check_file(char *file, int type, t_datalist *datalist);
+int			manage_files(t_element **tmp, t_element **pipelist, \
+						t_datalist *datalist);
+
+int			set_pipe(t_datalist *list, int *fd);
+int			set_dup(t_datalist *list, int *fd);
+void		exec_builtin(t_datalist *datalist, t_env **envlst, int builtin);
+int			exec_nobuiltin(t_datalist *data, t_env **envlst, \
+							t_datalist *full_data);
+int			need_to_fork(t_datalist *datalist, int builtin);
 
 #endif

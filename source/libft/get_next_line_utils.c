@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 10:05:36 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/18 12:48:37 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/19 08:55:04 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_lstadd_back_gnl(t_gnl_list **alst, t_gnl_list *new)
 t_gnl_list	*ft_lstnew_gnl(char *content)
 {
 	t_gnl_list	*elt;
-	int		i;
+	int			i;
 
 	if (!content)
 		return (NULL);

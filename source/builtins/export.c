@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:24 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/15 11:57:20 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/18 13:29:02 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -88,7 +88,7 @@ int	export_b(t_datalist *data, t_env **env)
 		{
 			args_splitted = parsing_export(data->args[i]);
 			if (!args_splitted)
-				continue ; // Mettre a jour la return value ?
+				continue ;
 			else if (strcmp((*env)->var, args_splitted[0]) \
 			&& !env_lfvar(*env, args_splitted[0]))
 				add_to_env(env, args_splitted[0], args_splitted[1]);

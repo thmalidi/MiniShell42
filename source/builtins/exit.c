@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/06 09:04:16 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/12 11:42:53 by hgeffroy         ###   ########.fr       */
+/*   Created: 2023/09/18 13:11:45 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/09/19 08:39:08 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -23,23 +23,26 @@ Retourne la valeur de sortie si on doit exit, -1 sinon.
 */
 int	should_exit(char *arg)
 {
-	int	i;
+	int		i;
+	char	*char_error;
 
 	i = -1;
 	while (arg[++i])
 	{
 		if (arg[i] == '(' || arg[i] == ')')
-			return (error_manager(ft_strndup(&arg[i], 1), SYNTAX), -1); // Ca doit leak ca !
+		{
+			char_error = ft_strndup(&arg[i], 1);
+			error_manager(char_error, SYNTAX);
+			free(char_error);
+			return (-1);
+		}
 	}
 	i = -1;
-	while (arg[++i])
+	if (ft_isstrdigit(arg) == -1)
 	{
-		if (ft_isalpha(arg[i]))
-		{
-			g_return_value = 2;
-			ft_dprintf(2, "exit: %s: numeric argument required\n", arg);
-			return (2);
-		}
+		g_return_value = 2;
+		ft_dprintf(2, "exit: %s: numeric argument required\n", arg);
+		return (2);
 	}
 	return (ft_atoi(arg));
 }
@@ -49,12 +52,6 @@ int	exit_b(t_datalist *data, t_env **env)
 	int	shouldexit;
 
 	(void)env;
-	if (data->args[1] && ft_isstrdigit(data->args[1]) < 0)
-	{
-		g_return_value = 2;
-		ft_dprintf(2, "exit: %s: numeric argument required\n", data->args[1]);
-		return (2);
-	}
 	if (len_tab(data->args) > 2)
 		return (error_manager("exit", NBARGS), g_return_value);
 	if (len_tab(data->args) < 2)

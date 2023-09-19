@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/31 14:10:35 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/11 09:23:59 by hgeffroy         ###   ########.fr       */
+/*   Created: 2023/09/19 08:46:08 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/09/19 08:46:09 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -84,5 +84,20 @@ int	check_file(char *file, int type, t_datalist *datalist)
 		if (check_appfile(file, datalist) < 0)
 			return (-1);
 	}
+	return (0);
+}
+
+int	manage_files(t_element **tmp, t_element **pipelist, t_datalist *datalist)
+{
+	if (check_file((*tmp)->next->str, (*tmp)->type, datalist) < 0)
+	{
+		*tmp = remove_files(*tmp);
+		if (!(*tmp) || !((*tmp)->previous))
+			*pipelist = *tmp;
+		return (-1);
+	}
+	*tmp = remove_files(*tmp);
+	if (!(*tmp) || !((*tmp)->previous))
+		*pipelist = *tmp;
 	return (0);
 }

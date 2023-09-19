@@ -6,11 +6,18 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 08:24:47 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/19 08:45:51 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	write_hd(char *line, int *fd)
+{
+	write(fd[1], line, ft_strlen(line));
+	write(fd[1], "\n", 1);
+	free(line);
+}
 
 /*
 Si on met des trucs apres le here doc, 
@@ -21,7 +28,6 @@ elt de pipelist est le limiteur.
 Il faut fork pour les signaux.
 Attention c'est un process il faudra le wait !!
 */
-
 int	exec_ohd(char *limiter, int *fd, t_env **env)
 {
 	char	*line;
@@ -35,25 +41,19 @@ int	exec_ohd(char *limiter, int *fd, t_env **env)
 		if (!line)
 		{
 			free(line);
-			return (g_return_value);
+			exit (g_return_value);
 		}
-		line_expanded = expand(line, env);
-		if (!line_expanded)
-		{
-			free(line_expanded);
-			return (g_return_value);
-		}
+		line_expanded = expand(line, env); // Changer expand pour retourner \0 si seulement \n ?
+		// if (!line_expanded) 
+		// 	return (free(line_expanded), g_return_value);
 		if (ft_strcmp(line_expanded, limiter) == 0)
 		{
 			free(line_expanded);
-			break ;
+			free_env(*env);
+			exit (g_return_value);
 		}
-		write(fd[1], line_expanded, ft_strlen(line_expanded));
-		write(fd[1], "\n", 1);
-		free_env(*env);
-		free(line_expanded);
+		write_hd(line_expanded, fd);
 	}
-	exit (g_return_value);
 }
 
 int	exec_hd(t_element *pipelist, t_env **env)
