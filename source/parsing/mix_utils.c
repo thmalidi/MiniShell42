@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:22:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/19 10:34:10 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/19 13:03:58 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,14 @@ int	count_symb_in(char *str)
 			if (str[i++] == '<')
 				v++;
 		}
-		if (v > 3)
+		if (v >= 3)
 		{
 			if (v == 4)
-				return (dprintf(2, "parse error near `<'\n"), 0);
+				return (error_manager("<", SYNTAX), 0);
 			else if (v == 5)
-				return (dprintf(2, "parse error near `<<'\n"), 0);
+				return (error_manager("<<", SYNTAX), 0);
 			else
-				return (dprintf(2, "parse error near `<<<'\n"), 0);
+				return (error_manager("<<<", SYNTAX), 0);
 		}
 	}
 	return (1);
@@ -100,9 +100,9 @@ int	count_symb_out(char *str)
 		if (v > 2)
 		{
 			if (v == 3)
-				return (printf("parse error near `>'\n"), 0);
+				return (error_manager(">", SYNTAX), 0);
 			else
-				return (printf("parse error near `>>'\n"), 0);
+				return (error_manager(">>", SYNTAX), 0);
 		}
 	}
 	return (1);
@@ -124,9 +124,9 @@ int	check_in_outfile(t_big_list *arg)
 		while (etmp)
 		{
 			if (!count_symb_in(etmp->str) || !count_symb_out(etmp->str))
-				return (g_return_value = 2, 0);
+				return (g_return_value = 2, free_elm(arg), free_lst(arg), 0);
 			if (!potential_error(etmp, tmp))
-				return (0);
+				return (free_elm(arg), free_lst(arg), 0);
 			etmp = etmp->next;
 		}
 		tmp = tmp->next;

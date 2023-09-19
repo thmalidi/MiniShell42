@@ -3,15 +3,12 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
+#    By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/09/19 14:15:09 by hgeffroy         ###   ########.fr        #
+#    Updated: 2023/09/19 14:54:19 by hgeffroy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-
-
 
 include config/sources.mk
 include config/headers.mk

@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:12:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/14 15:41:01 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/19 14:28:31 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ int	between(char *str, int range)
 		i++;
 	}
 	if (s % 2 == 0 && d % 2 == 0)
+		return (1);
+	else if (d % 2 == 0 && str[range] == 39 && s % 2 != 0)
+		return (1);
+	else if (s % 2 == 0 && str[range] == 34 && d % 2 != 0)
 		return (1);
 	return (0);
 }
@@ -101,7 +105,7 @@ void	clean_str(char *str, int v)
 			str[i] = '\'';
 		else if (v == 0 && str[i] == 2)
 			str[i] = '\"';
-		else if (v == 0 && str[i] == 3)
+		else if (v == 1 && str[i] == 3)
 			str[i] = '|';
 		i++;
 	}
