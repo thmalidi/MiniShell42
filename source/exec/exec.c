@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:27:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 08:14:03 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:16:40 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ int	pipe_manager(t_datalist *tmp, t_datalist *data, int *fd, t_env **envlst)
 		return (free_datalist(data), -1);
 	if (exec_opipe(tmp, fd, envlst, data))
 		return (free_datalist(data), -1);
-	if (tmp->infile)
+	if (tmp->infile > 0)
 		close(tmp->infile);
-	if (tmp->outfile)
+	if (tmp->outfile > 0)
 		close(tmp->outfile);
 	close_fd(fd, 2);
 	tmp = tmp->next;
@@ -116,8 +116,7 @@ int	exec(t_big_list *list, t_env **envlst)
 	int			fd[4];
 	t_datalist	*datalist;
 	t_datalist	*tmp;
-
-	g_return_value = 0;
+	
 	ft_bzero(fd, 4 * sizeof(int));
 	datalist = init_struct(list, envlst);
 	if (!datalist)

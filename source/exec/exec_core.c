@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_utils2.c                                      :+:      :+:    :+:   */
+/*   exec_core.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:39:46 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 08:39:47 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/19 15:25:52 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ int	set_dup(t_datalist *list, int *fd)
 	else if (fd[3] > 0)
 		dup2(fd[3], STDOUT_FILENO);
 	close_fd(fd, 4);
+	if (list->infile > 0)
+		close(list->infile);
+	if (list->outfile > 0)
+		close(list->outfile);
 	return (0);
 }
 
@@ -61,10 +65,6 @@ void	exec_builtin(t_datalist *datalist, t_env **envlst, int builtin)
 										&exit_b, &export_b, &pwd_b, &unset_b};
 
 	(*tab_builtins[builtin])(datalist, envlst);
-	if (datalist->infile)
-		close(datalist->infile);
-	if (datalist->outfile)
-		close(datalist->outfile);
 }
 
 int	exec_nobuiltin(t_datalist *data, t_env **envlst, t_datalist *full_data)
@@ -87,7 +87,8 @@ int	exec_nobuiltin(t_datalist *data, t_env **envlst, t_datalist *full_data)
 		free_datalist(full_data);
 		exit (g_return_value);
 	}
-	execve(cmdwpath, data->args, env);
+	if (cmdwpath)
+		execve(cmdwpath, data->args, env);
 	free(cmdwpath);
 	free_tab(env);
 	free_datalist(full_data);
