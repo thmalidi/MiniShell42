@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:40:31 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/20 14:32:34 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:05:39 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	close_fd(int *fd, int n)
 
 void	close_datafd(t_datalist *data)
 {
-	t_datalist *tmp;
+	t_datalist	*tmp;
 
 	tmp = data;
 	while (tmp)

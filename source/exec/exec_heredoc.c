@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/20 09:52:15 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:34:04 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@ void	write_hd(char *line, int *fd)
 	write(fd[1], line, ft_strlen(line));
 	write(fd[1], "\n", 1);
 	free(line);
+}
+
+void	free_hd(char *line, t_datalist *data, t_big_list *list, t_env *env)
+{
+	free(line);
+	free_datalist(data);
+	free_big_list(list);
+	free_env(env);
 }
 
 /*
@@ -41,25 +49,14 @@ int	exec_ohd(t_datalist *data, char *limiter, int *fd, t_env **env, t_big_list *
 		if (!line)
 		{
 			error_manager(limiter, HD);
-			free(line);
-			free_datalist(data);
-			free_big_list(list);
-			free_env(*env);
+			free_hd(line, data, list, *env);
 			close(fd[1]);
 			exit (g_return_value);
 		}
-		line_expanded = expand(line, env); // Changer expand pour retourner \0 si seulement \n ?
-		// if (!line_expanded)
-		// 	return (free(line_expanded), g_return_value);
-		// printf("limiter: %s\n", limiter);
-		// printf("line_expanded: %s\n", line_expanded);
-		// printf("strcmp: %d\n", ft_strcmp(line_expanded, limiter));
+		line_expanded = expand(line, env);
 		if (ft_strcmp(line_expanded, limiter) == 0)
 		{
-			free(line_expanded);
-			free_datalist(data);
-			free_big_list(list);
-			free_env(*env);
+			free_hd(line_expanded, data, list, *env);
 			close(fd[1]);
 			exit (g_return_value);
 		}
@@ -67,7 +64,7 @@ int	exec_ohd(t_datalist *data, char *limiter, int *fd, t_env **env, t_big_list *
 	}
 }
 
-int	exec_hd(t_datalist *data, t_element *pipelist, t_env **env, t_big_list *list)
+int	exec_hd(t_datalist *data, t_element *elt, t_env **env, t_big_list *list)
 {
 	int	fd[2];
 	int	pid;
@@ -78,7 +75,7 @@ int	exec_hd(t_datalist *data, t_element *pipelist, t_env **env, t_big_list *list
 	pid = fork();
 	ignore_signals();
 	if (pid == 0)
-		exec_ohd(data, pipelist->next->str, fd, env, list);
+		exec_ohd(data, elt->next->str, fd, env, list);
 	close(fd[1]);
 	waitpid(pid, &status, WUNTRACED);
 	if (WIFEXITED(status))

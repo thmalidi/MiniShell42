@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:27:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/20 14:47:46 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:19:29 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ int	exec_child(t_datalist *data, int *fd, t_env **envlst, t_datalist *full_data)
 	if (builtin > -1)
 	{
 		exec_builtin(data, envlst, builtin);
-		// close(STDIN_FILENO);
-		// close(STDOUT_FILENO);
-		// close(STDERR_FILENO);
 		free_env(*envlst);
 		free_datalist(full_data);
 		exit (g_return_value);
@@ -118,7 +115,7 @@ int	exec(t_big_list *list, t_env **envlst)
 	int			fd[4];
 	t_datalist	*datalist;
 	t_datalist	*tmp;
-	
+
 	ft_bzero(fd, 4 * sizeof(int));
 	datalist = init_struct(list, envlst);
 	if (!datalist)

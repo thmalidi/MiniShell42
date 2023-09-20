@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:24 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 13:41:52 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:04:57 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	print_export(t_env *env)
 int	export_b(t_datalist *data, t_env **env)
 {
 	int		i;
-	char	**args_splitted;
+	char	**args_s;
 
 	g_return_value = 0;
 	if (len_tab(data->args) < 2)
@@ -86,15 +86,15 @@ int	export_b(t_datalist *data, t_env **env)
 		i = 0;
 		while ((data->args)[++i])
 		{
-			args_splitted = parsing_export(data->args[i]);
-			if (!args_splitted)
+			args_s = parsing_export(data->args[i]);
+			if (!args_s)
 				continue ;
-			else if (ft_strcmp((*env)->var, args_splitted[0]) \
-			&& !env_lfvar(*env, args_splitted[0]))
-				add_to_env(env, ft_strdup(args_splitted[0]), ft_strdup(args_splitted[1]));
-			else if (args_splitted[1])
-				set_value_env(env, args_splitted[0], ft_strdup(args_splitted[1]));
-			free_tab(args_splitted);
+			else if (ft_strcmp((*env)->var, args_s[0]) \
+			&& !env_lfvar(*env, args_s[0]))
+				add_to_env(env, ft_strdup(args_s[0]), ft_strdup(args_s[1]));
+			else if (args_s[1])
+				set_value_env(env, args_s[0], ft_strdup(args_s[1]));
+			free_tab(args_s);
 		}
 	}
 	return (g_return_value);
