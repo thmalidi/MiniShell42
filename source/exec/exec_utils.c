@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:40:31 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 11:26:36 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:32:34 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,21 @@ void	close_fd(int *fd, int n)
 		if (fd[i] > 0)
 			close (fd[i]);
 		i++;
+	}
+}
+
+void	close_datafd(t_datalist *data)
+{
+	t_datalist *tmp;
+
+	tmp = data;
+	while (tmp)
+	{
+		if (tmp->infile > 0)
+			close(tmp->infile);
+		if (tmp->outfile > 0)
+			close(tmp->outfile);
+		tmp = tmp->next;
 	}
 }
 
