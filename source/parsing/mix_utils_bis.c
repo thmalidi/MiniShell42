@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mix_utils_bis.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:56:31 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/20 10:24:36 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/19 15:57:45 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	potential_error(t_element	*etmp, t_big_list	*tmp)
 			}
 			if (!etmp->next)
 			{
-				return (error_manager("`newline'", SYNTAX),
+				return (error_manager("\\n", SYNTAX),
 					g_return_value = 130, 0);
 			}
 	}

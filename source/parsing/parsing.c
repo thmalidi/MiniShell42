@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/20 07:45:50 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/20 11:01:28 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_big_list	*pars_arg(char *str, t_env **envlst)
 	t_big_list	*new;
 
 	if (str[0] == '|' || str[ft_strlen(str) - 1] == '|')
-		return (printf("parse error near `|'\n"), g_return_value = 130, NULL);
+		return (error_manager("|", SYNTAX), NULL);
 	tab = ft_split(str, '|');
 	i = 0;
 	if (!pars_arg_op(tab, i, envlst))
@@ -112,6 +112,10 @@ t_big_list	*parsing(char *str, t_env **envlst)
 	{
 		if (str[i] == '|' && !between(str, i))
 			str[i] = 3;
+		if (str[i] == '<' && !between(str, i))
+			str[i] = 4;
+		if (str[i] == '>' && !between(str, i))
+			str[i] = 5;
 		i++;
 	}
 	if (!double_quote(str))
