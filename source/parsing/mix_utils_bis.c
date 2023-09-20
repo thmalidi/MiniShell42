@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:56:31 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/19 15:57:45 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/20 12:23:19 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	potential_error(t_element	*etmp, t_big_list	*tmp)
 			if (etmp->previous && (etmp->previous->type == 1 || etmp->previous->type == 2 || etmp->previous->type == 3
 					|| etmp->previous->type == 4))
 			{
-				printf("passsseee\n");
 				return (error_manager(etmp->str, SYNTAX),
 					g_return_value = 130, 0);
 			}

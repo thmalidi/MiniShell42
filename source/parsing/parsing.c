@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/20 11:01:28 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/20 12:29:21 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ t_big_list	*parsing(char *str, t_env **envlst)
 	i = 0;
 	while (str[i])
 	{
+		if (str[i] == '|' && str[i + 1] && str[i + 1] == '|' && between(str, i + 1) && str[i + 2] && str[i + 2] == '|' && between(str, i + 2))
+			return (error_manager("|", SYNTAX), NULL);
 		if (str[i] == '|' && !between(str, i))
 			str[i] = 3;
 		if (str[i] == '<' && !between(str, i))

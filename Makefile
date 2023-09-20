@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/09/19 14:54:19 by hgeffroy         ###   ########.fr        #
+#    Updated: 2023/09/20 12:21:08 by tmalidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
