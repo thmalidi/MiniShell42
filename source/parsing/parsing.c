@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/19 15:29:22 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/20 07:45:50 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ t_big_list	*parsing(char *str, t_env **envlst)
 	int i;
 
 	i = 0;
-	g_return_value = 0;
 	while (str[i])
 	{
 		if (str[i] == '|' && !between(str, i))
@@ -116,11 +115,9 @@ t_big_list	*parsing(char *str, t_env **envlst)
 		i++;
 	}
 	if (!double_quote(str))
-		return (printf("\033[31mError : quotes still open\033[0m\n"),
-			g_return_value = 1, NULL);
+		return (error_manager("\"", QUOTES), NULL);
 	if (check_full_space(str))
-		return (printf("parse error near `|'\n"),
-				g_return_value = 130, NULL);
+		return (error_manager("|", SYNTAX), NULL);
 	arg = pars_arg(str, envlst);
 	return (arg);
 }

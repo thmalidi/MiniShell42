@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:35:39 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 16:58:23 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/20 07:36:56 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	manage_line(char *line, t_env **env)
 			if (arg)
 			{
 				splited_arg(arg);
-				if (check_in_outfile(arg) && g_return_value == 0)
+				if (check_in_outfile(arg))
 					exec(arg, env);
 			}
 		}
@@ -54,7 +54,6 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	envlst = create_env(env);
-	g_return_value = 0;
 	while (1)
 	{
 		init_signals();

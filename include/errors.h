@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:57:32 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/31 12:40:02 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/20 07:42:50 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ enum	e_errors
 	IDENTIFIER	=	6,
 	NBARGS		=	7,
 	MALLOC		=	8,
-	OPTION		=	9
+	OPTION		=	9,
+	QUOTES		=	10
 };
 
 typedef int	(*t_errors)(char *arg);
@@ -42,5 +43,6 @@ int	error_identifier(char *str);
 int	error_args(char *str);
 int	error_malloc(char *str);
 int	error_option(char *str);
+int	error_quotes(char *str);
 
 #endif
