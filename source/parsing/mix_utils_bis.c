@@ -6,11 +6,25 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:56:31 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/20 13:13:02 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/20 13:42:09 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	only(char *str)
+{
+	int	i;
+	
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != '<' && str[i] != '>')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 char	*free_trim(char *str)
 {
@@ -22,8 +36,9 @@ char	*free_trim(char *str)
 int	potential_error(t_element	*etmp, t_big_list	*tmp)
 {
 	(void) tmp;
-	if ((etmp->type == 1 || etmp->type == 2 || etmp->type == 3
-			|| etmp->type == 4))
+	
+	if (etmp->type == 1 || etmp->type == 2 || etmp->type == 3
+			|| etmp->type == 4 || etmp->type == 6)
 	{
 			if (etmp->previous && (etmp->previous->type == 1 || etmp->previous->type == 2 || etmp->previous->type == 3
 					|| etmp->previous->type == 4))
