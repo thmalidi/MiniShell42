@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:39:46 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/20 09:49:15 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:34:03 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ Set le dup d'entree et de sortie.
 On ne doit dup que si le fd est != de 0.
 On doit prioriser les infile et outfile aux pipes.
 */
-int	set_dup(t_datalist *list, int *fd)
+int	set_dup(t_datalist *list, int *fd, t_datalist *full_data)
 {
 	if (list->infile > 0)
 		dup2(list->infile, STDIN_FILENO);
@@ -50,10 +50,7 @@ int	set_dup(t_datalist *list, int *fd)
 	else if (fd[3] > 0)
 		dup2(fd[3], STDOUT_FILENO);
 	close_fd(fd, 4);
-	if (list->infile > 0)
-		close(list->infile);
-	if (list->outfile > 0)
-		close(list->outfile);
+	close_datafd(full_data);
 	return (0);
 }
 

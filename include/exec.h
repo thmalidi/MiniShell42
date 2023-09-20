@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:36:48 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 16:37:32 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:34:46 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,11 @@ int			manage_files(t_element **tmp, t_element **pipelist, \
 						t_datalist *datalist);
 
 int			set_pipe(t_datalist *list, int *fd);
-int			set_dup(t_datalist *list, int *fd);
+int			set_dup(t_datalist *list, int *fd, t_datalist *full_data);
 void		exec_builtin(t_datalist *datalist, t_env **envlst, int builtin);
 int			exec_nobuiltin(t_datalist *data, t_env **envlst, \
 							t_datalist *full_data);
 int			need_to_fork(t_datalist *datalist, int builtin);
+void		close_datafd(t_datalist *data);
 
 #endif

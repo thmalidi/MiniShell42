@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:27:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 16:16:40 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:47:46 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	exec_child(t_datalist *data, int *fd, t_env **envlst, t_datalist *full_data)
 
 	builtin = is_builtin(data->cmd);
 	signal(SIGINT, &child_handler);
-	set_dup(data, fd);
+	set_dup(data, fd, full_data);
 	if (builtin > -1)
 	{
 		exec_builtin(data, envlst, builtin);
@@ -56,6 +56,8 @@ int	exec_opipe(t_datalist *data, int *fd, t_env **envlst, t_datalist *full_data)
 		ignore_signals();
 		if ((data->infile < 0 || data->outfile < 0) && data->pid == 0)
 		{
+			close_fd(fd, 4);
+			close_datafd(full_data);
 			free_datalist(full_data);
 			free_env(*envlst);
 			exit (1);
