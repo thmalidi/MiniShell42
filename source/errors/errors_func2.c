@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:31:56 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 10:40:32 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/20 07:58:50 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	error_syntax(char *str)
 {
-	ft_dprintf(2, "syntax error near unexpected token \'%s\'\n", str);
+	ft_dprintf(2, " syntax error near unexpected token \'%s\'\n", str);
 	g_return_value = 2;
 	return (0);
 }

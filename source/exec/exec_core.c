@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_core.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:39:46 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 15:25:52 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/20 09:49:15 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ la sortie se fera sur la sortie standard si aucun outfile n'est precise.
 */
 int	set_pipe(t_datalist *list, int *fd)
 {
+	close_fd(fd, 2);
 	fd[0] = fd[2];
 	fd[1] = fd[3];
 	fd[2] = 0;

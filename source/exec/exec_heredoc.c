@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 16:36:51 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/20 09:52:15 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	exec_ohd(t_datalist *data, char *limiter, int *fd, t_env **env, t_big_list *
 		line = readline("> ");
 		if (!line)
 		{
+			error_manager(limiter, HD);
 			free(line);
 			free_datalist(data);
 			free_big_list(list);
