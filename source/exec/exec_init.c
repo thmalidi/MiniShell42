@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 16:33:25 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/20 10:20:10 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	set_files(t_datalist *data, t_element **pipe, t_env **env, t_big_list *list)
 	{
 		if (tmp->type == 2)
 		{
+			if (data->infile > 0)
+				close (data->infile);
 			data->infile = exec_hd(data, tmp, env, list);
 			if (data->infile < 0 || g_return_value > 128)
 				return (-1);
