@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:56:31 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/20 12:23:19 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/20 13:13:02 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,11 @@ int	potential_error(t_element	*etmp, t_big_list	*tmp)
 			if (etmp->previous && (etmp->previous->type == 1 || etmp->previous->type == 2 || etmp->previous->type == 3
 					|| etmp->previous->type == 4))
 			{
-				return (error_manager(etmp->str, SYNTAX),
-					g_return_value = 130, 0);
+				return (error_manager(etmp->str, SYNTAX), 0);
 			}
 			if (!etmp->next)
 			{
-				return (error_manager("\\n", SYNTAX),
-					g_return_value = 130, 0);
+				return (error_manager("\\n", SYNTAX), 0);
 			}
 	}
 	return (1);
