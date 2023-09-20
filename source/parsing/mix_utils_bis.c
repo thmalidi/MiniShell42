@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:56:31 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/20 13:42:09 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/20 14:08:25 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	potential_error(t_element	*etmp, t_big_list	*tmp)
 			}
 			if (!etmp->next)
 			{
-				return (error_manager("\\n", SYNTAX), 0);
+				return (error_manager("newline", SYNTAX), 0);
 			}
 	}
 	return (1);
