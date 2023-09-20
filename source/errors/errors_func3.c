@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   errors_func3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 13:32:01 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/20 07:38:52 by hgeffroy         ###   ########.fr       */
+/*   Created: 2023/09/20 07:39:23 by hgeffroy          #+#    #+#             */
+/*   Updated: 2023/09/20 07:43:26 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	error_manager(char *str, int error_id)
+int	error_quotes(char *str)
 {
-	const t_errors	tab_errors[] = {&error_nofile, &error_isdir, &error_notdir, \
-									&error_cmd, &error_perm, &error_syntax, \
-									&error_identifier, &error_args, \
-									&error_malloc, &error_option, &error_quotes};
-
-	return ((*tab_errors[error_id])(str));
+	ft_dprintf(2, " unexpected EOF while looking for matching '%s'\n", str);
+	g_return_value = 2;
+	return (0);
 }

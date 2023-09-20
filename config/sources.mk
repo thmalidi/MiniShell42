@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    sources.mk                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hgeffroy <hgeffroy@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 14:42:36 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/09/19 15:20:00 by hgeffroy         ###   ########.fr        #
+#    Updated: 2023/09/20 07:42:30 by hgeffroy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,5 +52,6 @@ SOURCES =	source/main.c \
 			source/builtins/unset.c \
 			source/errors/errors.c \
 			source/errors/errors_func.c \
-			source/errors/errors_func2.c
+			source/errors/errors_func2.c \
+			source/errors/errors_func3.c
 			
