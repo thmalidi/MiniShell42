@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/20 14:29:14 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/20 14:52:14 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*rp_env(char *str, char *var, char *value)
 	tmp = ft_substr(str, 0, len - (int)ft_strlen(var));
 	if (value)
 		final = ft_strjoin(tmp, value);
-	else 
+	else
 		final = ft_strdup(tmp);
 	free(tmp);
 	tmp = ft_strjoin(final, sec);
