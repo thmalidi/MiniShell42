@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:03:32 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/20 14:12:39 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/20 14:53:45 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int	pars_arg_op(char **tab, int i, t_env **envlst)
 	return (1);
 }
 
-char *prepare_string(char *str)
+char	*prepare_string(char *str)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (str[i])
 	{

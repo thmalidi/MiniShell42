@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:56:31 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/20 14:08:25 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/20 14:51:59 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	only(char *str)
 {
 	int	i;
-	
+
 	i = 0;
 	while (str[i])
 	{
@@ -28,7 +28,8 @@ int	only(char *str)
 
 char	*free_trim(char *str)
 {
-	char *trim;
+	char	*trim;
+
 	trim = ft_strtrim(str, "\"");
 	return (free(str), trim);
 }
@@ -36,29 +37,29 @@ char	*free_trim(char *str)
 int	potential_error(t_element	*etmp, t_big_list	*tmp)
 {
 	(void) tmp;
-	
 	if (etmp->type == 1 || etmp->type == 2 || etmp->type == 3
-			|| etmp->type == 4 || etmp->type == 6)
+		|| etmp->type == 4 || etmp->type == 6)
 	{
-			if (etmp->previous && (etmp->previous->type == 1 || etmp->previous->type == 2 || etmp->previous->type == 3
-					|| etmp->previous->type == 4))
-			{
-				return (error_manager(etmp->str, SYNTAX), 0);
-			}
-			if (!etmp->next)
-			{
-				return (error_manager("newline", SYNTAX), 0);
-			}
+		if (etmp->previous && (etmp->previous->type == 1
+				|| etmp->previous->type == 2 || etmp->previous->type == 3
+				|| etmp->previous->type == 4))
+		{
+			return (error_manager(etmp->str, SYNTAX), 0);
+		}
+		if (!etmp->next)
+		{
+			return (error_manager("newline", SYNTAX), 0);
+		}
 	}
 	return (1);
 }
 
 int	check_full_space(char *str)
 {
-	char **tab;
-	int i;
-	int j;
-	int s;
+	char	**tab;
+	int		i;
+	int		j;
+	int		s;
 
 	tab = ft_split(str, '|');
 	i = 0;
@@ -71,7 +72,7 @@ int	check_full_space(char *str)
 			if (tab[i][j] != ' ')
 			{
 				s = 0;
-				break;
+				break ;
 			}
 			j++;
 		}

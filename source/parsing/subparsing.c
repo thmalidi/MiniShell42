@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 12:59:50 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/04 15:11:12 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/20 14:52:52 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	space_process(char **tab)
 	}
 }
 
-void fill_pipelist(t_big_list *tmp)
+void	fill_pipelist(t_big_list *tmp)
 {
 	int	n;
-	
+
 	n = 1;
 	while (tmp && tmp->content)
 	{
@@ -58,7 +58,7 @@ void	splited_arg(t_big_list *arg)
 	tmp = arg;
 	while (tmp && tmp->content)
 	{
-		tmp->pipelist = malloc(sizeof(t_element *)); //proteger...
+		tmp->pipelist = malloc(sizeof(t_element *));
 		if (!tmp->pipelist)
 			return ;
 		*tmp->pipelist = NULL;
