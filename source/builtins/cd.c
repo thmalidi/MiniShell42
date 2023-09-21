@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:11:35 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 13:11:37 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/21 11:05:33 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	go_root(t_env **env)
 	if (!dir)
 		return (-1);
 	set_value_env(env, "PWD", dir);
+	free(dir);
 	return (0);
 }
 
@@ -74,6 +75,7 @@ int	go_back(t_env **env)
 	if (!dir)
 		return (-1);
 	set_value_env(env, "PWD", dir);
+	free(dir);
 	return (0);
 }
 
