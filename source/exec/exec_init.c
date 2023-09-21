@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/21 16:37:48 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/21 17:01:59 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ t_datalist	*init_struct(t_big_list *list, t_env **env)
 
 	datalist = NULL;
 	tmp = list;
-	while (tmp && tmp->content[0] != '\0')
+	while (tmp)
 	{
 		if (fill_data(&datalist, tmp, env) < 0)
 		{

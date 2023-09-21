@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:27:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/21 16:27:00 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/21 17:01:06 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,9 @@ int	exec(t_big_list *list, t_env **envlst)
 	ft_bzero(fd, 4 * sizeof(int));
 	datalist = init_struct(list, envlst);
 	if (!datalist)
+	{
 		return (0);
+	}
 	tmp = datalist;
 	while (tmp)
 	{
