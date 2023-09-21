@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:24 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/21 10:30:23 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/21 14:16:34 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,12 @@ int	print_export(t_env *env)
 	return (0);
 }
 
-int	export_b(t_datalist *data, t_env **env)
+int	export_b(t_datalist *data, t_datalist *f_data, t_env **env)
 {
 	int		i;
 	char	**args_s;
 
+	(void)f_data;
 	g_return_value = 0;
 	if (len_tab(data->args) < 2)
 		print_export(*env);

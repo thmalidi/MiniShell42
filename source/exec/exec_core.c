@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:39:46 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/20 14:34:03 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/21 14:10:45 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ int	set_dup(t_datalist *list, int *fd, t_datalist *full_data)
 /*
 Exec une commande qui est un builtin.
 */
-void	exec_builtin(t_datalist *datalist, t_env **envlst, int builtin)
+void	exec_b(t_datalist *data, t_datalist *f_data, t_env **env, int builtin)
 {
 	const t_builtins	tab_builtins[] = {&cd_b, &echo_b, &env_b, \
 										&exit_b, &export_b, &pwd_b, &unset_b};
 
-	(*tab_builtins[builtin])(datalist, envlst);
+	(*tab_builtins[builtin])(data, f_data, env);
 }
 
 int	exec_nobuiltin(t_datalist *data, t_env **envlst, t_datalist *full_data)
@@ -90,17 +90,17 @@ int	exec_nobuiltin(t_datalist *data, t_env **envlst, t_datalist *full_data)
 	free(cmdwpath);
 	free_tab(env);
 	free_datalist(full_data);
-	exit (g_return_value);
+	return (g_return_value);
 }
 
 /*
 Retourne 0 si pas besoin de fork, 1 sinon
 */
-int	need_to_fork(t_datalist *datalist, int builtin)
+int	need_to_fork(t_datalist *datalist, t_datalist *full_data, int builtin)
 {
 	if (builtin < 0)
 		return (1);
-	if (len_datalist(datalist) == 1)
+	if (len_datalist(full_data) == 1)
 	{
 		if ((builtin == EXPORT && !(datalist->args)[1]) || builtin == ECHO \
 			|| builtin == PWD || builtin == ENV)

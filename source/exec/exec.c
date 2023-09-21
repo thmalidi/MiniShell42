@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:27:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/21 10:01:19 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/21 14:18:05 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ int	exec_child(t_datalist *data, int *fd, t_env **envlst, t_datalist *full_data)
 	set_dup(data, fd, full_data);
 	if (builtin > -1)
 	{
-		exec_builtin(data, envlst, builtin);
+		exec_b(data, full_data, envlst, builtin);
 		free_env(*envlst);
 		free_datalist(full_data);
-		exit (g_return_value);
+		if (builtin != EXIT)
+			exit (g_return_value);
+		return (g_return_value);
 	}
 	else
 		exec_nobuiltin(data, envlst, full_data);
@@ -45,8 +47,8 @@ int	exec_opipe(t_datalist *data, int *fd, t_env **envlst, t_datalist *full_data)
 	if (ft_strcmp(data->cmd, "") == 0)
 		return (error_manager("", CMD), 0);
 	builtin = is_builtin(data->cmd);
-	if (need_to_fork(data, builtin) == 0)
-		exec_builtin(data, envlst, builtin);
+	if (need_to_fork(data, full_data, builtin) == 0)
+		exec_b(data, full_data, envlst, builtin);
 	else
 	{
 		data->pid = fork();
@@ -94,8 +96,7 @@ int	pipe_manager(t_datalist *tmp, t_datalist *data, int *fd, t_env **envlst)
 		return (-1);
 	if (set_pipe(tmp, fd) < 0)
 		return (free_datalist(data), -1);
-	if (exec_opipe(tmp, fd, envlst, data))
-		return (free_datalist(data), -1);
+	exec_opipe(tmp, fd, envlst, data);
 	if (tmp->infile > 0)
 		close(tmp->infile);
 	if (tmp->outfile > 0)

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 07:39:23 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/20 15:06:54 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/21 11:45:39 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,12 @@ int	error_hd(char *str)
 	ft_dprintf(2, \
 	" here-document at line 1 delimited by end-of-file (wanted `%s')\n", str);
 	g_return_value = 0;
+	return (0);
+}
+
+int	error_notset(char *str)
+{
+	ft_dprintf(2, " cd: %s not set\n", str);
+	g_return_value = 1;
 	return (0);
 }

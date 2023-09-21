@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 11:17:07 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 10:56:34 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/21 13:38:57 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	free_datalist(t_datalist *datalist)
 
 	if (!datalist)
 		return ;
+	close_datafd(datalist);
 	tmp = datalist->next;
 	while (tmp)
 	{

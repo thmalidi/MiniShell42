@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:11:35 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/21 11:05:33 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/21 14:16:47 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	go_root(t_env **env)
 {
 	char	*dir;
 
+	if (get_value_env(*env, "HOME") == NULL)
+		return (error_manager("HOME", NOTSET), -1);
 	dir = getcwd(NULL, 0);
 	if (!dir)
 		return (-1);
@@ -65,6 +67,9 @@ int	go_back(t_env **env)
 {
 	char	*dir;
 
+	if (get_value_env(*env, "OLDPWD") == NULL \
+		|| get_value_env(*env, "OLDPWD") == NULL)
+		return (error_manager("OLDPWD", NOTSET), -1);
 	dir = getcwd(NULL, 0);
 	if (!dir)
 		return (-1);
@@ -95,10 +100,11 @@ int	spec_manager(t_datalist *data, t_env **env)
 	return (0);
 }
 
-int	cd_b(t_datalist *data, t_env **env)
+int	cd_b(t_datalist *data, t_datalist *f_data, t_env **env)
 {
 	char	*dir;
 
+	(void)f_data;
 	g_return_value = 0;
 	if (len_tab(data->args) > 2)
 		return (error_manager("cd", NBARGS), g_return_value);
@@ -109,7 +115,7 @@ int	cd_b(t_datalist *data, t_env **env)
 	dir = getcwd(NULL, 0);
 	if (!dir)
 		return (ft_dprintf(2, "cd: error retrieving current directory: \
-		getcwd: cannot access parent directories: No such file or directory"), \
+getcwd: cannot access parent directories: No such file or directory"), \
 		g_return_value);
 	set_value_env(env, "OLDPWD", dir);
 	free(dir);
@@ -119,7 +125,7 @@ int	cd_b(t_datalist *data, t_env **env)
 	dir = getcwd(NULL, 0);
 	if (!dir)
 		return (ft_dprintf(2, "cd: error retrieving current directory: \
-		getcwd: cannot access parent directories: No such file or directory"), \
+getcwd: cannot access parent directories: No such file or directory"), \
 		g_return_value);
 	set_value_env(env, "PWD", dir);
 	free(dir);

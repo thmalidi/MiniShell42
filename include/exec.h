@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:36:48 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/20 14:34:46 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/21 14:11:56 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_datalist
 	struct s_datalist	*next;
 }	t_datalist;
 
-typedef int	(*t_builtins)(t_datalist *datalist, t_env **env);
+typedef int	(*t_builtins)(t_datalist *datalist, t_datalist *full_data, t_env **env);
 
 // Proto
 char		*check_cmd(char **env, char *cmd);
@@ -59,10 +59,10 @@ int			manage_files(t_element **tmp, t_element **pipelist, \
 
 int			set_pipe(t_datalist *list, int *fd);
 int			set_dup(t_datalist *list, int *fd, t_datalist *full_data);
-void		exec_builtin(t_datalist *datalist, t_env **envlst, int builtin);
+void		exec_b(t_datalist *data, t_datalist *f_data, t_env **env, int builtin);
 int			exec_nobuiltin(t_datalist *data, t_env **envlst, \
 							t_datalist *full_data);
-int			need_to_fork(t_datalist *datalist, int builtin);
+int			need_to_fork(t_datalist *datalist, t_datalist *full_data, int builtin);
 void		close_datafd(t_datalist *data);
 
 #endif
