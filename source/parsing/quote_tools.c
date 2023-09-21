@@ -6,39 +6,37 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:12:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/20 15:21:49 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/21 16:00:22 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	between(char *str, int range)
+int between(char *str, int range)
 {
-	int	i;
-	int	s;
-	int	d;
+	int bool;
+	int i;
 
+	bool = 0;
 	i = 0;
-	d = 0;
-	s = 0;
-	while (str[i] && i < range)
+	while (i < range)
 	{
-		if (str[i] == 34)
-			d++;
-		if (str[i] == 39)
-			s++;
+		if (str[i] == 34 || str[i] == 39)
+		{
+			bool = str[i];
+			i++;
+			while (i < range && str[i] != bool)
+				i++;
+			if (range == i)
+			{
+				if (str[i] == bool)
+					return (1);
+				return (0);
+			}
+		}
 		i++;
 	}
-	if ((s % 2 == 0 && d % 2 == 0)
-		|| (d % 2 == 0 && str[range] == 39 && str[range + 1] == 39))
-		return (1);
-	else if (d % 2 == 0 && str[range] == 39 && s % 2 != 0 && str[i + 1] != 34)
-		return (0);
-	else if (s % 2 == 0 && str[range] == 34 && str[range + 1] == 34)
-		return (1);
-	else if (s % 2 == 0 && str[range] == 34 && d % 2 != 0 && str[i + 1] != 39)
-		return (0);
-	return (0);
+	return (1);
 }
 
 int	replace(char *str, char c, int i)
