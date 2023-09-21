@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:39:46 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/21 14:10:45 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/21 16:23:56 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,9 @@ Retourne 0 si pas besoin de fork, 1 sinon
 int	need_to_fork(t_datalist *datalist, t_datalist *full_data, int builtin)
 {
 	if (builtin < 0)
+	{
 		return (1);
+	}
 	if (len_datalist(full_data) == 1)
 	{
 		if ((builtin == EXPORT && !(datalist->args)[1]) || builtin == ECHO \
@@ -109,5 +111,7 @@ int	need_to_fork(t_datalist *datalist, t_datalist *full_data, int builtin)
 			return (0);
 	}
 	else
+	{
 		return (1);
+	}
 }

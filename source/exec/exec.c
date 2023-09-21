@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:27:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/21 14:18:05 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/21 16:27:00 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,17 @@ int	wait_processes(t_datalist *datalist)
 int	pipe_manager(t_datalist *tmp, t_datalist *data, int *fd, t_env **envlst)
 {
 	if (!(tmp->cmd))
+	{
+		if (tmp->infile)
+			close(tmp->infile);
+		if (tmp->outfile)
+			close(tmp->outfile);
 		return (-1);
+	}
 	if (set_pipe(tmp, fd) < 0)
 		return (free_datalist(data), -1);
-	exec_opipe(tmp, fd, envlst, data);
+	if (exec_opipe(tmp, fd, envlst, data))
+		return (free_datalist(data), -1);
 	if (tmp->infile > 0)
 		close(tmp->infile);
 	if (tmp->outfile > 0)
@@ -124,8 +131,9 @@ int	exec(t_big_list *list, t_env **envlst)
 	tmp = datalist;
 	while (tmp)
 	{
-		if (pipe_manager(tmp, datalist, fd, envlst) < 0)
-			return (0);
+		pipe_manager(tmp, datalist, fd, envlst);
+		// if (pipe_manager(tmp, datalist, fd, envlst) < 0)
+		// 	return (0);
 		tmp = tmp->next;
 	}
 	wait_processes(datalist);

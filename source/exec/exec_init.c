@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/20 10:20:10 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/21 16:37:48 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	set_files(t_datalist *data, t_element **pipe, t_env **env, t_big_list *list)
 		if (tmp->type < 5 && tmp->type > 0)
 		{
 			if (manage_files(&tmp, pipe, data) < 0)
-				return (0);
+				return (0); // J'avais mis -1 somehow pour un truc
 		}
 		else
 			tmp = tmp->next;

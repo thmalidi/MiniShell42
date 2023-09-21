@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/21 12:04:51 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/21 16:03:14 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,21 @@ int	exec_ohd(t_datalist *data, char *limiter, int *fd, t_env **env, t_big_list *
 	char	*line;
 	char	*line_expanded;
 
+	ignore_signals();
 	signal(SIGINT, &hd_handler);
 	close(fd[0]);
 	while (1)
 	{
 		line = readline("> ");
-		if (!line)
+		if (!line && g_return_value != 130)
 		{
 			error_manager(limiter, HD);
+			free_hd(line, data, list, *env);
+			close(fd[1]);
+			exit (g_return_value);
+		}
+		else if (g_return_value == 130)
+		{
 			free_hd(line, data, list, *env);
 			close(fd[1]);
 			exit (g_return_value);
@@ -73,7 +80,6 @@ int	exec_hd(t_datalist *data, t_element *elt, t_env **env, t_big_list *list)
 	if (pipe(fd) == -1)
 		return (-1);
 	pid = fork();
-	ignore_signals();
 	if (pid == 0)
 		exec_ohd(data, elt->next->str, fd, env, list);
 	close(fd[1]);
