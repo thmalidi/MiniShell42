@@ -6,13 +6,13 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:27:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:16:23 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:49:18 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exec_child(t_datalist *data, int *fd, t_env **envlst)
+int	exec_child(t_data *data, int *fd, t_env **envlst)
 {
 	int	builtin;
 
@@ -40,7 +40,7 @@ Execute une fork qui correspond donc a un pipe.
 Dans le cas ou l'exec ne fonctionne pas, exit avec un perror,
 il faudra check que le perror renvoie bien les bons trucs.
 */
-int	exec_opipe(t_datalist *data, int *fd, t_env **envlst)
+int	exec_opipe(t_data *data, int *fd, t_env **envlst)
 {
 	int	builtin;
 
@@ -67,10 +67,10 @@ int	exec_opipe(t_datalist *data, int *fd, t_env **envlst)
 	return (0);
 }
 
-int	wait_processes(t_datalist *datalist)
+int	wait_processes(t_data *datalist)
 {
-	t_datalist	*tmp;
-	int			status;
+	t_data	*tmp;
+	int		status;
 
 	tmp = datalist;
 	status = 0;
@@ -90,7 +90,7 @@ int	wait_processes(t_datalist *datalist)
 	return (0);
 }
 
-int	pipe_manager(t_datalist *tmp, int *fd, t_env **envlst)
+int	pipe_manager(t_data *tmp, int *fd, t_env **envlst)
 {
 	if (!(tmp->cmd))
 	{
@@ -120,9 +120,9 @@ Mettre les conditions sur le fork.
 */
 int	exec(t_big_list *list, t_env **envlst)
 {
-	int			fd[4];
-	t_datalist	*datalist;
-	t_datalist	*tmp;
+	int		fd[4];
+	t_data	*datalist;
+	t_data	*tmp;
 
 	ft_bzero(fd, 4 * sizeof(int));
 	datalist = init_struct(list, envlst);
@@ -134,8 +134,6 @@ int	exec(t_big_list *list, t_env **envlst)
 	while (tmp)
 	{
 		pipe_manager(tmp, fd, envlst);
-		// if (pipe_manager(tmp, datalist, fd, envlst) < 0)
-		// 	return (0);
 		tmp = tmp->next;
 	}
 	wait_processes(datalist);

@@ -6,13 +6,13 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:28:05 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:06:26 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:48:34 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	unset_b(t_datalist *data, t_env **env)
+int	unset_b(t_data *data, t_env **env)
 {
 	int	i;
 

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:11:35 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:05:09 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:48:34 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	go_back(t_env **env)
 	return (0);
 }
 
-int	spec_manager(t_datalist *data, t_env **env)
+int	spec_manager(t_data *data, t_env **env)
 {
 	if (!(data->args[1]) || ft_strcmp(data->args[1], "~") == 0 \
 		|| ft_strcmp(data->args[1], "~/") == 0)
@@ -100,7 +100,7 @@ int	spec_manager(t_datalist *data, t_env **env)
 	return (0);
 }
 
-int	cd_b(t_datalist *data, t_env **env)
+int	cd_b(t_data *data, t_env **env)
 {
 	char	*dir;
 

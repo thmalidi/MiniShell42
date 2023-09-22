@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:40:31 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/20 15:05:39 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:49:05 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	close_fd(int *fd, int n)
 	}
 }
 
-void	close_datafd(t_datalist *data)
+void	close_datafd(t_data *data)
 {
-	t_datalist	*tmp;
+	t_data	*tmp;
 
 	tmp = data;
 	while (tmp)
@@ -73,10 +73,10 @@ int	is_builtin(char *cmd)
 	return (-1);
 }
 
-int	len_datalist(t_datalist *datalist)
+int	len_datalist(t_data *datalist)
 {
-	int			len;
-	t_datalist	*tmp;
+	int		len;
+	t_data	*tmp;
 
 	len = 0;
 	tmp = datalist;

@@ -6,13 +6,13 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:46:08 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/21 15:42:26 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:48:34 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_infile(char *file, t_datalist *datalist)
+int	check_infile(char *file, t_data *datalist)
 {
 	if (datalist->infile > 0)
 	{
@@ -36,7 +36,7 @@ int	check_infile(char *file, t_datalist *datalist)
 	return (0);
 }
 
-int	check_outfile(char *file, t_datalist *datalist)
+int	check_outfile(char *file, t_data *datalist)
 {
 	if (datalist->outfile > 0)
 	{
@@ -54,7 +54,7 @@ int	check_outfile(char *file, t_datalist *datalist)
 	return (0);
 }
 
-int	check_appfile(char *file, t_datalist *datalist)
+int	check_appfile(char *file, t_data *datalist)
 {
 	if (datalist->outfile > 0)
 	{
@@ -72,7 +72,7 @@ int	check_appfile(char *file, t_datalist *datalist)
 	return (0);
 }
 
-int	check_file(char *file, int type, t_datalist *datalist)
+int	check_file(char *file, int type, t_data *datalist)
 {
 	int	fd;
 
@@ -103,7 +103,7 @@ int	check_file(char *file, int type, t_datalist *datalist)
 	return (0);
 }
 
-int	manage_files(t_element **tmp, t_element **pipelist, t_datalist *datalist)
+int	manage_files(t_element **tmp, t_element **pipelist, t_data *datalist)
 {
 	if (check_file((*tmp)->next->str, (*tmp)->type, datalist) < 0)
 	{

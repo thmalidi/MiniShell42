@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:24 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:06:11 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:48:34 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	print_export(t_env *env)
 	return (0);
 }
 
-int	export_b(t_datalist *data, t_env **env)
+int	export_b(t_data *data, t_env **env)
 {
 	int		i;
 	char	**args_s;
@@ -91,7 +91,7 @@ int	export_b(t_datalist *data, t_env **env)
 				continue ;
 			else if (ft_strcmp((*env)->var, args_s[0]) \
 			&& !env_lfvar(*env, args_s[0]))
-				add_to_env(env, ft_strdup(args_s[0]), ft_strdup(args_s[1]));	
+				add_to_env(env, ft_strdup(args_s[0]), ft_strdup(args_s[1]));
 			else if (args_s[1])
 				set_value_env(env, args_s[0], args_s[1]);
 			free_tab(args_s);

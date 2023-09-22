@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 11:17:07 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/21 13:38:57 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:48:34 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ void	free_big_list(t_big_list *list)
 	free(tmp2);
 }
 
-void	free_datalist(t_datalist *datalist)
+void	free_datalist(t_data *datalist)
 {
-	t_datalist	*tmp;
+	t_data	*tmp;
 
 	if (!datalist)
 		return ;

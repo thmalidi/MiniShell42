@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:39:46 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:13:37 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:48:34 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ et on les met dan fd[4] pour le infile et fd[5] pour le outfile.
 Si on est sur le dernier pipe, on ne doit pas ouvrir de nouveau pipe, 
 la sortie se fera sur la sortie standard si aucun outfile n'est precise.
 */
-int	set_pipe(t_datalist *list, int *fd)
+int	set_pipe(t_data *list, int *fd)
 {
 	close_fd(fd, 2);
 	fd[0] = fd[2];
@@ -39,7 +39,7 @@ Set le dup d'entree et de sortie.
 On ne doit dup que si le fd est != de 0.
 On doit prioriser les infile et outfile aux pipes.
 */
-int	set_dup(t_datalist *list, int *fd)
+int	set_dup(t_data *list, int *fd)
 {
 	if (list->infile > 0)
 		dup2(list->infile, STDIN_FILENO);
@@ -57,7 +57,7 @@ int	set_dup(t_datalist *list, int *fd)
 /*
 Exec une commande qui est un builtin.
 */
-void	exec_b(t_datalist *data, t_env **env, int builtin)
+void	exec_b(t_data *data, t_env **env, int builtin)
 {
 	const t_builtins	tab_builtins[] = {&cd_b, &echo_b, &env_b, \
 										&exit_b, &export_b, &pwd_b, &unset_b};
@@ -65,7 +65,7 @@ void	exec_b(t_datalist *data, t_env **env, int builtin)
 	(*tab_builtins[builtin])(data, env);
 }
 
-int	exec_nobuiltin(t_datalist *data, t_env **envlst)
+int	exec_nobuiltin(t_data *data, t_env **envlst)
 {
 	char	*cmdwpath;
 	char	**env;
@@ -96,7 +96,7 @@ int	exec_nobuiltin(t_datalist *data, t_env **envlst)
 /*
 Retourne 0 si pas besoin de fork, 1 sinon
 */
-int	need_to_fork(t_datalist *datalist, int builtin)
+int	need_to_fork(t_data *datalist, int builtin)
 {
 	if (builtin < 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 08:58:35 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:49:33 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ supprimme de pipelist les elements correspondants.
 Attention si la commande commence par une redir 
 il faut ptet changer des trucs ici, reinit le pointeur.
 */
-int	set_files(t_datalist *data, t_element **pipe, t_env **env, t_big_list *list)
+int	set_files(t_data *data, t_element **pipe, t_env **env, t_big_list *list)
 {
 	t_element	*tmp;
 
@@ -36,13 +36,14 @@ int	set_files(t_datalist *data, t_element **pipe, t_env **env, t_big_list *list)
 		if (tmp->type < 5 && tmp->type > 0)
 		{
 			if (manage_files(&tmp, pipe, data) < 0)
-				return (0); // J'avais mis -1 somehow pour un truc
+				return (0);
 		}
 		else
 			tmp = tmp->next;
 	}
 	return (0);
 }
+// J'avais return -1 si manage_files < 0 somehow pour un truc
 
 /*
 Remplit lstargs, t_element ne contient plus que ce dont on a besoin ici.
@@ -73,24 +74,24 @@ char	**set_args(t_element *pipelist)
 /*
 Initialise les data d'un element de la liste.
 */
-int	init_data(t_datalist *datalist, t_datalist *full_data, t_big_list *list, t_env **env)
+int	init_data(t_data *data, t_data *f_data, t_big_list *list, t_env **env)
 {
 	t_element	*tmp;
 
-	if (full_data)
-		datalist->head = full_data;
+	if (f_data)
+		data->head = f_data;
 	else
-		datalist->head = datalist;
+		data->head = data;
 	tmp = *(list->pipelist);
-	if (set_files(datalist, list->pipelist, env, list) < 0)
+	if (set_files(data, list->pipelist, env, list) < 0)
 		return (-1);
 	tmp = *(list->pipelist);
 	if (tmp)
-		datalist->cmd = ft_strdup(tmp->str);
-	if (!datalist->cmd)
+		data->cmd = ft_strdup(tmp->str);
+	if (!data->cmd)
 		return (0);
-	datalist->args = set_args(*(list->pipelist));
-	if (!(datalist->args))
+	data->args = set_args(*(list->pipelist));
+	if (!(data->args))
 		return (-1);
 	return (0);
 }
@@ -98,12 +99,12 @@ int	init_data(t_datalist *datalist, t_datalist *full_data, t_big_list *list, t_e
 /*
 Ajoute un element a la structure datalist et le remplit.
 */
-int	fill_data(t_datalist **datalist, t_big_list *list, t_env **env)
+int	fill_data(t_data **datalist, t_big_list *list, t_env **env)
 {
-	t_datalist	*new;
-	t_datalist	*tmp;
+	t_data	*new;
+	t_data	*tmp;
 
-	new = (t_datalist *)ft_calloc(1, sizeof(t_datalist));
+	new = (t_data *)ft_calloc(1, sizeof(t_data));
 	if (!new)
 		return (-1);
 	new->next = NULL;
@@ -125,9 +126,9 @@ int	fill_data(t_datalist **datalist, t_big_list *list, t_env **env)
 Initialise la structure, on va exec les heredoc dedans, et set les fd.
 Free la big_list.
 */
-t_datalist	*init_struct(t_big_list *list, t_env **env)
+t_data	*init_struct(t_big_list *list, t_env **env)
 {
-	t_datalist	*datalist;
+	t_data		*datalist;
 	t_big_list	*tmp;
 
 	datalist = NULL;
@@ -147,9 +148,9 @@ t_datalist	*init_struct(t_big_list *list, t_env **env)
 }
 
 // A del
-// void	print_datalist(t_datalist *datalist)
+// void	print_data(t_data *datalist)
 // {
-// 	t_datalist	*tmp;
+// 	t_data	*tmp;
 // 	int			i;
 
 // 	i = 0;

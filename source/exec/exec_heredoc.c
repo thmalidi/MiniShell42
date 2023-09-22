@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/21 16:03:14 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:48:34 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	write_hd(char *line, int *fd)
 	free(line);
 }
 
-void	free_hd(char *line, t_datalist *data, t_big_list *list, t_env *env)
+void	free_hd(char *line, t_data *data, t_big_list *list, t_env *env)
 {
 	free(line);
 	free_datalist(data);
@@ -36,7 +36,7 @@ elt de pipelist est le limiteur.
 Il faut fork pour les signaux.
 Attention c'est un process il faudra le wait !!
 */
-int	exec_ohd(t_datalist *data, char *limiter, int *fd, t_env **env, t_big_list *list)
+int	exec_ohd(t_data *data, char *limiter, int *fd, t_env **env, t_big_list *list)
 {
 	char	*line;
 	char	*line_expanded;
@@ -71,7 +71,7 @@ int	exec_ohd(t_datalist *data, char *limiter, int *fd, t_env **env, t_big_list *
 	}
 }
 
-int	exec_hd(t_datalist *data, t_element *elt, t_env **env, t_big_list *list)
+int	exec_hd(t_data *data, t_element *elt, t_env **env, t_big_list *list)
 {
 	int	fd[2];
 	int	pid;
