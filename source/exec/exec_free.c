@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 11:17:07 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:48:34 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:51:59 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,24 +92,24 @@ void	free_big_list(t_big_list *list)
 	free(tmp2);
 }
 
-void	free_datalist(t_data *datalist)
+void	free_data(t_data *data)
 {
 	t_data	*tmp;
 
-	if (!datalist)
+	if (!data)
 		return ;
-	close_datafd(datalist);
-	tmp = datalist->next;
+	close_datafd(data);
+	tmp = data->next;
 	while (tmp)
 	{
-		free(datalist->cmd);
-		free_tab(datalist->args);
-		free(datalist);
-		datalist = tmp;
+		free(data->cmd);
+		free_tab(data->args);
+		free(data);
+		data = tmp;
 		tmp = tmp->next;
 	}
-	free(datalist->cmd);
-	free_tab(datalist->args);
-	free(datalist);
+	free(data->cmd);
+	free_tab(data->args);
+	free(data);
 	return ;
 }

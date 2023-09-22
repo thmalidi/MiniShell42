@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:40:31 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:49:05 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:51:59 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ int	is_builtin(char *cmd)
 	return (-1);
 }
 
-int	len_datalist(t_data *datalist)
+int	len_data(t_data *data)
 {
 	int		len;
 	t_data	*tmp;
 
 	len = 0;
-	tmp = datalist;
+	tmp = data;
 	while (tmp)
 	{
 		len++;

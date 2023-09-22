@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:49:33 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:51:59 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ int	init_data(t_data *data, t_data *f_data, t_big_list *list, t_env **env)
 }
 
 /*
-Ajoute un element a la structure datalist et le remplit.
+Ajoute un element a la structure data et le remplit.
 */
-int	fill_data(t_data **datalist, t_big_list *list, t_env **env)
+int	fill_data(t_data **data, t_big_list *list, t_env **env)
 {
 	t_data	*new;
 	t_data	*tmp;
@@ -108,12 +108,12 @@ int	fill_data(t_data **datalist, t_big_list *list, t_env **env)
 	if (!new)
 		return (-1);
 	new->next = NULL;
-	if (init_data(new, *datalist, list, env) < 0)
+	if (init_data(new, *data, list, env) < 0)
 		return (free(new), -1);
-	tmp = *datalist;
+	tmp = *data;
 	if (!tmp)
 	{
-		*datalist = new;
+		*data = new;
 		return (0);
 	}
 	while (tmp->next)
@@ -128,33 +128,33 @@ Free la big_list.
 */
 t_data	*init_struct(t_big_list *list, t_env **env)
 {
-	t_data		*datalist;
+	t_data		*data;
 	t_big_list	*tmp;
 
-	datalist = NULL;
+	data = NULL;
 	tmp = list;
 	while (tmp)
 	{
-		if (fill_data(&datalist, tmp, env) < 0)
+		if (fill_data(&data, tmp, env) < 0)
 		{
-			free_datalist(datalist);
+			free_data(data);
 			free_big_list(list);
 			return (NULL);
 		}
 		tmp = tmp->next;
 	}
 	free_big_list(list);
-	return (datalist);
+	return (data);
 }
 
 // A del
-// void	print_data(t_data *datalist)
+// void	print_data(t_data *data)
 // {
 // 	t_data	*tmp;
 // 	int			i;
 
 // 	i = 0;
-// 	tmp = datalist;
+// 	tmp = data;
 // 	while (tmp)
 // 	{
 // 		printf("\nDatalist du pipe %d :\n", i);

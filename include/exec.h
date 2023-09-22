@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:36:48 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:48:34 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:51:59 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "env.h"
 
 // Struct
-typedef struct s_datalist
+typedef struct s_data
 {
 	char				*cmd;
 	int					pipenb;
@@ -25,11 +25,11 @@ typedef struct s_datalist
 	int					infile;
 	int					outfile;
 	char				**args;
-	struct s_datalist	*head;
-	struct s_datalist	*next;
+	struct s_data	*head;
+	struct s_data	*next;
 }	t_data;
 
-typedef int	(*t_builtins)(t_data *datalist, t_env **env);
+typedef int	(*t_builtins)(t_data *data, t_env **env);
 
 // Proto
 char		*check_cmd(char **env, char *cmd);
@@ -46,24 +46,24 @@ t_data	*init_struct(t_big_list *list, t_env **env);
 t_element	*remove_files(t_element *elt);
 void		close_fd(int *fd, int n);
 void		free_big_list(t_big_list *list);
-void		free_datalist(t_data *datalist);
+void		free_data(t_data *data);
 void		free_element(t_element **elt);
-void		print_data(t_data *datalist);
+void		print_data(t_data *data);
 
 void		init_signals(void);
 void		ignore_signals(void);
 void		child_handler(int sig);
-int			len_datalist(t_data *datalist);
+int			len_data(t_data *data);
 void		hd_handler(int sig);
-int			check_file(char *file, int type, t_data *datalist);
+int			check_file(char *file, int type, t_data *data);
 int			manage_files(t_element **tmp, t_element **pipelist, \
-						t_data *datalist);
+						t_data *data);
 
 int			set_pipe(t_data *list, int *fd);
 int			set_dup(t_data *list, int *fd);
 void		exec_b(t_data *data, t_env **env, int builtin);
 int			exec_nobuiltin(t_data *data, t_env **envlst);
-int			need_to_fork(t_data *datalist, int builtin);
+int			need_to_fork(t_data *data, int builtin);
 void		close_datafd(t_data *data);
 
 #endif

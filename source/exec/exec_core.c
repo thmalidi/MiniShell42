@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:39:46 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:48:34 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:51:59 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,29 +82,29 @@ int	exec_nobuiltin(t_data *data, t_env **envlst)
 	if (!cmdwpath)
 	{
 		free_tab(env);
-		free_datalist(data->head);
+		free_data(data->head);
 		exit (g_return_value);
 	}
 	if (cmdwpath)
 		execve(cmdwpath, data->args, env);
 	free(cmdwpath);
 	free_tab(env);
-	free_datalist(data->head);
+	free_data(data->head);
 	return (g_return_value);
 }
 
 /*
 Retourne 0 si pas besoin de fork, 1 sinon
 */
-int	need_to_fork(t_data *datalist, int builtin)
+int	need_to_fork(t_data *data, int builtin)
 {
 	if (builtin < 0)
 	{
 		return (1);
 	}
-	if (len_datalist(datalist->head) == 1)
+	if (len_data(data->head) == 1)
 	{
-		if ((builtin == EXPORT && !(datalist->args)[1]) || builtin == ECHO \
+		if ((builtin == EXPORT && !(data->args)[1]) || builtin == ECHO \
 			|| builtin == PWD || builtin == ENV)
 			return (1);
 		else

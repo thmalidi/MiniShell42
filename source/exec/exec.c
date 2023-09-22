@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:27:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:49:18 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:51:59 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ int	exec_child(t_data *data, int *fd, t_env **envlst)
 	{
 		exec_b(data, envlst, builtin);
 		free_env(*envlst);
-		free_datalist(data->head);
+		free_data(data->head);
 		if (builtin != EXIT)
 			exit (g_return_value);
 		return (g_return_value);
 	}
 	else
 		exec_nobuiltin(data, envlst);
-	free_datalist(data->head);
+	free_data(data->head);
 	free_env(*envlst);
 	return (g_return_value);
 }
@@ -57,7 +57,7 @@ int	exec_opipe(t_data *data, int *fd, t_env **envlst)
 		{
 			close_fd(fd, 4);
 			close_datafd(data->head);
-			free_datalist(data->head);
+			free_data(data->head);
 			free_env(*envlst);
 			exit (1);
 		}
@@ -67,12 +67,12 @@ int	exec_opipe(t_data *data, int *fd, t_env **envlst)
 	return (0);
 }
 
-int	wait_processes(t_data *datalist)
+int	wait_processes(t_data *data)
 {
 	t_data	*tmp;
 	int		status;
 
-	tmp = datalist;
+	tmp = data;
 	status = 0;
 	while (tmp)
 	{
@@ -101,9 +101,9 @@ int	pipe_manager(t_data *tmp, int *fd, t_env **envlst)
 		return (-1);
 	}
 	if (set_pipe(tmp, fd) < 0)
-		return (free_datalist(tmp->head), -1);
+		return (free_data(tmp->head), -1);
 	if (exec_opipe(tmp, fd, envlst))
-		return (free_datalist(tmp->head), -1);
+		return (free_data(tmp->head), -1);
 	if (tmp->infile > 0)
 		close(tmp->infile);
 	if (tmp->outfile > 0)
@@ -121,24 +121,24 @@ Mettre les conditions sur le fork.
 int	exec(t_big_list *list, t_env **envlst)
 {
 	int		fd[4];
-	t_data	*datalist;
+	t_data	*data;
 	t_data	*tmp;
 
 	ft_bzero(fd, 4 * sizeof(int));
-	datalist = init_struct(list, envlst);
-	if (!datalist)
+	data = init_struct(list, envlst);
+	if (!data)
 	{
 		return (0);
 	}
-	tmp = datalist;
+	tmp = data;
 	while (tmp)
 	{
 		pipe_manager(tmp, fd, envlst);
 		tmp = tmp->next;
 	}
-	wait_processes(datalist);
+	wait_processes(data);
 	close_fd(fd, 4);
-	free_datalist(datalist);
+	free_data(data);
 	return (0);
 }
 
