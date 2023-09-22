@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:36:48 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:05:17 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:12:13 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,10 @@ int			manage_files(t_element **tmp, t_element **pipelist, \
 						t_datalist *datalist);
 
 int			set_pipe(t_datalist *list, int *fd);
-int			set_dup(t_datalist *list, int *fd, t_datalist *full_data);
+int			set_dup(t_datalist *list, int *fd);
 void		exec_b(t_datalist *data, t_env **env, int builtin);
-int			exec_nobuiltin(t_datalist *data, t_env **envlst, \
-							t_datalist *full_data);
-int			need_to_fork(t_datalist *datalist, t_datalist *full_data, int builtin);
+int			exec_nobuiltin(t_datalist *data, t_env **envlst);
+int			need_to_fork(t_datalist *datalist, int builtin);
 void		close_datafd(t_datalist *data);
 
 #endif

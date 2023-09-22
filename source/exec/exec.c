@@ -6,31 +6,31 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:27:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:07:11 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:16:23 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exec_child(t_datalist *data, int *fd, t_env **envlst, t_datalist *full_data)
+int	exec_child(t_datalist *data, int *fd, t_env **envlst)
 {
 	int	builtin;
 
 	builtin = is_builtin(data->cmd);
 	signal(SIGINT, &child_handler);
-	set_dup(data, fd, full_data);
+	set_dup(data, fd);
 	if (builtin > -1)
 	{
 		exec_b(data, envlst, builtin);
 		free_env(*envlst);
-		free_datalist(full_data);
+		free_datalist(data->head);
 		if (builtin != EXIT)
 			exit (g_return_value);
 		return (g_return_value);
 	}
 	else
-		exec_nobuiltin(data, envlst, full_data);
-	free_datalist(full_data);
+		exec_nobuiltin(data, envlst);
+	free_datalist(data->head);
 	free_env(*envlst);
 	return (g_return_value);
 }
@@ -40,14 +40,14 @@ Execute une fork qui correspond donc a un pipe.
 Dans le cas ou l'exec ne fonctionne pas, exit avec un perror,
 il faudra check que le perror renvoie bien les bons trucs.
 */
-int	exec_opipe(t_datalist *data, int *fd, t_env **envlst, t_datalist *full_data)
+int	exec_opipe(t_datalist *data, int *fd, t_env **envlst)
 {
 	int	builtin;
 
 	if (ft_strcmp(data->cmd, "") == 0)
 		return (error_manager("", CMD), 0);
 	builtin = is_builtin(data->cmd);
-	if (need_to_fork(data, full_data, builtin) == 0)
+	if (need_to_fork(data, builtin) == 0)
 		exec_b(data, envlst, builtin);
 	else
 	{
@@ -56,13 +56,13 @@ int	exec_opipe(t_datalist *data, int *fd, t_env **envlst, t_datalist *full_data)
 		if ((data->infile < 0 || data->outfile < 0) && data->pid == 0)
 		{
 			close_fd(fd, 4);
-			close_datafd(full_data);
-			free_datalist(full_data);
+			close_datafd(data->head);
+			free_datalist(data->head);
 			free_env(*envlst);
 			exit (1);
 		}
 		if (data->pid == 0)
-			exec_child(data, fd, envlst, full_data);
+			exec_child(data, fd, envlst);
 	}
 	return (0);
 }
@@ -90,7 +90,7 @@ int	wait_processes(t_datalist *datalist)
 	return (0);
 }
 
-int	pipe_manager(t_datalist *tmp, t_datalist *data, int *fd, t_env **envlst)
+int	pipe_manager(t_datalist *tmp, int *fd, t_env **envlst)
 {
 	if (!(tmp->cmd))
 	{
@@ -101,9 +101,9 @@ int	pipe_manager(t_datalist *tmp, t_datalist *data, int *fd, t_env **envlst)
 		return (-1);
 	}
 	if (set_pipe(tmp, fd) < 0)
-		return (free_datalist(data), -1);
-	if (exec_opipe(tmp, fd, envlst, data))
-		return (free_datalist(data), -1);
+		return (free_datalist(tmp->head), -1);
+	if (exec_opipe(tmp, fd, envlst))
+		return (free_datalist(tmp->head), -1);
 	if (tmp->infile > 0)
 		close(tmp->infile);
 	if (tmp->outfile > 0)
@@ -133,7 +133,7 @@ int	exec(t_big_list *list, t_env **envlst)
 	tmp = datalist;
 	while (tmp)
 	{
-		pipe_manager(tmp, datalist, fd, envlst);
+		pipe_manager(tmp, fd, envlst);
 		// if (pipe_manager(tmp, datalist, fd, envlst) < 0)
 		// 	return (0);
 		tmp = tmp->next;
