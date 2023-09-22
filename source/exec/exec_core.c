@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:39:46 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/21 16:23:56 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:06:37 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ int	set_dup(t_datalist *list, int *fd, t_datalist *full_data)
 /*
 Exec une commande qui est un builtin.
 */
-void	exec_b(t_datalist *data, t_datalist *f_data, t_env **env, int builtin)
+void	exec_b(t_datalist *data, t_env **env, int builtin)
 {
 	const t_builtins	tab_builtins[] = {&cd_b, &echo_b, &env_b, \
 										&exit_b, &export_b, &pwd_b, &unset_b};
 
-	(*tab_builtins[builtin])(data, f_data, env);
+	(*tab_builtins[builtin])(data, env);
 }
 
 int	exec_nobuiltin(t_datalist *data, t_env **envlst, t_datalist *full_data)

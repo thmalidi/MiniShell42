@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:11:35 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/21 14:16:47 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:05:09 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,10 @@ int	spec_manager(t_datalist *data, t_env **env)
 	return (0);
 }
 
-int	cd_b(t_datalist *data, t_datalist *f_data, t_env **env)
+int	cd_b(t_datalist *data, t_env **env)
 {
 	char	*dir;
 
-	(void)f_data;
 	g_return_value = 0;
 	if (len_tab(data->args) > 2)
 		return (error_manager("cd", NBARGS), g_return_value);

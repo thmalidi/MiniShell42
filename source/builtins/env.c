@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:10:58 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/21 14:16:41 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:05:25 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ Check les eventuels arguments, je pense qu'on met juste un message d'erreur
 s'il y a des arguments.
 Il ne faut pas print si les var n'ont pas de value, gere dans env_print.
 */
-int	env_b(t_datalist *data, t_datalist *f_data, t_env **env)
+int	env_b(t_datalist *data, t_env **env)
 {
-	(void)f_data;
-	
 	g_return_value = 0;
 	if (len_tab(data->args) > 1)
 		error_manager("env", NBARGS);

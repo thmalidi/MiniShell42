@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:27:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/21 17:01:06 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:07:11 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	exec_child(t_datalist *data, int *fd, t_env **envlst, t_datalist *full_data)
 	set_dup(data, fd, full_data);
 	if (builtin > -1)
 	{
-		exec_b(data, full_data, envlst, builtin);
+		exec_b(data, envlst, builtin);
 		free_env(*envlst);
 		free_datalist(full_data);
 		if (builtin != EXIT)
@@ -48,7 +48,7 @@ int	exec_opipe(t_datalist *data, int *fd, t_env **envlst, t_datalist *full_data)
 		return (error_manager("", CMD), 0);
 	builtin = is_builtin(data->cmd);
 	if (need_to_fork(data, full_data, builtin) == 0)
-		exec_b(data, full_data, envlst, builtin);
+		exec_b(data, envlst, builtin);
 	else
 	{
 		data->pid = fork();
