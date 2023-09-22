@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/21 17:01:59 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 08:58:35 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,14 @@ char	**set_args(t_element *pipelist)
 /*
 Initialise les data d'un element de la liste.
 */
-int	init_data(t_datalist *datalist, t_big_list *list, t_env **env)
+int	init_data(t_datalist *datalist, t_datalist *full_data, t_big_list *list, t_env **env)
 {
 	t_element	*tmp;
 
+	if (full_data)
+		datalist->head = full_data;
+	else
+		datalist->head = datalist;
 	tmp = *(list->pipelist);
 	if (set_files(datalist, list->pipelist, env, list) < 0)
 		return (-1);
@@ -103,7 +107,7 @@ int	fill_data(t_datalist **datalist, t_big_list *list, t_env **env)
 	if (!new)
 		return (-1);
 	new->next = NULL;
-	if (init_data(new, list, env) < 0)
+	if (init_data(new, *datalist, list, env) < 0)
 		return (free(new), -1);
 	tmp = *datalist;
 	if (!tmp)

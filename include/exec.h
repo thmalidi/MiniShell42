@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:36:48 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/21 14:11:56 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 08:53:32 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_datalist
 	int					infile;
 	int					outfile;
 	char				**args;
+	struct s_datalist	*head;
 	struct s_datalist	*next;
 }	t_datalist;
 
