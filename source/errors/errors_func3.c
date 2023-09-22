@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 07:39:23 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/21 11:45:39 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:55:15 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ int	error_hd(char *str)
 int	error_notset(char *str)
 {
 	ft_dprintf(2, " cd: %s not set\n", str);
+	g_return_value = 1;
+	return (0);
+}
+
+int	error_ambiguous(char *str)
+{
+	ft_dprintf(2, "%s: ambiguous redirect\n", str);
 	g_return_value = 1;
 	return (0);
 }

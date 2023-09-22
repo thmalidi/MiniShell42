@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:51:59 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 10:12:55 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ void	write_hd(char *line, int *fd)
 	free(line);
 }
 
-void	free_hd(char *line, t_data *data, t_big_list *list, t_env *env)
+void	free_hd(char *line, t_data *data, t_big_list *list, t_env *env, int *fd)
 {
 	free(line);
 	free_data(data);
 	free_big_list(list);
 	free_env(env);
+	close(fd[1]);
+	exit (g_return_value);
 }
 
 /*
@@ -50,23 +52,13 @@ int	exec_ohd(t_data *data, char *limiter, int *fd, t_env **env, t_big_list *list
 		if (!line && g_return_value != 130)
 		{
 			error_manager(limiter, HD);
-			free_hd(line, data, list, *env);
-			close(fd[1]);
-			exit (g_return_value);
+			free_hd(line, data, list, *env, fd);
 		}
 		else if (g_return_value == 130)
-		{
-			free_hd(line, data, list, *env);
-			close(fd[1]);
-			exit (g_return_value);
-		}
+			free_hd(line, data, list, *env, fd);
 		line_expanded = expand(line, env);
 		if (ft_strcmp(line_expanded, limiter) == 0)
-		{
-			free_hd(line_expanded, data, list, *env);
-			close(fd[1]);
-			exit (g_return_value);
-		}
+			free_hd(line_expanded, data, list, *env, fd);
 		write_hd(line_expanded, fd);
 	}
 }

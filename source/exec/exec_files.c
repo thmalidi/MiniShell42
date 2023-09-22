@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:46:08 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:51:59 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 10:00:32 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,21 +85,12 @@ int	check_file(char *file, int type, t_data *data)
 			close(data->outfile);
 		return (error_manager(file, ISDIR), close(fd), -1);
 	}
-	if (type == 1)
-	{
-		if (check_infile(file, data) < 0)
-			return (-1);
-	}
-	else if (type == 3)
-	{
-		if (check_outfile(file, data) < 0)
-			return (-1);
-	}
-	else if (type == 4)
-	{
-		if (check_appfile(file, data) < 0)
-			return (-1);
-	}
+	if (type == 1 && check_infile(file, data) < 0)
+		return (-1);
+	else if (type == 3 && check_outfile(file, data) < 0)
+		return (-1);
+	else if (type == 4 && check_appfile(file, data) < 0)
+		return (-1);
 	return (0);
 }
 

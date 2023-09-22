@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:36:48 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:51:59 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 10:10:13 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef struct s_data
 	int					infile;
 	int					outfile;
 	char				**args;
-	struct s_data	*head;
-	struct s_data	*next;
+	struct s_data		*head;
+	struct s_data		*next;
 }	t_data;
 
 typedef int	(*t_builtins)(t_data *data, t_env **env);
@@ -42,7 +42,7 @@ int			exec_hd(t_data *data, t_element *pipelist, t_env **env, \
 					t_big_list *list);
 int			is_builtin(char *cmd);
 int			is_whitespace(char *cmd);
-t_data	*init_struct(t_big_list *list, t_env **env);
+t_data		*init_struct(t_big_list *list, t_env **env);
 t_element	*remove_files(t_element *elt);
 void		close_fd(int *fd, int n);
 void		free_big_list(t_big_list *list);
