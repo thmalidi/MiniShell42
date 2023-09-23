@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:05:34 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 13:40:23 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 09:44:48 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ char	*check_cmd(char **env, char *cmd)
 {
 	char	**paths;
 	char	*cmd_to_ret;
+	int		fd;
 
 	if (!cmd)
 		return (NULL);
@@ -112,15 +113,15 @@ char	*check_cmd(char **env, char *cmd)
 	{
 		paths = get_path(env);
 		if (!paths)
-			return (NULL);
+			return (error_manager(cmd, NOFILE), g_return_value = 1, NULL);
 		cmd_to_ret = check_cmd_nopath(paths, cmd);
-		free_tab(paths);
-		return (cmd_to_ret);
+		return (free_tab(paths), cmd_to_ret);
 	}
 	else
 	{
-		if (open(cmd, O_DIRECTORY) > -1)
-			return (error_manager(cmd, ISDIR), NULL);
+		fd = open(cmd, O_DIRECTORY);
+		if (fd > -1)
+			return (close(fd), error_manager(cmd, ISDIR), NULL);
 		if (access(cmd, F_OK) != 0)
 			return (error_manager(cmd, NOFILE), NULL);
 		else if (access(cmd, F_OK) == 0 && access(cmd, X_OK) != 0)

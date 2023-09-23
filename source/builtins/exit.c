@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:11:45 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 09:41:42 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 08:08:09 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,14 @@ int	should_exit(char *arg)
 	return (ft_atoi(arg));
 }
 
-int	exit_b(t_datalist *data, t_env **env)
+int	exit_b(t_data *data)
 {
 	int	shouldexit;
 
-	(void)env;
 	if (len_tab(data->args) < 2)
 	{
-		free_env(*env);
-		free_datalist(data);
+		free_env(*data->env);
+		free_data(data->head);
 		exit (0);
 	}
 	shouldexit = should_exit((data->args)[1]);
@@ -69,8 +68,8 @@ int	exit_b(t_datalist *data, t_env **env)
 	else
 	{
 		g_return_value = shouldexit % 256;
-		free_env(*env);
-		free_datalist(data);
+		free_env(*data->env);
+		free_data(data->head);
 		exit(g_return_value);
 	}
 }

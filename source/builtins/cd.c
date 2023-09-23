@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:11:35 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 13:11:37 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 07:58:32 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	go_root(t_env **env)
 {
 	char	*dir;
 
+	if (get_value_env(*env, "HOME") == NULL)
+		return (error_manager("HOME", NOTSET), -1);
 	dir = getcwd(NULL, 0);
 	if (!dir)
 		return (-1);
@@ -57,6 +59,7 @@ int	go_root(t_env **env)
 	if (!dir)
 		return (-1);
 	set_value_env(env, "PWD", dir);
+	free(dir);
 	return (0);
 }
 
@@ -64,6 +67,9 @@ int	go_back(t_env **env)
 {
 	char	*dir;
 
+	if (get_value_env(*env, "OLDPWD") == NULL \
+		|| get_value_env(*env, "OLDPWD") == NULL)
+		return (error_manager("OLDPWD", NOTSET), -1);
 	dir = getcwd(NULL, 0);
 	if (!dir)
 		return (-1);
@@ -74,42 +80,43 @@ int	go_back(t_env **env)
 	if (!dir)
 		return (-1);
 	set_value_env(env, "PWD", dir);
+	free(dir);
 	return (0);
 }
 
-int	spec_manager(t_datalist *data, t_env **env)
+int	spec_manager(t_data *data)
 {
 	if (!(data->args[1]) || ft_strcmp(data->args[1], "~") == 0 \
 		|| ft_strcmp(data->args[1], "~/") == 0)
 	{
-		go_root(env);
+		go_root(data->env);
 		return (1);
 	}
 	else if (ft_strcmp(data->args[1], "-") == 0)
 	{
-		go_back(env);
+		go_back(data->env);
 		return (1);
 	}
 	return (0);
 }
 
-int	cd_b(t_datalist *data, t_env **env)
+int	cd_b(t_data *data)
 {
 	char	*dir;
 
 	g_return_value = 0;
 	if (len_tab(data->args) > 2)
 		return (error_manager("cd", NBARGS), g_return_value);
-	if (spec_manager(data, env) == 1)
+	if (spec_manager(data) == 1)
 		return (g_return_value);
 	if (is_an_option(data->args, 0) == YES)
 		return (error_manager("cd", OPTION), g_return_value);
 	dir = getcwd(NULL, 0);
 	if (!dir)
 		return (ft_dprintf(2, "cd: error retrieving current directory: \
-		getcwd: cannot access parent directories: No such file or directory"), \
+getcwd: cannot access parent directories: No such file or directory"), \
 		g_return_value);
-	set_value_env(env, "OLDPWD", dir);
+	set_value_env(data->env, "OLDPWD", dir);
 	free(dir);
 	if (is_valid_dir(data->args[1]) == NO)
 		return (g_return_value);
@@ -117,9 +124,9 @@ int	cd_b(t_datalist *data, t_env **env)
 	dir = getcwd(NULL, 0);
 	if (!dir)
 		return (ft_dprintf(2, "cd: error retrieving current directory: \
-		getcwd: cannot access parent directories: No such file or directory"), \
+getcwd: cannot access parent directories: No such file or directory"), \
 		g_return_value);
-	set_value_env(env, "PWD", dir);
+	set_value_env(data->env, "PWD", dir);
 	free(dir);
 	return (g_return_value);
 }

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:39:46 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/20 14:34:03 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 08:04:55 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ et on les met dan fd[4] pour le infile et fd[5] pour le outfile.
 Si on est sur le dernier pipe, on ne doit pas ouvrir de nouveau pipe, 
 la sortie se fera sur la sortie standard si aucun outfile n'est precise.
 */
-int	set_pipe(t_datalist *list, int *fd)
+int	set_pipe(t_data *list, int *fd)
 {
 	close_fd(fd, 2);
 	fd[0] = fd[2];
@@ -39,7 +39,7 @@ Set le dup d'entree et de sortie.
 On ne doit dup que si le fd est != de 0.
 On doit prioriser les infile et outfile aux pipes.
 */
-int	set_dup(t_datalist *list, int *fd, t_datalist *full_data)
+int	set_dup(t_data *list, int *fd)
 {
 	if (list->infile > 0)
 		dup2(list->infile, STDIN_FILENO);
@@ -50,29 +50,29 @@ int	set_dup(t_datalist *list, int *fd, t_datalist *full_data)
 	else if (fd[3] > 0)
 		dup2(fd[3], STDOUT_FILENO);
 	close_fd(fd, 4);
-	close_datafd(full_data);
+	close_datafd(list->head);
 	return (0);
 }
 
 /*
 Exec une commande qui est un builtin.
 */
-void	exec_builtin(t_datalist *datalist, t_env **envlst, int builtin)
+void	exec_b(t_data *data, int builtin)
 {
 	const t_builtins	tab_builtins[] = {&cd_b, &echo_b, &env_b, \
 										&exit_b, &export_b, &pwd_b, &unset_b};
 
-	(*tab_builtins[builtin])(datalist, envlst);
+	(*tab_builtins[builtin])(data);
 }
 
-int	exec_nobuiltin(t_datalist *data, t_env **envlst, t_datalist *full_data)
+int	exec_nobuiltin(t_data *data)
 {
 	char	*cmdwpath;
 	char	**env;
 
 	signal(SIGQUIT, &child_handler);
-	env = env_to_tab(*envlst);
-	free_env(*envlst);
+	env = env_to_tab(*data->env);
+	free_env(*data->env);
 	if (!env)
 	{
 		error_manager(data->cmd, CMD);
@@ -82,32 +82,36 @@ int	exec_nobuiltin(t_datalist *data, t_env **envlst, t_datalist *full_data)
 	if (!cmdwpath)
 	{
 		free_tab(env);
-		free_datalist(full_data);
+		free_data(data->head);
 		exit (g_return_value);
 	}
 	if (cmdwpath)
 		execve(cmdwpath, data->args, env);
 	free(cmdwpath);
 	free_tab(env);
-	free_datalist(full_data);
-	exit (g_return_value);
+	free_data(data->head);
+	return (g_return_value);
 }
 
 /*
 Retourne 0 si pas besoin de fork, 1 sinon
 */
-int	need_to_fork(t_datalist *datalist, int builtin)
+int	need_to_fork(t_data *data, int builtin)
 {
 	if (builtin < 0)
-		return (1);
-	if (len_datalist(datalist) == 1)
 	{
-		if ((builtin == EXPORT && !(datalist->args)[1]) || builtin == ECHO \
+		return (1);
+	}
+	if (len_data(data->head) == 1)
+	{
+		if ((builtin == EXPORT && !(data->args)[1]) || builtin == ECHO \
 			|| builtin == PWD || builtin == ENV)
 			return (1);
 		else
 			return (0);
 	}
 	else
+	{
 		return (1);
+	}
 }

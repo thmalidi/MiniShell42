@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 11:17:07 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 10:56:34 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 09:01:38 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ void	free_element(t_element **elt)
 
 	tmp2 = *elt;
 	if (!tmp2)
+	{
+		dprintf(2, "Not like this\n");
 		return ;
+	}
 	tmp1 = (*elt)->next;
 	while (tmp1)
 	{
@@ -92,23 +95,24 @@ void	free_big_list(t_big_list *list)
 	free(tmp2);
 }
 
-void	free_datalist(t_datalist *datalist)
+void	free_data(t_data *data)
 {
-	t_datalist	*tmp;
+	t_data	*tmp;
 
-	if (!datalist)
+	if (!data)
 		return ;
-	tmp = datalist->next;
+	close_datafd(data);
+	tmp = data->next;
 	while (tmp)
 	{
-		free(datalist->cmd);
-		free_tab(datalist->args);
-		free(datalist);
-		datalist = tmp;
+		free(data->cmd);
+		free_tab(data->args);
+		free(data);
+		data = tmp;
 		tmp = tmp->next;
 	}
-	free(datalist->cmd);
-	free_tab(datalist->args);
-	free(datalist);
+	free(data->cmd);
+	free_tab(data->args);
+	free(data);
 	return ;
 }
