@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/20 14:48:58 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/23 15:58:16 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_big_list	*pars_arg(char *str, t_env **envlst)
 	t_big_list	*a;
 	t_big_list	*new;
 
+	
 	if (str[0] == '|' || str[ft_strlen(str) - 1] == '|')
 		return (error_manager("|", SYNTAX), NULL);
 	tab = ft_split(str, '|');
