@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:27:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 09:42:30 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 14:54:17 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int	exec_child(t_data *data, int *fd)
 		free_env(*data->env);
 		free_data(data->head);
 		if (builtin != EXIT)
+		{
+			rl_clear_history();
 			exit (g_return_value);
+		}
 		return (g_return_value);
 	}
 	else
@@ -59,6 +62,7 @@ int	exec_opipe(t_data *data, int *fd)
 			close_datafd(data->head);
 			free_env(*data->env);
 			free_data(data->head);
+			rl_clear_history();
 			exit (1);
 		}
 		if (data->pid == 0)
