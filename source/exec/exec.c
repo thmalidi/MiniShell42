@@ -6,13 +6,13 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:27:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:51:59 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 08:08:38 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exec_child(t_data *data, int *fd, t_env **envlst)
+int	exec_child(t_data *data, int *fd)
 {
 	int	builtin;
 
@@ -21,17 +21,17 @@ int	exec_child(t_data *data, int *fd, t_env **envlst)
 	set_dup(data, fd);
 	if (builtin > -1)
 	{
-		exec_b(data, envlst, builtin);
-		free_env(*envlst);
+		exec_b(data, builtin);
+		free_env(*data->env);
 		free_data(data->head);
 		if (builtin != EXIT)
 			exit (g_return_value);
 		return (g_return_value);
 	}
 	else
-		exec_nobuiltin(data, envlst);
+		exec_nobuiltin(data);
+	free_env(*data->env);
 	free_data(data->head);
-	free_env(*envlst);
 	return (g_return_value);
 }
 
@@ -40,7 +40,7 @@ Execute une fork qui correspond donc a un pipe.
 Dans le cas ou l'exec ne fonctionne pas, exit avec un perror,
 il faudra check que le perror renvoie bien les bons trucs.
 */
-int	exec_opipe(t_data *data, int *fd, t_env **envlst)
+int	exec_opipe(t_data *data, int *fd)
 {
 	int	builtin;
 
@@ -48,7 +48,7 @@ int	exec_opipe(t_data *data, int *fd, t_env **envlst)
 		return (error_manager("", CMD), 0);
 	builtin = is_builtin(data->cmd);
 	if (need_to_fork(data, builtin) == 0)
-		exec_b(data, envlst, builtin);
+		exec_b(data, builtin);
 	else
 	{
 		data->pid = fork();
@@ -57,12 +57,12 @@ int	exec_opipe(t_data *data, int *fd, t_env **envlst)
 		{
 			close_fd(fd, 4);
 			close_datafd(data->head);
+			free_env(*data->env);
 			free_data(data->head);
-			free_env(*envlst);
 			exit (1);
 		}
 		if (data->pid == 0)
-			exec_child(data, fd, envlst);
+			exec_child(data, fd);
 	}
 	return (0);
 }
@@ -90,26 +90,25 @@ int	wait_processes(t_data *data)
 	return (0);
 }
 
-int	pipe_manager(t_data *tmp, int *fd, t_env **envlst)
+int	pipe_manager(t_data *data, int *fd)
 {
-	if (!(tmp->cmd))
+	if (!(data->cmd))
 	{
-		if (tmp->infile)
-			close(tmp->infile);
-		if (tmp->outfile)
-			close(tmp->outfile);
+		if (data->infile)
+			close(data->infile);
+		if (data->outfile)
+			close(data->outfile);
 		return (-1);
 	}
-	if (set_pipe(tmp, fd) < 0)
-		return (free_data(tmp->head), -1);
-	if (exec_opipe(tmp, fd, envlst))
-		return (free_data(tmp->head), -1);
-	if (tmp->infile > 0)
-		close(tmp->infile);
-	if (tmp->outfile > 0)
-		close(tmp->outfile);
+	if (set_pipe(data, fd) < 0)
+		return (free_data(data->head), -1);
+	if (exec_opipe(data, fd))
+		return (free_data(data->head), -1);
+	if (data->infile > 0)
+		close(data->infile);
+	if (data->outfile > 0)
+		close(data->outfile);
 	close_fd(fd, 2);
-	tmp = tmp->next;
 	return (0);
 }
 
@@ -133,7 +132,7 @@ int	exec(t_big_list *list, t_env **envlst)
 	tmp = data;
 	while (tmp)
 	{
-		pipe_manager(tmp, fd, envlst);
+		pipe_manager(tmp, fd);
 		tmp = tmp->next;
 	}
 	wait_processes(data);

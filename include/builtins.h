@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:36:32 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:48:34 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 07:57:15 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ int		check_var(char *var, char *func);
 int		is_an_option(char **tab, int func);
 
 // Fct builtins
-int		cd_b(t_data *data, t_env **env);
-int		echo_b(t_data *data, t_env **env);
-int		env_b(t_data *data, t_env **env);
-int		exit_b(t_data *data, t_env **env);
-int		export_b(t_data *data, t_env **env);
-int		pwd_b(t_data *data, t_env **env);
-int		unset_b(t_data *data, t_env **env);
+int		cd_b(t_data *data);
+int		echo_b(t_data *data);
+int		env_b(t_data *data);
+int		exit_b(t_data *data);
+int		export_b(t_data *data);
+int		pwd_b(t_data *data);
+int		unset_b(t_data *data);
 
 #endif

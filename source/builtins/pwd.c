@@ -6,17 +6,16 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:27:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:48:34 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 08:00:23 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	pwd_b(t_data *data, t_env **env)
+int	pwd_b(t_data *data)
 {
 	char	*pwd;
 
-	(void)env;
 	g_return_value = 0;
 	if (is_an_option(data->args, 1) == YES)
 		return (error_manager("pwd", OPTION));

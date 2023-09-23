@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:27:42 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:48:34 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 07:58:57 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,10 @@ int	noneed_breakline(char *args)
 	return (0);
 }
 
-int	echo_b(t_data *data, t_env **env)
+int	echo_b(t_data *data)
 {
 	int	i;
 
-	(void)env;
 	if (!(data->args) || !(data->args[1]))
 		return (printf("\n"), 0);
 	i = 1;

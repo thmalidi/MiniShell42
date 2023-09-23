@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:51:59 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/22 11:18:56 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ supprimme de pipelist les elements correspondants.
 Attention si la commande commence par une redir 
 il faut ptet changer des trucs ici, reinit le pointeur.
 */
-int	set_files(t_data *data, t_element **pipe, t_env **env, t_big_list *list)
+int	set_files(t_data *data, t_element **pipe, t_big_list *list)
 {
 	t_element	*tmp;
 
@@ -29,7 +29,7 @@ int	set_files(t_data *data, t_element **pipe, t_env **env, t_big_list *list)
 		{
 			if (data->infile > 0)
 				close (data->infile);
-			data->infile = exec_hd(data, tmp, env, list);
+			data->infile = exec_hd(data, tmp, list);
 			if (data->infile < 0 || g_return_value > 128)
 				return (-1);
 		}
@@ -82,8 +82,9 @@ int	init_data(t_data *data, t_data *f_data, t_big_list *list, t_env **env)
 		data->head = f_data;
 	else
 		data->head = data;
+	data->env = env;
 	tmp = *(list->pipelist);
-	if (set_files(data, list->pipelist, env, list) < 0)
+	if (set_files(data, list->pipelist, list) < 0)
 		return (-1);
 	tmp = *(list->pipelist);
 	if (tmp)

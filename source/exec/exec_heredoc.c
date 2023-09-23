@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 10:12:55 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 08:08:29 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	write_hd(char *line, int *fd)
 	free(line);
 }
 
-void	free_hd(char *line, t_data *data, t_big_list *list, t_env *env, int *fd)
+void	free_hd(char *line, t_data *data, t_big_list *list, int *fd)
 {
 	free(line);
+	free_env(*(data->env));
 	free_data(data);
 	free_big_list(list);
-	free_env(env);
 	close(fd[1]);
 	exit (g_return_value);
 }
@@ -38,7 +38,7 @@ elt de pipelist est le limiteur.
 Il faut fork pour les signaux.
 Attention c'est un process il faudra le wait !!
 */
-int	exec_ohd(t_data *data, char *limiter, int *fd, t_env **env, t_big_list *list)
+int	exec_ohd(t_data *data, char *limiter, int *fd, t_big_list *list)
 {
 	char	*line;
 	char	*line_expanded;
@@ -52,18 +52,18 @@ int	exec_ohd(t_data *data, char *limiter, int *fd, t_env **env, t_big_list *list
 		if (!line && g_return_value != 130)
 		{
 			error_manager(limiter, HD);
-			free_hd(line, data, list, *env, fd);
+			free_hd(line, data, list, fd);
 		}
 		else if (g_return_value == 130)
-			free_hd(line, data, list, *env, fd);
-		line_expanded = expand(line, env);
+			free_hd(line, data, list, fd);
+		line_expanded = expand(line, data->env);
 		if (ft_strcmp(line_expanded, limiter) == 0)
-			free_hd(line_expanded, data, list, *env, fd);
+			free_hd(line_expanded, data, list, fd);
 		write_hd(line_expanded, fd);
 	}
 }
 
-int	exec_hd(t_data *data, t_element *elt, t_env **env, t_big_list *list)
+int	exec_hd(t_data *data, t_element *elt, t_big_list *list)
 {
 	int	fd[2];
 	int	pid;
@@ -73,7 +73,7 @@ int	exec_hd(t_data *data, t_element *elt, t_env **env, t_big_list *list)
 		return (-1);
 	pid = fork();
 	if (pid == 0)
-		exec_ohd(data, elt->next->str, fd, env, list);
+		exec_ohd(data, elt->next->str, fd, list);
 	close(fd[1]);
 	waitpid(pid, &status, WUNTRACED);
 	if (WIFEXITED(status))

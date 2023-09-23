@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:39:46 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:51:59 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 08:04:55 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,22 @@ int	set_dup(t_data *list, int *fd)
 /*
 Exec une commande qui est un builtin.
 */
-void	exec_b(t_data *data, t_env **env, int builtin)
+void	exec_b(t_data *data, int builtin)
 {
 	const t_builtins	tab_builtins[] = {&cd_b, &echo_b, &env_b, \
 										&exit_b, &export_b, &pwd_b, &unset_b};
 
-	(*tab_builtins[builtin])(data, env);
+	(*tab_builtins[builtin])(data);
 }
 
-int	exec_nobuiltin(t_data *data, t_env **envlst)
+int	exec_nobuiltin(t_data *data)
 {
 	char	*cmdwpath;
 	char	**env;
 
 	signal(SIGQUIT, &child_handler);
-	env = env_to_tab(*envlst);
-	free_env(*envlst);
+	env = env_to_tab(*data->env);
+	free_env(*data->env);
 	if (!env)
 	{
 		error_manager(data->cmd, CMD);

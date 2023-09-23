@@ -6,13 +6,13 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:28:05 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:48:34 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 08:00:34 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	unset_b(t_data *data, t_env **env)
+int	unset_b(t_data *data)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ int	unset_b(t_data *data, t_env **env)
 		if (check_var(data->args[i], "unset") < 0)
 			break ;
 		else
-			rm_from_env(env, data->args[1]);
+			rm_from_env(data->env, data->args[1]);
 	}
 	return (g_return_value);
 }
