@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:32:01 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:57:25 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 10:35:18 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	error_manager(char *str, int error_id)
 									&error_identifier, &error_args, \
 									&error_malloc, &error_option, \
 									&error_quotes, &error_hd, &error_notset, \
-									&error_ambiguous};
+									&error_ambiguous, &error_nopath};
 
 	return ((*tab_errors[error_id])(str));
 }

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:57:32 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:56:14 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 10:35:40 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ enum	e_errors
 	QUOTES		=	10,
 	HD			=	11,
 	NOTSET		=	12,
-	AMBIGUOUS	=	13
+	AMBIGUOUS	=	13,
+	NOPATH		=	14
 };
 
 typedef int	(*t_errors)(char *arg);
@@ -50,5 +51,6 @@ int	error_quotes(char *str);
 int	error_hd(char *str);
 int	error_notset(char *str);
 int	error_ambiguous(char *str);
+int	error_nopath(char *str);
 
 #endif
