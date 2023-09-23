@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:11:45 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 08:08:09 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 14:54:54 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	exit_b(t_data *data)
 	{
 		free_env(*data->env);
 		free_data(data->head);
+		rl_clear_history();
 		exit (0);
 	}
 	shouldexit = should_exit((data->args)[1]);
@@ -70,6 +71,7 @@ int	exit_b(t_data *data)
 		g_return_value = shouldexit % 256;
 		free_env(*data->env);
 		free_data(data->head);
+		rl_clear_history();
 		exit(g_return_value);
 	}
 }
