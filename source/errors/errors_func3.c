@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 07:39:23 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 09:55:15 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 10:34:31 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,12 @@ int	error_ambiguous(char *str)
 {
 	ft_dprintf(2, "%s: ambiguous redirect\n", str);
 	g_return_value = 1;
+	return (0);
+}
+
+int	error_nopath(char *str)
+{
+	ft_dprintf(2, "%s: No such file or directory\n", str);
+	g_return_value = 127;
 	return (0);
 }

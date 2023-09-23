@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:31:53 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/21 16:28:52 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 10:34:47 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	error_nofile(char *str)
 {
 	ft_dprintf(2, "%s: No such file or directory\n", str);
-	g_return_value = 127;
+	g_return_value = 1;
 	return (0);
 }
 
