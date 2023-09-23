@@ -1,6 +1,0 @@
-comment.txt$
-config$
-include$
-Makefile$
-source$
-test.txt$
