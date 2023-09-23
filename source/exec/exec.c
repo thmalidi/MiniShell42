@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:27:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 09:42:30 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 15:58:23 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int	exec_child(t_data *data, int *fd)
 		free_env(*data->env);
 		free_data(data->head);
 		if (builtin != EXIT)
+		{
+			rl_clear_history();
 			exit (g_return_value);
+		}
 		return (g_return_value);
 	}
 	else
@@ -44,8 +47,8 @@ int	exec_opipe(t_data *data, int *fd)
 {
 	int	builtin;
 
-	if (ft_strcmp(data->cmd, "") == 0)
-		return (error_manager("", CMD), 0);
+	if (data->cmd && ft_strcmp(data->cmd, "") == 0)
+		error_manager("", CMD);
 	builtin = is_builtin(data->cmd);
 	if (need_to_fork(data, builtin) == 0)
 		exec_b(data, builtin);
@@ -59,6 +62,7 @@ int	exec_opipe(t_data *data, int *fd)
 			close_datafd(data->head);
 			free_env(*data->env);
 			free_data(data->head);
+			rl_clear_history();
 			exit (1);
 		}
 		if (data->pid == 0)
@@ -98,7 +102,6 @@ int	pipe_manager(t_data *data, int *fd)
 			close(data->infile);
 		if (data->outfile > 0)
 			close(data->outfile);
-		return (-1);
 	}
 	if (set_pipe(data, fd) < 0)
 		return (free_data(data->head), -1);
@@ -125,11 +128,14 @@ int	exec(t_big_list *list, t_env **envlst)
 
 	ft_bzero(fd, 4 * sizeof(int));
 	data = init_struct(list, envlst);
+	// print_data(data);
 	if (!data)
 		return (0);
 	tmp = data;
 	while (tmp)
 	{
+		if (!tmp->args)
+			g_return_value = 127;
 		pipe_manager(tmp, fd);
 		tmp = tmp->next;
 	}

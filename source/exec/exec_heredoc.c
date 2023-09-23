@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 08:08:29 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 14:53:50 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	free_hd(char *line, t_data *data, t_big_list *list, int *fd)
 	free_data(data);
 	free_big_list(list);
 	close(fd[1]);
+	rl_clear_history();
 	exit (g_return_value);
 }
 
