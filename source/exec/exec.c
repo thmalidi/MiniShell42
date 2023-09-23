@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:27:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 15:58:23 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 18:46:01 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,16 @@ int	exec_opipe(t_data *data, int *fd)
 	{
 		data->pid = fork();
 		ignore_signals();
+		if (data->cmd && ft_strncmp(data->cmd, "\6", 1) == 0 && data->pid == 0)
+		{
+			g_return_value = 0;
+			close_fd(fd, 4);
+			close_datafd(data->head);
+			free_env(*data->env);
+			free_data(data->head);
+			rl_clear_history();
+			exit (g_return_value);
+		}
 		if ((data->infile < 0 || data->outfile < 0) && data->pid == 0)
 		{
 			close_fd(fd, 4);
@@ -134,8 +144,6 @@ int	exec(t_big_list *list, t_env **envlst)
 	tmp = data;
 	while (tmp)
 	{
-		if (!tmp->args)
-			g_return_value = 127;
 		pipe_manager(tmp, fd);
 		tmp = tmp->next;
 	}

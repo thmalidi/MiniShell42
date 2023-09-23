@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:46:08 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/22 10:00:32 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 18:14:29 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	check_infile(char *file, t_data *data)
 		close(data->infile);
 		data->infile = 0;
 	}
+	if (file[0] == '\6')
+		return (-1);
 	if (access(file, F_OK) < 0)
 	{
 		data->infile = -1;
@@ -43,6 +45,8 @@ int	check_outfile(char *file, t_data *data)
 		close(data->outfile);
 		data->outfile = 0;
 	}
+	if (file[0] == '\6')
+		return (-1);
 	if (access(file, F_OK) == 0 && access(file, W_OK) < 0)
 	{
 		data->outfile = -1;
@@ -61,6 +65,8 @@ int	check_appfile(char *file, t_data *data)
 		close(data->outfile);
 		data->outfile = 0;
 	}
+	if (file[0] == '\6')
+		return (-1);
 	if (access(file, F_OK) == 0 && access(file, W_OK) < 0)
 	{
 		data->outfile = -1;
