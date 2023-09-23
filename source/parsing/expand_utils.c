@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/21 16:40:50 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/23 14:55:18 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,8 @@ char	*expand_process(char *str, t_env *env)
 			tmp = change(tab[i], final, env, rv);
 			free(final);
 			final = ft_strdup(tmp);
-			free(tmp);
+			if (tmp[0] != '\0')
+				free(tmp);
 			i++;
 		}
 		free_tab(tab);
