@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:11:25 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 13:11:27 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 18:37:45 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_var(char *var, char *func)
 
 	if (!var)
 		return (-1);
-	if (ft_isalpha((int)var[0]) == 0 && var[0] != '_')
+	if (ft_isalpha((int)var[0]) == 0 && var[0] != '_' && var[0] != '\6')
 		return (error_manager(func, IDENTIFIER), -1);
 	i = 0;
 	while (var[++i])
