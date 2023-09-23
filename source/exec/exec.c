@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:27:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 09:05:50 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 09:42:30 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ int	pipe_manager(t_data *data, int *fd)
 {
 	if (!(data->cmd))
 	{
-		if (data->infile)
+		if (data->infile > 0)
 			close(data->infile);
-		if (data->outfile)
+		if (data->outfile > 0)
 			close(data->outfile);
 		return (-1);
 	}

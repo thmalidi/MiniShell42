@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 11:17:07 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 09:01:38 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 10:27:41 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ void	free_element(t_element **elt)
 	t_element	*tmp1;
 	t_element	*tmp2;
 
+	if (!elt)
+		return ;
 	tmp2 = *elt;
 	if (!tmp2)
 	{
-		dprintf(2, "Not like this\n");
+		free(elt);
 		return ;
 	}
 	tmp1 = (*elt)->next;
