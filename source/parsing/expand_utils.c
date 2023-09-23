@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/23 14:55:18 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/23 17:34:38 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,9 @@ char	**extract_var(char *str)
 		if (str[i] == '$')
 		{
 			j = i + 1;
-			if (ft_isalpha(str[j]))
+			if (ft_isalnum(str[j]))
 			{
-				while (str[j] && ft_isalpha(str[j]))
-					j++;
-			}
-			if (ft_isdigit(str[j]))
-			{
-				while (str[j] && ft_isdigit(str[j]))
+				while (str[j] && ft_isalnum(str[j]))
 					j++;
 			}
 			if (str[j] == '?')
@@ -131,7 +126,9 @@ char	*expand_process(char *str, t_env *env)
 			tmp = change(tab[i], final, env, rv);
 			free(final);
 			final = ft_strdup(tmp);
-			if (tmp[0] != '\0')
+			if (tmp[0] == '\0')
+				final[0] = 8;
+			else
 				free(tmp);
 			i++;
 		}
