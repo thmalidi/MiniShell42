@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/20 14:52:14 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/21 16:40:50 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,21 @@ char	**extract_var(char *str)
 		if (str[i] == '$')
 		{
 			j = i + 1;
-			while (str[j] && ft_isalnum(str[j]))
-				j++;
+			if (ft_isalpha(str[j]))
+			{
+				while (str[j] && ft_isalpha(str[j]))
+					j++;
+			}
+			if (ft_isdigit(str[j]))
+			{
+				while (str[j] && ft_isdigit(str[j]))
+					j++;
+			}
 			if (str[j] == '?')
 				j++;
 			if (j - i != 1)
 				tab[c++] = ft_substr(str, i, j - i);
+			//printf("%s\n", tab[c - 1]);
 		}
 		i++;
 	}
