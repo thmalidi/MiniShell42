@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:27:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 15:58:23 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 17:11:38 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,8 @@ int	exec(t_big_list *list, t_env **envlst)
 	tmp = data;
 	while (tmp)
 	{
-		if (!tmp->args)
-			g_return_value = 127;
+		// if (!tmp->args)
+		// 	g_return_value = 127;
 		pipe_manager(tmp, fd);
 		tmp = tmp->next;
 	}

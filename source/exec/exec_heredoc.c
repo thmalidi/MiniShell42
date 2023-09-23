@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 14:53:50 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/23 17:22:39 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	exec_ohd(t_data *data, char *limiter, int *fd, t_big_list *list)
 	char	*line;
 	char	*line_expanded;
 
-	ignore_signals();
 	signal(SIGINT, &hd_handler);
+	g_return_value = 0;
 	close(fd[0]);
 	while (1)
 	{
@@ -70,6 +70,7 @@ int	exec_hd(t_data *data, t_element *elt, t_big_list *list)
 	int	pid;
 	int	status;
 
+	ignore_signals();
 	if (pipe(fd) == -1)
 		return (-1);
 	pid = fork();
