@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/23 18:04:28 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/24 15:37:46 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,11 @@ char	**extract_var(char *str)
 		if (str[i] == '$')
 		{
 			j = i + 1;
+			if (str[j] == 34 || str[j] == 39)
+			{
+				if (str[j + 1] != str[j])
+					j++;
+			}
 			if (ft_isalnum(str[j]))
 			{
 				while (str[j] && ft_isalnum(str[j]))

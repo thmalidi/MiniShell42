@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:46:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/23 17:49:43 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/24 15:37:51 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,20 @@
 char	*change(char *str, char *final, t_env *env, char *rv)
 {
 	char *value;
+	char **tab;
 
 	value = get_value_env(env, str + 1);
 	if (!ft_strncmp("$?", str, ft_strlen(str)))
 		return (rp_env(final, str, rv));
 	else if (ft_isdigit(str[1]))
 		return (rp_env(final, str, str + 2));
+	else if (str[1] == 34 || str[1] == 39)
+	{
+		if (str[2] == str[1])
+			return ("\0");
+		tab = ft_split(str + 1, str[1]);
+		return (join_tab(tab, 0));
+	}
 	else if (!value)
 		return ("\0");
 	else
@@ -42,6 +50,8 @@ void	ending(char *tmp)
 			tmp[i] = '<';
 		if (tmp[i] == 5)
 			tmp[i] = '>';
+		if (tmp[i] == -1)
+			tmp[i] = '$';
 		i++;
 	}
 }

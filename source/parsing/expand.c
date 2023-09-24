@@ -6,26 +6,27 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/20 15:31:13 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/24 15:16:02 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	interpreted(char *str)
+int	interpreted(char *str, int range)
 {
 	int	i;
+	int q;
 
 	i = 0;
-	if (str[0] != 39)
+	q = 0;
+	while (i > range)
 	{
-		while (str[i])
-		{
-			if (str[i] == '$')
-				return (1);
-			i++;
-		}
+		if (str[i] == 39 && between(str, i))
+			q++;
+		i++;
 	}
+	if (q % 2 == 0)
+		return (1);
 	return (0);
 }
 

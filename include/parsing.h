@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:33:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/20 15:38:39 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/24 15:16:06 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_history
 	struct s_history	*previous;
 }						t_history;
 
+int			interpreted(char *str, int range);
 void		ending(char *tmp);
 int			only(char *str);
 int			check_full_space(char *str);
