@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:27:42 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 17:11:25 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/24 09:02:50 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,14 @@ int	echo_b(t_data *data)
 		i++;
 	if (data->args[i])
 	{
+		while (strncmp(data->args[i], "\6", 1) == 0)
+			i++;
 		printf("%s", data->args[i]);
 		while (data->args[++i])
-			printf(" %s", data->args[i]);
+		{
+			if (strncmp(data->args[i], "\6", 1) != 0)
+				printf(" %s", data->args[i]);
+		}
 	}
 	if (noneed_breakline(data->args[1]) == 0)
 		printf("\n");
