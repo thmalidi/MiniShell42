@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 18:45:42 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/24 07:48:46 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	set_files(t_data *data, t_element **pipe, t_big_list *list)
 		if (tmp->type < 5 && tmp->type > 0)
 		{
 			if (tmp->next && ft_strcmp(tmp->next->str, "\6") == 0)
-				error_manager("", AMBIGUOUS);	
+				error_manager(tmp->str, AMBIGUOUS);
 			if (manage_files(&tmp, pipe, data) < 0)
 				return (0);
 		}

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:35:39 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 17:19:47 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/24 07:36:51 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,14 @@ int	main(int ac, char **av, char **env)
 		if (!line)
 		{
 			printf("\n");
-			free(line);
-			free_env(envlst);
 			rl_clear_history();
-			return (g_return_value);
+			return (free(line), free_env(envlst), g_return_value);
 		}
 		if (line && strcmp(line, ""))
 			add_history(line);
 		manage_line(line, &envlst);
 		free(line);
 	}
-	free_env(envlst);
 	rl_clear_history();
-	return (g_return_value);
+	return (free_env(envlst), g_return_value);
 }

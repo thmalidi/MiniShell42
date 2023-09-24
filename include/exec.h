@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:36:48 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 09:08:34 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/24 07:31:59 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,7 @@ void		hd_handler(int sig);
 void		ignore_signals(void);
 void		init_signals(void);
 void		print_data(t_data *data);
+
+void		exit_pipe(t_data *data, int *fd, int ret);
 
 #endif
