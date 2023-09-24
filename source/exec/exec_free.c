@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 11:17:07 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 10:27:41 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/24 07:31:45 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,4 +117,13 @@ void	free_data(t_data *data)
 	free_tab(data->args);
 	free(data);
 	return ;
+}
+
+void	exit_pipe(t_data *data, int *fd, int ret)
+{
+	close_fd(fd, 4);
+	free_env(*data->env);
+	free_data(data->head);
+	rl_clear_history();
+	exit (ret);
 }
