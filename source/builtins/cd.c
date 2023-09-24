@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:11:35 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 07:58:32 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/24 17:54:36 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,10 @@ int	cd_b(t_data *data)
 	dir = getcwd(NULL, 0);
 	if (!dir)
 		return (ft_dprintf(2, "cd: error retrieving current directory: \
-getcwd: cannot access parent directories: No such file or directory"), \
+getcwd: cannot access parent directories: No such file or directory\n"), \
 		g_return_value);
-	set_value_env(data->env, "OLDPWD", dir);
+	if (env_lfvar(*data->env, "OLDPWD") || (*data->env && ft_strcmp((*data->env)->var, "OLDPWD") == 0))
+		set_value_env(data->env, "OLDPWD", dir);
 	free(dir);
 	if (is_valid_dir(data->args[1]) == NO)
 		return (g_return_value);
@@ -124,9 +125,10 @@ getcwd: cannot access parent directories: No such file or directory"), \
 	dir = getcwd(NULL, 0);
 	if (!dir)
 		return (ft_dprintf(2, "cd: error retrieving current directory: \
-getcwd: cannot access parent directories: No such file or directory"), \
+getcwd: cannot access parent directories: No such file or directory\n"), \
 		g_return_value);
-	set_value_env(data->env, "PWD", dir);
+	if (env_lfvar(*data->env, "PWD") || (*data->env && ft_strcmp((*data->env)->var, "PWD") == 0))
+		set_value_env(data->env, "PWD", dir);
 	free(dir);
 	return (g_return_value);
 }

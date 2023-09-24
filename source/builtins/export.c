@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:24 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 08:16:19 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/24 17:57:04 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ int	export_b(t_data *data)
 			args = parsing_export(data->args[i]);
 			if (!args)
 				continue ;
-			else if (ft_strcmp((*data->env)->var, args[0]) \
-			&& !env_lfvar(*data->env, args[0]))
+			else if (!(*data->env) || (ft_strcmp((*data->env)->var, args[0]) \
+			&& !env_lfvar(*data->env, args[0])))
 				add_to_env(data->env, ft_strdup(args[0]), ft_strdup(args[1]));
 			else if (args[1])
 				set_value_env(data->env, args[0], args[1]);

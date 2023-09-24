@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:39:46 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 17:29:27 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/24 18:01:41 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ int	exec_nobuiltin(t_data *data)
 	free_env(*data->env);
 	if (!env)
 	{
-		error_manager(data->cmd, CMD);
+		error_manager(data->cmd, NOPATH);
+		free_tab(env);
+		free_data(data->head);
 		rl_clear_history();
 		exit (g_return_value);
 	}
