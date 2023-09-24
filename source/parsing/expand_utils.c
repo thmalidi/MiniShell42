@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/24 17:37:57 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/24 18:06:21 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	**extract_var(char *str)
 	int		j;
 	int		c;
 	char	**tab;
-	//char **tmp;
+	char **tmp;
 
 	tab = malloc(sizeof(char *) * (count_var(str) + 1));
 	if (!tab)
@@ -91,16 +91,17 @@ char	**extract_var(char *str)
 	{
 		if (str[i] == '$')
 		{
-			/*if (str[j] == 34)
-			{
-				tmp = ft_split(str, 34);
-				tab[c++] = join_tab(tmp, 0);
-			}*/
 			j = i + 1;
 			if (ft_isalnum(str[j]))
 			{
 				while (str[j] && ft_isalnum(str[j]))
 					j++;
+			}
+			else if (str[j] == 34 || str[j] == 39)
+			{
+				tmp = ft_split(str, str[j]);
+				tab[c++] = join_tab(tmp + 1, 0);
+				free_tab(tmp);
 			}
 			if (str[j] == '?')
 				j++;
@@ -132,7 +133,7 @@ char	*expand_process(char *str, t_env *env)
 		tmp = change(tab[i], final, env, rv);
 		free(final);
 		final = ft_strdup(tmp);
-		if (tmp[0] == '\0')
+		if (tmp && tmp[0] == '\0')
 			final[0] = 6;
 		else
 			free(tmp);
