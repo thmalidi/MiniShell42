@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/24 17:33:08 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/24 17:37:57 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,24 +123,21 @@ char	*expand_process(char *str, t_env *env)
 	i = 0;
 	final = ft_strdup(str);
 	rv = ft_itoa(g_return_value);
-	if (final[0] != 39)
+	//	printf("%s||\n",final);
+	//printf("%s///\n", str);
+	tab = extract_var(final);
+	while (tab[i])
 	{
-		//printf("%s||\n",final);
-		//printf("%s///\n", str);
-		tab = extract_var(final);
-		while (tab[i])
-		{
-			//printf("%s///\n", final);
-			tmp = change(tab[i], final, env, rv);
-			free(final);
-			final = ft_strdup(tmp);
-			if (tmp[0] == '\0')
-				final[0] = 6;
-			else
-				free(tmp);
-			i++;
-		}
-		free_tab(tab);
+		//printf("%s///\n", final);
+		tmp = change(tab[i], final, env, rv);
+		free(final);
+		final = ft_strdup(tmp);
+		if (tmp[0] == '\0')
+			final[0] = 6;
+		else
+			free(tmp);
+		i++;
 	}
+	free_tab(tab);
 	return (free(rv), free(str), final);
 }
