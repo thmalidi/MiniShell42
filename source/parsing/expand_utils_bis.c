@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:46:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/24 15:37:51 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/24 17:32:59 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*change(char *str, char *final, t_env *env, char *rv)
 	char *value;
 	char **tab;
 
+	//printf("%s<<<\n", str);
 	value = get_value_env(env, str + 1);
 	if (!ft_strncmp("$?", str, ft_strlen(str)))
 		return (rp_env(final, str, rv));
@@ -30,7 +31,7 @@ char	*change(char *str, char *final, t_env *env, char *rv)
 		return (join_tab(tab, 0));
 	}
 	else if (!value)
-		return ("\0");
+		return (rp_env(final, str, ""));
 	else
 		return (rp_env(final, str, value));
 }

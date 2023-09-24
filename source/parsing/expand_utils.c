@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/24 15:37:46 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/24 17:33:08 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ char	**extract_var(char *str)
 	int		j;
 	int		c;
 	char	**tab;
+	//char **tmp;
 
 	tab = malloc(sizeof(char *) * (count_var(str) + 1));
 	if (!tab)
@@ -90,12 +91,12 @@ char	**extract_var(char *str)
 	{
 		if (str[i] == '$')
 		{
-			j = i + 1;
-			if (str[j] == 34 || str[j] == 39)
+			/*if (str[j] == 34)
 			{
-				if (str[j + 1] != str[j])
-					j++;
-			}
+				tmp = ft_split(str, 34);
+				tab[c++] = join_tab(tmp, 0);
+			}*/
+			j = i + 1;
 			if (ft_isalnum(str[j]))
 			{
 				while (str[j] && ft_isalnum(str[j]))
@@ -105,7 +106,6 @@ char	**extract_var(char *str)
 				j++;
 			if (j - i != 1)
 				tab[c++] = ft_substr(str, i, j - i);
-			//printf("%s\n", tab[c - 1]);
 		}
 		i++;
 	}
@@ -125,9 +125,12 @@ char	*expand_process(char *str, t_env *env)
 	rv = ft_itoa(g_return_value);
 	if (final[0] != 39)
 	{
+		//printf("%s||\n",final);
+		//printf("%s///\n", str);
 		tab = extract_var(final);
 		while (tab[i])
 		{
+			//printf("%s///\n", final);
 			tmp = change(tab[i], final, env, rv);
 			free(final);
 			final = ft_strdup(tmp);

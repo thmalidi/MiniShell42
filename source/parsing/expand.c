@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/24 15:16:02 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/24 17:07:16 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	interpreted(char *str, int range)
 
 	i = 0;
 	q = 0;
-	while (i > range)
+	while (i < range)
 	{
 		if (str[i] == 39 && between(str, i))
 			q++;
