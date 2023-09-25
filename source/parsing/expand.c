@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/25 17:30:22 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/25 17:57:54 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,19 @@ char	*join_tab(char **tab, int s)
 	return (final);
 }
 
+int ambiguous(char **tab, int i, t_env *env)
+{
+	if (tab[i][0] == '$')
+	{
+		if (ft_strcmp("<",tab[i - 1]) || ft_strcmp(">>",tab[i - 1]) || ft_strcmp(">",tab[i - 1]))
+		{
+			if (!get_value_env(env, tab[i]))
+				return (error_manager(tab[i], AMBIGUOUS), 0);
+		}
+	}
+	return (1);
+}
+
 char	*expand(char *str, t_env **env)
 {
 	char	*tmp;
@@ -125,6 +138,8 @@ char	*expand(char *str, t_env **env)
 		return (free(tab), NULL);
 	while (tab[i])
 	{
+		//printf("{%s} == %d\n", tab[i], ambiguous(tab, i, *env));
+		//printf("%d<<<\n",ambiguous(tab, i, *env));
 		if (i != 0 && !ft_strcmp(tab[i - 1], "<<"))
 			tab[i] = tab[i];
 		else
