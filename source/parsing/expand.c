@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/25 15:03:58 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/25 15:24:41 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,16 @@ char	*join_tab(char **tab, int s)
 		{
 			while (tab[i])
 			{
-				tmp = ft_strjoin(final, tab[i]);
-				free(final);
-				if (tab[i + 1] && s)
-					final = ft_strjoin(tmp, " ");
-				else
-					final = ft_strdup(tmp);
-				free(tmp);
+				if (tab[i][0] != 6)
+				{
+					tmp = ft_strjoin(final, tab[i]);
+					free(final);
+					if (tab[i + 1] && s)
+						final = ft_strjoin(tmp, " ");
+					else
+						final = ft_strdup(tmp);
+					free(tmp);
+				}
 				i++;
 			}
 		}
@@ -122,7 +125,6 @@ char	*expand(char *str, t_env **env)
 			tab[i] = expand_process(tab[i], *env);
 		i++;
 	}
-	//printf("%d<>\n", tab[0][0]);
 	tmp = join_tab(tab, 1);
 	final = ft_strtrim(tmp, " ");
 	free_tab(tab);
