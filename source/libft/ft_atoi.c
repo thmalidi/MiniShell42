@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:16:11 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/08/24 14:04:24 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/24 08:14:43 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ static int	is_blank(char c)
 
 int	ft_atoi(const char *str)
 {
-	int			i;
-	int			sign;
-	long int	res;
+	int				i;
+	int				sign;
+	long long int	res;
+	long long int	pres;
 
 	i = 0;
 	while (is_blank(str[i]) == 1)
@@ -38,8 +39,9 @@ int	ft_atoi(const char *str)
 	res = 0;
 	while (ft_isdigit(str[i]) == 1)
 	{
+		pres = res;
 		res = res * 10 + str[i] - '0';
-		if (res != ((res * 10) + (str[i] - '0')) / 10)
+		if (pres != res / 10)
 			return ((sign + 1) / -2);
 		i++;
 	}

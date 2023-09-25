@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/24 17:07:16 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/25 15:24:41 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,25 +75,32 @@ char	*join_tab(char **tab, int s)
 	int		i;
 
 	i = 1;
-	if (s)
-		final = ft_strjoin(tab[0], " ");
-	else
-		final = ft_strdup(tab[0]);
-	if (tab[i])
+	if (tab[0][0] != 6)
 	{
-		while (tab[i])
+		if (s)
+			final = ft_strjoin(tab[0], " ");
+		else
+		final = ft_strdup(tab[0]);
+		if (tab[i])
 		{
-			tmp = ft_strjoin(final, tab[i]);
-			free(final);
-			if (tab[i + 1] && s)
-				final = ft_strjoin(tmp, " ");
-			else
-				final = ft_strdup(tmp);
-			free(tmp);
-			i++;
+			while (tab[i])
+			{
+				if (tab[i][0] != 6)
+				{
+					tmp = ft_strjoin(final, tab[i]);
+					free(final);
+					if (tab[i + 1] && s)
+						final = ft_strjoin(tmp, " ");
+					else
+						final = ft_strdup(tmp);
+					free(tmp);
+				}
+				i++;
+			}
 		}
+		return (final);
 	}
-	return (final);
+	return (NULL);
 }
 
 char	*expand(char *str, t_env **env)
