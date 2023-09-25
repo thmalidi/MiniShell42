@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/25 15:24:41 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/25 15:31:52 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*join_tab(char **tab, int s)
 	int		i;
 
 	i = 1;
-	if (tab[0][0] != 6)
+	if (tab[0] && tab[0][0] != 6)
 	{
 		if (s)
 			final = ft_strjoin(tab[0], " ");
