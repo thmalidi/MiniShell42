@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:40:31 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 15:49:35 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/25 08:49:43 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,6 @@
 /*
 Close les n premiers fd.
 */
-void	close_fd(int *fd, int n)
-{
-	int	i;
-
-	i = 0;
-	while (i < n)
-	{
-		if (fd[i] > 0)
-			close (fd[i]);
-		i++;
-	}
-}
-
-void	close_datafd(t_data *data)
-{
-	t_data	*tmp;
-
-	tmp = data;
-	while (tmp)
-	{
-		if (tmp->infile > 0)
-			close(tmp->infile);
-		if (tmp->outfile > 0)
-			close(tmp->outfile);
-		tmp = tmp->next;
-	}
-}
 
 int	element_len(t_element *list)
 {

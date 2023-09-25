@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:11:45 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/24 08:18:42 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/25 08:57:12 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	should_exit(char *arg)
 		}
 	}
 	i = -1;
-	if (ft_isstrdigit(arg) == -1 || (ft_strlen(arg) > 10 && ft_atoi(arg) * (-1) < 2))
+	if (ft_isstrdigit(arg) == -1 \
+		|| (ft_strlen(arg) > 10 && ft_atoi(arg) * (-1) < 2))
 	{
 		g_return_value = 2;
 		ft_dprintf(2, "exit: %s: numeric argument required\n", arg);

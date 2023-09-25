@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/24 07:48:46 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/25 09:18:13 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,23 +151,23 @@ t_data	*init_struct(t_big_list *list, t_env **env)
 }
 
 // A del
-void	print_data(t_data *data)
-{
-	t_data		*tmp;
-	int			i;
+// void	print_data(t_data *data)
+// {
+// 	t_data		*tmp;
+// 	int			i;
 
-	i = 0;
-	tmp = data;
-	while (tmp)
-	{
-		printf("\nDatalist du pipe %d :\n", i);
-		printf("Cmd : %s\n", tmp->cmd);
-		printf("fd du infile : %d\n", tmp->infile);
-		printf("fd du outfile : %d\n", tmp->outfile);
-		printf("Les arguments : \n");
-		print_tab(tmp->args);
-		tmp = tmp->next;
-		i++;
-		printf("\n");
-	}
-}
+// 	i = 0;
+// 	tmp = data;
+// 	while (tmp)
+// 	{
+// 		printf("\nDatalist du pipe %d :\n", i);
+// 		printf("Cmd : %s\n", tmp->cmd);
+// 		printf("fd du infile : %d\n", tmp->infile);
+// 		printf("fd du outfile : %d\n", tmp->outfile);
+// 		printf("Les arguments : \n");
+// 		print_tab(tmp->args);
+// 		tmp = tmp->next;
+// 		i++;
+// 		printf("\n");
+// 	}
+// }
