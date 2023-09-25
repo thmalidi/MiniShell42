@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:12:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/25 15:14:30 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/25 15:50:30 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	clean_str(char *str, int v)
 	int	i;
 
 	i = v;
+	if (!str)
+		return ;
 	while (str[i] && str[i + 1])
 	{
 		if (v == 1 && str[i] == 1)
@@ -102,7 +104,7 @@ char	*end_clean(char *str, t_element *e)
 	dup = join_tab(tab, 0);
 	free_tab(tab);
 	tab = ft_split(dup, 39);
-	if (!tab)
+	if (!tab[0])
 		return (free(tab), free(dup), e->type = 0, "\0");
 	free(dup);
 	tmp = join_tab(tab, 0);
