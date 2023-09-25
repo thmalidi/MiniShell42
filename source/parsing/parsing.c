@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/24 17:42:15 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/25 16:22:12 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ t_big_list	*pars_arg(char *str, t_env **envlst)
 	t_big_list	*a;
 	t_big_list	*new;
 
-	
 	if (str[0] == '|' || str[ft_strlen(str) - 1] == '|')
 		return (error_manager("|", SYNTAX), NULL);
 	tab = ft_split(str, '|');
@@ -103,12 +102,23 @@ int	scan_cmd(char *str)
 	return (free(dup), 1);
 }
 
+t_big_list *end_check(char *str, t_big_list	*arg, t_env **envlst)
+{
+	if (!double_quote(str))
+		return (error_manager("\"", QUOTES), NULL);
+	if (check_full_space(str))
+		return (error_manager("|", SYNTAX), NULL);
+	arg = pars_arg(str, envlst);
+	return (arg);
+}
+
 t_big_list	*parsing(char *str, t_env **envlst)
 {
 	t_big_list	*arg;
 	int			i;
 
 	i = 0;
+	arg = NULL;
 	while (str[i])
 	{
 		if (str[i] == '|' && str[i + 1] && str[i + 1] == '|'
@@ -121,14 +131,9 @@ t_big_list	*parsing(char *str, t_env **envlst)
 			str[i] = 4;
 		if (str[i] == '>' && !between(str, i))
 			str[i] = 5;
-		if (str[i] == '$' && !interpreted(str, i))
+		if (str[i] == '$' && (!interpreted(str, i) || (!between(str, i) && !ft_isalnum(str[i + 1]) && str[i + 1] != '?')))
 			str[i] = -1;
 		i++;
 	}
-	if (!double_quote(str))
-		return (error_manager("\"", QUOTES), NULL);
-	if (check_full_space(str))
-		return (error_manager("|", SYNTAX), NULL);
-	arg = pars_arg(str, envlst);
-	return (arg);
+	return (end_check(str, arg, envlst));
 }
