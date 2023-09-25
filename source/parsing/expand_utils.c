@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/25 15:00:45 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/25 15:10:41 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,12 +124,9 @@ char	*expand_process(char *str, t_env *env)
 	i = 0;
 	final = ft_strdup(str);
 	rv = ft_itoa(g_return_value);
-	//	printf("%s||\n",final);
-	//printf("%s///\n", str);
 	tab = extract_var(final);
 	while (tab[i])
 	{
-		//printf("%s///\n", final);
 		tmp = change(tab[i], final, env, rv);
 		free(final);
 		final = ft_strdup(tmp);
