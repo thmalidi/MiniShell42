@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/23 15:58:16 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/24 17:42:15 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ t_big_list	*parsing(char *str, t_env **envlst)
 			str[i] = 4;
 		if (str[i] == '>' && !between(str, i))
 			str[i] = 5;
+		if (str[i] == '$' && !interpreted(str, i))
+			str[i] = -1;
 		i++;
 	}
 	if (!double_quote(str))

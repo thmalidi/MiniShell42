@@ -6,26 +6,27 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/20 15:31:13 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/25 15:03:58 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	interpreted(char *str)
+int	interpreted(char *str, int range)
 {
 	int	i;
+	int q;
 
 	i = 0;
-	if (str[0] != 39)
+	q = 0;
+	while (i < range)
 	{
-		while (str[i])
-		{
-			if (str[i] == '$')
-				return (1);
-			i++;
-		}
+		if (str[i] == 39 && between(str, i))
+			q++;
+		i++;
 	}
+	if (q % 2 == 0)
+		return (1);
 	return (0);
 }
 
@@ -74,25 +75,29 @@ char	*join_tab(char **tab, int s)
 	int		i;
 
 	i = 1;
-	if (s)
-		final = ft_strjoin(tab[0], " ");
-	else
-		final = ft_strdup(tab[0]);
-	if (tab[i])
+	if (tab[0][0] != 6)
 	{
-		while (tab[i])
+		if (s)
+			final = ft_strjoin(tab[0], " ");
+		else
+		final = ft_strdup(tab[0]);
+		if (tab[i])
 		{
-			tmp = ft_strjoin(final, tab[i]);
-			free(final);
-			if (tab[i + 1] && s)
-				final = ft_strjoin(tmp, " ");
-			else
-				final = ft_strdup(tmp);
-			free(tmp);
-			i++;
+			while (tab[i])
+			{
+				tmp = ft_strjoin(final, tab[i]);
+				free(final);
+				if (tab[i + 1] && s)
+					final = ft_strjoin(tmp, " ");
+				else
+					final = ft_strdup(tmp);
+				free(tmp);
+				i++;
+			}
 		}
+		return (final);
 	}
-	return (final);
+	return (NULL);
 }
 
 char	*expand(char *str, t_env **env)
@@ -117,6 +122,7 @@ char	*expand(char *str, t_env **env)
 			tab[i] = expand_process(tab[i], *env);
 		i++;
 	}
+	//printf("%d<>\n", tab[0][0]);
 	tmp = join_tab(tab, 1);
 	final = ft_strtrim(tmp, " ");
 	free_tab(tab);
