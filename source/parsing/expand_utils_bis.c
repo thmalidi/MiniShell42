@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:46:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/24 18:05:59 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/25 15:33:33 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	ending(char *tmp)
 {
 	int	i;
 
+	if (!tmp)
+		return ;
 	i = 0;
 	while (tmp[i])
 	{
