@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/25 15:31:52 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/26 16:30:19 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,26 +81,45 @@ char	*join_tab(char **tab, int s)
 			final = ft_strjoin(tab[0], " ");
 		else
 		final = ft_strdup(tab[0]);
-		if (tab[i])
-		{
-			while (tab[i])
-			{
-				if (tab[i][0] != 6)
-				{
-					tmp = ft_strjoin(final, tab[i]);
-					free(final);
-					if (tab[i + 1] && s)
-						final = ft_strjoin(tmp, " ");
-					else
-						final = ft_strdup(tmp);
-					free(tmp);
-				}
-				i++;
-			}
-		}
-		return (final);
 	}
-	return (NULL);
+	else
+	{
+		if (s)
+			final = ft_strjoin(tab[i++], " ");
+		else
+		final = ft_strdup(tab[i++]);
+	}
+	if (tab[i - 1])
+	{
+		while (tab[i])
+		{
+			if (tab[i][0] != 6)
+			{
+				tmp = ft_strjoin(final, tab[i]);
+				free(final);
+				if (tab[i + 1] && s)
+					final = ft_strjoin(tmp, " ");
+				else
+					final = ft_strdup(tmp);
+				free(tmp);
+			}
+			i++;
+		}
+	}
+	return (final);
+}
+
+int ambiguous(char **tab, int i, t_env *env)
+{
+	if (tab[i][0] == '$')
+	{
+		if (ft_strcmp("<",tab[i - 1]) || ft_strcmp(">>",tab[i - 1]) || ft_strcmp(">",tab[i - 1]))
+		{
+			if (!get_value_env(env, tab[i]))
+				return (error_manager(tab[i], AMBIGUOUS), 0);
+		}
+	}
+	return (1);
 }
 
 char	*expand(char *str, t_env **env)
@@ -119,6 +138,8 @@ char	*expand(char *str, t_env **env)
 		return (free(tab), NULL);
 	while (tab[i])
 	{
+		if (i != 0 && (!ft_strcmp(tab[i - 1], "<") || !ft_strcmp(tab[i - 1], ">>") || !ft_strcmp(tab[i - 1], ">")) && tab[i][0] == '$' && !get_value_env(*env, tab[i] + 1))
+			return (error_manager(tab[i], AMBIGUOUS), NULL);
 		if (i != 0 && !ft_strcmp(tab[i - 1], "<<"))
 			tab[i] = tab[i];
 		else
