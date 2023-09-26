@@ -6,44 +6,11 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 11:17:07 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/24 07:31:45 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:36:21 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-Enleve les elts correspondants aux redirections 
-apres avoir check une redirection.
-*/
-t_element	*remove_files(t_element *elt)
-{
-	t_element	*res;
-
-	if (elt->previous)
-	{
-		res = elt->previous;
-		if (elt->next->next)
-		{
-			res->next = elt->next->next;
-			res->next->previous = res;
-		}
-		else
-			res->next = NULL;
-	}
-	else if (elt->next->next)
-	{
-		res = elt->next->next;
-		res->previous = NULL;
-	}
-	else
-		res = NULL;
-	free(elt->next->str);
-	free(elt->next);
-	free(elt->str);
-	free(elt);
-	return (res);
-}
 
 void	free_element(t_element **elt)
 {
@@ -122,7 +89,16 @@ void	free_data(t_data *data)
 void	exit_pipe(t_data *data, int *fd, int ret)
 {
 	close_fd(fd, 4);
-	free_env(*data->env);
+	if (*data->env)
+		free_env(*data->env);
+	free_data(data->head);
+	rl_clear_history();
+	exit (ret);
+}
+
+void	exit_fork(t_data *data, char **env, int ret)
+{
+	free_tab(env);
 	free_data(data->head);
 	rl_clear_history();
 	exit (ret);

@@ -6,7 +6,7 @@
 #    By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 14:42:36 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/09/20 07:42:30 by hgeffroy         ###   ########.fr        #
+#    Updated: 2023/09/25 08:50:43 by hgeffroy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SOURCES =	source/main.c \
 			source/exec/exec_cmd_utils.c \
 			source/exec/exec_core.c \
 			source/exec/exec_files.c \
+			source/exec/exec_files_utils.c \
 			source/exec/exec_free.c \
 			source/exec/exec_heredoc.c \
 			source/exec/exec_init.c \
