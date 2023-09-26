@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/25 17:57:54 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/26 16:30:19 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,8 +138,8 @@ char	*expand(char *str, t_env **env)
 		return (free(tab), NULL);
 	while (tab[i])
 	{
-		//printf("{%s} == %d\n", tab[i], ambiguous(tab, i, *env));
-		//printf("%d<<<\n",ambiguous(tab, i, *env));
+		if (i != 0 && (!ft_strcmp(tab[i - 1], "<") || !ft_strcmp(tab[i - 1], ">>") || !ft_strcmp(tab[i - 1], ">")) && tab[i][0] == '$' && !get_value_env(*env, tab[i] + 1))
+			return (error_manager(tab[i], AMBIGUOUS), NULL);
 		if (i != 0 && !ft_strcmp(tab[i - 1], "<<"))
 			tab[i] = tab[i];
 		else
