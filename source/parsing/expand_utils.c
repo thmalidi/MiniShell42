@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/25 15:10:41 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/27 15:12:23 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	**extract_var(char *str)
 	int		j;
 	int		c;
 	char	**tab;
-	char **tmp;
+	char	**tmp;
 
 	tab = malloc(sizeof(char *) * (count_var(str) + 1));
 	if (!tab)

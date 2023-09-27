@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/27 15:07:34 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/27 15:11:51 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_big_list	*pars_arg(char *str, t_env **envlst)
 		return (free_tab(tab), NULL);
 	i = 0;
 	if (!tab[i])
-			i++;
+		i++;
 	new = ft_lstnew_big(tab[i]);
 	if (tab[i])
 		i++;
@@ -109,16 +109,6 @@ int	scan_cmd(char *str)
 	return (free(dup), 1);
 }
 
-t_big_list *end_check(char *str, t_big_list	*arg, t_env **envlst)
-{
-	if (!double_quote(str))
-		return (error_manager("\"", QUOTES), NULL);
-	if (check_full_space(str))
-		return (error_manager("|", SYNTAX), NULL);
-	arg = pars_arg(str, envlst);
-	return (arg);
-}
-
 t_big_list	*parsing(char *str, t_env **envlst)
 {
 	t_big_list	*arg;
@@ -138,7 +128,8 @@ t_big_list	*parsing(char *str, t_env **envlst)
 			str[i] = 4;
 		if (str[i] == '>' && !between(str, i))
 			str[i] = 5;
-		if (str[i] == '$' && (!interpreted(str, i) || (!between(str, i) && !ft_isalnum(str[i + 1]) && str[i + 1] != '?')))
+		if (str[i] == '$' && (!interpreted(str, i) || (!between(str, i)
+					&& !ft_isalnum(str[i + 1]) && str[i + 1] != '?')))
 			str[i] = -1;
 		i++;
 	}

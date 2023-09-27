@@ -6,16 +6,16 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:12:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/25 15:50:30 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/27 15:15:17 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int between(char *str, int range)
+int	between(char *str, int range)
 {
-	int bool;
-	int i;
+	int	bool;
+	int	i;
 
 	bool = 0;
 	i = 0;

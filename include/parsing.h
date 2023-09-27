@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:33:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/27 15:06:56 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/27 15:17:07 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct s_history
 	struct s_history	*previous;
 }						t_history;
 
+t_big_list	*pars_arg(char *str, t_env **envlst);
+t_big_list	*end_check(char *str, t_big_list	*arg, t_env **envlst);
 int			interpreted(char *str, int range);
 void		ending(char *tmp);
 int			only(char *str);
