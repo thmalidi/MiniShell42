@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:03:32 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/27 12:59:08 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/27 13:02:03 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ int	pars_arg_op(char **tab, int i, t_env **envlst)
 	while (tab[i])
 	{
 		tab[i] = expand(tab[i], envlst);
-		if (!tab[i++])
+		if (!tab[i])
 		{
+			i++;
 			while (tab[i])
 				free(tab[i++]);
 			return (0);
