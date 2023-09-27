@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:03:32 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/26 16:30:42 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/27 12:28:24 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,19 @@ int	pars_arg_op(char **tab, int i, t_env **envlst)
 		tab[i] = put_space(tab[i]);
 		quote_splite(tab[i]);
 		if (!scan_cmd(tab[i++]))
+		{
+			i = 0;
+			while (tab[i])
+				free(tab[i++]);
 			return (0);
+		}
 	}
 	i = 0;
 	while (tab[i])
 	{
 		tab[i] = expand(tab[i], envlst);
 		if (!tab[i])
-			return 0;
+			return (0);
 		i++;
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:22:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/23 16:06:06 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/27 12:20:30 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,23 @@ char	*space(char *str, int range)
 char	*put_space(char *str)
 {
 	int		i;
-	char	*final;
 
 	i = 0;
-	final = ft_strdup(str);
-	free(str);
-	if (final[0] != 34 && final[0] != 39)
+	if (str[0] != 34 && str[0] != 39)
 	{
-		while (final[i])
+		while (str[i])
 		{
-			while (final[i] && (final[i] == '<' || final[i] == '>'))
+			while (str[i] && (str[i] == '<' || str[i] == '>'))
 				i++;
-			if (final[i] != ' ' && final[i] && i != 0 && between(final, i))
-				final = space(final, i);
-			while (final[i] && (final[i] != '<' && final[i] != '>'))
+			if (str[i] != ' ' && str[i] && i != 0 && between(str, i))
+				str = space(str, i);
+			while (str[i] && (str[i] != '<' && str[i] != '>'))
 				i++;
-			if (final[i] != ' ' && final[i] && between(final, i))
-				final = space(final, i++);
+			if (str[i] != ' ' && str[i] && between(str, i))
+				str = space(str, i++);
 		}
 	}
-	return (final);
+	return (str);
 }
 
 int	count_symb_in(char *str)
