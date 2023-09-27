@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/27 15:14:36 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/27 16:02:15 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,18 +111,13 @@ char	*join_tab(char **tab, int s)
 
 char	*expand(char *str, t_env **env)
 {
-	char	*tmp;
 	char	*final;
 	char	**tab;
+	char	*tmp;
 	int		i;
 
-	tmp = ft_strdup(str);
-	free(str);
-	tab = ft_split(tmp, ' ');
-	free(tmp);
 	i = 0;
-	if (!tab[i])
-		return (free(tab), NULL);
+	tab = init(str);
 	while (tab[i])
 	{
 		if (i != 0 && (!ft_strcmp(tab[i - 1], "<")
