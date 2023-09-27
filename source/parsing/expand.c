@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/27 11:12:16 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/27 14:56:53 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*join_tab(char **tab, int s)
 	return (final);
 }
 
-int ambiguous(char **tab, int i, t_env *env)
+/*int ambiguous(char **tab, int i, t_env *env)
 {
 	if (tab[i][0] == '$')
 	{
@@ -120,7 +120,7 @@ int ambiguous(char **tab, int i, t_env *env)
 		}
 	}
 	return (1);
-}
+}*/
 
 char	*expand(char *str, t_env **env)
 {
@@ -129,6 +129,7 @@ char	*expand(char *str, t_env **env)
 	char	**tab;
 	int		i;
 
+	//printf("%s<-\n", str);
 	tmp = ft_strdup(str);
 	free(str);
 	tab = ft_split(tmp, ' ');
