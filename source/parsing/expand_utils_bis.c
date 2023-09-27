@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:46:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/25 15:33:33 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/27 11:13:35 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ char	*change(char *str, char *final, t_env *env, char *rv)
 	char *value;
 	char **tab;
 
-	//printf("%s<<<\n", str);
+	if (!str)
+		return (NULL);
 	value = get_value_env(env, str + 1);
 	if (str[0] != '$')
 		return (ft_strdup(str));
