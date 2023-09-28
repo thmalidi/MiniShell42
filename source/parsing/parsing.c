@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/28 09:33:26 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/28 15:10:20 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@ t_big_list	*pars_arg(char *str, t_env **envlst)
 	int			i;
 	t_big_list	*a;
 	t_big_list	*new;
+	int len;
 
 	a = NULL;
 	if (str[0] == '|' || str[ft_strlen(str) - 1] == '|')
 		return (error_manager("|", SYNTAX), NULL);
 	tab = ft_split(str, '|');
+	len = len_tab(tab);
 	i = 0;
 	if (!pars_arg_op(tab, i, envlst))
 		return (free_tab(tab), NULL);
@@ -50,8 +52,12 @@ t_big_list	*pars_arg(char *str, t_env **envlst)
 	else
 		return (free(new), free(tab), a);
 	a = new;
-	while (tab[i])
-		ft_lstadd_back_big(a, ft_lstnew_big(tab[i++]));
+	while (i < len)
+	{
+		if (tab[i])
+			ft_lstadd_back_big(a, ft_lstnew_big(tab[i]));
+		i++;
+	}
 	return (free(tab), a);
 }
 
@@ -83,7 +89,7 @@ int	double_quote(char *str)
 	return (0);
 }
 
-int	scan_cmd(char *str)
+/*int	scan_cmd(char *str)
 {
 	int		i;
 	int		d;
@@ -107,7 +113,7 @@ int	scan_cmd(char *str)
 		i++;
 	}
 	return (free(dup), 1);
-}
+}*/
 
 t_big_list	*parsing(char *str, t_env **envlst)
 {

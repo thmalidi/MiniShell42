@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/25 16:37:34 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/28 14:37:32 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,10 @@ int	fill_data(t_data **data, t_big_list *list, t_env **env)
 	if (!new)
 		return (-1);
 	new->next = NULL;
+	if (!*list->pipelist)
+	{
+		return (free(new), 0);
+	}
 	if (init_data(new, *data, list, env) < 0)
 		return (free(new), -1);
 	tmp = *data;

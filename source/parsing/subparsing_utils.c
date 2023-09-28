@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:15:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/28 09:34:16 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/28 15:11:40 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int	is_ok(t_big_list **a)
 		tmp = *test->pipelist;
 		while (tmp)
 		{
-			if (!scan_cmd(tmp->str))
-				return (0);
+			/*if (!scan_cmd(tmp->str))
+				return (0);*/
 			tmp = tmp->next;
 		}
 		test = test->next;

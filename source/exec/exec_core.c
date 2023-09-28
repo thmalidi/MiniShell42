@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_core.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:39:46 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/25 08:56:51 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/28 14:36:13 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,19 @@ int	exec_nobuiltin(t_data *data)
 	if (!env)
 	{
 		error_manager(data->cmd, NOPATH);
-		exit_fork(data, env, g_return_value);
+		free_tab(env);
+		free_data(data->head);
+		rl_clear_history();
+		exit (g_return_value);
 	}
 	cmdwpath = check_cmd(env, data->cmd);
 	if (!cmdwpath)
-		exit_fork(data, env, g_return_value);
+	{
+		free_tab(env);
+		free_data(data->head);
+		rl_clear_history();
+		exit (g_return_value);
+	}
 	else
 		execve(cmdwpath, data->args, env);
 	return (free(cmdwpath), free_tab(env), free_data(data->head), \

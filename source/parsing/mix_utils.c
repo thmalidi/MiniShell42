@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:22:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/27 12:20:30 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/28 14:38:00 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int	check_in_outfile(t_big_list *arg)
 		return (0);
 	while (tmp)
 	{
-		if (tmp == NULL)
+		if (tmp == NULL || !*tmp->pipelist)
 			break ;
 		etmp = *tmp->pipelist;
 		while (etmp)

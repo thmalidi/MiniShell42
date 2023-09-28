@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:40:31 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/25 08:49:43 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/28 14:44:15 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-Close les n premiers fd.
-*/
 
 int	element_len(t_element *list)
 {
