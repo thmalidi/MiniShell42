@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:40:31 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/28 14:44:15 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/28 16:38:11 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	is_whitespace(char *str)
+{
+	int	i;
+
+	if (!str)
+		return (YES);
+	i = 0;
+	while (str[i])
+	{
+		if (!(str[i] > 8 && str[i] < 14) || str[i] == 32)
+			return (NO);
+		i++;
+	}
+	return (YES);
+}
 
 int	element_len(t_element *list)
 {
