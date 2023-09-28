@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/28 14:50:48 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/28 16:03:50 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ int	exec_ohd(t_data *data, char *limiter, int *fd, t_big_list *list)
 		if (ft_strcmp(line, limiter) == 0)
 			free_hd(line, data, list, fd);
 		if (line)
+		{
+			puts("yolo");
 			line_expanded = expand(line, data->env);
+		}
 		write_hd(line_expanded, fd);
 	}
 }

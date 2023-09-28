@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:40:42 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 13:40:43 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/28 16:12:39 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ int	check_end_path(char *path)
 	return (-1);
 }
 
-int	is_whitespace(char *cmd)
-{
-	int	i;
+// int	is_whitespace(char *cmd)
+// {
+// 	int	i;
 
-	i = 0;
-	while (cmd[i] == ' ' || (cmd[i] > 8 && cmd[i] < 14))
-		i++;
-	if (i == (int)ft_strlen(cmd))
-		return (YES);
-	else
-		return (NO);
-}
+// 	i = 0;
+// 	while (cmd[i] == ' ' || (cmd[i] > 8 && cmd[i] < 14))
+// 		i++;
+// 	if (i == (int)ft_strlen(cmd))
+// 		return (YES);
+// 	else
+// 		return (NO);
+// }
