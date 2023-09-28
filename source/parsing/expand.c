@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/28 14:58:58 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/28 17:14:58 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ char	*expand(char *str, t_env **env)
 				|| !ft_strcmp(tab[i - 1], ">>")
 				|| !ft_strcmp(tab[i - 1], ">")) && tab[i][0] == '$'
 				&& !get_value_env(*env, tab[i] + 1))
-			return (error_manager(tab[i], AMBIGUOUS), free_tab(tab), NULL);
+			return (free_tab(tab), ft_strdup("\6\0"));
 		if (i != 0 && !ft_strcmp(tab[i - 1], "<<"))
 			tab[i] = tab[i];
 		else

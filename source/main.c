@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:35:39 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/28 15:23:26 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/28 17:15:54 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		init_signals();
-		printf("%d\n", g_return_value);
+		//printf("%d\n", g_return_value);
 		line = readline("\001\033[32m\002Minishell>\001\033[0m\002");
 		if (!line)
 		{
