@@ -6,7 +6,7 @@
 #    By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 14:42:36 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/09/28 10:00:58 by tmalidi          ###   ########.fr        #
+#    Updated: 2023/09/28 14:34:34 by tmalidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SOURCES =	source/main.c \
 			source/exec/exec_cmd_utils.c \
 			source/exec/exec_core.c \
 			source/exec/exec_files.c \
+			source/exec/exec_files_utils.c \
 			source/exec/exec_free.c \
 			source/exec/exec_heredoc.c \
 			source/exec/exec_init.c \

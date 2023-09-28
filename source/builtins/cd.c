@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:11:35 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/24 17:54:36 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:39:55 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,6 @@ Si pas d'arguments, renvoit a la racine aussi.
 Gerer cd - ? (Envoit a la racine).
 Il faut parser ce bordel un peu !
 */
-
-/*
-Fonction qui renvoit YES si c'est un directory ACCESSIBLE, NO sinon.
-La gestion d'erreur y est faite.
-*/
-int	is_valid_dir(char *path)
-{
-	struct stat	sb;
-
-	if (stat(path, &sb) == -1)
-	{
-		if (errno == EACCES)
-			return (error_manager(path, PERM), NO);
-		else
-		{
-			g_return_value = 1;
-			ft_dprintf(2, "%s: No such file or directory\n", path);
-			return (NO);
-		}
-	}
-	if (S_ISREG(sb.st_mode))
-		return (error_manager(path, NOTDIR), NO);
-	return (YES);
-}
 
 int	go_root(t_env **env)
 {
@@ -100,23 +76,17 @@ int	spec_manager(t_data *data)
 	return (0);
 }
 
-int	cd_b(t_data *data)
+int	cd_core(t_data *data)
 {
 	char	*dir;
 
-	g_return_value = 0;
-	if (len_tab(data->args) > 2)
-		return (error_manager("cd", NBARGS), g_return_value);
-	if (spec_manager(data) == 1)
-		return (g_return_value);
-	if (is_an_option(data->args, 0) == YES)
-		return (error_manager("cd", OPTION), g_return_value);
 	dir = getcwd(NULL, 0);
 	if (!dir)
 		return (ft_dprintf(2, "cd: error retrieving current directory: \
 getcwd: cannot access parent directories: No such file or directory\n"), \
 		g_return_value);
-	if (env_lfvar(*data->env, "OLDPWD") || (*data->env && ft_strcmp((*data->env)->var, "OLDPWD") == 0))
+	if (env_lfvar(*data->env, "OLDPWD") \
+		|| (*data->env && ft_strcmp((*data->env)->var, "OLDPWD") == 0))
 		set_value_env(data->env, "OLDPWD", dir);
 	free(dir);
 	if (is_valid_dir(data->args[1]) == NO)
@@ -127,8 +97,22 @@ getcwd: cannot access parent directories: No such file or directory\n"), \
 		return (ft_dprintf(2, "cd: error retrieving current directory: \
 getcwd: cannot access parent directories: No such file or directory\n"), \
 		g_return_value);
-	if (env_lfvar(*data->env, "PWD") || (*data->env && ft_strcmp((*data->env)->var, "PWD") == 0))
+	if (env_lfvar(*data->env, "PWD") \
+		|| (*data->env && ft_strcmp((*data->env)->var, "PWD") == 0))
 		set_value_env(data->env, "PWD", dir);
 	free(dir);
+	return (g_return_value);
+}
+
+int	cd_b(t_data *data)
+{
+	g_return_value = 0;
+	if (len_tab(data->args) > 2)
+		return (error_manager("cd", NBARGS), g_return_value);
+	if (spec_manager(data) == 1)
+		return (g_return_value);
+	if (is_an_option(data->args, 0) == YES)
+		return (error_manager("cd", OPTION), g_return_value);
+	cd_core(data);
 	return (g_return_value);
 }

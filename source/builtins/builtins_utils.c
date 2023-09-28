@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:11:25 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 18:37:45 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/28 14:35:24 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,28 @@ int	is_an_option(char **tab, int func)
 		}
 	}
 	return (NO);
+}
+
+/*
+Fonction qui renvoit YES si c'est un directory ACCESSIBLE, NO sinon.
+La gestion d'erreur y est faite.
+*/
+int	is_valid_dir(char *path)
+{
+	struct stat	sb;
+
+	if (stat(path, &sb) == -1)
+	{
+		if (errno == EACCES)
+			return (error_manager(path, PERM), NO);
+		else
+		{
+			g_return_value = 1;
+			ft_dprintf(2, "%s: No such file or directory\n", path);
+			return (NO);
+		}
+	}
+	if (S_ISREG(sb.st_mode))
+		return (error_manager(path, NOTDIR), NO);
+	return (YES);
 }

@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/28 13:41:42 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/28 14:58:58 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ char	*expand(char *str, t_env **env)
 
 	i = 0;
 	tab = init(str);
+	if (!tab)
+		return (NULL);
 	while (tab[i])
 	{
 		if (i != 0 && (!ft_strcmp(tab[i - 1], "<")
