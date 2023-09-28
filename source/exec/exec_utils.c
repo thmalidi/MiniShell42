@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:40:31 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/28 16:30:22 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/28 16:38:11 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_whitespace(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if ((str[i] > 8 && str[i] < 14) || str[i] == 32)
+		if (!(str[i] > 8 && str[i] < 14) || str[i] == 32)
 			return (NO);
 		i++;
 	}

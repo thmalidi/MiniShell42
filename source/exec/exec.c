@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:27:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/28 16:31:08 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/28 16:35:40 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	exec_opipe(t_data *data, int *fd)
 	int	builtin;
 
 	if (data->cmd && is_whitespace(data->cmd) == YES)
-		error_manager("", CMD);
+		error_manager(data->cmd, CMD);
 	builtin = is_builtin(data->cmd);
 	if (need_to_fork(data, builtin) == 0)
 	{
@@ -125,7 +125,6 @@ int	exec(t_big_list *list, t_env **envlst)
 
 	ft_bzero(fd, 4 * sizeof(int));
 	data = init_struct(list, envlst);
-	print_data(data);
 	if (!data)
 		return (0);
 	tmp = data;
