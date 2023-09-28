@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/27 16:02:15 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/28 09:39:52 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*mod_env(char **tab)
 	return (make_str(tab));
 }
 
-char	*join_tab(char **tab, int s)
+/*char	*join_tab(char **tab, int s)
 {
 	char	*tmp;
 	char	*final;
@@ -107,7 +107,7 @@ char	*join_tab(char **tab, int s)
 		}
 	}
 	return (final);
-}
+}*/
 
 char	*expand(char *str, t_env **env)
 {
@@ -129,6 +129,7 @@ char	*expand(char *str, t_env **env)
 			tab[i] = tab[i];
 		else
 			tab[i] = expand_process(tab[i], *env);
+		//printf("%d{-\n",tab[i][0]);
 		i++;
 	}
 	tmp = join_tab(tab, 1);
