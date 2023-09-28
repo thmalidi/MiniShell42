@@ -6,7 +6,7 @@
 #    By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 14:42:36 by hgeffroy          #+#    #+#              #
-#    Updated: 2023/09/28 09:51:31 by tmalidi          ###   ########.fr        #
+#    Updated: 2023/09/28 10:00:58 by tmalidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SOURCES =	source/main.c \
 			source/parsing/mix_utils.c \
 			source/parsing/mix_utils_bis.c \
 			source/parsing/join.c \
+			source/parsing/extract.c \
 			source/srclib/ft_lstadd_back.c \
 			source/srclib/ft_lstlast.c \
 			source/srclib/ft_lstnew.c \

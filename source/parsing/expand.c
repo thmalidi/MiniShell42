@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/28 09:39:52 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/28 11:17:43 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,12 +124,11 @@ char	*expand(char *str, t_env **env)
 				|| !ft_strcmp(tab[i - 1], ">>")
 				|| !ft_strcmp(tab[i - 1], ">")) && tab[i][0] == '$'
 				&& !get_value_env(*env, tab[i] + 1))
-			return (error_manager(tab[i], AMBIGUOUS), NULL);
+			return (error_manager(tab[i], AMBIGUOUS), free_tab(tab), NULL);
 		if (i != 0 && !ft_strcmp(tab[i - 1], "<<"))
 			tab[i] = tab[i];
 		else
 			tab[i] = expand_process(tab[i], *env);
-		//printf("%d{-\n",tab[i][0]);
 		i++;
 	}
 	tmp = join_tab(tab, 1);

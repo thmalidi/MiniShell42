@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/27 15:36:13 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:55:50 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	count_var(char *str)
 	return (c);
 }
 
-char	**extract_var(char *str)
+/*char	**extract_var(char *str)
 {
 	int		i;
 	int		j;
@@ -111,7 +111,7 @@ char	**extract_var(char *str)
 		i++;
 	}
 	return (tab[c] = NULL, tab);
-}
+}*/
 
 char	*expand_process(char *str, t_env *env)
 {
