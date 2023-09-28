@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:15:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/23 17:49:20 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/28 09:34:16 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	asign_type(t_element *tmp, t_big_list *arg, int n)
 		tmp->type = 2;
 	}
 	else if (!strncmp(">", tmp->str, ft_strlen(tmp->str))
-			|| !strncmp("<>", tmp->str, ft_strlen(tmp->str)))
+		|| !strncmp("<>", tmp->str, ft_strlen(tmp->str)))
 		tmp->type = 3;
 	else if (!strncmp(">>", tmp->str, ft_strlen(tmp->str)))
 		tmp->type = 4;
