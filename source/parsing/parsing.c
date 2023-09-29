@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/29 10:17:41 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/29 10:37:56 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,25 @@ void	trim_tab(char **tab)
 	}
 }
 
+t_big_list	*make_lst(char **tab, t_big_list *new, int i)
+{
+	t_big_list	*a;
+
+	a = new;
+	while (tab[i])
+	{
+		if (tab[i])
+			ft_lstadd_back_big(a, ft_lstnew_big(tab[i++]));
+	}
+	return (a);
+}
+
 t_big_list	*pars_arg(char *str, t_env **envlst)
 {
 	char		**tab;
 	int			i;
-	t_big_list	*a;
 	t_big_list	*new;
 
-	a = NULL;
 	if (str[0] == '|' || str[ft_strlen(str) - 1] == '|')
 		return (error_manager("|", SYNTAX), NULL);
 	tab = ft_split(str, '|');
@@ -48,14 +59,9 @@ t_big_list	*pars_arg(char *str, t_env **envlst)
 	if (tab[i])
 		i++;
 	else
-		return (free(new), free(tab), a);
-	a = new;
-	while (tab[i])
-	{
-		if (tab[i])
-			ft_lstadd_back_big(a, ft_lstnew_big(tab[i++]));
-	}
-	return (free(tab), a);
+		return (free(new), free(tab), NULL);
+	new = make_lst(tab, new, i);
+	return (free(tab), new);
 }
 
 int	double_quote(char *str)
