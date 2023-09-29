@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:23:51 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/29 09:36:12 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/29 09:45:31 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	exec_hd(t_data *data, t_element *elt, t_big_list *list)
 	{
 		g_return_value = WEXITSTATUS(status);
 		if (g_return_value == 130)
-			return (close(fd[0]), 0);	
+			return (close(fd[0]), 0);
 	}
 	return (fd[0]);
 }
