@@ -3,22 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   exec_core.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:39:46 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/28 14:36:13 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/29 09:18:14 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* 
-Sort fd propre.
-Si on impose un outfile ou un infile, on ouvre quand meme le pipe 
-et on les met dan fd[4] pour le infile et fd[5] pour le outfile.
-Si on est sur le dernier pipe, on ne doit pas ouvrir de nouveau pipe, 
-la sortie se fera sur la sortie standard si aucun outfile n'est precise.
-*/
 int	set_pipe(t_data *list, int *fd)
 {
 	close_fd(fd, 2);
@@ -34,11 +27,6 @@ int	set_pipe(t_data *list, int *fd)
 	return (0);
 }
 
-/*
-Set le dup d'entree et de sortie.
-On ne doit dup que si le fd est != de 0.
-On doit prioriser les infile et outfile aux pipes.
-*/
 int	set_dup(t_data *list, int *fd)
 {
 	if (list->infile > 0)
@@ -54,9 +42,6 @@ int	set_dup(t_data *list, int *fd)
 	return (0);
 }
 
-/*
-Exec une commande qui est un builtin.
-*/
 void	exec_b(t_data *data, int builtin)
 {
 	const t_builtins	tab_builtins[] = {&cd_b, &echo_b, &env_b, \
@@ -78,7 +63,6 @@ int	exec_nobuiltin(t_data *data)
 		error_manager(data->cmd, NOPATH);
 		free_tab(env);
 		free_data(data->head);
-		rl_clear_history();
 		exit (g_return_value);
 	}
 	cmdwpath = check_cmd(env, data->cmd);
@@ -86,7 +70,6 @@ int	exec_nobuiltin(t_data *data)
 	{
 		free_tab(env);
 		free_data(data->head);
-		rl_clear_history();
 		exit (g_return_value);
 	}
 	else
@@ -95,9 +78,6 @@ int	exec_nobuiltin(t_data *data)
 			g_return_value);
 }
 
-/*
-Retourne 0 si pas besoin de fork, 1 sinon
-*/
 int	need_to_fork(t_data *data, int builtin)
 {
 	if (builtin < 0)

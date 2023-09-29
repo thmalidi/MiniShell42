@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:40:31 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/28 16:38:11 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/29 08:22:54 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,30 +74,3 @@ int	len_data(t_data *data)
 	}
 	return (len);
 }
-
-// void	close_all(int *fd)
-// {
-// 	int	i;
-
-// 	i = -1;
-// 	while (++i < 6)
-// 	{
-// 		if (fd[i] > 0)
-// 			close (fd[i]);
-// 	}
-// 	return ;
-// }
-
-// void	close_inpipe(int *fd)
-// {
-// 	if (fd[0] > 0)
-// 		close (fd[0]);
-// 	if (fd[1] > 0)
-// 		close (fd[1]);
-// 	if (fd[4] > 0)
-// 		close (fd[4]);
-// 	if (fd[5] > 0)
-// 		close (fd[5]);
-// 	fd[4] = 0;
-// 	fd[5] = 0;
-// }

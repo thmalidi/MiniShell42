@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:55:24 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 08:57:40 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/29 08:16:38 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,5 @@ int		len_tab(char **tab);
 void	print_tab(char **tab);
 void	print_tab_int(int *tab, int n);
 void	free_tab(char **tab);
-int		ft_dprintf(int fd, char *str, ...);
 
 #endif

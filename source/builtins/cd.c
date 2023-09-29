@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:11:35 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/28 15:39:55 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/29 08:28:28 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-Si plusieurs arguments, n'execute que le premier !!
-Si pas d'arguments, renvoit a la racine aussi.
-Gerer cd - ? (Envoit a la racine).
-Il faut parser ce bordel un peu !
-*/
+static int	go_root(t_env **env);
+static int	go_back(t_env **env);
+static int	spec_manager(t_data *data);
+static int	cd_core(t_data *data);
 
-int	go_root(t_env **env)
+static int	go_root(t_env **env)
 {
 	char	*dir;
 
@@ -39,7 +37,7 @@ int	go_root(t_env **env)
 	return (0);
 }
 
-int	go_back(t_env **env)
+static int	go_back(t_env **env)
 {
 	char	*dir;
 
@@ -60,7 +58,7 @@ int	go_back(t_env **env)
 	return (0);
 }
 
-int	spec_manager(t_data *data)
+static int	spec_manager(t_data *data)
 {
 	if (!(data->args[1]) || ft_strcmp(data->args[1], "~") == 0 \
 		|| ft_strcmp(data->args[1], "~/") == 0)
@@ -76,7 +74,7 @@ int	spec_manager(t_data *data)
 	return (0);
 }
 
-int	cd_core(t_data *data)
+static int	cd_core(t_data *data)
 {
 	char	*dir;
 

@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:11:25 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/28 14:35:24 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/29 08:28:21 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-Retourne -1 si ce n'est pas une var qu'on peut mettre dans l'env, 0 sinon.
-*/
 int	check_var(char *var, char *func)
 {
 	int	i;
@@ -57,9 +54,6 @@ int	is_pwdoption(char *str)
 	}
 	return (NO);
 }
-/*
-Func vaut 1 pour PWD, 0 sinon.
-*/
 
 int	is_an_option(char **tab, int func)
 {
@@ -85,10 +79,6 @@ int	is_an_option(char **tab, int func)
 	return (NO);
 }
 
-/*
-Fonction qui renvoit YES si c'est un directory ACCESSIBLE, NO sinon.
-La gestion d'erreur y est faite.
-*/
 int	is_valid_dir(char *path)
 {
 	struct stat	sb;

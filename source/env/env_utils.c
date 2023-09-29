@@ -6,15 +6,12 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:31:25 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 13:25:43 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/29 08:21:42 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-Fonction qui malloc l'elt, ne pas oublier de proteger.
-*/
 t_env	*env_newelt(char *newvar, char *newvalue)
 {
 	t_env	*new;
@@ -28,11 +25,6 @@ t_env	*env_newelt(char *newvar, char *newvalue)
 	return (new);
 }
 
-/*
-Retourne un pointeur sur l'elt precedent celui dont la variable var vaut lfvar.
-Retourne NULL si on trouve pas.
-Attention, ne check donc pas la premier valeur de l'env !!
-*/
 t_env	*env_lfvar(t_env *env, char *lfvar)
 {
 	t_env	*tmp1;

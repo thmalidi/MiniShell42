@@ -6,13 +6,15 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:27:42 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/28 15:51:36 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/29 08:25:48 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	noneed_breakline(char *args)
+static int	noneed_breakline(char *args);
+
+static int	noneed_breakline(char *args)
 {
 	int	i;
 

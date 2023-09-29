@@ -6,16 +6,12 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:29:34 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/18 13:30:56 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/29 08:21:28 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-Retourne -2 si var est a NULL, 
-regarder si on peut s'en servir pour la gestion du cas "export =a".
-*/
 int	add_to_env(t_env **env, char *var, char *value)
 {
 	t_env	*new;
@@ -38,10 +34,6 @@ int	add_to_env(t_env **env, char *var, char *value)
 	return (0);
 }
 
-/*A test separement*/
-/*
-Retourne 0 en cas de succes, -1 sinon. Ne rien enlever est un succes !
-*/
 int	rm_from_env(t_env **env, char *var_to_rm)
 {
 	t_env	*tmp1;
@@ -63,9 +55,6 @@ int	rm_from_env(t_env **env, char *var_to_rm)
 	return (0);
 }
 
-/*
-Retourne 0 en cas de succes, -1 si on a rien set.
-*/
 int	set_value_env(t_env **env, char *var_to_set, char *value)
 {
 	t_env	*tmp1;
@@ -87,11 +76,6 @@ int	set_value_env(t_env **env, char *var_to_set, char *value)
 	return (0);
 }
 
-/*
-Retourne la valeur de la variable d'environnement var.
-Retourne NULL s'il ne trouve pas var.
-Attention, elle n'est pas malloc (C'est completement faisable si besoin)!
-*/
 char	*get_value_env(t_env *env, char *var)
 {
 	t_env	*tmp;

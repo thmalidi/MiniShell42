@@ -6,16 +6,22 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:27:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/28 16:35:40 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/29 09:17:56 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exec_child(t_data *data, int *fd)
+static int	pipe_manager(t_data *data, int *fd);
+static int	exec_child(t_data *data, int *fd);
+static int	exec_opipe(t_data *data, int *fd);
+static int	wait_processes(t_data *data);
+
+static int	exec_child(t_data *data, int *fd)
 {
 	int	builtin;
 
+	rl_clear_history();
 	builtin = is_builtin(data->cmd);
 	signal(SIGINT, &child_handler);
 	set_dup(data, fd);
@@ -25,10 +31,7 @@ int	exec_child(t_data *data, int *fd)
 		free_env(*data->env);
 		free_data(data->head);
 		if (builtin != EXIT)
-		{
-			rl_clear_history();
 			exit (g_return_value);
-		}
 		return (g_return_value);
 	}
 	else
@@ -38,12 +41,7 @@ int	exec_child(t_data *data, int *fd)
 	return (g_return_value);
 }
 
-/*
-Execute une fork qui correspond donc a un pipe.
-Dans le cas ou l'exec ne fonctionne pas, exit avec un perror,
-il faudra check que le perror renvoie bien les bons trucs.
-*/
-int	exec_opipe(t_data *data, int *fd)
+static int	exec_opipe(t_data *data, int *fd)
 {
 	int	builtin;
 
@@ -51,9 +49,7 @@ int	exec_opipe(t_data *data, int *fd)
 		error_manager(data->cmd, CMD);
 	builtin = is_builtin(data->cmd);
 	if (need_to_fork(data, builtin) == 0)
-	{
 		exec_b(data, builtin);
-	}
 	else
 	{
 		data->pid = fork();
@@ -68,7 +64,7 @@ int	exec_opipe(t_data *data, int *fd)
 	return (0);
 }
 
-int	wait_processes(t_data *data)
+static int	wait_processes(t_data *data)
 {
 	t_data	*tmp;
 	int		status;
@@ -91,7 +87,7 @@ int	wait_processes(t_data *data)
 	return (0);
 }
 
-int	pipe_manager(t_data *data, int *fd)
+static int	pipe_manager(t_data *data, int *fd)
 {
 	if (!(data->cmd))
 	{
@@ -112,11 +108,6 @@ int	pipe_manager(t_data *data, int *fd)
 	return (0);
 }
 
-/*
-Fonction a appeler dans le main.
-Les heredocs sont executes dans init_struct.
-Mettre les conditions sur le fork.
-*/
 int	exec(t_big_list *list, t_env **envlst)
 {
 	int		fd[4];
@@ -138,5 +129,3 @@ int	exec(t_big_list *list, t_env **envlst)
 	free_data(data);
 	return (0);
 }
-
-// Faire un main pour tester sans le main minishell !

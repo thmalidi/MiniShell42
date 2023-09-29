@@ -6,19 +6,18 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:05:34 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 10:39:41 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/29 08:30:32 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-On check d'abord si c'est une commande (pas de /) ou un file (avec /).
-Si c'est une commande, recuperer le path et faire les trucs.
-Sinon, check si le file existe, puis les perms.
-*/
+static int	is_acmd(char *str);
+static char	**get_path(char **env);
+static char	*lfcmd(char **paths, char *cmd);
+static char	*check_cmd_nopath(char **paths, char *cmd);
 
-int	is_acmd(char *str)
+static int	is_acmd(char *str)
 {
 	int	i;
 
@@ -31,7 +30,7 @@ int	is_acmd(char *str)
 	return (YES);
 }
 
-char	**get_path(char **env)
+static char	**get_path(char **env)
 {
 	int		i;
 	char	**new_paths;
@@ -60,7 +59,7 @@ char	**get_path(char **env)
 	return (free_tab(paths), new_paths);
 }
 
-char	*lfcmd(char **paths, char *cmd)
+static char	*lfcmd(char **paths, char *cmd)
 {
 	char	*cmd_to_check;
 	int		i;
@@ -82,7 +81,7 @@ char	*lfcmd(char **paths, char *cmd)
 	return (cmd_to_check);
 }
 
-char	*check_cmd_nopath(char **paths, char *cmd)
+static char	*check_cmd_nopath(char **paths, char *cmd)
 {
 	char	*cmd_to_check;
 

@@ -6,19 +6,19 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/28 17:21:21 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/29 08:34:48 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-Set les valeurs de infile et outfile et 
-supprimme de pipelist les elements correspondants.
-Attention si la commande commence par une redir 
-il faut ptet changer des trucs ici, reinit le pointeur.
-*/
-int	set_files(t_data *data, t_element **pipe, t_big_list *list)
+static int	set_files(t_data *data, t_element **pipe, t_big_list *list);
+static char	**set_args(t_element *pipelist);
+static int	init_data(t_data *data, t_data *f_data, \
+						t_big_list *list, t_env **env);
+static int	fill_data(t_data **data, t_big_list *list, t_env **env);
+
+static int	set_files(t_data *data, t_element **pipe, t_big_list *list)
 {
 	t_element	*tmp;
 
@@ -45,12 +45,8 @@ int	set_files(t_data *data, t_element **pipe, t_big_list *list)
 	}
 	return (0);
 }
-// J'avais return -1 si manage_files < 0 somehow pour un truc
 
-/*
-Remplit lstargs, t_element ne contient plus que ce dont on a besoin ici.
-*/
-char	**set_args(t_element *pipelist)
+static char	**set_args(t_element *pipelist)
 {
 	t_element	*tmp;
 	char		**args;
@@ -73,10 +69,8 @@ char	**set_args(t_element *pipelist)
 	return (args);
 }
 
-/*
-Initialise les data d'un element de la liste.
-*/
-int	init_data(t_data *data, t_data *f_data, t_big_list *list, t_env **env)
+static int	init_data(t_data *data, t_data *f_data, \
+						t_big_list *list, t_env **env)
 {
 	t_element	*tmp;
 
@@ -99,10 +93,7 @@ int	init_data(t_data *data, t_data *f_data, t_big_list *list, t_env **env)
 	return (0);
 }
 
-/*
-Ajoute un element a la structure data et le remplit.
-*/
-int	fill_data(t_data **data, t_big_list *list, t_env **env)
+static int	fill_data(t_data **data, t_big_list *list, t_env **env)
 {
 	t_data	*new;
 	t_data	*tmp;
@@ -127,10 +118,6 @@ int	fill_data(t_data **data, t_big_list *list, t_env **env)
 	return (0);
 }
 
-/*
-Initialise la structure, on va exec les heredoc dedans, et set les fd.
-Free la big_list.
-*/
 t_data	*init_struct(t_big_list *list, t_env **env)
 {
 	t_data		*data;
@@ -150,26 +137,4 @@ t_data	*init_struct(t_big_list *list, t_env **env)
 	}
 	free_big_list(list);
 	return (data);
-}
-
-// A del
-void	print_data(t_data *data)
-{
-	t_data		*tmp;
-	int			i;
-
-	i = 0;
-	tmp = data;
-	while (tmp)
-	{
-		printf("\nDatalist du pipe %d :\n", i);
-		printf("Cmd : %s\n", tmp->cmd);
-		printf("fd du infile : %d\n", tmp->infile);
-		printf("fd du outfile : %d\n", tmp->outfile);
-		printf("Les arguments : \n");
-		print_tab(tmp->args);
-		tmp = tmp->next;
-		i++;
-		printf("\n");
-	}
 }

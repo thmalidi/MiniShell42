@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/28 10:55:50 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/29 08:23:29 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,45 +73,6 @@ int	count_var(char *str)
 	}
 	return (c);
 }
-
-/*char	**extract_var(char *str)
-{
-	int		i;
-	int		j;
-	int		c;
-	char	**tab;
-	char	**tmp;
-
-	tab = malloc(sizeof(char *) * (count_var(str) + 1));
-	if (!tab)
-		return (NULL);
-	i = 0;
-	c = 0;
-	while (str[i])
-	{
-		if (str[i] == '$')
-		{
-			j = i + 1;
-			if (ft_isalnum(str[j]))
-			{
-				while (str[j] && ft_isalnum(str[j]))
-					j++;
-			}
-			else if (str[j] == 34 || str[j] == 39)
-			{
-				tmp = ft_split(str, str[j]);
-				tab[c++] = join_tab(tmp + 1, 0);
-				free_tab(tmp);
-			}
-			if (str[j] == '?')
-				j++;
-			if (j - i != 1)
-				tab[c++] = ft_substr(str, i, j - i);
-		}
-		i++;
-	}
-	return (tab[c] = NULL, tab);
-}*/
 
 char	*expand_process(char *str, t_env *env)
 {
