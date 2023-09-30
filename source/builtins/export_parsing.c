@@ -6,24 +6,27 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:11:09 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 12:49:05 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/30 07:45:10 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	fill_tab(char **tab, char *arg, int index_split, int n)
+static int	fill_tab(char **tab, char *arg, int index_split, int n);
+static char	**ft_split_export(char *arg);
+
+static int	fill_tab(char **tab, char *arg, int index_split, int n)
 {
 	int	i;
 
 	tab[0] = (char *)malloc(sizeof(char) * (index_split + 2));
 	if (!tab[0])
-		return (-1);
+		return (error_manager("fill_tab", MALLOC), -1);
 	if (n > 1)
 	{
 		tab[1] = (char *)malloc(sizeof(char) * (ft_strlen(arg) - index_split));
 		if (!tab[1])
-			return (-1);
+			return (error_manager("fill_tab", MALLOC), -1);
 	}
 	tab[n] = NULL;
 	i = -1;
@@ -37,7 +40,7 @@ int	fill_tab(char **tab, char *arg, int index_split, int n)
 	return (0);
 }
 
-char	**ft_split_export(char *arg)
+static char	**ft_split_export(char *arg)
 {
 	int		i;
 	int		n;
@@ -53,7 +56,7 @@ char	**ft_split_export(char *arg)
 		n = 1;
 	res = (char **)malloc(sizeof(char *) * (n + 1));
 	if (!res)
-		return (NULL);
+		return (error_manager("ft_split_export", MALLOC), NULL);
 	if (fill_tab(res, arg, i, n) < 0)
 		return (free_tab(res), NULL);
 	res[n] = NULL;

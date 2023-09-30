@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:36:32 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/28 14:34:49 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/30 07:44:38 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ enum	e_builtin
 
 // Utils
 char	**parsing_export(char *arg);
-char	**ft_split_export(char *arg);
 int		check_var(char *var, char *func);
 int		is_an_option(char **tab, int func);
 int		is_valid_dir(char *path);

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/29 09:22:28 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/30 07:05:12 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ char	*make_str(char **tab)
 	final[0] = '\0';
 	while (tab[i])
 	{
-		tmp = ft_strjoin(final, " ");
+		tmp = ft_strjoin(final, " "); //Proteger
 		free(final);
-		final = ft_strjoin(tmp, tab[i++]);
+		final = ft_strjoin(tmp, tab[i++]); //proteger
 		free(tmp);
 	}
 	return (final);
@@ -61,7 +61,7 @@ char	*mod_env(char **tab)
 		if (tab[i][0] == ':')
 		{
 			free(tab[i]);
-			tab[i] = ft_strdup("YES");
+			tab[i] = ft_strdup("YES"); //Proteger ici
 		}
 		i++;
 	}
@@ -93,6 +93,6 @@ char	*expand(char *str, t_env **env)
 		i++;
 	}
 	tmp = join_tab(tab, 1);
-	final = ft_strtrim(tmp, " ");
+	final = ft_strtrim(tmp, " "); //Proteger ici;
 	return (free_tab(tab), free(tmp), final);
 }

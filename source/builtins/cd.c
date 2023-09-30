@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:11:35 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/29 08:28:28 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/30 07:34:06 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,15 @@ static int	go_root(t_env **env)
 		return (error_manager("HOME", NOTSET), -1);
 	dir = getcwd(NULL, 0);
 	if (!dir)
-		return (-1);
+		return (ft_dprintf(2, "cd: error retrieving current directory: \
+getcwd: cannot access parent directories: No such file or directory\n", -1));
 	set_value_env(env, "OLDPWD", dir);
 	free(dir);
 	chdir(get_value_env(*env, "HOME"));
 	dir = getcwd(NULL, 0);
 	if (!dir)
-		return (-1);
+		return (ft_dprintf(2, "cd: error retrieving current directory: \
+getcwd: cannot access parent directories: No such file or directory\n", -1));
 	set_value_env(env, "PWD", dir);
 	free(dir);
 	return (0);
@@ -52,7 +54,8 @@ static int	go_back(t_env **env)
 	free(dir);
 	dir = getcwd(NULL, 0);
 	if (!dir)
-		return (-1);
+		return (ft_dprintf(2, "cd: error retrieving current directory: \
+getcwd: cannot access parent directories: No such file or directory\n", -1));
 	set_value_env(env, "PWD", dir);
 	free(dir);
 	return (0);

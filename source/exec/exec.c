@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:27:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/29 09:17:56 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/30 07:23:07 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	exec_opipe(t_data *data, int *fd)
 	int	builtin;
 
 	if (data->cmd && is_whitespace(data->cmd) == YES)
-		error_manager(data->cmd, CMD);
+		return (error_manager(data->cmd, CMD));
 	builtin = is_builtin(data->cmd);
 	if (need_to_fork(data, builtin) == 0)
 		exec_b(data, builtin);

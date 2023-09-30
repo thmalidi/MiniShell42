@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:29:34 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/29 08:21:28 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/30 08:16:53 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,19 @@ int	add_to_env(t_env **env, char *var, char *value)
 	t_env	*temp;
 
 	if (!var)
-		return (-2);
+	{
+		error_manager("add_to_env", MALLOC);
+		free_env(*env);
+		exit (-1);
+	}
 	new = env_newelt(var, value);
 	if (!new)
-		return (-1);
+	{
+		error_manager("add_to_env", MALLOC);
+		free_env(*env);
+		free(var);
+		exit (-1);
+	}
 	if (!(*env))
 	{
 		*env = new;
@@ -59,6 +68,9 @@ int	set_value_env(t_env **env, char *var_to_set, char *value)
 {
 	t_env	*tmp1;
 
+
+	(void)value;
+
 	tmp1 = env_lfvar(*env, var_to_set);
 	if (!tmp1 && strcmp((*env)->var, var_to_set))
 		return (-1);
@@ -66,12 +78,24 @@ int	set_value_env(t_env **env, char *var_to_set, char *value)
 	{
 		free((*env)->value);
 		(*env)->value = ft_strdup(value);
+		if (!(*env)->value)
+		{
+			free_env(*env);
+			error_manager("set_value_env", MALLOC);
+			exit(-1);
+		}
 	}
 	else
 	{
 		tmp1 = tmp1->next;
 		free(tmp1->value);
 		tmp1->value = ft_strdup(value);
+		if (!tmp1->value)
+		{
+			free_env(*env);
+			error_manager("set_value_env", MALLOC);
+			exit(-1);
+		}
 	}
 	return (0);
 }
