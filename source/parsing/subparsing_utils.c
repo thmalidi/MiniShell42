@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subparsing_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:15:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/28 16:14:40 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/29 08:24:18 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,7 @@ int	is_ok(t_big_list **a)
 	{
 		tmp = *test->pipelist;
 		while (tmp)
-		{
-			/*if (!scan_cmd(tmp->str))
-				return (0);*/
 			tmp = tmp->next;
-		}
 		test = test->next;
 	}
 	return (1);
@@ -107,7 +103,6 @@ int	subparsing(t_element **subparsing, t_big_list *arg, int n)
 		clean_str(tmp->str, 1);
 		asign_type(tmp, arg, n);
 		tmp->str = end_clean(tmp->str, tmp);
-		//printf("{%s}\n", tmp->str);
 		tmp = tmp->next;
 		i++;
 	}

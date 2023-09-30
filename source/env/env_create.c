@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env_create.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:29:17 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/28 15:44:08 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/29 08:28:57 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static char	*get_var(char *line);
 
 static char	*get_var(char *line)
 {
@@ -60,21 +62,3 @@ t_env	*create_env(char **env)
 	}
 	return (lst_env);
 }
-
-// A tester !
-// int	main(int ac, char **av, char **env)
-// {
-// 	(void)ac;
-// 	(void)av;
-// 	t_env *l_env;
-// 	char  **tabenv;
-// 	l_env = create_env(env);
-// 	env_print(l_env);
-// 	tabenv = env_to_tab(l_env);
-// 	env_clean(l_env);
-// 	printf("\n\n\n\n");
-// 	print_tab(tabenv);
-// 	free_tab(tabenv);
-// }
-// gcc ../libft/*.c env_create.c env_free.c env_op.c env_to_tab.c env_utils.c 
-// -fsanitize=address -g3 -Werror -Wextra -Wall

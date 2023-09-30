@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:46:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/28 16:15:12 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/28 11:14:07 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ void	ending(char *tmp)
 			tmp[i] = '>';
 		if (tmp[i] == -1)
 			tmp[i] = '$';
-		if (tmp[i] == -2)
-			tmp[i] = ' ';
 		i++;
 	}
 }
@@ -83,6 +81,6 @@ char	**init(char *str)
 	free(str);
 	tab = ft_split(tmp, ' ');
 	if (!tab[0])
-		return (free(tab), free(tmp), NULL);
+		return (free(tab), NULL);
 	return (free(tmp), tab);
 }

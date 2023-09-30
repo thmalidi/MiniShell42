@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:27:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 08:00:23 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:53:36 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	pwd_b(t_data *data)
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 	{
+		free(pwd);
 		return (ft_dprintf(2, "cd: error retrieving current directory: \
 getcwd: cannot access parent directories: No such file or directory\n"), \
 		g_return_value);

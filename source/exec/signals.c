@@ -6,16 +6,9 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:41:56 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/23 17:23:14 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/29 08:23:08 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-SIGINT : ctrl-C
-SIGQUIT : ctrl-\
-Si rl sort NULL, c’est ctrl-D : car ctrl-D est un EOF pas un signal.
-On a 3 handlers a faire : pour les hd, pour les childs et pour le parent.
-*/
 
 #include "minishell.h"
 

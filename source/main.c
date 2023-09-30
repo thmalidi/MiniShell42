@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:35:39 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/28 16:15:05 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/29 08:28:09 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	manage_line(char *line, t_env **env)
 		if (only_space(line))
 		{
 			arg = parsing(line, env);
+			free(line);
 			if (arg)
 			{
 				splited_arg(arg);
@@ -43,6 +44,8 @@ void	manage_line(char *line, t_env **env)
 					exec(arg, env);
 			}
 		}
+		else
+			free(line);
 	}
 }
 
@@ -57,7 +60,6 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		init_signals();
-		//printf("%d\n", g_return_value);
 		line = readline("\001\033[32m\002Minishell>\001\033[0m\002");
 		if (!line)
 		{
@@ -68,7 +70,6 @@ int	main(int ac, char **av, char **env)
 		if (line && strcmp(line, ""))
 			add_history(line);
 		manage_line(line, &envlst);
-		free(line);
 	}
 	rl_clear_history();
 	return (free_env(envlst), g_return_value);

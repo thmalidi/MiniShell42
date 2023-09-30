@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/28 14:58:58 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/29 09:22:28 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,47 +68,6 @@ char	*mod_env(char **tab)
 	return (make_str(tab));
 }
 
-/*char	*join_tab(char **tab, int s)
-{
-	char	*tmp;
-	char	*final;
-	int		i;
-
-	i = 1;
-	if (tab[0] && tab[0][0] != 6)
-	{
-		if (s)
-			final = ft_strjoin(tab[0], " ");
-		else
-			final = ft_strdup(tab[0]);
-	}
-	else
-	{
-		if (s)
-			final = ft_strjoin(tab[i++], " ");
-		else
-			final = ft_strdup("");
-	}
-	if (tab[i - 1])
-	{
-		while (tab[i])
-		{
-			if (tab[i][0] != 6)
-			{
-				tmp = ft_strjoin(final, tab[i]);
-				free(final);
-				if (tab[i + 1] && s)
-					final = ft_strjoin(tmp, " ");
-				else
-					final = ft_strdup(tmp);
-				free(tmp);
-			}
-			i++;
-		}
-	}
-	return (final);
-}*/
-
 char	*expand(char *str, t_env **env)
 {
 	char	*final;
@@ -126,7 +85,7 @@ char	*expand(char *str, t_env **env)
 				|| !ft_strcmp(tab[i - 1], ">>")
 				|| !ft_strcmp(tab[i - 1], ">")) && tab[i][0] == '$'
 				&& !get_value_env(*env, tab[i] + 1))
-			return (error_manager(tab[i], AMBIGUOUS), free_tab(tab), NULL);
+			return (free_tab(tab), ft_strdup("\6\0"));
 		if (i != 0 && !ft_strcmp(tab[i - 1], "<<"))
 			tab[i] = tab[i];
 		else
@@ -135,6 +94,5 @@ char	*expand(char *str, t_env **env)
 	}
 	tmp = join_tab(tab, 1);
 	final = ft_strtrim(tmp, " ");
-	free_tab(tab);
-	return (free(tmp), final);
+	return (free_tab(tab), free(tmp), final);
 }

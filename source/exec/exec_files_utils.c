@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 08:49:14 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/25 08:57:24 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/29 08:22:17 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,6 @@ void	close_datafd(t_data *data)
 	}
 }
 
-/*
-Enleve les elts correspondants aux redirections 
-apres avoir check une redirection.
-*/
 t_element	*remove_files(t_element *elt)
 {
 	t_element	*res;

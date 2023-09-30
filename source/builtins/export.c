@@ -6,13 +6,17 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:04:24 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/24 17:57:04 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/29 08:28:33 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	print_export_line(t_env *env_var)
+static int		print_export_line(t_env *env_var);
+static t_env	*find_next_min(t_env *env, char *prev_min);
+static int		print_export(t_env *env);
+
+static int	print_export_line(t_env *env_var)
 {
 	if (!env_var)
 		return (-1);
@@ -27,7 +31,7 @@ int	print_export_line(t_env *env_var)
 	return (0);
 }
 
-t_env	*find_next_min(t_env *env, char *prev_min)
+static t_env	*find_next_min(t_env *env, char *prev_min)
 {
 	t_env	*min;
 	t_env	*tmp;
@@ -53,7 +57,7 @@ t_env	*find_next_min(t_env *env, char *prev_min)
 	return (min);
 }
 
-int	print_export(t_env *env)
+static int	print_export(t_env *env)
 {
 	int		i;
 	t_env	*min;

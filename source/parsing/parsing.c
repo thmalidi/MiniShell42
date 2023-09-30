@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/28 16:02:16 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/30 19:37:56 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,38 @@ void	trim_tab(char **tab)
 	while (tab[i])
 	{
 		tmp = ft_strtrim(tab[i], " ");
+		if (!tmp)
+			error_manager("ft_strtrim", MALLOC);
 		free(tab[i]);
 		tab[i] = tmp;
 		i++;
 	}
 }
 
+t_big_list	*make_lst(char **tab, t_big_list *new, int i)
+{
+	t_big_list	*a;
+
+	a = new;
+	while (tab[i])
+	{
+		if (tab[i])
+			ft_lstadd_back_big(a, ft_lstnew_big(tab[i++]));
+	}
+	return (a);
+}
+
 t_big_list	*pars_arg(char *str, t_env **envlst)
 {
 	char		**tab;
 	int			i;
-	t_big_list	*a;
 	t_big_list	*new;
-	int len;
 
-	a = NULL;
 	if (str[0] == '|' || str[ft_strlen(str) - 1] == '|')
 		return (error_manager("|", SYNTAX), NULL);
 	tab = ft_split(str, '|');
-	len = len_tab(tab);
+	if (!tab)
+		return (error_manager("ft_split", MALLOC), NULL);
 	i = 0;
 	if (!pars_arg_op(tab, i, envlst))
 		return (free_tab(tab), NULL);
@@ -47,18 +60,14 @@ t_big_list	*pars_arg(char *str, t_env **envlst)
 	if (!tab[i])
 		i++;
 	new = ft_lstnew_big(tab[i]);
+	if (!new)
+		return (error_manager("ft_lstnew_big", MALLOC), NULL);
 	if (tab[i])
 		i++;
 	else
-		return (free(new), free(tab), a);
-	a = new;
-	while (i < len)
-	{
-		if (tab[i])
-			ft_lstadd_back_big(a, ft_lstnew_big(tab[i]));
-		i++;
-	}
-	return (free(tab), a);
+		return (free(new), free(tab), NULL);
+	new = make_lst(tab, new, i);
+	return (free(tab), new);
 }
 
 int	double_quote(char *str)
@@ -89,32 +98,6 @@ int	double_quote(char *str)
 	return (0);
 }
 
-/*int	scan_cmd(char *str)
-{
-	int		i;
-	int		d;
-	int		s;
-	char	*dup;
-
-	i = 0;
-	d = 0;
-	s = 0;
-	dup = ft_strtrim(str, " ");
-	while (str[i])
-	{
-		if (dup[i] == 34)
-			d++;
-		if (dup[i] == 39)
-			s++;
-		if ((dup[i] == 92 || dup[i] == ';') && s % 2 == 0 && d % 2 == 0)
-			return (printf(
-					"Error : %c forbidden character\n",
-					dup[i]), free(dup), g_return_value = 1, 0);
-		i++;
-	}
-	return (free(dup), 1);
-}*/
-
 t_big_list	*parsing(char *str, t_env **envlst)
 {
 	t_big_list	*arg;
@@ -134,8 +117,6 @@ t_big_list	*parsing(char *str, t_env **envlst)
 			str[i] = 4;
 		if (str[i] == '>' && !between(str, i))
 			str[i] = 5;
-		/*if (str[i] == ' ' && !between(str, i))
-			str[i] = -2;*/
 		if (str[i] == '$' && (!interpreted(str, i) || (!between(str, i)
 					&& !ft_isalnum(str[i + 1]) && str[i + 1] != '?')))
 			str[i] = -1;

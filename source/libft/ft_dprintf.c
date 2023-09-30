@@ -6,13 +6,14 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:46:43 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/19 08:54:04 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/29 08:18:31 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "ft_printf.h"
 
-int	ft_dprints(char *buffer, char *str, int j)
+int	ft_dprints(char *buffer, const char *str, int j)
 {
 	int	i;
 
@@ -25,7 +26,7 @@ int	ft_dprints(char *buffer, char *str, int j)
 	return (ft_strlen(str));
 }
 
-int	str_manager(char *buffer, char *str, va_list args, int mode)
+int	str_manager(char *buffer, const char *str, va_list args, int mode)
 {
 	int	i;
 	int	j;
@@ -50,7 +51,7 @@ int	str_manager(char *buffer, char *str, va_list args, int mode)
 	return (j);
 }
 
-int	ft_dprintf(int fd, char *str, ...)
+int	ft_dprintf(int fd, const char *str, ...)
 {
 	va_list		args;
 	char		buffer[4096];

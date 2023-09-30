@@ -6,13 +6,15 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:27:42 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/24 09:02:50 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/29 08:25:48 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	noneed_breakline(char *args)
+static int	noneed_breakline(char *args);
+
+static int	noneed_breakline(char *args)
 {
 	int	i;
 
@@ -36,7 +38,10 @@ int	echo_b(t_data *data)
 	int	i;
 
 	if (!(data->args) || !(data->args[1]))
+	{
+		g_return_value = 0;
 		return (printf("\n"), 0);
+	}
 	i = 1;
 	while (noneed_breakline(data->args[i]) == 1)
 		i++;

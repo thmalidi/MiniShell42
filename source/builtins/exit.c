@@ -3,22 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:11:45 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/28 14:35:58 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/09/29 08:26:16 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-Si trop d'arguments, on exit pas et sortie 1.
-Si parenthese dans l'arg, unexpected token et on exit pas et sortie 2 !
-Sinon on exit bien mais "bash: exit: str: numeric argument required" et sortie 2
-*/
+static int	limit(char *arg);
+static int	should_exit(char *arg);
 
-int	limit(char *arg)
+static int	limit(char *arg)
 {
 	if (strcmp(arg, "-9223372036854775808") == 0)
 		return (0);
@@ -28,10 +25,7 @@ int	limit(char *arg)
 		return (-1);
 }
 
-/*
-Retourne la valeur de sortie si on doit exit, -1 sinon.
-*/
-int	should_exit(char *arg)
+static int	should_exit(char *arg)
 {
 	int		i;
 	char	*char_error;
