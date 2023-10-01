@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subparsing_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:15:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/29 08:24:18 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/10/01 15:35:42 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,11 @@ int	subparsing(t_element **subparsing, t_big_list *arg, int n)
 {
 	int			i;
 	t_element	*tmp;
-	char		**envp;
-
+	//char		**envp;
 	i = 0;
 	arg->here_doc = 0;
 	tmp = *subparsing;
-	envp = ft_split(getenv("PATH"), ':');
+	//envp = ft_split(getenv("PATH"), ':');
 	while (tmp)
 	{
 		clean_str(tmp->str, 1);
@@ -106,5 +105,5 @@ int	subparsing(t_element **subparsing, t_big_list *arg, int n)
 		tmp = tmp->next;
 		i++;
 	}
-	return (free_tab(envp), 1);
+	return (/*free_tab(envp),*/ 1);
 }

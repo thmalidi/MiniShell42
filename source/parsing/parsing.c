@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/30 19:37:56 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/10/01 15:32:55 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	trim_tab(char **tab)
 	{
 		tmp = ft_strtrim(tab[i], " ");
 		if (!tmp)
-			error_manager("ft_strtrim", MALLOC);
+			error_manager("trim_tab(ft_strtrim)", MALLOC);
 		free(tab[i]);
 		tab[i] = tmp;
 		i++;
@@ -52,7 +52,7 @@ t_big_list	*pars_arg(char *str, t_env **envlst)
 		return (error_manager("|", SYNTAX), NULL);
 	tab = ft_split(str, '|');
 	if (!tab)
-		return (error_manager("ft_split", MALLOC), NULL);
+		return (error_manager("pars_arg(ft_split)", MALLOC), NULL);
 	i = 0;
 	if (!pars_arg_op(tab, i, envlst))
 		return (free_tab(tab), NULL);
@@ -61,7 +61,7 @@ t_big_list	*pars_arg(char *str, t_env **envlst)
 		i++;
 	new = ft_lstnew_big(tab[i]);
 	if (!new)
-		return (error_manager("ft_lstnew_big", MALLOC), NULL);
+		return (error_manager("pars_arg(ft_lstnew_big)", MALLOC), NULL);
 	if (tab[i])
 		i++;
 	else

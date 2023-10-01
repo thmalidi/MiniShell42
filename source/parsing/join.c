@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 20:39:03 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/28 09:48:04 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/10/01 15:22:00 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*join_tab(char **tab, int s)
 
 	i = 1;
 	final = init_bef(tab, s, i);
-	if (tab[i - 1])
+	if (final && tab[i - 1])
 	{
 		while (tab[i])
 		{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 13:34:54 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/08/17 06:20:56 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/10/01 15:04:47 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_lstadd_back_e(t_element **lst, t_element *new)
 {
 	t_element	*last;
 
-	if (lst)
+	if (lst && new)
 	{
 		if (*lst == NULL)
 		{

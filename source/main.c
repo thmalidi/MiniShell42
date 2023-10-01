@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:35:39 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/29 08:28:09 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/10/01 14:57:55 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,11 @@ void	manage_line(char *line, t_env **env)
 			free(line);
 			if (arg)
 			{
-				splited_arg(arg);
-				if (check_in_outfile(arg))
-					exec(arg, env);
+				if (splited_arg(arg))
+				{
+					if (check_in_outfile(arg))
+						exec(arg, env);
+				}
 			}
 		}
 		else

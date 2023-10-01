@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:12:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/30 19:23:15 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/10/01 15:30:47 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,10 @@ char	*end_clean(char *str, t_element *e)
 
 	tmp = ft_strdup(prepare_string(str));
 	free(str);
+	if (!tmp)
+		return (error_manager("end_clean(ft_strdup)", MALLOC), NULL);
 	tab = ft_split(tmp, 34);
-	if (!tab[0])
+	if (!tab || !tab[0])
 		return (free(tab), free(tmp), e->type = 0, "\0");
 	free(tmp);
 	dup = join_tab(tab, 0);

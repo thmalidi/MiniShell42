@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:22:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/30 19:42:38 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/10/01 15:31:51 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ char	*space(char *str, int range)
 	s = ft_substr(str + range, 0, ft_strlen(str + range));
 	free(str);
 	if (!f || !s)
-		return (error_manager("ft_substr", MALLOC), NULL);
+		return (error_manager("space(ft_substr)", MALLOC), NULL);
 	tmp = ft_strjoin(f, " ");
 	if (!tmp)
-		return (error_manager("ft_strjoin", MALLOC), NULL);
+		return (error_manager("space(ft_strjoin)", MALLOC), NULL);
 	free(f);
 	f = ft_strjoin(tmp, s);
 	if (!f)
-		return (error_manager("ft_strjoin", MALLOC), NULL);
+		return (error_manager("space(ft_strjoin)", MALLOC), NULL);
 	return (free(s), free(tmp), f);
 }
 

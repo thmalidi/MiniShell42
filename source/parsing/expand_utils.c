@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/30 19:56:50 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/10/01 15:31:13 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*expand_process(char *str, t_env *env)
 	final = ft_strdup(str);
 	rv = ft_itoa(g_return_value);
 	if (!final || !rv)
-		return (error_manager("ft_strdup", MALLOC), NULL);
+		return (error_manager("expand_process(ft_strdup)", MALLOC), NULL);
 	tab = extract_var(final);
 	while (tab && tab[i])
 	{
