@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:46:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/28 11:14:07 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/10/02 15:51:09 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,13 @@ char	**init(char *str)
 	if (!tab[0])
 		return (free(tab), NULL);
 	return (free(tmp), tab);
+}
+
+void	free_r(char **tab, int len)
+{
+	int	i;
+
+	i = 0;
+	while (i < len)
+		free(tab[i++]);
 }

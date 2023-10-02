@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:15:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/10/01 15:35:42 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/10/02 15:51:35 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,10 @@ int	subparsing(t_element **subparsing, t_big_list *arg, int n)
 {
 	int			i;
 	t_element	*tmp;
-	//char		**envp;
+
 	i = 0;
 	arg->here_doc = 0;
 	tmp = *subparsing;
-	//envp = ft_split(getenv("PATH"), ':');
 	while (tmp)
 	{
 		clean_str(tmp->str, 1);
@@ -105,5 +104,5 @@ int	subparsing(t_element **subparsing, t_big_list *arg, int n)
 		tmp = tmp->next;
 		i++;
 	}
-	return (/*free_tab(envp),*/ 1);
+	return (1);
 }

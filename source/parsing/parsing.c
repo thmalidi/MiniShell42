@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:09:43 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/10/01 15:32:55 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/10/02 15:50:37 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,20 @@ void	trim_tab(char **tab)
 t_big_list	*make_lst(char **tab, t_big_list *new, int i)
 {
 	t_big_list	*a;
+	t_big_list	*c;
+	int			len;
 
 	a = new;
+	len = len_tab(tab);
 	while (tab[i])
 	{
 		if (tab[i])
-			ft_lstadd_back_big(a, ft_lstnew_big(tab[i++]));
+		{
+			c = ft_lstnew_big(tab[i++]);
+			if (!c)
+				return (free(a), free_r(tab, len), NULL);
+			ft_lstadd_back_big(a, c);
+		}
 	}
 	return (a);
 }
@@ -61,7 +69,8 @@ t_big_list	*pars_arg(char *str, t_env **envlst)
 		i++;
 	new = ft_lstnew_big(tab[i]);
 	if (!new)
-		return (error_manager("pars_arg(ft_lstnew_big)", MALLOC), NULL);
+		return (free_tab(tab)
+			, error_manager("pars_arg(ft_lstnew_big)", MALLOC), NULL);
 	if (tab[i])
 		i++;
 	else

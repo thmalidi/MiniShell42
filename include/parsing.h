@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:33:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/10/01 14:51:08 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/10/02 15:08:11 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_extract
 	char	**tmp;
 }			t_extract;
 
+void		free_r(char **tab, int len);
 int			count_var(char *str);
 char		**extract_var(char *str);
 char		**init(char *str);

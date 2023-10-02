@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:03:32 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/30 20:03:31 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/10/02 15:13:46 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ char	*rp_trim(char *str)
 
 int	pars_arg_op(char **tab, int i, t_env **envlst)
 {
-	(void)envlst;
 	trim_tab(tab);
 	while (tab[i])
 	{
 		tab[i] = put_space(tab[i]);
+		if (!tab[i])
+			return (0);
 		quote_splite(tab[i]);
 		i++;
 	}
