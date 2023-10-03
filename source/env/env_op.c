@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:29:34 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/29 08:21:28 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/10/03 08:10:03 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,7 @@ int	add_to_env(t_env **env, char *var, char *value)
 	t_env	*new;
 	t_env	*temp;
 
-	if (!var)
-		return (-2);
-	new = env_newelt(var, value);
-	if (!new)
-		return (-1);
+	new = check_add_env(env, var, value);
 	if (!(*env))
 	{
 		*env = new;
@@ -66,12 +62,16 @@ int	set_value_env(t_env **env, char *var_to_set, char *value)
 	{
 		free((*env)->value);
 		(*env)->value = ft_strdup(value);
+		if (!(*env)->value)
+			free_env_and_exit(env);
 	}
 	else
 	{
 		tmp1 = tmp1->next;
 		free(tmp1->value);
 		tmp1->value = ft_strdup(value);
+		if (!tmp1->value)
+			free_env_and_exit(env);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:25:04 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/29 08:34:48 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/30 07:28:37 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int	set_files(t_data *data, t_element **pipe, t_big_list *list);
 static char	**set_args(t_element *pipelist);
+static int	fill_data(t_data **data, t_big_list *list, t_env **env);
 static int	init_data(t_data *data, t_data *f_data, \
 						t_big_list *list, t_env **env);
-static int	fill_data(t_data **data, t_big_list *list, t_env **env);
 
 static int	set_files(t_data *data, t_element **pipe, t_big_list *list)
 {
@@ -54,14 +54,14 @@ static char	**set_args(t_element *pipelist)
 
 	args = (char **)malloc(sizeof(char *) * (element_len(pipelist) + 1));
 	if (!args)
-		return (NULL);
+		return (error_manager("set_args", MALLOC), NULL);
 	tmp = pipelist;
 	i = 0;
 	while (tmp)
 	{
 		args[i] = ft_strdup(tmp->str);
 		if (!args[i])
-			return (free_tab(args), NULL);
+			return (error_manager("set_args", MALLOC), free_tab(args), NULL);
 		tmp = tmp->next;
 		i++;
 	}
@@ -84,12 +84,16 @@ static int	init_data(t_data *data, t_data *f_data, \
 		return (-1);
 	tmp = *(list->pipelist);
 	if (tmp)
+	{
 		data->cmd = ft_strdup(tmp->str);
+		if (!data->cmd)
+			return (error_manager("init_data", MALLOC), -1);
+	}
 	if (!data->cmd)
 		return (0);
 	data->args = set_args(*(list->pipelist));
 	if (!(data->args))
-		return (-1);
+		return (free(data->cmd), -1);
 	return (0);
 }
 
@@ -100,7 +104,7 @@ static int	fill_data(t_data **data, t_big_list *list, t_env **env)
 
 	new = (t_data *)ft_calloc(1, sizeof(t_data));
 	if (!new)
-		return (-1);
+		return (error_manager("fill_data", MALLOC), -1);
 	new->next = NULL;
 	if (!*list->pipelist)
 		return (free(new), 0);

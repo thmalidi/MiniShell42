@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:40:42 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/29 08:21:55 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/30 06:46:54 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,17 @@ int	check_end_path(char *path)
 	if (path[ft_strlen(path) - 1] == '/')
 		return (0);
 	return (-1);
+}
+
+int	is_acmd(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == '/')
+			return (NO);
+	}
+	return (YES);
 }

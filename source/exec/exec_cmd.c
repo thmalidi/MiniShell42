@@ -6,28 +6,32 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:05:34 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/29 08:30:32 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/10/03 07:42:13 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	is_acmd(char *str);
 static char	**get_path(char **env);
 static char	*lfcmd(char **paths, char *cmd);
 static char	*check_cmd_nopath(char **paths, char *cmd);
+static int	set_path(char **paths, char **new_paths, int i);
 
-static int	is_acmd(char *str)
+static int	set_path(char **paths, char **new_paths, int i)
 {
-	int	i;
-
-	i = -1;
-	while (str[++i])
+	if (check_end_path(paths[i]) < 0)
 	{
-		if (str[i] == '/')
-			return (NO);
+		new_paths[i] = ft_strjoin(paths[i], "/");
+		if (!new_paths[i])
+			return (-1);
 	}
-	return (YES);
+	else
+	{
+		new_paths[i] = ft_strdup(paths[i]);
+		if (!new_paths[i])
+			return (-1);
+	}
+	return (0);
 }
 
 static char	**get_path(char **env)
@@ -38,22 +42,16 @@ static char	**get_path(char **env)
 
 	paths = is_path(env);
 	if (!paths)
-		return (NULL);
+		return (error_manager("get_path", MALLOC), NULL);
 	new_paths = (char **)malloc(sizeof(char *) * (len_tab(paths) + 1));
 	if (!new_paths)
-		return (NULL);
+		return (error_manager("get_path", MALLOC), free_tab(paths), NULL);
 	i = -1;
 	while (paths[++i])
 	{
-		if (check_end_path(paths[i]) < 0)
-		{
-			new_paths[i] = ft_strjoin(paths[i], "/");
-			if (!new_paths[i])
-				return (error_manager("get_path", MALLOC), \
-					free_tab(paths), free_tab(new_paths), NULL);
-		}
-		else
-			new_paths[i] = ft_strdup(paths[i]);
+		if (set_path(paths, new_paths, i) < 0)
+			return (error_manager("get_path", MALLOC), \
+				free_tab(paths), free_tab(new_paths), NULL);
 	}
 	new_paths[i] = NULL;
 	return (free_tab(paths), new_paths);

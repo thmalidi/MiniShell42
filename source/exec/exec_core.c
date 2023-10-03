@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 08:39:46 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/29 09:18:14 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/09/30 07:19:31 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	exec_nobuiltin(t_data *data)
 	char	**env;
 
 	signal(SIGQUIT, &child_handler);
+	g_return_value = 0;
 	env = env_to_tab(*data->env);
 	free_env(*data->env);
 	if (!env)
