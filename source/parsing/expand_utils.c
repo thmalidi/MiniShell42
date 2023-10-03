@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:53:06 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/10/01 15:31:13 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/10/03 10:56:48 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ char	*rp_env(char *str, char *var, char *value)
 	sec += ft_strlen(var);
 	len = range(str, var, ft_strlen(str));
 	tmp = ft_substr(str, 0, len - (int)ft_strlen(var));
+	if (!tmp)
+		error_manager("rp_env(ft_substr)", MALLOC);
 	if (value)
 		final = ft_strjoin(tmp, value);
 	else
@@ -83,7 +85,6 @@ char	*expand_process(char *str, t_env *env)
 	char	*rv;
 
 	i = 0;
-	(void)env;
 	final = ft_strdup(str);
 	rv = ft_itoa(g_return_value);
 	if (!final || !rv)
@@ -92,6 +93,8 @@ char	*expand_process(char *str, t_env *env)
 	while (tab && tab[i])
 	{
 		tmp = change(tab[i], final, env, rv);
+		if (!tmp)
+			break ;
 		free(final);
 		final = ft_strdup(tmp);
 		if (tmp && tmp[0] == '\0')
@@ -99,6 +102,5 @@ char	*expand_process(char *str, t_env *env)
 		free(tmp);
 		i++;
 	}
-	free_tab(tab);
-	return (free(rv), free(str), final);
+	return (free_tab(tab), free(rv), free(str), final);
 }

@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 09:56:55 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/28 11:18:47 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/10/03 11:15:53 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,15 @@ char	**cp_tab(char **tab)
 	return (new);
 }
 
-void	init_elm(t_extract *elm, char *str)
+int	init_elm(t_extract *elm, char *str)
 {
 	elm->tab = NULL;
 	elm->tab = malloc(sizeof(char *) * (count_var(str) + 1));
 	if (!elm->tab)
-		return ;
+		return (-1);
 	elm->i = 0;
 	elm->c = 0;
+	return (0);
 }
 
 void	extract_process(t_extract *elm, char *str)
@@ -74,7 +75,10 @@ char	**extract_var(char *str)
 	char		**final;
 
 	elm = malloc(sizeof(t_extract));
-	init_elm(elm, str);
+	if (!elm)
+		return (NULL);
+	if (init_elm(elm, str) < 0)
+		return (free(elm), NULL);
 	extract_process(elm, str);
 	elm->tab[elm->c] = NULL;
 	final = cp_tab(elm->tab);

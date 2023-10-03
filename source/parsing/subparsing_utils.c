@@ -6,32 +6,11 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:15:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/10/02 15:51:35 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/10/03 11:14:23 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	is_cmd(char **path, char *cmd)
-{
-	char	*tmp;
-	char	*joined;
-
-	if (!path)
-		return (0);
-	if (access(cmd, X_OK) == 0)
-		return (1);
-	tmp = ft_strjoin("/", cmd);
-	while (*path)
-	{
-		joined = ft_strjoin(*path, tmp);
-		if (access(joined, X_OK) == 0)
-			return (free(tmp), free(joined), 1);
-		free(joined);
-		path++;
-	}
-	return (free(tmp), 0);
-}
 
 int	is_builtins(char *str)
 {
