@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:40:42 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/30 06:46:54 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/10/03 10:37:51 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**is_path(char **env)
 		return (NULL);
 	paths = ft_split(env[i] + 5, ':');
 	if (!paths)
-		return (NULL);
+		return (error_manager("is_path", MALLOC), NULL);
 	return (paths);
 }
 

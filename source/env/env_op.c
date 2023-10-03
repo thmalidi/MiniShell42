@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:29:34 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/10/03 08:10:03 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/10/03 10:40:52 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ int	rm_from_env(t_env **env, char *var_to_rm)
 		return (-1);
 	if (ft_strcmp((*env)->var, var_to_rm) == 0)
 	{
+		tmp1 = *env;
 		*env = (*env)->next;
+		env_free_elt(tmp1);
 		return (0);
 	}
 	tmp2 = env_lfvar(*env, var_to_rm);
