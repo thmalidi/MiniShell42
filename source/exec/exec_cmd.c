@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:05:34 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/10/03 07:42:13 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/10/03 10:37:18 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	**get_path(char **env)
 
 	paths = is_path(env);
 	if (!paths)
-		return (error_manager("get_path", MALLOC), NULL);
+		return (NULL);
 	new_paths = (char **)malloc(sizeof(char *) * (len_tab(paths) + 1));
 	if (!new_paths)
 		return (error_manager("get_path", MALLOC), free_tab(paths), NULL);
