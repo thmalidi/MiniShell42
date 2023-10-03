@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:58:26 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/29 08:23:19 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/10/03 11:21:08 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,5 @@ void	free_lst_content(t_big_list *a)
 void	free_lst(t_big_list *a)
 {
 	free_lst_content(a);
+	a = NULL;
 }

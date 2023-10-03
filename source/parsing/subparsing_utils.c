@@ -3,35 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   subparsing_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:15:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/29 08:24:18 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/10/03 11:22:25 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	is_cmd(char **path, char *cmd)
-{
-	char	*tmp;
-	char	*joined;
-
-	if (!path)
-		return (0);
-	if (access(cmd, X_OK) == 0)
-		return (1);
-	tmp = ft_strjoin("/", cmd);
-	while (*path)
-	{
-		joined = ft_strjoin(*path, tmp);
-		if (access(joined, X_OK) == 0)
-			return (free(tmp), free(joined), 1);
-		free(joined);
-		path++;
-	}
-	return (free(tmp), 0);
-}
 
 int	is_builtins(char *str)
 {
@@ -92,12 +71,10 @@ int	subparsing(t_element **subparsing, t_big_list *arg, int n)
 {
 	int			i;
 	t_element	*tmp;
-	char		**envp;
 
 	i = 0;
 	arg->here_doc = 0;
 	tmp = *subparsing;
-	envp = ft_split(getenv("PATH"), ':');
 	while (tmp)
 	{
 		clean_str(tmp->str, 1);
@@ -106,5 +83,5 @@ int	subparsing(t_element **subparsing, t_big_list *arg, int n)
 		tmp = tmp->next;
 		i++;
 	}
-	return (free_tab(envp), 1);
+	return (1);
 }

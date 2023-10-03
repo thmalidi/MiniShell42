@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:12:22 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/27 15:15:17 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/10/02 15:54:06 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ void	quote_splite(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 	{
-		while (str[i] && str[i] != 39 && str[i] != 34)
+		while (str && str[i] && str[i] != 39 && str[i] != 34)
 			i++;
-		if (str[i])
+		if (str && str[i])
 			i = replace(str, str[i], i + 1);
 	}
 }
@@ -97,14 +97,16 @@ char	*end_clean(char *str, t_element *e)
 
 	tmp = ft_strdup(prepare_string(str));
 	free(str);
+	if (!tmp)
+		return (error_manager("end_clean(ft_strdup)", MALLOC), NULL);
 	tab = ft_split(tmp, 34);
-	if (!tab[0])
+	if (!tab || !tab[0])
 		return (free(tab), free(tmp), e->type = 0, "\0");
 	free(tmp);
 	dup = join_tab(tab, 0);
 	free_tab(tab);
 	tab = ft_split(dup, 39);
-	if (!tab[0])
+	if (!tab || !tab[0])
 		return (free(tab), free(dup), e->type = 0, "\0");
 	free(dup);
 	tmp = join_tab(tab, 0);

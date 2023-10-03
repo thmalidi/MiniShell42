@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:56:31 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/21 10:30:30 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/10/03 11:16:20 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	check_full_space(char *str)
 
 	tab = ft_split(str, '|');
 	i = 0;
-	while (tab[i])
+	while (tab && tab[i])
 	{
 		j = 0;
 		while (tab[i][j])

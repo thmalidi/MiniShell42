@@ -6,7 +6,11 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:46:36 by tmalidi           #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2023/10/03 10:43:13 by tmalidi          ###   ########.fr       */
+=======
 /*   Updated: 2023/10/03 08:20:39 by hgeffroy         ###   ########.fr       */
+>>>>>>> 70996a9ecaa0876fc655df9adc22d80d6c84e472
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +85,15 @@ char	**init(char *str)
 	free(str);
 	tab = ft_split(tmp, ' ');
 	if (!tab[0])
-		return (free(tmp), free(tab), NULL); //Free tmp ici pour le NULL check ? Ajouter !tab aussi...
+		return (free(tmp), free(tab), NULL);
 	return (free(tmp), tab);
+}
+
+void	free_r(char **tab, int len)
+{
+	int	i;
+
+	i = 0;
+	while (i < len)
+		free(tab[i++]);
 }

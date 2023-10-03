@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:03:32 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/29 08:23:53 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/10/03 11:22:06 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	pars_arg_op(char **tab, int i, t_env **envlst)
 	while (tab[i])
 	{
 		tab[i] = put_space(tab[i]);
+		if (!tab[i])
+			return (0);
 		quote_splite(tab[i]);
 		i++;
 	}
@@ -38,6 +40,8 @@ int	pars_arg_op(char **tab, int i, t_env **envlst)
 	while (tab[i])
 	{
 		tab[i] = expand(tab[i], envlst);
+		if (!tab[i])
+			return (free_tab(tab), 0);
 		i++;
 	}
 	return (1);

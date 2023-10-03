@@ -6,7 +6,11 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2023/10/03 10:57:59 by tmalidi          ###   ########.fr       */
+=======
 /*   Updated: 2023/09/30 07:05:12 by hgeffroy         ###   ########.fr       */
+>>>>>>> 70996a9ecaa0876fc655df9adc22d80d6c84e472
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +97,6 @@ char	*expand(char *str, t_env **env)
 		i++;
 	}
 	tmp = join_tab(tab, 1);
-	final = ft_strtrim(tmp, " "); //Proteger ici;
+	final = ft_strtrim(tmp, " ");
 	return (free_tab(tab), free(tmp), final);
 }
