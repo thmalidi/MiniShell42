@@ -6,7 +6,7 @@
 /*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:46:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/09/30 07:01:23 by hgeffroy         ###   ########.fr       */
+/*   Updated: 2023/10/03 08:20:39 by hgeffroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,6 @@ char	**init(char *str)
 	free(str);
 	tab = ft_split(tmp, ' ');
 	if (!tab[0])
-		return (free(tab), NULL); //Free tmp ici pour le NULL check ? Ajouter !tab aussi...
+		return (free(tmp), free(tab), NULL); //Free tmp ici pour le NULL check ? Ajouter !tab aussi...
 	return (free(tmp), tab);
 }
