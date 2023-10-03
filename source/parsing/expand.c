@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgeffroy <hgeffroy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:03:17 by tmalidi           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/10/03 10:57:59 by tmalidi          ###   ########.fr       */
-=======
-/*   Updated: 2023/09/30 07:05:12 by hgeffroy         ###   ########.fr       */
->>>>>>> 70996a9ecaa0876fc655df9adc22d80d6c84e472
+/*   Updated: 2023/10/03 11:34:00 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +43,9 @@ char	*make_str(char **tab)
 	final[0] = '\0';
 	while (tab[i])
 	{
-		tmp = ft_strjoin(final, " "); //Proteger
+		tmp = ft_strjoin(final, " ");
 		free(final);
-		final = ft_strjoin(tmp, tab[i++]); //proteger
+		final = ft_strjoin(tmp, tab[i++]);
 		free(tmp);
 	}
 	return (final);
@@ -65,7 +61,7 @@ char	*mod_env(char **tab)
 		if (tab[i][0] == ':')
 		{
 			free(tab[i]);
-			tab[i] = ft_strdup("YES"); //Proteger ici
+			tab[i] = ft_strdup("YES");
 		}
 		i++;
 	}

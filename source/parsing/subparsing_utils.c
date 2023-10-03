@@ -6,30 +6,12 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:15:36 by tmalidi           #+#    #+#             */
-/*   Updated: 2023/10/03 11:22:25 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/10/03 11:38:04 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_builtins(char *str)
-{
-	if (!ft_strncmp("echo", str, ft_strlen(str)))
-		return (1);
-	if (!ft_strncmp("cd", str, ft_strlen(str)))
-		return (1);
-	if (!ft_strncmp("pwd", str, ft_strlen(str)))
-		return (1);
-	if (!ft_strncmp("unset", str, ft_strlen(str)))
-		return (1);
-	if (!ft_strncmp("env", str, ft_strlen(str)))
-		return (1);
-	if (!ft_strncmp("export", str, ft_strlen(str)))
-		return (1);
-	if (!ft_strncmp("exit", str, ft_strlen(str)))
-		return (1);
-	return (0);
-}
 
 int	is_ok(t_big_list **a)
 {

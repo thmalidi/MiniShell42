@@ -6,7 +6,7 @@
 /*   By: tmalidi <tmalidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:33:54 by hgeffroy          #+#    #+#             */
-/*   Updated: 2023/09/28 14:35:01 by tmalidi          ###   ########.fr       */
+/*   Updated: 2023/10/03 11:32:38 by tmalidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_extract
 	char	**tmp;
 }			t_extract;
 
+void		free_r(char **tab, int len);
 int			count_var(char *str);
 char		**extract_var(char *str);
 char		**init(char *str);
@@ -79,7 +80,7 @@ void		plst_h(t_history **a);
 void		free_history(t_history **history);
 t_big_list	*parsing(char *str, t_env **envlst);
 void		plst(t_big_list **a);
-void		splited_arg(t_big_list *arg);
+int			splited_arg(t_big_list *arg);
 void		free_elm(t_big_list *arg);
 int			subparsing(t_element **subparsing, t_big_list *arg, int n);
 void		printf_tab(char **tab);
